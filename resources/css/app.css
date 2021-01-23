@@ -1,0 +1,172 @@
+@import 'tailwindcss/base';
+
+@import 'tailwindcss/components';
+
+@import 'tailwindcss/utilities';
+
+/* Colors */
+.bg-primary {
+    background-color: #47C2F2;
+}
+.bg-secondary {
+    background-color: #00ECB0;
+}
+
+a {
+    @apply no-underline;
+    transition: all .2s ease !important;
+}
+a:hover {
+    @apply no-underline;
+}
+.h-link:hover {
+    @apply translate-r-2 no-underline font-semibold;
+}
+.translate-r-2 {
+    transform: translateX(2px) !important;
+}
+.card {
+    @apply bg-white shadow rounded-lg border-none;
+}
+.card:hover {
+    @apply shadow-2xl;
+}
+.transition {
+    -webkit-transition: all .45s ease;
+    transition: all .45s ease;
+}
+.h-transform {
+    transform: translateY(5px);
+}
+.h-input {
+    @apply /*form-input*/ block rounded-md shadow-sm w-full;
+}
+.h-input:focus {
+    @apply outline-none border-blue-200 border-2 shadow;
+}
+.h-select {
+    @apply w-full block bg-gray-100 text-gray-700 border border-gray-100 rounded py-3 px-3;
+}
+.h-select:focus {
+    @apply outline-none bg-white ring;
+}
+strong.required {
+    @apply font-bold text-red-500;
+}
+
+/** Algolia Search Components */
+
+/*
+* Refinement list/Checkbox
+* https://www.algolia.com/doc/api-reference/widgets/refinement-list/vue/#html-output
+*/
+.ais-refinement-list {
+}
+.ais-RefinementList-item {
+    @apply mr-4;
+}
+.ais-RefinementList-label {
+    @apply flex items-center;
+}
+.ais-RefinementList-labelText {
+    @apply ml-6 font-medium text-base text-gray-900;
+}
+.ais-RefinementList-checkbox {
+    @apply justify-start inline-flex outline-none border-4 border-blue-200 bg-blue-200;
+    transform: scale(2.0);
+}
+.ais-RefinementList-count {
+    @apply rounded-full h-8 w-8 ml-6 flex items-center text-center justify-center shadow-lg bg-teal-400 text-white font-bold text-sm;
+}
+
+/*
+* Range Input
+* https://www.algolia.com/doc/api-reference/widgets/range-input/vue/#html-output
+*/
+.ais-RangeInput {
+    @apply flex text-black items-center justify-between;
+}
+.ais-RangeInput-input {
+    @apply h-input;
+}
+.ais-RangeInput-input:focus {
+    @apply outline-none border-blue-200 border-4 shadow;
+}
+.ais-RangeInput-submit {
+    @apply hidden;
+}
+.ais-RangeInput-separator	{
+    @apply ml-auto;
+}
+
+/*
+* Search Box
+* https://www.algolia.com/doc/api-reference/widgets/search-box/vue/#html-output
+*/
+
+.ais-SearchBox-input {
+    @apply h-input;
+}
+.ais-SearchBox-input:focus {
+    @apply outline-none shadow;
+}
+.ais-SearchBox-submit {
+    @apply hidden
+}
+.ais-SearchBox-reset {
+    @apply hidden
+}
+
+/* Modal Transitions */
+
+.modal-fade-enter {
+    @apply ease-out duration-300;
+}
+.modal-fade-enter-active {
+    @apply opacity-0;
+}
+.modal-fade-enter-to {
+    @apply opacity-100;
+}
+.modal-fade-leave {
+    @apply ease-in duration-200;
+}
+.modal-fade-leave-active {
+    @apply opacity-100;
+}
+.modal-fade-leave-to {
+    @apply opacity-0;
+}
+
+.modal-dialog-enter {
+    transform: translateY(-50%) translateX(100vw);
+    opacity: 0;
+}
+.modal-dialog-enter-active {
+    transition: transform .5s;
+}
+.modal-dialog-enter-to {
+    @apply opacity-100 translate-y-0; /*.sm:scale-100*/
+}
+.modal-dialog-leave {
+    @apply ease-in duration-200;
+}
+.modal-dialog-leave-active {
+    transition: transform .5s;
+
+}
+.modal-dialog-leave-to {
+    transform: translateY(-50%) translateX(100vw);
+    opacity: 0;/*.sm:translate-y-0 .sm:scale-95*/
+}
+
+[v-cloak] {display: none}
+
+
+/*.modal-dialog-enter-active, .modal-dialog-leave-active {
+    transition: opacity 0.5s;
+}
+.modal-dialog-enter, .modal-dialog-leave-to !* .fade-leave-active below version 2.1.8 *! {
+    opacity: 0;
+}*/
+
