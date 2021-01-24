@@ -13,10 +13,11 @@
     {{--        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">--}}
 
         <!-- Styles -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
+        @yield('styles')
         @livewireStyles
-
     </head>
     <body class="font-sans antialiased bg-gray-50">
 {{--        <x-jet-banner />--}}
@@ -35,14 +36,15 @@
             <main>
                 {{ $slot }}
             </main>
-        </div>
+        </div>--}}
 
         @stack('modals')
 
-        @livewireScripts--}}
+        @livewireScripts
         <div class="min-h-screen">
 
-                <div id="app">
+                <div id="app" v-cloak>
+
                     @include('layouts.nav')
 
                     @yield('content')

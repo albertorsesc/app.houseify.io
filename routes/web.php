@@ -7,6 +7,12 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::view('dashboard', 'dashboard')->name('dashboard');
-    Route::view('properties', 'properties.index')->name('web.properties.index');
+    Route::view('inicio', 'dashboard')->name('dashboard');
+    Route::view('propiedades', 'properties.index')->name('web.properties.index');
+    Route::view('propiedades/crear', 'properties.create')->name('web.properties.create');
+    Route::view('propiedades/una-propiedad', 'properties.show')->name('web.properties.show');
+
+    Route::view('directorio-de-negocios', 'businesses.index')->name('web.businesses.index');
+    Route::view('directorio-de-negocios/un-negocio', 'businesses.show')->name('web.businesses.show');
+
 });

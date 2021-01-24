@@ -19,6 +19,7 @@ module.exports = {
                 teal: colors.teal,
                 cyan: colors.cyan,
                 emerald: colors.emerald,
+                rose: colors.rose,
             }
         },
     },
@@ -26,6 +27,8 @@ module.exports = {
     variants: {
         extend: {
             opacity: ['disabled'],
+            height: ['hover'],
+            width: ['hover'],
         },
     },
 

@@ -28,5 +28,9 @@
         "vue": "^2.6.12",
         "vue-loader": "^15.9.6",
         "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "@chenfengyuan/vue-carousel": "^1.0.6",
+        "vue-multiselect": "^2.1.6"
     }
 }

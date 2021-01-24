@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Propiedades')
-{{--<x-app-layout>--}}
+
 @section('content')
     <properties inline-template>
         <div>
@@ -15,29 +15,34 @@
                             <a @click="activeTab = 'explore-properties'"
                                role="button"
                                href="#"
-                               class="mx-2 text-base font-medium text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out">
+                               class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
+                               :class="[activeTab === 'explore-properties' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Explorar Propiedades
                             </a>
                             <a @click="activeTab = 'my-properties'"
                                role="button"
                                href="#"
-                               class="mx-2 text-base font-medium text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out">
+                               class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
+                               :class="[activeTab === 'my-properties' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Mis Propiedades
                             </a>
                             <a @click="activeTab = 'my-interests'"
                                role="button"
                                href="#"
-                               class="mx-2 text-base font-medium text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out">
+                               class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
+                               :class="[activeTab === 'my-interests' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Mis Intereses
                             </a>
                             <a @click="activeTab = 'search-properties'"
                                role="button"
                                href="#"
-                               class="mx-2 text-base font-medium text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out">
+                               class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
+                               :class="[activeTab === 'search-properties' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Busqueda de Propiedades
                             </a>
                         </div>
 
+                        {{--Mobile--}}
                         <div class="w-full md:hidden mt-2">
                             <div class="flex-1 w-full ">
                                 <a @click="activeTab = 'explore-properties'"
@@ -76,15 +81,18 @@
                 </div>
             </header>
 
-            <main>
-                <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+            <main class="">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <!-- Replace with your content -->
-                    <div class="px-4 py-6 sm:px-0 bg-red-300">
-                        <div v-show="activeTab === 'explore-properties'" class="text-3xl block">Explorando</div>
-                        <div v-show="activeTab === 'my-properties'" class="text-3xl block">Mis Propiedades</div>
+                    <div class="px-4 py-6 sm:px-0">
+                        <div v-show="activeTab === 'explore-properties'" class="text-3xl block">
+                            <explore-properties></explore-properties>
+                        </div>
+                        <div v-show="activeTab === 'my-properties'" class="text-3xl block">
+                            <my-properties></my-properties>
+                        </div>
                         <div v-show="activeTab === 'my-interests'" class="text-3xl block">Mis Intereses</div>
                         <div v-show="activeTab === 'search-properties'" class="text-3xl block">Busqueda Avanzada de Propiedades</div>
-                        {{--                        <div class="border-4 border-dashed border-gray-200 rounded-lg h-96"></div>--}}
                     </div>
                     <!-- /End replace -->
                 </div>
@@ -92,4 +100,3 @@
         </div>
     </properties>
 @endsection
-{{--</x-app-layout>--}}

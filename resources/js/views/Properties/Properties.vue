@@ -1,4 +1,7 @@
 <script>
+import ExploreProperties from '../../views/Properties/ExploreProperties'
+import MyProperties from '../../views/Properties/MyProperties'
+
 export default {
     name: 'Properties',
     data: function () {
@@ -27,6 +30,10 @@ export default {
                 this.headerTitle = 'Busqueda Avanzada de Propiedades'
             }
         }
+    },
+    components: {
+        MyProperties,
+        ExploreProperties,
     }
 }
 </script>

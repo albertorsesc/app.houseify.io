@@ -4,16 +4,28 @@
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <img src="{{ asset('/logos/houseify-2.png') }}"
-                             height="130"
-                             width="130"
-                             class="object-fit -mt-2"
-                             alt="Houseify.io">
+                        <a href="{{ route('dashboard') }}">
+                            <img src="{{ asset('/logos/houseify-2.png') }}"
+                                 height="130"
+                                 width="130"
+                                 class="object-fit -mt-2"
+                                 alt="Houseify.io">
+                        </a>
                     </div>
                     <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                         <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="{{ route('dashboard') }}"
+                               class="border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl">
+                                Inicio
+                            </a>
                             <a href="{{ route('web.properties.index') }}"
-                               class="border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl">Propiedades</a>
+                               class="border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl">
+                                Propiedades
+                            </a>
+                            <a href="{{ route('web.businesses.index') }}"
+                               class="border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl">
+                                Negocios
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -30,9 +42,9 @@
                         <!-- Profile dropdown -->
                         <div class="ml-3 relative">
                             <div>
-                                <button class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-haspopup="true">
+                                <button @click="open = ! open" class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-haspopup="true">
                                     <span class="sr-only">Open user menu</span>
-                                    <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                    <img class="h-8 w-8 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="" />
                                 </button>
                             </div>
                             <!--
@@ -49,11 +61,25 @@
                                  role="menu"
                                  aria-orientation="vertical"
                                  aria-labelledby="user-menu">
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your Profile</a>
+                                <a href="{{ route('profile.show') }}"
+                                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                                    Perfil
+                                </a>
 
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Settings</a>
+                                <a href="#"
+                                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                                    Settings
+                                </a>
 
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Sign out</a>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+
+                                    <x-jet-dropdown-link href="{{ route('logout') }}"
+                                                         onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                        {{ __('Logout') }}
+                                    </x-jet-dropdown-link>
+                                </form>
                             </div>
                         </div>
                     </div>

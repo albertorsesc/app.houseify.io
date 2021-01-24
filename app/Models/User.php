@@ -10,13 +10,13 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens;
-    use HasFactory;
-    use HasProfilePhoto;
-    use Notifiable;
-    use TwoFactorAuthenticatable;
+    use HasFactory,
+        Notifiable,
+        HasApiTokens,
+        HasProfilePhoto,
+        TwoFactorAuthenticatable;
 
     /**
      * The attributes that are mass assignable.
@@ -58,4 +58,14 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /* Helpers */
+
+    public function isRoot() : bool
+    {
+        return in_array(
+            $this->email,
+            config('houseify.roles.root')
+        );
+    }
 }

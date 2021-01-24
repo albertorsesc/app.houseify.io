@@ -6,6 +6,11 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+    private array $seeders = [
+        UserSeeder::class,
+        PropertyTypeSeeder::class,
+        PropertyCategorySeeder::class,
+    ];
     /**
      * Seed the application's database.
      *
@@ -13,6 +18,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call($this->seeders);
     }
 }

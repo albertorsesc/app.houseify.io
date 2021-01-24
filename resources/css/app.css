@@ -39,10 +39,10 @@ a:hover {
     transform: translateY(5px);
 }
 .h-input {
-    @apply /*form-input*/ block rounded-md shadow-sm w-full;
+    @apply /*form-input*/ block rounded-md shadow-sm w-full bg-white outline-none border-teal-200;
 }
 .h-input:focus {
-    @apply outline-none border-blue-200 border-2 shadow;
+    @apply outline-none shadow border-none py-2;
 }
 .h-select {
     @apply w-full block bg-gray-100 text-gray-700 border border-gray-100 rounded py-3 px-3;
@@ -152,7 +152,7 @@ strong.required {
     @apply ease-in duration-200;
 }
 .modal-dialog-leave-active {
-    transition: transform .5s;
+    transition: transform 1s;
 
 }
 .modal-dialog-leave-to {

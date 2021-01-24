@@ -39,10 +39,20 @@
                     </a>
                 @endif
 
-                <x-jet-button class="ml-4">
+                <x-jet-button class="ml-4" onclick="login">
                     {{ __('Login') }}
                 </x-jet-button>
             </div>
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
+
+<script>
+    function login () {
+        window.axios.get('/sanctum/csrf-cookie').then(response => {
+            window.axios.post('login').then(response => {
+                dd('successful');
+            });
+        });
+    }
+</script>
