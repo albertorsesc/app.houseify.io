@@ -7,6 +7,7 @@ mix.js('resources/js/app.js', 'public/js')
         require('autoprefixer'),
     ]).vue({ version: 2 });
 
+mix.copy('node_modules/sweetalert2/src/sweetalert2.scss', 'public/css/sweetalert2.css')
 mix.copy('node_modules/vue-multiselect/dist/vue-multiselect.min.css', 'public/css/vue-multiselect.min.css')
 
 mix.webpackConfig({

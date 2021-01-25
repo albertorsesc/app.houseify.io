@@ -6,11 +6,19 @@ export default {
     name: 'Properties',
     data: function () {
         return {
+            endpoint: '/api/properties',
+            properties: [],
+
             activeTab: 'explore-properties',
             headerTitle: 'Propiedades',
         }
     },
     methods: {
+        index () {
+            axios.get(this.endpoint).then(response => {
+                this.properties = response.data.data
+            }).catch(error => dd(error))
+        },
         nav(to) {
             this.activeTab = to
         }

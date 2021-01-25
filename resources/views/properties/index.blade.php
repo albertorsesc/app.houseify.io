@@ -2,6 +2,10 @@
 
 @section('title', 'Propiedades')
 
+@section('styles')
+    <link rel="stylesheet" href="/css/vue-multiselect.min.css">
+@endsection
+
 @section('content')
     <properties inline-template>
         <div>

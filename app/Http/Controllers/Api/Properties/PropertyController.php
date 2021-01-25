@@ -23,8 +23,10 @@ class PropertyController extends Controller
 
     public function store(PropertyRequest $request) : PropertyResource
     {
+        $property = Property::create($request->all());
+
         return new PropertyResource(
-            Property::create($request->all())
+            $property->load('propertyCategory.propertyType')
         );
     }
 
@@ -33,7 +35,9 @@ class PropertyController extends Controller
         $this->authorize('update', $property);
 
         return new PropertyResource(
-            tap($property)->update($request->all())
+            tap($property)
+                ->update($request->all())
+                ->load('propertyCategory.propertyType')
         );
     }
 

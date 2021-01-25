@@ -4,7 +4,7 @@
             <strong class="required" v-if="isRequired">*</strong>
             {{ title }}
         </label>
-        <div class="rounded-md shadow-sm mb-1">
+        <div class="rounded-md shadow-sm mb-1 mt-1">
             <input :type="type"
                    :value="data"
                    @input="update($event.target.value)"

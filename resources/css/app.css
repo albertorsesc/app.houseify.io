@@ -42,7 +42,7 @@ a:hover {
     @apply /*form-input*/ block rounded-md shadow-sm w-full bg-white outline-none border-teal-200;
 }
 .h-input:focus {
-    @apply outline-none shadow border-none py-2;
+    @apply outline-none shadow border-none;
 }
 .h-select {
     @apply w-full block bg-gray-100 text-gray-700 border border-gray-100 rounded py-3 px-3;

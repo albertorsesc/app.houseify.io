@@ -7,15 +7,21 @@
             <div class="card transition hover:transform px-6 py-4">
                 <div class="flex justify-center justify-between items-center">
                     <span class="bg-teal-200 text-teal-700 font-semibold text-xs rounded-full px-2 py-1 tracking-wide leading-none inline-block"
+                          v-text="property.propertyCategory.propertyType.display_name"
                           ></span>
                     <span class="bg-blue-200 text-teal-700 font-semibold text-xs rounded-full px-2 py-1 tracking-wide leading-none inline-block"
+                          v-text="limitString(property.propertyCategory.displayName, 10)"
                           ></span>
                     <span class="bg-purple-200 text-teal-700 font-semibold text-xs rounded-full px-2 py-1 tracking-wide leading-none inline-block"
+                          v-text="property.businessType"
                           ></span>
                 </div>
-                <div class="font-semibold text-lg text-gray-700 mt-2 mb-2 text-center">Casa Hermosa</div>
+                <div class="font-semibold text-lg text-gray-700 mt-2 mb-2 text-center"
+                     v-text="propertyTitle"
+                     :title="property.title"
+                ></div>
                 <div class="mb-1 text-center">
-                    <span class="text-green-700 font-bold text-base">$200,000</span>
+                    <span class="text-green-700 font-bold text-base" v-text="property.formattedPrice"></span>
                     <span class="ml-1 text-sm text-gray-500">m.n.</span>
                 </div>
 
@@ -35,8 +41,7 @@
                     </a>
 
                     <div class="right-0 mt-1 items-center align-middle px-4 text-green-500">
-                        <!--:href="property.meta.links.profile"-->
-                        <a
+                        <a :href="property.meta.links.profile"
                            class="no-underline h-link hover:text-green-400 -mt-6"
                            title="Visitar Propiedad">
                             <i class="text-base far fa-eye"></i>
@@ -50,12 +55,19 @@
 
 <script>
 import CustomCarousel from '../../components/CustomCarousel'
+
 export default {
+    props: {
+        property: {
+            required: true,
+            type: Object,
+        }
+    },
     data() {
         return {
             currentUrl: window.location.href,
 
-            // propertyTitle: this.limitString(this.property.title, 24),
+            propertyTitle: this.limitString(this.property.title, 24),
         }
     },
     components: {

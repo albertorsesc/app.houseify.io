@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Properties;
 
+use App\Http\Resources\LocationResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PropertyResource extends JsonResource
@@ -25,7 +26,7 @@ class PropertyResource extends JsonResource
             'status' => $this->status,
             'businessType' => $this->business_type,
             'propertyCategory' => new PropertyCategoryResource($this->whenLoaded('propertyCategory')),
-//            'propertyAddress' => new PropertyAddressResource($this->whenLoaded('propertyAddress')),
+            'location' => new LocationResource($this->whenLoaded('location')),
 //            'propertyFeature' => new PropertyFeatureResource($this->whenLoaded('propertyFeature')),
             'seller' => $this->whenLoaded('seller'),
 //            'interests' => $this->whenLoaded('interests'),

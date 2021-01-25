@@ -19,11 +19,10 @@
         <div v-show="menuTab === 'my-properties'"
              class="flex-wrap md:flex sm:justify-center mt-3">
 
-            <!--        <template v-for="propertyChunk in properties">-->
-
-            <property-card></property-card>
-
-            <!--        </template>-->
+                <property-card v-for="property in myProperties"
+                               :key="property.id"
+                               :property="property"
+                ></property-card>
 
         </div>
     </div>
@@ -38,13 +37,28 @@ export default {
     name: "MyProperties",
     data() {
         return {
+            endpoint: '/api/me/properties',
+            myProperties: [],
             menuTab: 'my-properties'
         }
     },
     methods: {
+        index () {
+            axios.get(this.endpoint).then(response => {
+                this.myProperties = response.data.data
+            }).catch(error => dd(error))
+        },
         toggle() {
             this.menuTab = this.menuTab === 'my-properties' ? 'new-property' : 'my-properties'
         }
+    },
+    mounted() {
+        this.index()
+        Event.$on('properties.new-property', (property) => {
+            dd(property)
+            this.myProperties.unshift(property)
+            this.menuTab = 'my-properties'
+        })
     },
     components: {
         PropertyCard,

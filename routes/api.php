@@ -3,10 +3,13 @@
     use App\Http\Controllers\Api\CountryController;
     use App\Http\Controllers\Api\Properties\BusinessTypeController;
     use App\Http\Controllers\Api\Properties\LocationController;
+    use App\Http\Controllers\Api\Properties\MyPropertyController;
     use App\Http\Controllers\Api\Properties\PropertyCategoriesByPropertyTypeController;
     use App\Http\Controllers\Api\Properties\PropertyCategoryController;
     use App\Http\Controllers\Api\Properties\PropertyController;
     use App\Http\Controllers\Api\Properties\PropertyFeatureController;
+    use App\Http\Controllers\Api\Sepomex\CityByStateController;
+    use App\Http\Controllers\Api\Sepomex\NeighborhoodByCityController;
     use App\Http\Controllers\Api\StateController;
     use Illuminate\Http\Request;
     use App\Http\Controllers\Api\Properties\PropertyTypeController;
@@ -22,6 +25,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('business-types', BusinessTypeController::class)->name('business-types.index');
         Route::get('countries', CountryController::class)->name('countries.index');
         Route::get('states', StateController::class)->name('states.index');
+        Route::get('states/{state}/cities', CityByStateController::class)->name('states.cities.index');
+        Route::get('cities/{city}/neighborhoods', NeighborhoodByCityController::class)->name('cities.neighborhoods.index');
+
         Route::get(
             'property-types/{propertyType}/property-categories',
             PropertyCategoriesByPropertyTypeController::class
@@ -29,6 +35,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::post('properties/{property:slug}/location', [LocationController::class, 'store'])->name('properties.location.store');
         Route::put('properties/{property:slug}/location', [LocationController::class, 'update'])->name('properties.location.update');
+
+        Route::get('me/properties', MyPropertyController::class)->name('me.properties');
 
 
         Route::apiResources([

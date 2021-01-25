@@ -14,6 +14,8 @@ class LocationController extends Controller
     {
         $property->location()->create($request->all());
 
+        $property->location->load('state');
+
         return response()->json([
             'data' => new LocationResource($property->location->first())
         ], 201);
@@ -22,6 +24,8 @@ class LocationController extends Controller
     public function update(LocationRequest $request, Property $property) : LocationResource
     {
         $property->location()->update($request->all());
+
+        $property->location->load('state');
 
         return new LocationResource($property->location);
     }

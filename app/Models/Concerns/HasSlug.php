@@ -11,5 +11,8 @@ trait HasSlug
         static::creating(function (Sluggable $model) {
             $model->slug = Str::slug($model->getSluggableValue());
         });
+        static::updating(function (Sluggable $model) {
+            $model->slug = Str::slug($model->getSluggableValue());
+        });
     }
 }

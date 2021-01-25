@@ -12,7 +12,7 @@ class Property extends Model implements Sluggable, Locationable
     protected $casts = ['price' => 'integer', 'status' => 'boolean', 'seller_id' => 'integer'];
     protected $fillable = ['property_category_id', 'business_type', 'title', 'price', 'comments'];
 
-    public function getRouteKeyName()
+    public function getRouteKeyName() : string
     {
         return 'slug';
     }

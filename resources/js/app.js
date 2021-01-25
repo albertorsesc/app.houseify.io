@@ -15,10 +15,26 @@ Vue.component('business-profile', require('./views/Businesses/BusinessProfile').
 
 Vue.component('profile', require('./views/User/Profile').default);
 
+/** Auth Helpers */
+import auth from './mixins/auth';
+Vue.mixin(auth)
+
+/** Helper functions */
+import mixins from './mixins/mixins';
+Vue.mixin(mixins)
+
+/* Packages */
+
 /*
 * Vue-Multiselect
 * https://vue-multiselect.js.org/
 *  */
+
+/**
+ * SweetAlert2
+ * https://sweetalert2.github.io
+ */
+
 
 /** Events */
 window.Event = new Vue()

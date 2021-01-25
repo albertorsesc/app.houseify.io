@@ -148,18 +148,19 @@ class PropertyRequestTest extends PropertyTestCase
      */
     public function price_must_be_an_integer()
     {
+        $validatedField = 'price';
         $brokenRule = 'non-integer';
 
         $this->postJson(
             route($this->routePrefix . 'store'),
-            $this->make(Property::class, ['price' => $brokenRule])->toArray()
-        )->assertJsonMissingValidationErrors('price');
+            $this->make(Property::class, [$validatedField => $brokenRule])->toArray()
+        )->assertJsonValidationErrors($validatedField);
 
         $property = $this->create(Property::class);
         $this->putJson(
             route($this->routePrefix . 'update', $property),
-            $this->make(Property::class, ['price' => $brokenRule])->toArray()
-        )->assertJsonMissingValidationErrors('price');
+            $this->make(Property::class, [$validatedField => $brokenRule])->toArray()
+        )->assertJsonValidationErrors($validatedField);
     }
 
     /**

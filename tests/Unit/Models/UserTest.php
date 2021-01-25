@@ -1,0 +1,31 @@
+<?php
+
+namespace Tests\Unit\Models;
+
+use Tests\TestCase;
+use App\Models\{User, Properties\Property};
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Database\Seeders\{PropertyTypeSeeder, PropertyCategorySeeder};
+
+class UserTest extends TestCase
+{
+    use RefreshDatabase;
+
+    /**
+     *   @test
+     *   @throws \Throwable
+     */
+    public function user_belongs_to_many_properties()
+    {
+        $this->signIn();
+
+        $this->loadSeeders([
+            PropertyTypeSeeder::class,
+            PropertyCategorySeeder::class,
+        ]);
+
+        $this->create(Property::class);
+
+        $this->assertInstanceOf(Property::class, auth()->user()->properties->first());
+    }
+}

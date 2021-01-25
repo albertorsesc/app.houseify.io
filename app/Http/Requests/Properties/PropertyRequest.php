@@ -27,7 +27,7 @@ class PropertyRequest extends FormRequest
             'property_category_id' => ['required', 'exists:property_categories,id'],
             'business_type' => ['required', 'in:' . implode(',', \App\Models\Properties\Concerns\BusinessType::all())],
             'title' => ['required', 'max:50'],
-            'price' => ['required', 'integer', 'max:100000000', 'gte:' . 0]
+            'price' => ['required', 'integer', 'max:100000000', 'gt:' . 0]
         ];
     }
 }

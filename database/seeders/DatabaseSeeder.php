@@ -10,6 +10,8 @@ class DatabaseSeeder extends Seeder
         UserSeeder::class,
         PropertyTypeSeeder::class,
         PropertyCategorySeeder::class,
+        CountrySeeder::class,
+        StateSeeder::class,
     ];
     /**
      * Seed the application's database.
