@@ -71,12 +71,12 @@ class ResetCommand extends Command
 
         $this->line('<green>-- Updating Composer Dependencies --</green>');
         exec('composer dumpautoload -o');
-//        exec('composer update');
+        exec('composer update');
 
         $this->newLine();
 
         $this->line('<green>-- Updating NPM Dependencies --</green>');
-//        exec('npm update');
+        exec('npm update');
 
         $this->newLine();
 

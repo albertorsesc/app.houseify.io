@@ -31,4 +31,10 @@
             'suspicious' => 'Posible Fraude/Sospechoso',
             'other' => 'Otro'
         ],
+
+        /* Modules */
+        'modules' => [
+            'properties' => 'Propiedades',
+            'businesses' => 'Directorio de Negocios',
+        ],
     ];

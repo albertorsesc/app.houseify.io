@@ -35,6 +35,12 @@ Vue.mixin(mixins)
  * https://sweetalert2.github.io
  */
 
+/**
+ * Vue-Clickaway
+ * https://github.com/simplesmiler/vue-clickaway
+ */
+/*import { mixin as clickaway } from 'vue-clickaway';
+Vue.mixin(clickaway)*/
 
 /** Events */
 window.Event = new Vue()

@@ -2,12 +2,17 @@
 
 namespace App\Models\Properties;
 
-use App\Models\Concerns\{HasLocation, HasSlug, HasUuid, Locationable, Sluggable};
-use Illuminate\Database\Eloquent\{Builder, Factories\HasFactory, Model, Relations\BelongsTo};
+use App\Models\User;
+use App\Models\Concerns\{HasLocation, HasUuid, Interestable, Locationable, Publishable};
+use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, Relations\BelongsTo, Relations\HasOne};
 
-class Property extends Model implements Sluggable, Locationable
+class Property extends Model implements Locationable
 {
-    use HasFactory, HasUuid, HasSlug, HasLocation;
+    use HasUuid,
+        HasFactory,
+        Publishable,
+        HasLocation,
+        Interestable;
 
     protected $casts = ['price' => 'integer', 'status' => 'boolean', 'seller_id' => 'integer'];
     protected $fillable = ['property_category_id', 'business_type', 'title', 'price', 'comments'];
@@ -19,16 +24,19 @@ class Property extends Model implements Sluggable, Locationable
 
     /** Relations */
 
+    public function seller() : BelongsTo
+    {
+        return $this->belongsTo(User::class, 'seller_id');
+    }
+
     public function propertyCategory() : BelongsTo
     {
         return $this->belongsTo(PropertyCategory::class);
     }
 
-    /* Scopes */
-
-    public function scopeIsPublished(Builder $query)
+    public function propertyFeature() : HasOne
     {
-        return $query->whereStatus(true);
+        return $this->hasOne(PropertyFeature::class);
     }
 
     /* Helpers */
@@ -41,10 +49,5 @@ class Property extends Model implements Sluggable, Locationable
     public function formattedPrice() : string
     {
         return '$' . number_format($this->price);
-    }
-
-    public function getSluggableValue () : string
-    {
-        return $this->title . '-' . $this->uuid;
     }
 }

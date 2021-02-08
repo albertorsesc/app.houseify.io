@@ -19,7 +19,7 @@
                                 <strong class="required">*</strong>
                                 Titulo de la Publicacion
                             </label>
-                            <div class="mt-1 flex rounded-md shadow-sm">
+                            <div class="my-1 flex rounded-md shadow-sm">
                                 <input type="text"
                                        v-model="propertyForm.title"
                                        id="title"
@@ -44,7 +44,7 @@
                                     <strong class="required">*</strong>
                                     Tipo de Propiedad
                                 </label>
-                                <div class="mt-1 rounded-md shadow-sm text-base">
+                                <div class="my-1 rounded-md shadow-sm text-base">
                                     <vue-multiselect v-model="selectedPropertyType"
                                                      :options="propertyTypes"
                                                      id="property_type"
@@ -67,7 +67,7 @@
                                 <label for="property_category_id" class="block text-sm font-medium text-gray-700">
                                     Categoria de la Propiedad
                                 </label>
-                                <div class="mt-1 rounded-md shadow-sm text-base">
+                                <div class="my-1 rounded-md shadow-sm text-base">
                                     <vue-multiselect v-model="propertyForm.propertyCategory"
                                                      :options="propertyCategoriesByPropertyType"
                                                      label="displayName"
@@ -96,7 +96,7 @@
                                     <strong class="required">*</strong>
                                     Tipo de Negocio
                                 </label>
-                                <div class="mt-1 rounded-md shadow-sm text-base">
+                                <div class="my-1 rounded-md shadow-sm text-base">
                                     <vue-multiselect v-model="propertyForm.businessType"
                                                      :options="businessTypes"
                                                      id="business_type"
@@ -119,7 +119,7 @@
                                     <strong class="required">*</strong>
                                     Precio
                                 </label>
-                                <div class="mt-1 flex rounded-md shadow-sm">
+                                <div class="my-1 flex rounded-md shadow-sm">
                                     <input type="number"
                                            v-model="propertyForm.price"
                                            id="price"
@@ -151,12 +151,12 @@
 
             <div class="pt-5">
                 <div class="flex justify-end">
-                    <button @click="cancel" type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <button @click="cancel" type="button" class="ml-3 h-link inline-flex items-center justify-center px-4 py-2 bg-white border border-gray-200 border border-gray-200 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:font-semibold focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-primary transition ease-in-out duration-150">
                         Cancelar
                     </button>
                     <button @click="store"
                             type="submit"
-                            class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            class="ml-3 h-link inline-flex items-center justify-center px-4 py-2 bg-white border border-gray-200 rounded-md font-semibold text-xs text-emerald-500 uppercase tracking-widest hover:font-semibold hover:shadow-lg hover:bg-teal-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-primary transition ease-in-out duration-150">
                         Guardar
                     </button>
                 </div>

@@ -32,6 +32,7 @@
     "dependencies": {
         "@chenfengyuan/vue-carousel": "^1.0.6",
         "sweetalert2": "^10.13.1",
+        "vue-clickaway": "^2.2.2",
         "vue-multiselect": "^2.1.6"
     }
 }

@@ -12,7 +12,7 @@ class PropertyCategoriesByPropertyTypeController extends Controller
     public function __invoke (PropertyType $propertyType) : AnonymousResourceCollection
     {
         return PropertyCategoryResource::collection(
-            $propertyType->propertyCategories
+            $propertyType->propertyCategories->load('propertyType')
         );
     }
 }

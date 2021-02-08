@@ -2,12 +2,29 @@
 
 namespace Tests\Unit\Models\Properties;
 
+use App\Models\Interest;
+use App\Models\User;
+use Tests\PropertyTestCase;
 use App\Models\Properties\Property;
 use App\Models\Properties\PropertyCategory;
-use Tests\PropertyTestCase;
+use App\Models\Properties\PropertyFeature;
 
 class PropertyTest extends PropertyTestCase
 {
+
+    /**
+     *   @test
+     *   @throws \Throwable
+     */
+    public function property_model_belongs_to_seller()
+    {
+        $this->signIn();
+
+        $this->assertInstanceOf(
+            User::class, $this->create(Property::class)->seller
+        );
+    }
+
     /**
      *   @test
      *   @throws \Throwable
@@ -20,6 +37,32 @@ class PropertyTest extends PropertyTestCase
             PropertyCategory::class,
             $this->create(Property::class)->propertyCategory
         );
+    }
+
+    /**
+     *   @test
+     *   @throws \Throwable
+     */
+    public function property_has_one_property_feature()
+    {
+        $this->signIn();
+        $propertyFeature = $this->create(PropertyFeature::class);
+
+        $this->assertInstanceOf(PropertyFeature::class, $propertyFeature->property->fresh()->propertyFeature);
+    }
+
+    /**
+     *   @test
+     *   @throws \Throwable
+     */
+    public function property_has_many_interests()
+    {
+        $this->signIn();
+
+        $property = $this->create(Property::class);
+
+        $property->interested();
+        $this->assertInstanceOf(Interest::class, $property->fresh()->interests->first());
     }
 
     /**

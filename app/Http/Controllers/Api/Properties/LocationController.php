@@ -14,10 +14,10 @@ class LocationController extends Controller
     {
         $property->location()->create($request->all());
 
-        $property->location->load('state');
+        $property->load('location.state');
 
         return response()->json([
-            'data' => new LocationResource($property->location->first())
+            'data' => new LocationResource($property->location)
         ], 201);
     }
 
@@ -25,7 +25,7 @@ class LocationController extends Controller
     {
         $property->location()->update($request->all());
 
-        $property->location->load('state');
+        $property->load('location.state');
 
         return new LocationResource($property->location);
     }

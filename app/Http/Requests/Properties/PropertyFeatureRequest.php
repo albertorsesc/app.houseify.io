@@ -25,10 +25,6 @@ class PropertyFeatureRequest extends FormRequest
     public function rules()
     {
         return [
-            'property_id' => [
-                $this->getMethod() === 'POST' ? 'required' : '',
-                'exists:properties,id',
-            ],
             'property_size' => ['integer', 'max:100000000', 'gte:' . 0],
             'construction_size' => ['integer', 'max:100000000', 'gte:' . 0],
             'level_count' => ['integer', 'max:100', 'gte:' . 0],

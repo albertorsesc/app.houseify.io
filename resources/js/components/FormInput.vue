@@ -9,9 +9,10 @@
                    :value="data"
                    @input="update($event.target.value)"
                    :id="inputId"
-                   :class="['h-input block w-full ', error ? errorClasses : '']"
+                   :class="['h-input block w-full ', error ? errorClasses : '', ' ', customClasses]"
                    :autofocus="isFocused"
-                   :placeholder="placeholder">
+                   :placeholder="placeholder"
+                   :disabled="isDisabled">
         </div>
         <!--Errors-->
         <errors :error="error" :options="{ noContainer: true }"></errors>
@@ -54,6 +55,16 @@
             placeholder: {
                 required: false,
                 type: String
+            },
+            customClasses: {
+                required: false,
+                type: String,
+                default: '',
+            },
+            isDisabled: {
+                required: false,
+                type: Boolean,
+                default: false
             }
         },
         data() {

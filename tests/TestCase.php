@@ -4,6 +4,7 @@ namespace Tests;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Support\Facades\Auth;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -12,6 +13,11 @@ abstract class TestCase extends BaseTestCase
     public function signIn($attributes = []) : TestCase
     {
         return $this->actingAs($this->create(User::class, $attributes));
+    }
+
+    public function logout()
+    {
+        Auth::logout();
     }
 
     /**

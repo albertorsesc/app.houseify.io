@@ -20,7 +20,7 @@ class CreateLocationsTable extends Migration
             $table->string('address', 255)->nullable();
             $table->string('neighborhood',255);
             $table->string('city', 255);
-            $table->foreignId('state_id');
+            $table->foreignId('state_id')->constrained('states');
             $table->string('zip_code', 20)->nullable();
             $table->json('coordinates')->nullable();
             $table->timestamps();

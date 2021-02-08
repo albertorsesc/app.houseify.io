@@ -16,7 +16,6 @@ class PropertyFeatureResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'property' => new PropertyResource($this->property),
             'features' => [
                 'property_size' => $this->features['property_size'],
                 'construction_size' => $this->features['construction_size'],

@@ -3,7 +3,7 @@
 namespace Tests\Unit\Models;
 
 use Tests\TestCase;
-use App\Models\{User, Properties\Property};
+use App\Models\{Businesses\Business, User, Properties\Property};
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Database\Seeders\{PropertyTypeSeeder, PropertyCategorySeeder};
 
@@ -27,5 +27,18 @@ class UserTest extends TestCase
         $this->create(Property::class);
 
         $this->assertInstanceOf(Property::class, auth()->user()->properties->first());
+    }
+
+    /**
+     *   @test
+     *   @throws \Throwable
+     */
+    public function user_belongs_to_many_businesses()
+    {
+        $this->signIn();
+
+        $this->create(Business::class);
+
+        $this->assertInstanceOf(Business::class, auth()->user()->businesses->first());
     }
 }

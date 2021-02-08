@@ -5,12 +5,14 @@
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
-            {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+            En Houseify agradecemos que te hayas unido y que encuentres util esta herramienta hecha para ti!
+            Antes de comenzar, podrias verificar tu correo electronico al hacer click en el enlace que se envio a tu correo?
+            Si no recibiste el correo, con gusto enviaremos otro.
         </div>
 
         @if (session('status') == 'verification-link-sent')
             <div class="mb-4 font-medium text-sm text-green-600">
-                {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+                Un nuevo enlace de verificacion ha sido enviado al correo electronico que nos proporcionaste durante el registro.
             </div>
         @endif
 
@@ -20,7 +22,7 @@
 
                 <div>
                     <x-jet-button type="submit">
-                        {{ __('Resend Verification Email') }}
+                        Reenviar correo de verificacion
                     </x-jet-button>
                 </div>
             </form>
@@ -29,7 +31,7 @@
                 @csrf
 
                 <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    {{ __('Logout') }}
+                    Cerrar Sesion
                 </button>
             </form>
         </div>

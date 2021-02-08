@@ -1,8 +1,14 @@
 <?php
 
+    use App\Http\Controllers\Api\Businesses\Actions\InterestBusinessController;
+    use App\Http\Controllers\Api\Businesses\BusinessController;
+    use App\Http\Controllers\Api\Businesses\MyBusinessController;
     use App\Http\Controllers\Api\CountryController;
+    use App\Http\Controllers\Api\Properties\Actions\InterestPropertyController;
+    use App\Http\Controllers\Api\Properties\Actions\PublishController;
     use App\Http\Controllers\Api\Properties\BusinessTypeController;
     use App\Http\Controllers\Api\Properties\LocationController;
+    use App\Http\Controllers\Api\Properties\MyInterestedPropertiesController;
     use App\Http\Controllers\Api\Properties\MyPropertyController;
     use App\Http\Controllers\Api\Properties\PropertyCategoriesByPropertyTypeController;
     use App\Http\Controllers\Api\Properties\PropertyCategoryController;
@@ -11,6 +17,7 @@
     use App\Http\Controllers\Api\Sepomex\CityByStateController;
     use App\Http\Controllers\Api\Sepomex\NeighborhoodByCityController;
     use App\Http\Controllers\Api\StateController;
+    use App\Http\Controllers\Api\SuggestionController;
     use Illuminate\Http\Request;
     use App\Http\Controllers\Api\Properties\PropertyTypeController;
 
@@ -36,15 +43,29 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('properties/{property:slug}/location', [LocationController::class, 'store'])->name('properties.location.store');
         Route::put('properties/{property:slug}/location', [LocationController::class, 'update'])->name('properties.location.update');
 
-        Route::get('me/properties', MyPropertyController::class)->name('me.properties');
+        Route::post('properties/{property:slug}/features', [PropertyFeatureController::class, 'store'])->name('properties.features.store');
+        Route::put('properties/{property:slug}/features', [PropertyFeatureController::class, 'update'])->name('properties.features.update');
 
+        Route::put('properties/{property:slug}/toggle', PublishController::class)->name('properties.toggle');
+
+        Route::post('properties/{property:slug}/interested', [InterestPropertyController::class, 'store'])->name('properties.interested');
+        Route::delete('properties/{property:slug}/uninterested', [InterestPropertyController::class, 'destroy'])->name('properties.uninterested');
+
+        Route::post('businesses/{business:slug}/location', [\App\Http\Controllers\Api\Businesses\LocationController::class, 'store'])->name('businesses.location.store');
+        Route::put('businesses/{business:slug}/location', [\App\Http\Controllers\Api\Businesses\LocationController::class, 'update'])->name('businesses.location.update');
+
+        Route::post('businesses/{business:slug}/interested', [InterestBusinessController::class, 'store'])->name('businesses.interested');
+        Route::delete('businesses/{business:slug}/uninterested', [InterestBusinessController::class, 'destroy'])->name('businesses.uninterested');
+
+        Route::put('businesses/{business:slug}/toggle', \App\Http\Controllers\Api\Businesses\Actions\PublishController::class)->name('businesses.toggle');
+
+        Route::get('me/properties', MyPropertyController::class)->name('me.properties');
+        Route::get('me/properties/interested', MyInterestedPropertiesController::class)->name('me.properties.interested');
+        Route::get('me/businesses', MyBusinessController::class)->name('me.businesses');
 
         Route::apiResources([
             'properties' => PropertyController::class,
+            'businesses' => BusinessController::class,
         ]);
-        Route::apiResource(
-            'property-features',
-            PropertyFeatureController::class
-        )->names('properties.features');
     });
 });

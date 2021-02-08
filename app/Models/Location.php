@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Concerns\SerializeTimestamps;
-use Illuminate\Database\{Eloquent\Model, Eloquent\Factories\HasFactory};
+use Illuminate\Database\{Eloquent\Model, Eloquent\Factories\HasFactory, Eloquent\Relations\BelongsTo};
 
 class Location extends Model
 {
@@ -22,7 +22,7 @@ class Location extends Model
     /**
      * @todo: Test State relationship without dependencies.
      */
-    public function state()
+    public function state() : BelongsTo
     {
         return $this->belongsTo(State::class);
     }

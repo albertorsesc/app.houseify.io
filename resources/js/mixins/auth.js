@@ -5,7 +5,7 @@ module.exports = {
         isAuthenticated(){
             return !! window.me.loggedIn;
         },
-        getUser() {
+        auth() {
             return window.me.i
         },
         guest(){

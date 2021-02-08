@@ -40,19 +40,25 @@
                     <!-- Replace with your content -->
                     <div class="py-6 sm:px-0">
                         <div>
-                            <alert :type="'warning'">Para Publicar la propiedad es necesario registrar su Direccion</alert>
+                            @if(auth()->check() && auth()->user()->owns($property, 'seller_id') && ! $property->location)
+                            <alert :type="'warning'">
+                                Para Publicar la propiedad es necesario registrar su Direccion
+                            </alert>
+                            @endif
 
+                            @if(auth()->check() && auth()->user()->owns($property, 'seller_id') && ! $property->propertyFeature && $property->location)
                             <alert :type="'primary'">
                                 Aparece en nuestra
                                 <a href="#" class="h-link">
                                     Busqueda Avanzada
                                 </a> agregando las Caracteristicas relevantes!
                             </alert>
+                            @endif
 
-                            <alert :type="'info'">
+                            <!--<alert :type="'info'">
                                 Al cambiar tu Propiedad a "No Publica" podria tomar unos momentos
                                 para desaparecer de la Busqueda Avanzada.
-                            </alert>
+                            </alert>-->
 
                             <div class="w-full mb-2 md:flex">
                                 <!--Carrousel-->
@@ -60,7 +66,8 @@
                                     <div class="card transition hover:transform">
                                         <div class="card-body">
                                             {{--                            <a @click="openModal('get-images')" href="#">--}}
-                                            <custom-carousel :module-name="'properties'"
+                                            <custom-carousel
+                                                :module-name="'properties'"
                                             ></custom-carousel>
                                             {{--                            </a>--}}
                                         </div>
@@ -85,7 +92,8 @@
                                         {{--Publish/Unpublish--}}
                                         <div class="w-full md:mx-2 mb-2 md:mb-0">
                                             <span class="rounded-md shadow-sm">
-                                                <button type="button"
+                                                <button @click="toggle"
+                                                        type="button"
                                                         :class="status.btnClass"
                                                         class="-mt-1 flex shadow-sm justify-center w-full py-3 border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                                         :title="localProperty.status ? 'Ocultar esta Propiedad del publico...' : 'Hacer publico esta Propiedad...'">
@@ -200,9 +208,9 @@
                                                                     Actualizado
                                                                 </div>
                                                                 <div class="ml-2 flex-shrink-0 flex">
-                                                              <span class="px-2 inline-flex text-base leading-5 font-semibold rounded-full text-gray-500"
-                                                                    v-text="localProperty.meta.updatedAt"
-                                                              ></span>
+                                                                  <span class="px-2 inline-flex text-base leading-5 font-semibold rounded-full text-gray-500"
+                                                                        v-text="localProperty.meta.updatedAt"
+                                                                  ></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -217,105 +225,107 @@
 
                             <divider title="Ubicacion"></divider>
 
-                            <property-location :property="localProperty"></property-location>
+                            <property-location></property-location>{{--:property="localProperty"--}}
 
                             <divider title="Caracteristicas"></divider>
 
-                            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                                <div class="px-4 py-5 sm:px-6">
+                            <property-features></property-features>
 
-                                    <h3 class="flex text-lg leading-6 font-medium text-emerald-600">
-                                        <svg class="mr-2 h-5 w-5 text-teal-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Caracteristicas de la Propiedad
-                                    </h3>
-                                    <!--                                <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                                                                        Personal details and application.
-                                                                    </p>-->
-                                </div>
-                                <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
-                                    <dl class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-3">
-                                        <div class="sm:col-span-1">
-                                            <dt class="text-sm font-medium text-gray-500 flex">
-                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                                                </svg>
-                                                m² Propiedad
-                                            </dt>
-                                            <dd class="mt-1 text-base text-teal-600">
-                                                200
-                                            </dd>
-                                        </div>
-                                        <div class="sm:col-span-1">
-                                            <dt class="text-sm font-medium text-gray-500 flex">
-                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                                                </svg>
-                                                m² Construccion
-                                            </dt>
-                                            <dd class="mt-1 text-base text-teal-600">
-                                                120
-                                            </dd>
-                                        </div>
-                                        <div class="sm:col-span-1">
+                                <!--                            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                                                                <div class="px-4 py-5 sm:px-6">
 
-                                            <dt class="text-sm font-medium text-gray-500 flex">
-                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                                </svg>
-                                                No. Niveles
-                                            </dt>
-                                            <dd class="mt-1 text-base text-teal-600">
-                                                2
-                                            </dd>
-                                        </div>
-                                        <div class="sm:col-span-1">
-                                            <dt class="text-sm font-medium text-gray-500 flex">
-                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                                </svg>
-                                                No. Habitaciones
-                                            </dt>
-                                            <dd class="mt-1 text-base text-teal-600">
-                                                4
-                                            </dd>
-                                        </div>
-                                        <div class="sm:col-span-1">
+                                                                    <h3 class="flex text-lg leading-6 font-medium text-emerald-600">
+                                                                        <svg class="mr-2 h-5 w-5 text-teal-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                                        </svg>
+                                                                        Caracteristicas de la Propiedad
+                                                                    </h3>
+                                                                    &lt;!&ndash;                                <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                                                                                                        Personal details and application.
+                                                                                                    </p>&ndash;&gt;
+                                                                </div>
+                                                                <div class="border-t border-gray-200 mx-4 py-5 sm:px-6">
+                                                                    <dl class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-3">
+                                                                        <div class="sm:col-span-1">
+                                                                            <dt class="text-sm font-medium text-gray-500 flex">
+                                                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                                                                                </svg>
+                                                                                m² Propiedad
+                                                                            </dt>
+                                                                            <dd class="mt-1 text-base text-teal-600">
+                                                                                200
+                                                                            </dd>
+                                                                        </div>
+                                                                        <div class="sm:col-span-1">
+                                                                            <dt class="text-sm font-medium text-gray-500 flex">
+                                                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                                                                                </svg>
+                                                                                m² Construccion
+                                                                            </dt>
+                                                                            <dd class="mt-1 text-base text-teal-600">
+                                                                                120
+                                                                            </dd>
+                                                                        </div>
+                                                                        <div class="sm:col-span-1">
 
-                                            <dt class="text-sm font-medium text-gray-500 flex">
-                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                                </svg>
-                                                No. Banos
-                                            </dt>
-                                            <dd class="mt-1 text-base text-teal-600">
-                                                3
-                                            </dd>
-                                        </div>
-                                        <div class="sm:col-span-1">
-                                            <dt class="text-sm font-medium text-gray-500 flex">
-                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                                </svg>
-                                                No. Medios Banos
-                                            </dt>
-                                            <dd class="mt-1 text-base text-teal-600">
-                                                3
-                                            </dd>
-                                        </div>
+                                                                            <dt class="text-sm font-medium text-gray-500 flex">
+                                                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                                                                </svg>
+                                                                                No. Niveles
+                                                                            </dt>
+                                                                            <dd class="mt-1 text-base text-teal-600">
+                                                                                2
+                                                                            </dd>
+                                                                        </div>
+                                                                        <div class="sm:col-span-1">
+                                                                            <dt class="text-sm font-medium text-gray-500 flex">
+                                                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                                                                </svg>
+                                                                                No. Habitaciones
+                                                                            </dt>
+                                                                            <dd class="mt-1 text-base text-teal-600">
+                                                                                4
+                                                                            </dd>
+                                                                        </div>
+                                                                        <div class="sm:col-span-1">
 
-                                        <div class="sm:col-span-2">
-                                            <dt class="text-sm font-medium text-gray-500">
-                                                Comentarios adicionales
-                                            </dt>
-                                            <dd class="mt-1 text-sm text-emerald-700">
-                                                Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
-                                            </dd>
-                                        </div>
-                                    </dl>
-                                </div>
-                            </div>
+                                                                            <dt class="text-sm font-medium text-gray-500 flex">
+                                                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                                                                </svg>
+                                                                                No. Banos
+                                                                            </dt>
+                                                                            <dd class="mt-1 text-base text-teal-600">
+                                                                                3
+                                                                            </dd>
+                                                                        </div>
+                                                                        <div class="sm:col-span-1">
+                                                                            <dt class="text-sm font-medium text-gray-500 flex">
+                                                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                                                                </svg>
+                                                                                No. Medios Banos
+                                                                            </dt>
+                                                                            <dd class="mt-1 text-base text-teal-600">
+                                                                                3
+                                                                            </dd>
+                                                                        </div>
+
+                                                                        <div class="sm:col-span-2">
+                                                                            <dt class="text-sm font-medium text-gray-500">
+                                                                                Comentarios adicionales
+                                                                            </dt>
+                                                                            <dd class="mt-1 text-sm text-emerald-700">
+                                                                                Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
+                                                                            </dd>
+                                                                        </div>
+                                                                    </dl>
+                                                                </div>
+                                                            </div>-->
 
                             <divider title="Mapa de Ubicacion"></divider>
 
@@ -541,7 +551,7 @@
                                                         <strong class="required">*</strong>
                                                         Tipo de Propiedad
                                                     </label>
-                                                    <vue-multiselect v-model="selectedPropertyType"
+                                                    <vue-multiselect v-model="propertyForm.propertyCategory.propertyType"
                                                                      :options="propertyTypes"
                                                                      :searchable="false"
                                                                      label="display_name"

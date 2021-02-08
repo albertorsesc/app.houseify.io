@@ -83,6 +83,10 @@
                     @endif
                 </div>
             </div>
+
+            <notifications v-show="activeTab === 'notifications'"></notifications>
+
+            <subscriptions v-show="activeTab === 'subscriptions'"></subscriptions>
         </div>
     </profile>
 @endsection

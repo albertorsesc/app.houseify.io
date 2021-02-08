@@ -17,7 +17,7 @@
                 </button>
             </div>
         </div>
-        <div v-if="property.location" class="border-t border-gray-200 px-4 py-5 sm:px-6">
+        <div v-if="location" class="border-t border-gray-200 mx-4 py-5 sm:px-6">
             <dl class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-3">
                 <div class="sm:col-span-1">
                     <dt class="text-sm font-medium text-gray-500 flex">
@@ -78,7 +78,7 @@
         </div>
 
         <modal modal-id="property-location" max-width="sm:max-w-5xl">
-            <template #title>Actualizar Ubicacion de la Propiedad</template>
+            <template #title>Ubicacion de la Propiedad</template>
             <template #content>
                 <form @submit.prevent>
 
@@ -195,11 +195,11 @@
             <template #footer>
                 <button @click="closeModal"
                         type="button"
-                        class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150">
+                        class="ml-3 h-link inline-flex items-center justify-center px-4 py-2 bg-white border border-gray-200 border border-gray-200 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:font-semibold focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-primary transition ease-in-out duration-150">
                     Cancelar
                 </button>
                 <button @click="submit"
-                        class="h-link ml-2 mt-2 md:mt-0 inline-flex items-center justify-center px-4 py-2 bg-teal-500 border border-gray-200 rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:font-semibold hover:shadow-lg hover:bg-teal-400 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                        class="ml-3 h-link inline-flex items-center justify-center px-4 py-2 bg-white border border-gray-200 rounded-md font-semibold text-xs text-emerald-500 uppercase tracking-widest hover:font-semibold hover:shadow-lg hover:bg-teal-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-primary transition ease-in-out duration-150">
                     Guardar
                 </button>
             </template>
@@ -215,12 +215,7 @@ import VueMultiselect from "vue-multiselect";
 
 export default {
     name: "PropertyLocation",
-    props: {
-        property: {
-            required: true,
-            type: Object
-        }
-    },
+    inject: ['property'],
     data() {
         return {
             endpoint: `/api/properties/${this.property.slug}/location`,
@@ -260,8 +255,9 @@ export default {
                 'city': this.propertyLocationForm.city,
                 'state_id': this.propertyLocationForm.state ? this.propertyLocationForm.state.id : null,
                 'zip_code': this.propertyLocationForm.zipCode,
-            }).then(() => {
+            }).then(response => {
                 this.closeModal()
+                this.location = response.data.data
                 SweetAlert.success(`La Ubicacion ha sido registrada exitosamente!`)
             }).catch(error => {
                 this.errors = error.response.status === 422 ?
@@ -305,6 +301,7 @@ export default {
                 .catch(error => { console.log(error) })
         },
         openModal() {
+            this.getStates()
             this.modal = {}
             this.actionType = this.location ? 'put' : 'post'
             this.errors = []
@@ -338,9 +335,6 @@ export default {
                 this.update()
             }
         }
-    },
-    mounted() {
-        this.getStates()
     },
     components: {
         Modal,

@@ -3,41 +3,30 @@
 namespace App\Http\Controllers\Api\Properties;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
+use App\Models\Properties\{Property};
 use App\Http\Requests\Properties\PropertyFeatureRequest;
 use App\Http\Resources\Properties\PropertyFeatureResource;
-use App\Models\Properties\PropertyFeature;
-use Illuminate\Http\Request;
 
 class PropertyFeatureController extends Controller
 {
-    public function index()
+    public function store(PropertyFeatureRequest $request, Property $property) : JsonResponse
     {
-        return PropertyFeatureResource::collection(
-            PropertyFeature::with('property')->get()
-        );
+        $property->propertyFeature()->create($request->only('features'));
+
+        $property->load('propertyFeature');
+
+        return response()->json([
+            'data' => new PropertyFeatureResource($property->propertyFeature)
+        ], 201);
     }
 
-    public function store(PropertyFeatureRequest $request)
+    public function update(PropertyFeatureRequest $request, Property $property) : PropertyFeatureResource
     {
-        return new PropertyFeatureResource(PropertyFeature::create($request->all()));
-    }
+        $property->propertyFeature()->update($request->only('features'));
 
-    public function show(PropertyFeature $propertyFeature)
-    {
-        return new PropertyFeatureResource($propertyFeature);
-    }
+        $property->load('propertyFeature');
 
-    public function update(PropertyFeatureRequest $request, PropertyFeature $propertyFeature)
-    {
-        $propertyFeature->update($request->except('property_id'));
-
-        return new PropertyFeatureResource($propertyFeature);
-    }
-
-    public function destroy(PropertyFeature $propertyFeature)
-    {
-        $propertyFeature->delete();
-
-        return response([], 204);
+        return new PropertyFeatureResource($property->propertyFeature);
     }
 }

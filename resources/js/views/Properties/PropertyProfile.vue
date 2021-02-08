@@ -7,6 +7,7 @@ import Errors from "../../components/Errors";
 import Divider from "../../components/Divider";
 import SweetAlert from "../../models/SweetAlert";
 import PropertyLocation from "./PropertyLocation";
+import PropertyFeatures from "./PropertyFeatures";
 import FormInput from "../../components/FormInput";
 import CustomCarousel from "../../components/CustomCarousel";
 
@@ -50,12 +51,25 @@ export default {
             })
                 .then(response => {
                     this.closeModal()
-                    // SweetAlert.success(`La Propiedad ha sido actualizada exitosamente!`)
                     this.localProperty = response.data.data
                     SweetAlert.success(`La Propiedad ha sido actualizada exitosamente!`)
-                    setTimeout(() => {
-                        window.location.href = `/propiedades/${response.data.data.slug}` }, 1500)
-                    })
+
+                    if (this.property.slug !== response.data.data.slug) {
+                        setTimeout(() => {
+                            window.location.href = `/propiedades/${response.data.data.slug}`
+                        }, 1500)
+                    }
+                })
+                .catch(error => { this.errors = error.response.status === 422 ? error.response.data.errors : [] })
+        },
+        toggle() {
+            axios
+                .put(`/api/properties/${this.localProperty.slug}/toggle`)
+                .then(() => {
+                    this.localProperty.status = ! this.localProperty.status
+                    let status = this.property.status ? 'Ocultada' : 'Publicada'
+                    SweetAlert.success(`La Propiedad ha sido ${status} exitosamente!`)
+                })
                 .catch(error => { this.errors = error.response.status === 422 ? error.response.data.errors : [] })
         },
         getPropertyTypes() {
@@ -119,6 +133,11 @@ export default {
         this.getPropertyTypes()
         this.getBusinessTypes()
     },
+    provide() {
+        return {
+            property: this.localProperty
+        }
+    },
     components: {
         Alert,
         Modal,
@@ -127,6 +146,7 @@ export default {
         FormInput,
         CustomCarousel,
         VueMultiselect,
+        PropertyFeatures,
         PropertyLocation,
     }
 }

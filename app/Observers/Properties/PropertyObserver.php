@@ -3,6 +3,7 @@
 namespace App\Observers\Properties;
 
 use Illuminate\Support\Str;
+use App\Events\Logs\LogActions;
 use App\Models\Properties\Property;
 
 class PropertyObserver
@@ -15,7 +16,8 @@ class PropertyObserver
      */
     public function creating(Property $property)
     {
-//        $property->slug = (string) Str::slug($property->title) . '-' . $property->uuid;
+        $property->uuid = (string) Str::uuid();
+        $property->slug = (string) Str::slug($property->title) . '-' . $property->uuid;
         $property->seller_id = auth()->id();
     }
 
@@ -28,7 +30,18 @@ class PropertyObserver
      */
     public function created(Property $property)
     {
-        //
+        LogActions::dispatch('STORE', $property, auth()->user());
+    }
+
+    /**
+     * Handle the property "updating" event.
+     *
+     * @param Property $property
+     * @return void
+     */
+    public function updating(Property $property)
+    {
+        $property->slug = (string) Str::slug($property->title) . '-' . $property->uuid;
     }
 
     /**
@@ -40,7 +53,7 @@ class PropertyObserver
      */
     public function updated(Property $property)
     {
-        //
+        LogActions::dispatch('UPDATE', $property, auth()->user());
     }
 
     /**
@@ -52,7 +65,7 @@ class PropertyObserver
      */
     public function deleted(Property $property)
     {
-        //
+        LogActions::dispatch('DELETE', $property, auth()->user());
     }
 
     /**

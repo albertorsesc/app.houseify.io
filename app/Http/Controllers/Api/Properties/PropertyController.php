@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\Properties;
 
+use App\Models\Properties\Property;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Properties\PropertyRequest;
 use App\Http\Resources\Properties\PropertyResource;
-use App\Models\Properties\Property;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class PropertyController extends Controller
@@ -15,7 +15,7 @@ class PropertyController extends Controller
         return PropertyResource::collection(
             Property::query()
                     ->isPublished()
-                    ->with(['propertyCategory.propertyType'])
+                    ->with(['propertyCategory.propertyType', 'location.state', 'interests'])
                     ->orderBy('updated_at', 'desc')
                     ->paginate(10)
         );

@@ -52,7 +52,7 @@ export default {
             this.menuTab = this.menuTab === 'my-properties' ? 'new-property' : 'my-properties'
         }
     },
-    mounted() {
+    created() {
         this.index()
         Event.$on('properties.new-property', (property) => {
             dd(property)

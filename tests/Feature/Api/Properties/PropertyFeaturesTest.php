@@ -15,11 +15,6 @@ class PropertyFeaturesTest extends PropertyTestCase
         $this->signIn();
     }
 
-    /**
-     *   @test
-     *   @throws \Throwable
-     *   @endpoint ['GET', '/api/property-features']
-     */
     public function authenticated_users_can_get_all_property_features()
     {
         $propertyFeature = $this->create(PropertyFeature::class);
@@ -55,7 +50,7 @@ class PropertyFeaturesTest extends PropertyTestCase
         $propertyFeature = $this->make(PropertyFeature::class);
 
         $response = $this->postJson(
-            route($this->routePrefix . 'store'),
+            route($this->routePrefix . 'store', $propertyFeature->property),
             $propertyFeature->toArray()
         );
         $response->assertStatus(201);
@@ -64,11 +59,6 @@ class PropertyFeaturesTest extends PropertyTestCase
         $this->assertEquals(PropertyFeature::first()->property->id, $propertyFeature->property_id);
     }
 
-    /**
-     *   @test
-     *   @throws \Throwable
-     *  @endpoint ['GET', '/api/property-features/{propertyFeature}']
-     */
     public function authenticated_users_can_get_a_property_feature()
     {
         $propertyFeature = $this->create(PropertyFeature::class);
@@ -89,7 +79,7 @@ class PropertyFeaturesTest extends PropertyTestCase
         $propertyFeatureData = $this->make(PropertyFeature::class, ['property_id' => $propertyFeature->property_id]);
 
         $response = $this->putJson(
-            route($this->routePrefix . 'update', $propertyFeature),
+            route($this->routePrefix . 'update', $propertyFeature->property),
             $propertyFeatureData->toArray()
         );
         $response->assertStatus(200);
@@ -106,11 +96,6 @@ class PropertyFeaturesTest extends PropertyTestCase
         ]);
     }
 
-    /**
-     *   @test
-     *   @throws \Throwable
-     *  @endpoint ['PUT', '/api/property-features/{propertyFeature}']
-     */
     public function authenticated_users_can_delete_a_property_feature()
     {
         $propertyFeature = $this->create(PropertyFeature::class);

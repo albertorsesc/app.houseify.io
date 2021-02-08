@@ -1,6 +1,7 @@
 <script>
-import ExploreProperties from '../../views/Properties/ExploreProperties'
+import InterestingProperties from "./InterestingProperties";
 import MyProperties from '../../views/Properties/MyProperties'
+import ExploreProperties from '../../views/Properties/ExploreProperties'
 
 export default {
     name: 'Properties',
@@ -31,7 +32,7 @@ export default {
             if (this.activeTab === 'my-properties') {
                 this.headerTitle = 'Mis Propiedades'
             }
-            if (this.activeTab === 'my-interests') {
+            if (this.activeTab === 'interesting-properties') {
                 this.headerTitle = 'Mis Intereses'
             }
             if (this.activeTab === 'search-properties') {
@@ -42,6 +43,7 @@ export default {
     components: {
         MyProperties,
         ExploreProperties,
+        InterestingProperties,
     }
 }
 </script>

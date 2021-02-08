@@ -2,6 +2,10 @@
 
 @section('title', 'Directorio de Negocios')
 
+@section('styles')
+    <link rel="stylesheet" href="/css/vue-multiselect.min.css">
+@endsection
+
 @section('content')
     <businesses inline-template>
         <div>
@@ -49,7 +53,7 @@
                                    role="button"
                                    href="#"
                                    class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out">
-                                    Explorar Propiedades
+                                    Explorar Negocios
                                 </a>
                             </div>
                             <div class="flex-1 md:hidden mt-2">
@@ -57,7 +61,7 @@
                                    role="button"
                                    href="#"
                                    class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out">
-                                    Mis Propiedades
+                                    Mis Negocios
                                 </a>
                             </div>
                             <div class="flex-1 md:hidden mt-2">
@@ -73,7 +77,7 @@
                                    role="button"
                                    href="#"
                                    class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out">
-                                    Busqueda de Propiedades
+                                    Busqueda de Negocios
                                 </a>
                             </div>
                         </div>
@@ -83,13 +87,14 @@
 
             <main class="">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <!-- Replace with your content -->
                     <div class="px-4 py-6 sm:px-0">
                         <div v-show="activeTab === 'explore-businesses'" class="text-3xl block">
                             <explore-businesses></explore-businesses>
                         </div>
                         <div v-show="activeTab === 'my-businesses'" class="text-3xl block">
-                            <my-businesses></my-businesses>
+                            <my-businesses
+                                :categories="{{ json_encode(config('houseify.construction_categories')) }}"
+                            ></my-businesses>
                         </div>
                         <div v-show="activeTab === 'my-interests'" class="text-3xl block">Mis Intereses</div>
                         <div v-show="activeTab === 'search-businesses'" class="text-3xl block">Busqueda Avanzada de Propiedades</div>

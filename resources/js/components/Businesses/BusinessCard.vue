@@ -1,9 +1,11 @@
 <template>
     <div class="my-3 w-full sm:w-1/2 md:w-1/3 px-2 mt-8 md:mt-0">
-        <a href="/directorio-de-negocios/un-negocio">
+        <a :href="business.meta.profile">
             <div class="card transition hover:transform max-w-sm rounded-lg border border-gray-200 bg-white shadow-lg p-2">
                 <div class="text-right p-2">
-                    <span class="text-xs text-gray-500 items-center">hace 2 semanas</span>
+                    <span class="text-xs text-gray-500 items-center"
+                          v-text="business.meta.updatedAt"
+                    ></span>
                 </div>
 
                 <div class="flex items-center relative mb-3">
@@ -36,11 +38,13 @@
 
                     <!--                <h4 class="text-gray-500 text-sm font-light">InVision</h4>-->
                     <div class="flex items-center">
-                        <h2 class="text-gray-800 text-xl font-bold">Mi Negocio</h2>
+                        <h2 class="text-gray-800 text-xl font-bold"
+                            v-text="business.name"
+                        ></h2>
                     </div>
 
                     <div class="text-xs border-t border-gray-300 py-4">
-                        <div class="flex justify-between">
+                        <div class="flex justify-between" v-if="business.location || business.phone">
                             Mexicali, BC, Mexico
                             <span>&bullet;</span>
                             <span>6862894998</span>
@@ -68,10 +72,10 @@
 <script>
 export default {
     props: {
-        /*business: {
+        business: {
             type: Object,
             required: true
-        }*/
+        }
     }
 }
 </script>

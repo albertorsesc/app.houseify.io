@@ -16,11 +16,11 @@ class CreatePropertiesTable extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
+            $table->string('slug', 100)->unique();
+            $table->string('title', 50);
             $table->foreignId('property_category_id')->constrained();
             $table->foreignId('seller_id')->constrained('users');
             $table->string('business_type', 15);
-            $table->string('title', 50);
-            $table->string('slug', 100)->unique();
             $table->unsignedInteger('price');
             $table->text('comments')->nullable();
             $table->boolean('status')->default(false);

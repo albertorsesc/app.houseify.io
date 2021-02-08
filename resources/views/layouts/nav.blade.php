@@ -42,7 +42,7 @@
                         <!-- Profile dropdown -->
                         <div class="ml-3 relative">
                             <div>
-                                <button @click="open = ! open" class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-haspopup="true">
+                                <button @click="open = ! open" class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-emerald-400 focus:ring-white" id="user-menu" aria-haspopup="true">
                                     <span class="sr-only">Open user menu</span>
                                     <img class="h-8 w-8 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="" />
                                 </button>
@@ -66,9 +66,9 @@
                                     Perfil
                                 </a>
 
-                                <a href="#"
+                                <a href="{{ route('web.suggestions.index') }}"
                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
-                                    Settings
+                                    Sugerencias
                                 </a>
 
                                 <form method="POST" action="{{ route('logout') }}">
@@ -77,14 +77,14 @@
                                     <x-jet-dropdown-link href="{{ route('logout') }}"
                                                          onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Cerrar Sesion') }}
                                     </x-jet-dropdown-link>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="-mr-2 flex md:hidden">
+                <div class="-mr-2 flex md:hidden" >
                     <!-- Mobile menu button -->
                     <button class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                         <span class="sr-only">Open main menu</span>

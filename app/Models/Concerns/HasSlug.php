@@ -8,11 +8,11 @@ trait HasSlug
 {
     public static function bootHasSlug()
     {
-        static::creating(function (Sluggable $model) {
-            $model->slug = Str::slug($model->getSluggableValue());
+        /*static::creating(function (Sluggable $model) {
+            $model->slug = Str::slug($model->title)  . '-' . $model->uuid;
         });
         static::updating(function (Sluggable $model) {
-            $model->slug = Str::slug($model->getSluggableValue());
-        });
+            $model->slug = Str::slug($model->title)  . '-' . $model->uuid;
+        });*/
     }
 }

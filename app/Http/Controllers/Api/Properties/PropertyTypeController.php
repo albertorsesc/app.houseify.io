@@ -9,7 +9,9 @@ class PropertyTypeController
     public function __invoke ()
     {
         return response()->json([
-            'data' => PropertyType::query()->orderBy('display_name')->get()
-        ], 200);
+            'data' => PropertyType::query()
+                                  ->orderBy('id')
+                                  ->get()
+        ]);
     }
 }

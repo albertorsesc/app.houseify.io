@@ -30,11 +30,11 @@
                                :class="[activeTab === 'my-properties' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Mis Propiedades
                             </a>
-                            <a @click="activeTab = 'my-interests'"
+                            <a @click="activeTab = 'interesting-properties'"
                                role="button"
                                href="#"
                                class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
-                               :class="[activeTab === 'my-interests' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
+                               :class="[activeTab === 'interesting-properties' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Mis Intereses
                             </a>
                             <a @click="activeTab = 'search-properties'"
@@ -65,7 +65,7 @@
                                 </a>
                             </div>
                             <div class="flex-1 md:hidden mt-2">
-                                <a @click="activeTab = 'my-interests'"
+                                <a @click="activeTab = 'interesting-properties'"
                                    role="button"
                                    href="#"
                                    class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out">
@@ -95,7 +95,9 @@
                         <div v-show="activeTab === 'my-properties'" class="text-3xl block">
                             <my-properties></my-properties>
                         </div>
-                        <div v-show="activeTab === 'my-interests'" class="text-3xl block">Mis Intereses</div>
+                        <div v-show="activeTab === 'interesting-properties'" class="text-3xl block">
+                            <interesting-properties></interesting-properties>
+                        </div>
                         <div v-show="activeTab === 'search-properties'" class="text-3xl block">Busqueda Avanzada de Propiedades</div>
                     </div>
                     <!-- /End replace -->
