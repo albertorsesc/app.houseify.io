@@ -108,7 +108,7 @@
                                 </label>
                                 <div class="mt-1">
                                     <vue-multiselect v-model="propertyLocationForm.state"
-                                                     :options="states"
+                                                     :options="getStates"
                                                      id="state_id"
                                                      label="name"
                                                      track-by="id"
@@ -208,6 +208,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Modal from "../../components/Modal";
 import SweetAlert from "../../models/SweetAlert";
 import FormInput from "../../components/FormInput";
@@ -218,7 +219,7 @@ export default {
     inject: ['property'],
     data() {
         return {
-            endpoint: `/api/properties/${this.property.slug}/location`,
+            endpoint: `/properties/${this.property.slug}/location`,
 
             location: this.property.location,
             states: [],
@@ -258,6 +259,7 @@ export default {
             }).then(response => {
                 this.closeModal()
                 this.location = response.data.data
+                Event.$emit('properties.location', this.location)
                 SweetAlert.success(`La Ubicacion ha sido registrada exitosamente!`)
             }).catch(error => {
                 this.errors = error.response.status === 422 ?
@@ -275,6 +277,7 @@ export default {
             }).then(response => {
                 this.closeModal()
                 this.location = response.data.data
+                Event.$emit('properties.location', this.location)
                 SweetAlert.success(`La Ubicacion ha sido actualizada exitosamente!`)
             }).catch(error => {
                 this.errors = error.response.status === 422 ?
@@ -282,26 +285,20 @@ export default {
                     []
             })
         },
-        getStates() {
-            axios.get('/api/states')
-                .then(response => { this.states = response.data.data })
-                .catch(error => { console.log(error) })
-        },
         getCities(selectedState) {
             let state = this.isObject(selectedState) ? selectedState : this.propertyLocationForm.state
-            axios.get(`/api/states/${state.name}/cities`)
+            axios.get(`/states/${state.name}/cities`)
                 .then(response => { this.cities = response.data })
                 .catch(error => { console.log(error) })
         },
         getNeighborhoods(selectedCity) {
             let city = selectedCity ? selectedCity : this.propertyLocationForm.city
 
-            axios.get(`/api/cities/${city}/neighborhoods`)
+            axios.get(`/cities/${city}/neighborhoods`)
                 .then(response => { this.neighborhoods = response.data })
                 .catch(error => { console.log(error) })
         },
         openModal() {
-            this.getStates()
             this.modal = {}
             this.actionType = this.location ? 'put' : 'post'
             this.errors = []
@@ -335,6 +332,14 @@ export default {
                 this.update()
             }
         }
+    },
+    computed: {
+        ...mapGetters({
+            getStates: 'global/getStates'
+        })
+    },
+    created() {
+        this.$store.dispatch('global/fetchStates')
     },
     components: {
         Modal,

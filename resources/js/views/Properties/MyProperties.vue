@@ -25,6 +25,22 @@
                 ></property-card>
 
         </div>
+
+        <div v-if="! myProperties.length" class="flex-wrap md:flex sm:justify-center p-6 mt-3 items-center rounded-lg">
+            <div class="flex flex-col md:flex-row items-center align-middle justify-center px-5 text-gray-700">
+                <div class="max-w-md">
+                    <div class="text-5xl font-dark font-bold"></div>
+                    <p class="text-2xl md:text-3xl font-light leading-normal">
+                        Crea tu primera Propiedad y comienza a registrar sus detalles.
+                    </p>
+                    <p class="mb-8 mt-4">Tus Propiedades seran vistas en toda la Republica Mexicana.</p>
+                </div>
+                <div class="max-w-full">
+                    <img src="/img/houses_with_garden.svg" alt="Houseify.io image">
+                </div>
+
+            </div>
+        </div>
     </div>
 
 </template>
@@ -37,7 +53,7 @@ export default {
     name: "MyProperties",
     data() {
         return {
-            endpoint: '/api/me/properties',
+            endpoint: '/me/properties',
             myProperties: [],
             menuTab: 'my-properties'
         }
@@ -55,7 +71,6 @@ export default {
     created() {
         this.index()
         Event.$on('properties.new-property', (property) => {
-            dd(property)
             this.myProperties.unshift(property)
             this.menuTab = 'my-properties'
         })

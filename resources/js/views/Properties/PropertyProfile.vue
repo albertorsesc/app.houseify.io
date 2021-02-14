@@ -1,5 +1,6 @@
 
 <script>
+import { mapGetters } from 'vuex'
 import Alert from "../../components/Alert";
 import Modal from "../../components/Modal";
 import VueMultiselect from 'vue-multiselect'
@@ -21,7 +22,7 @@ export default {
     },
     data () {
         return {
-            endpoint: '/api/properties/',
+            endpoint: '/properties/',
             propertyForm: {},
             localProperty: this.property,
             selectedPropertyType: {},
@@ -64,7 +65,7 @@ export default {
         },
         toggle() {
             axios
-                .put(`/api/properties/${this.localProperty.slug}/toggle`)
+                .put(`/properties/${this.localProperty.slug}/toggle`)
                 .then(() => {
                     this.localProperty.status = ! this.localProperty.status
                     let status = this.property.status ? 'Ocultada' : 'Publicada'
@@ -72,20 +73,10 @@ export default {
                 })
                 .catch(error => { this.errors = error.response.status === 422 ? error.response.data.errors : [] })
         },
-        getPropertyTypes() {
-            axios.get('/api/property-types')
-                .then(response => { this.propertyTypes = response.data.data })
-                .catch(error => { console.log(error) })
-        },
-        getBusinessTypes() {
-            axios.get('/api/business-types')
-                .then(response => { this.businessTypes = response.data.data })
-                .catch(error => { console.log(error) })
-        },
         getPropertyCategoriesByPropertyType(selectedPropertyType) {
             this.selectedPropertyType = selectedPropertyType ? selectedPropertyType : this.selectedPropertyType
             this.propertyForm.propertyCategory = {}
-            axios.get(`/api/property-types/${this.selectedPropertyType.id}/property-categories`)
+            axios.get(`/property-types/${this.selectedPropertyType.id}/property-categories`)
                 .then(response => { this.propertyCategoriesByPropertyType = response.data.data })
                 .catch(error => { console.log(error) })
         },
@@ -129,14 +120,25 @@ export default {
             this.propertyForm = {}
         },
     },
-    mounted() {
-        this.getPropertyTypes()
-        this.getBusinessTypes()
+    created() {
+        this.$store.dispatch('properties/fetchPropertyTypes')
+        this.$store.dispatch('properties/fetchBusinessTypes')
+
+        Event.$on('properties.location', location => {
+            this.localProperty.location = location
+        })
     },
     provide() {
         return {
             property: this.localProperty
         }
+    },
+    computed: {
+        ...mapGetters({
+            getStates: 'global/getStates',
+            getPropertyTypes: 'properties/getPropertyTypes',
+            getBusinessTypes: 'properties/getBusinessTypes'
+        })
     },
     components: {
         Alert,

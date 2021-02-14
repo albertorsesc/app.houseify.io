@@ -20,7 +20,7 @@ export default {
     name: "ExploreProperties",
     data() {
         return {
-            endpoint: '/api/properties',
+            endpoint: '/properties',
             properties: [],
 
             totalPages: 0,
@@ -66,6 +66,14 @@ export default {
     created() {
         this.index()
         this.onScroll()
+
+        Event.$on('interest-properties', property => {
+            let prop = this.properties.find(prop => prop[0].id === property.id)
+            prop.status = property.status
+            /*let propert = this.properties.filter(filteredProperties => filteredProperties[0].slug === property.slug)
+            dd(this.properties.splice(this.properties.indexOf(propert[0])))
+            this.properties.push(property)*/
+        })
     },
     components: {
         PropertyCard,

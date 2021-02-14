@@ -38,14 +38,27 @@
                             </div>
                         </div>
 
-                        <div class="sm:col-span-4 md:flex md:-mx-2">
+                        <div class="sm:col-span-4 md:-mx-2">
                             <div class="w-full md:mx-2">
                                 <label for="categories" class="block text-sm font-medium text-gray-700">
                                     Categorias
                                 </label>
-                                <vue-multiselect v-model="businessForm.categories" :options="categories" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
-                                    <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
-                                </vue-multiselect>
+                                <div class="my-1 rounded-md shadow-sm text-base ring-white">
+                                    <vue-multiselect v-model="businessForm.categories"
+                                                     :placeholder="''"
+                                                     :options="getConstructionCategories"
+                                                     :multiple="true"
+                                                     :taggable="true"
+                                                     :hide-selected="true"
+                                                     id="categories"
+                                                     :searchable="true"
+                                                     :close-on-select="false"
+                                                     select-label=""
+                                                     selected-label=""
+                                                     deselect-label=""
+                                                     placeholder="Selecciona las Categorias de Construccion de tu Negocio..."
+                                    ></vue-multiselect>
+                                </div>
 <!--                                <vue-multiselect v-model="businessForm.categories"
                                                  :options="categories"
                                                  id="categories"
@@ -158,20 +171,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import VueMultiselect from 'vue-multiselect'
 import Errors from "../../components/Errors";
 
 export default {
     name: "CreateBusiness",
-    props: {
-        categories: {
-            type: Array,
-            required: true,
-        }
-    },
     data() {
         return {
-            endpoint: '/api/businesses',
+            endpoint: '/businesses',
             businessForm: {
                 name: '',
                 categories: [],
@@ -189,6 +197,7 @@ export default {
             axios.post(this.endpoint, {
                 name: this.businessForm.name,
                 email: this.businessForm.email,
+                categories: this.businessForm.categories,
                 phone: this.businessForm.phone,
                 site: this.businessForm.site,
                 comments: this.businessForm.comments
@@ -205,8 +214,15 @@ export default {
     },
     mounted() {
     },
+    computed: {
+        ...mapGetters({
+            getConstructionCategories: 'global/getConstructionCategories'
+        })
+    },
     created() {
-        window.currentTab = 'createProperty'
+        window.currentTab = 'createBusiness'
+
+        this.$store.dispatch('global/fetchConstructionCategories')
     },
     components: {
         Errors,

@@ -3,6 +3,7 @@
     use App\Http\Controllers\Api\Businesses\Actions\InterestBusinessController;
     use App\Http\Controllers\Api\Businesses\BusinessController;
     use App\Http\Controllers\Api\Businesses\MyBusinessController;
+    use App\Http\Controllers\Api\ConstructionCategoryController;
     use App\Http\Controllers\Api\CountryController;
     use App\Http\Controllers\Api\Properties\Actions\InterestPropertyController;
     use App\Http\Controllers\Api\Properties\Actions\PublishController;
@@ -32,6 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('business-types', BusinessTypeController::class)->name('business-types.index');
         Route::get('countries', CountryController::class)->name('countries.index');
         Route::get('states', StateController::class)->name('states.index');
+        Route::get('construction-categories', ConstructionCategoryController::class)->name('construction-categories.index');
         Route::get('states/{state}/cities', CityByStateController::class)->name('states.cities.index');
         Route::get('cities/{city}/neighborhoods', NeighborhoodByCityController::class)->name('cities.neighborhoods.index');
 
@@ -62,6 +64,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('me/properties', MyPropertyController::class)->name('me.properties');
         Route::get('me/properties/interested', MyInterestedPropertiesController::class)->name('me.properties.interested');
         Route::get('me/businesses', MyBusinessController::class)->name('me.businesses');
+//        Route::get('me/properties/interested', MyInterestedPropertiesController::class)->name('me.properties.interested');
 
         Route::apiResources([
             'properties' => PropertyController::class,

@@ -162,6 +162,7 @@
             'price' => 'Precio',
             'state_id' => 'Estado',
             'country_id' => 'Pais',
+            'categories' => 'Categorias',
 
             /* User */
             'first_name' => 'Nombre',

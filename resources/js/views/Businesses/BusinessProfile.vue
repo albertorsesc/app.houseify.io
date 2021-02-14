@@ -1,7 +1,9 @@
 
 <script>
+import { mapGetters } from 'vuex'
 import Alert from "../../components/Alert";
 import Modal from "../../components/Modal";
+import VueMultiselect from 'vue-multiselect'
 import Errors from "../../components/Errors";
 import Divider from "../../components/Divider";
 import SweetAlert from "../../models/SweetAlert";
@@ -23,9 +25,11 @@ export default {
     },
     data() {
         return {
-            endpoint: '/api/businesses/',
+            endpoint: '/businesses/',
             localBusiness: this.business,
             businessForm: {},
+
+            selectedConstructionCategories: [],
 
             modal: {},
             actionType: '',
@@ -40,6 +44,7 @@ export default {
     methods: {
         update() {
             axios.put(this.endpoint + this.localBusiness.slug, {
+                categories: this.businessForm.categories ? this.businessForm.categories : this.localBusiness.categories,
                 email: this.businessForm.email ? this.businessForm.email : this.localBusiness.email,
                 phone: this.businessForm.phone ? this.businessForm.phone : this.localBusiness.phone,
                 site: this.businessForm.site ? this.businessForm.site : this.localBusiness.site,
@@ -73,7 +78,9 @@ export default {
                 // this.selectedPropertyType = this.localBusiness.businessCategory.businessType
                 // this.getPropertyCategoriesByPropertyType(this.selectedPropertyType)
                 // this.businessForm.businessCategory = this.localBusiness.businessCategory
+                this.businessForm.categories = this.selectedConstructionCategories = this.localBusiness.categories
                 this.businessForm.name = this.localBusiness.name
+                this.businessForm.categories = this.localBusiness.categories
                 this.businessForm.email = this.localBusiness.email
                 this.businessForm.phone = this.localBusiness.phone
                 this.businessForm.site = this.localBusiness.site
@@ -96,12 +103,30 @@ export default {
             this.businessForm = {}
         },
     },
+    watch: {
+        selectedConstructionCategories () {
+            this.businessForm.categories = this.selectedConstructionCategories
+        }
+    },
+    computed: {
+        ...mapGetters({
+            getConstructionCategories: 'global/getConstructionCategories'
+        })
+    },
+    created() {
+        this.$store.dispatch('global/fetchConstructionCategories')
+
+        Event.$on('businesses.location', location => {
+            this.localBusiness.location = location
+        })
+    },
     components: {
         Alert,
         Modal,
         Errors,
         Divider,
         FormInput,
+        VueMultiselect,
         BusinessLocation,
     }
 }

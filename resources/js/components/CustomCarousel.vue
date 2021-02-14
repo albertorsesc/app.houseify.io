@@ -1,5 +1,5 @@
 <template>
-    <carousel :data="data" :indicators="false" :interval="1200"></carousel><!---->
+    <vue-carousel :data="data" :indicators="false" :interval="1200"></vue-carousel><!---->
 </template>
 
 <script>

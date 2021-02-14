@@ -2,9 +2,12 @@ require('./bootstrap');
 require('alpinejs');
 // import Vue from 'vue/dist/vue.runtime.esm.js'
 // window.Vue = require('vue/dist/vue')
-window.Vue = require('vue/dist/vue.js')
+// window.Vue = require('vue/dist/vue.js')
+import Vue from 'vue/dist/vue'
+import store from './store'
 window.dd = console.log
 window.baseURL = window.URL
+Vue.config.productionTip = false
 
 Vue.component('nav-bar', require('./components/NavBar').default);
 Vue.component('properties', require('./views/Properties/Properties').default);
@@ -24,6 +27,11 @@ import mixins from './mixins/mixins';
 Vue.mixin(mixins)
 
 /* Packages */
+
+/**
+ * Vuex
+ * https://vuex.vuejs.org/
+ */
 
 /*
 * Vue-Multiselect
@@ -47,4 +55,5 @@ window.Event = new Vue()
 
 const app = new Vue({
     el: '#app',
+    store,
 });

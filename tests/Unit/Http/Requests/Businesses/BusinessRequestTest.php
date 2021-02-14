@@ -74,6 +74,57 @@ class BusinessRequestTest extends BusinessTestCase
      * @test
      * @throws \Throwable
      */
+    public function categories_is_required()
+    {
+        $validatedField = 'categories';
+        $brokenRule = null;
+
+        $this->postJson(
+            route($this->routePrefix . 'store'),
+            $this->make(Business::class, [
+                $validatedField => $brokenRule
+            ])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function categories_must_have_an_array_format()
+    {
+        $validatedField = 'categories';
+        $brokenRule = 'Ferreteria';
+
+        $this->postJson(
+            route($this->routePrefix . 'store'),
+            $this->make(Business::class, [
+                $validatedField => $brokenRule
+            ])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function categories_must_exist_in_construction_categories()
+    {
+        $validatedField = 'categories';
+        $brokenRule = ['non-category'];
+
+        $this->postJson(
+            route($this->routePrefix . 'store'),
+            $this->make(Business::class, [
+                $validatedField => $brokenRule
+            ])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
     public function owner_id_must_be_equal_to_authenticated_user_id()
     {
         $notOwner = $this->create(User::class);

@@ -15,7 +15,7 @@ class BusinessController extends Controller
         return BusinessResource::collection(
             Business::query()
                     ->isPublished()
-                    ->with('owner:id')
+                    ->with(['owner:id', 'location.state'])
                     ->paginate(10)
         );
     }

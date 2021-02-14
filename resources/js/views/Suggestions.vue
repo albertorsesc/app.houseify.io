@@ -11,7 +11,7 @@ export default {
     },
     methods: {
         submit () {
-            axios.post('/api/suggestions', this.suggestion)
+            axios.post('/suggestions', this.suggestion)
             .then(() => {
 
             })

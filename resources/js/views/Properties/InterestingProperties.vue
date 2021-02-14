@@ -38,7 +38,7 @@ export default {
     },
     methods: {
         getInterestingProperties() {
-            axios.get('/api/me/properties/interested')
+            axios.get('/me/properties/interested')
             .then(response => {
                 this.interestedProperties = response.data.data
             })

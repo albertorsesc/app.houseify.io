@@ -98,7 +98,10 @@
                         <div v-show="activeTab === 'interesting-properties'" class="text-3xl block">
                             <interesting-properties></interesting-properties>
                         </div>
-                        <div v-show="activeTab === 'search-properties'" class="text-3xl block">Busqueda Avanzada de Propiedades</div>
+                        <div v-show="activeTab === 'search-properties'"
+                             class="text-3xl block">
+                            Busqueda Avanzada de Propiedades
+                        </div>
                     </div>
                     <!-- /End replace -->
                 </div>

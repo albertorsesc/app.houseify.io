@@ -37,6 +37,12 @@ class Business extends Model
         return $query->whereStatus(true);
     }
 
+    /* Mutators */
+    public function setCategoriesAttribute($categories)
+    {
+        return $this->attributes['categories'] = json_encode($categories);
+    }
+
     /* Helpers */
 
     public function profile() : string

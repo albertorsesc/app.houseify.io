@@ -26,6 +26,7 @@ class BusinessRequest extends FormRequest
         return [
             'name' => $this->getMethod() === 'POST' ? ['required', 'max:150', 'unique:businesses,name'] : [],
             'email' => ['nullable', 'email', 'max:150'],
+            'categories' => ['required', 'array', 'in:' . implode(',', config('houseify.construction_categories'))],
             'phone' => ['max:50'],
             'site' => ['nullable', 'url', 'max:255'],
         ];

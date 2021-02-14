@@ -19,7 +19,7 @@ export default {
     name: "ExploreBusinesses",
     data() {
         return {
-            endpoint: '/api/businesses',
+            endpoint: '/businesses',
             businesses: [],
 
             totalPages: 0,

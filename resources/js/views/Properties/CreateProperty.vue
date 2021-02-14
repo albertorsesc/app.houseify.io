@@ -46,7 +46,7 @@
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base">
                                     <vue-multiselect v-model="selectedPropertyType"
-                                                     :options="propertyTypes"
+                                                     :options="getPropertyTypes"
                                                      id="property_type"
                                                      label="display_name"
                                                      :searchable="false"
@@ -82,6 +82,7 @@
                                         <template slot="noResult">
                                             <span class="text-lg text-yellow-600">Lo sentimos, no se encontraron resultados :(</span>
                                         </template>
+                                        <template slot="noOptions">Selecciona un Tipo de Propiedad</template>
                                     </vue-multiselect>
                                 </div>
                                 <errors :error="errors.property_category_id"
@@ -98,14 +99,14 @@
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base">
                                     <vue-multiselect v-model="propertyForm.businessType"
-                                                     :options="businessTypes"
+                                                     :options="getBusinessTypes"
                                                      id="business_type"
                                                      :searchable="false"
                                                      :close-on-select="true"
                                                      :show-labels="true"
-                                                     select-label=""
-                                                     selected-label=""
-                                                     deselect-label=""
+                                                     :select-label="''"
+                                                     :selected-label="''"
+                                                     :deselect-label="''"
                                                      :hide-selected="true"
                                                      :placeholder="''"
                                     ></vue-multiselect>
@@ -166,14 +167,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import VueMultiselect from 'vue-multiselect'
 import Errors from "../../components/Errors";
+import SweetAlert from "../../models/SweetAlert";
 
 export default {
     name: "CreateProperty",
     data() {
         return {
-            endpoint: '/api/properties',
+            endpoint: '/properties',
             propertyForm: {
                 title: '',
                 propertyCategory: {
@@ -205,25 +208,16 @@ export default {
             }).then(response => {
                 Event.$emit('properties.new-property', response.data.data)
                 this.propertyForm = {}
+                SweetAlert.success('Tu Propiedad ha sido creada exitosamente!')
 
             }).catch(error => this.errors = error.response.status === 422 ?
                 error.response.data.errors :
                 [])
         },
-        getPropertyTypes() {
-            axios.get('/api/property-types')
-                .then(response => { this.propertyTypes = response.data.data })
-                .catch(error => { console.log(error) })
-        },
-        getBusinessTypes() {
-            axios.get('/api/business-types')
-                .then(response => { this.businessTypes = response.data.data })
-                .catch(error => { console.log(error) })
-        },
         getPropertyCategoriesByPropertyType(selectedPropertyType) {
             this.selectedPropertyType = selectedPropertyType ? selectedPropertyType : this.selectedPropertyType
             this.propertyForm.propertyCategory = {}
-            axios.get(`/api/property-types/${this.selectedPropertyType.id}/property-categories`)
+            axios.get(`/property-types/${this.selectedPropertyType.id}/property-categories`)
                 .then(response => { this.propertyCategoriesByPropertyType = response.data.data })
                 .catch(error => { console.log(error) })
         },
@@ -232,13 +226,16 @@ export default {
         },
     },
     computed: {
-    },
-    mounted() {
-        this.getPropertyTypes()
-        this.getBusinessTypes()
+        ...mapGetters({
+            getPropertyTypes: 'properties/getPropertyTypes',
+            getBusinessTypes: 'properties/getBusinessTypes'
+        })
     },
     created() {
         window.currentTab = 'createProperty'
+
+        this.$store.dispatch('properties/fetchPropertyTypes')
+        this.$store.dispatch('properties/fetchBusinessTypes')
     },
     components: {
         Errors,

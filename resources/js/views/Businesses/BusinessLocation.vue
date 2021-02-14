@@ -216,9 +216,10 @@ import FormInput from "../../components/FormInput";
 export default {
     name: "BusinessLocation",
     inject: ['business'],
+    emits: ['businesses.location'],
     data() {
         return {
-            endpoint: `/api/businesses/${this.business.slug}/location`,
+            endpoint: `/businesses/${this.business.slug}/location`,
 
             location: this.business.location,
             states: [],
@@ -258,6 +259,7 @@ export default {
             }).then(response => {
                 this.closeModal()
                 this.location = response.data.data
+                Event.$emit('businesses.location', this.location)
                 SweetAlert.success(`La Ubicacion ha sido registrada exitosamente!`)
             }).catch(error => {
                 this.errors = error.response.status === 422 ?
@@ -275,6 +277,7 @@ export default {
             }).then(response => {
                 this.closeModal()
                 this.location = response.data.data
+                Event.$emit('businesses.location', this.location)
                 SweetAlert.success(`La Ubicacion ha sido actualizada exitosamente!`)
             }).catch(error => {
                 this.errors = error.response.status === 422 ?
@@ -282,26 +285,20 @@ export default {
                     []
             })
         },
-        getStates() {
-            axios.get('/api/states')
-                .then(response => { this.states = response.data.data })
-                .catch(error => { console.log(error) })
-        },
         getCities(selectedState) {
             let state = this.isObject(selectedState) ? selectedState : this.businessLocationForm.state
-            axios.get(`/api/states/${state.name}/cities`)
+            axios.get(`/states/${state.name}/cities`)
                 .then(response => { this.cities = response.data })
                 .catch(error => { console.log(error) })
         },
         getNeighborhoods(selectedCity) {
             let city = selectedCity ? selectedCity : this.businessLocationForm.city
 
-            axios.get(`/api/cities/${city}/neighborhoods`)
+            axios.get(`/cities/${city}/neighborhoods`)
                 .then(response => { this.neighborhoods = response.data })
                 .catch(error => { console.log(error) })
         },
         openModal() {
-            this.getStates()
             this.modal = {}
             this.actionType = this.location ? 'put' : 'post'
             this.errors = []

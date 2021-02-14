@@ -92,9 +92,7 @@
                             <explore-businesses></explore-businesses>
                         </div>
                         <div v-show="activeTab === 'my-businesses'" class="text-3xl block">
-                            <my-businesses
-                                :categories="{{ json_encode(config('houseify.construction_categories')) }}"
-                            ></my-businesses>
+                            <my-businesses></my-businesses>
                         </div>
                         <div v-show="activeTab === 'my-interests'" class="text-3xl block">Mis Intereses</div>
                         <div v-show="activeTab === 'search-businesses'" class="text-3xl block">Busqueda Avanzada de Propiedades</div>

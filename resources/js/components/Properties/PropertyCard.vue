@@ -7,8 +7,9 @@
             <div class="card transition hover:transform px-6 py-2">
                 <div class="flex justify-center justify-between items-center align-middle">
                     <span class="bg-teal-200 text-teal-700 font-semibold text-xs rounded-full px-2 py-1 tracking-wide leading-none inline-block"
+                          v-if="property.location"
                           v-text="property.location.state.name"
-                          ></span>
+                    ></span>
                     <span class="bg-blue-200 text-teal-700 font-semibold text-xs rounded-full px-2 py-1 tracking-wide leading-none inline-block"
                           v-text="limitString(property.propertyCategory.displayName, 10)"
                           ></span>
@@ -31,7 +32,7 @@
                     <interested-btn :model="property"
                                     :id="property.slug"
                                     model-name="properties"
-                                    endpoint="/api/properties"
+                                    endpoint="/properties"
                     ></interested-btn>
                     <a class="inline-block text-gray-700 hover:shadow-lg hover:text-indigo-500 tracking-wide text-sm font-bold mr-2 align-middle items-center"
                        :href="`https://www.facebook.com/sharer.php?u=` + currentUrl"
@@ -61,6 +62,7 @@ import InterestedBtn from "../InterestedBtn";
 import CustomCarousel from '../../components/CustomCarousel'
 
 export default {
+    name: 'PropertyCard',
     props: {
         property: {
             required: true,

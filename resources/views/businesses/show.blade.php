@@ -42,13 +42,20 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="py-6 sm:px-0">
                         <div>
+                            <div v-if="localBusiness.owner.id === auth && ! localBusiness.location" class="mb-4">
+                                <alert :type="'warning'">
+                                    Para Publicar el negocio es necesario registrar su Direccion
+                                </alert>
+                            </div>
+
                             <div class="w-full mb-2 md:flex">
                                 <div class="w-full md:w-1/6 mr-2 mb-2 md:mb-0">
                                     <span class="rounded-md shadow-sm">
                                         {{--Publish/UnPublish--}}
                                         <button @click="toggle"
+                                                :disabled="! localBusiness.location"
                                                 type="button"
-                                                :class="status.btnClass"
+                                                :class="[status.btnClass, ! localBusiness.location ? 'bg-gray-200' : '']"
                                                 class="-mt-1 flex shadow-sm justify-center w-full py-3 border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                                 :title="localBusiness.status ? 'Ocultar el Negocio del publico...' : 'Hacer publico el Negocio...'">
                                                 <svg v-if="! localBusiness.status" class="text-green-300 hover:text-green-400 hover:border-green-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
@@ -112,17 +119,15 @@
                                                             Categorias del Negocio
                                                         </dt>
                                                         <div class="flex mt-2 md:mt-3">
-                                                            <div class="mr-3">
-                                                                <span class="text-xs border-emerald-900 border-1 shadow rounded-full bg-blue-50 px-4 py-2 my-2">Electricidad</span>
-                                                            </div>
-                                                            <div class="mr-3">
-                                                                <span class="text-xs border-emerald-900 border-1 shadow rounded-full bg-blue-50 px-4 py-2">Ferreteria</span>
-                                                            </div>
-                                                            <div class="mb-2">
-                                                                <span class="text-xs border-emerald-900 border-1 shadow rounded-full bg-blue-50 px-4 py-2">Plomeria</span>
+                                                            <div class="mr-3"
+                                                                 v-for="(category, index) in localBusiness.categories"
+                                                                 :key="index">
+                                                                <span class="text-xs border-emerald-900 border-1 shadow rounded-full bg-blue-50 px-4 py-2 my-2"
+                                                                      v-text="category"
+                                                                ></span>
                                                             </div>
                                                         </div>
-                                                    </div>{{--sm:col-span-1--}}
+                                                    </div>
                                                     {{--Phone--}}
                                                     <div class="mt-4 md:mt-0" v-if="localBusiness.phone">
                                                         <dt class="text-sm font-medium text-gray-500">
@@ -143,7 +148,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="md:flex mt-4">
+                                                <div class="md:flex md:justify-start mt-6">
                                                     {{--Site--}}
                                                     <div class="w-full md:w-1/4 mt-4 md:mt-0" v-if="localBusiness.site">
                                                         <dt class="text-sm font-medium text-gray-500">
@@ -157,7 +162,7 @@
                                                         </dd>
                                                     </div>
                                                     {{--UpdatedAt--}}
-                                                    <div class="w-full md:w-1/4 mt-4 md:mt-0">
+                                                    <div class="w-full md:w-1/4 mt-4 md:mt-0 md:ml-16">
                                                         <dt class="text-sm font-medium text-gray-500">
                                                             Actualizado hace:
                                                         </dt>
@@ -362,6 +367,30 @@
                                                     </span>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="w-full md:flex md:-mx-2 mt-4">
+                                            <div class="w-full md:mx-2 mt-3 md:mt-0">
+                                                <div class="my-1 rounded-md shadow-sm text-base">
+                                                    <vue-multiselect v-model="selectedConstructionCategories"
+                                                                     :placeholder="''"
+                                                                     :options="getConstructionCategories"
+                                                                     :multiple="true"
+                                                                     :taggable="true"
+                                                                     :hide-selected="true"
+                                                                     id="categories"
+                                                                     :searchable="true"
+                                                                     :close-on-select="false"
+                                                                     select-label=""
+                                                                     selected-label=""
+                                                                     deselect-label=""
+                                                                     placeholder="Selecciona las Categorias de Construccion de tu Negocio..."
+                                                    ></vue-multiselect>
+                                                </div>
+                                                <errors :error="errors.categories"
+                                                        :options="{ noContainer: true }"
+                                                ></errors>
                                             </div>
                                         </div>
 

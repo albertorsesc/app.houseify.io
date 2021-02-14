@@ -37,14 +37,11 @@
             <main class="">
 
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <!-- Replace with your content -->
                     <div class="py-6 sm:px-0">
                         <div>
-                            @if(auth()->check() && auth()->user()->owns($property, 'seller_id') && ! $property->location)
-                            <alert :type="'warning'">
+                            <alert v-if="localProperty.seller.id === auth && ! localProperty.location" :type="'warning'">
                                 Para Publicar la propiedad es necesario registrar su Direccion
                             </alert>
-                            @endif
 
                             @if(auth()->check() && auth()->user()->owns($property, 'seller_id') && ! $property->propertyFeature && $property->location)
                             <alert :type="'primary'">
@@ -73,18 +70,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="md:flex flex-1 mt-2">
-
-                                        <!--Property Address-->
-                                        <div class="w-full md:w-1/2 mt-2 md:mt-0 mr-2">
-                                            {{--                                    @include('properties.components.property-address')--}}
-                                        </div>
-
-                                        {{--Property Feature--}}
-                                        <div class="w-full md:w-1/2 mt-2 md:mt-0">
-                                            {{--                                        @include('properties.components.property-features')--}}
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div class="w-full md:w-1/3 mt-4">
@@ -93,8 +78,9 @@
                                         <div class="w-full md:mx-2 mb-2 md:mb-0">
                                             <span class="rounded-md shadow-sm">
                                                 <button @click="toggle"
+                                                        :disabled="! localProperty.location"
                                                         type="button"
-                                                        :class="status.btnClass"
+                                                        :class="[status.btnClass, ! localProperty.location ? 'bg-gray-200' : '']"
                                                         class="-mt-1 flex shadow-sm justify-center w-full py-3 border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                                         :title="localProperty.status ? 'Ocultar esta Propiedad del publico...' : 'Hacer publico esta Propiedad...'">
                                                     <svg v-if="! localProperty.status" class="text-green-300 hover:text-green-400 hover:border-green-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
@@ -533,7 +519,7 @@
                                         </div>
 
                                         <div class="w-full md:flex md:-mx-2 mt-4">
-                                            <div class="w-full md:w-1/3 mx-2">
+                                            <div class="w-full md:w-1/3 mx-2 mt-3 md:mt-0">
                                                 <form-input
                                                     title="Precio"
                                                     type="number"
@@ -551,19 +537,21 @@
                                                         <strong class="required">*</strong>
                                                         Tipo de Propiedad
                                                     </label>
-                                                    <vue-multiselect v-model="propertyForm.propertyCategory.propertyType"
-                                                                     :options="propertyTypes"
-                                                                     :searchable="false"
-                                                                     label="display_name"
-                                                                     :close-on-select="true"
-                                                                     :show-labels="true"
-                                                                     select-label=""
-                                                                     selected-label=""
-                                                                     deselect-label=""
-                                                                     :hide-selected="true"
-                                                                     placeholder="Tipos de Propiedad..."
-                                                                     @select="getPropertyCategoriesByPropertyType"
-                                                    ></vue-multiselect>
+                                                    <div class="mt-1">
+                                                        <vue-multiselect v-model="propertyForm.propertyCategory.propertyType"
+                                                                         :options="propertyTypes"
+                                                                         :searchable="false"
+                                                                         label="display_name"
+                                                                         :close-on-select="true"
+                                                                         :show-labels="true"
+                                                                         select-label=""
+                                                                         selected-label=""
+                                                                         deselect-label=""
+                                                                         :hide-selected="true"
+                                                                         placeholder="Tipos de Propiedad..."
+                                                                         @select="getPropertyCategoriesByPropertyType"
+                                                        ></vue-multiselect>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="w-full md:w-1/3 mx-2 mt-3 md:mt-0 mb-4">
@@ -572,18 +560,20 @@
                                                         <strong class="required">*</strong>
                                                         Categoria de la Propiedad
                                                     </label>
-                                                    <vue-multiselect v-model="propertyForm.propertyCategory"
-                                                                     :options="propertyCategoriesByPropertyType"
-                                                                     :searchable="false"
-                                                                     label="displayName"
-                                                                     :close-on-select="true"
-                                                                     :show-labels="true"
-                                                                     select-label=""
-                                                                     selected-label=""
-                                                                     deselect-label=""
-                                                                     :hide-selected="true"
-                                                                     placeholder="Categorias de Propiedad"
-                                                    ></vue-multiselect>
+                                                    <div class="mt-1">
+                                                        <vue-multiselect v-model="propertyForm.propertyCategory"
+                                                                         :options="propertyCategoriesByPropertyType"
+                                                                         :searchable="false"
+                                                                         label="displayName"
+                                                                         :close-on-select="true"
+                                                                         :show-labels="true"
+                                                                         select-label=""
+                                                                         selected-label=""
+                                                                         deselect-label=""
+                                                                         :hide-selected="true"
+                                                                         placeholder="Categorias de Propiedad"
+                                                        ></vue-multiselect>
+                                                    </div>
                                                     <div v-if="errors.property_category_id"
                                                          :class="['alert alert-danger']"
                                                          v-text="errors.property_category_id[0]"

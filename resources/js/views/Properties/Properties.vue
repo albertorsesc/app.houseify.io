@@ -7,7 +7,7 @@ export default {
     name: 'Properties',
     data: function () {
         return {
-            endpoint: '/api/properties',
+            endpoint: '/properties',
             properties: [],
 
             activeTab: 'explore-properties',

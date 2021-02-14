@@ -200,7 +200,7 @@ export default {
     inject: ['property'],
     data() {
         return {
-            endpoint: `/api/properties/${this.property.slug}/features`,
+            endpoint: `/properties/${this.property.slug}/features`,
 
             propertyFeatures: this.property.propertyFeature,
 

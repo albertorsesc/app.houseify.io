@@ -11,7 +11,12 @@ class BusinessController extends Controller
     public function __invoke (Business $business)
     {
         return view('businesses.show', [
-            'business' => new BusinessResource($business)
+            'business' => new BusinessResource(
+                $business->load([
+                    'location.state',
+                    'owner:id'
+                ])
+            )
         ]);
     }
 }

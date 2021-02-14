@@ -14,7 +14,7 @@
             </svg>
         </div>
         <div v-show="menuTab === 'new-business'">
-            <create-business :categories="categories"></create-business>
+            <create-business></create-business>
         </div>
         <div v-show="menuTab === 'my-businesses'"
              class="flex-wrap md:flex sm:justify-center mt-3">
@@ -35,15 +35,9 @@ import BusinessCard from "../../components/Businesses/BusinessCard";
 
 export default {
     name: "MyBusinesses",
-    props: {
-        categories: {
-            type: Array,
-            required: true,
-        }
-    },
     data() {
         return {
-            endpoint: '/api/me/businesses',
+            endpoint: '/me/businesses',
             myBusinesses: [],
             menuTab: 'my-businesses'
         }

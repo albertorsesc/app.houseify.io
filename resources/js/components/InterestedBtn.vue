@@ -49,7 +49,7 @@
         methods: {
             toggle() {
                 this.isInterested ? this.uninterested() : this.interested()
-                Event.$emit(`interest-${this.modelName}`)
+                Event.$emit(`interest-${this.modelName}`, this.model)
             },
             check() {
                 this.redirectIfGuest()

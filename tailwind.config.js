@@ -31,7 +31,6 @@ module.exports = {
             width: ['hover'],
         },
     },
-
     plugins: [
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
