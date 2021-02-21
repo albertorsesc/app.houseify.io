@@ -29,6 +29,7 @@ class BusinessResource extends JsonResource
             'status' => $this->status,
             'comments' => $this->comments,
             'location' => new LocationResource($this->whenLoaded('location')),
+            'interests' => $this->whenLoaded('interests'),
             'meta' => [
                 'profile' => $this->profile(),
                 'updatedAt' => $this->updated_at->diffForHumans()

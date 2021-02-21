@@ -5,6 +5,7 @@
     use App\Http\Controllers\Api\Businesses\MyBusinessController;
     use App\Http\Controllers\Api\ConstructionCategoryController;
     use App\Http\Controllers\Api\CountryController;
+    use App\Http\Controllers\Api\JobProfiles\JobProfileController;
     use App\Http\Controllers\Api\Properties\Actions\InterestPropertyController;
     use App\Http\Controllers\Api\Properties\Actions\PublishController;
     use App\Http\Controllers\Api\Properties\BusinessTypeController;
@@ -64,11 +65,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('me/properties', MyPropertyController::class)->name('me.properties');
         Route::get('me/properties/interested', MyInterestedPropertiesController::class)->name('me.properties.interested');
         Route::get('me/businesses', MyBusinessController::class)->name('me.businesses');
-//        Route::get('me/properties/interested', MyInterestedPropertiesController::class)->name('me.properties.interested');
+        Route::get('me/businesses/interested', \App\Http\Controllers\Api\Businesses\MyInterestedBusinessesController::class)->name('me.businesses.interested');
 
         Route::apiResources([
             'properties' => PropertyController::class,
             'businesses' => BusinessController::class,
+            'job-profiles' => JobProfileController::class,
         ]);
     });
 });

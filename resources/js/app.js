@@ -16,6 +16,8 @@ Vue.component('property-profile', require('./views/Properties/PropertyProfile').
 Vue.component('businesses', require('./views/Businesses/Businesses').default);
 Vue.component('business-profile', require('./views/Businesses/BusinessProfile').default);
 
+Vue.component('job-profiles', require('./views/JobProfiles/JobProfiles').default);
+
 Vue.component('profile', require('./views/User/Profile').default);
 
 /** Auth Helpers */

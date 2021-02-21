@@ -83,6 +83,15 @@ class User extends Authenticatable implements MustVerifyEmail
                        });
     }
 
+    public function scopeInterestedBusinesses() : Builder
+    {
+        return Business::query()
+                       ->with(['owner', 'interests', 'location.state'])
+                       ->whereHas('interests', function($query) {
+                           return $query->where('user_id', $this->id);
+                       });
+    }
+
     /* Helpers */
 
     public function isRoot() : bool

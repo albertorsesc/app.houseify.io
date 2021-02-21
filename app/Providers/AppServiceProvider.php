@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Models\{Businesses\Business, Properties\Property};
-use App\Observers\{Businesses\BusinessObserver, Properties\PropertyObserver};
+use App\Models\{Businesses\Business, JobProfiles\JobProfile, Properties\Property};
+use App\Observers\{Businesses\BusinessObserver, JobProfileObserver, Properties\PropertyObserver};
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Property::observe(PropertyObserver::class);
         Business::observe(BusinessObserver::class);
+        JobProfile::observe(JobProfileObserver::class);
     }
 }

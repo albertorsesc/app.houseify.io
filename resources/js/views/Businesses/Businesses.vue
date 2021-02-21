@@ -1,6 +1,7 @@
 <script>
 import MyBusinesses from "./MyBusinesses";
 import ExploreBusinesses from "./ExploreBusinesses";
+import InterestingBusinesses from "./InterestingBusinesses";
 
 export default {
     name: "Businesses",
@@ -13,6 +14,7 @@ export default {
     components: {
         MyBusinesses,
         ExploreBusinesses,
+        InterestingBusinesses,
     }
 }
 </script>

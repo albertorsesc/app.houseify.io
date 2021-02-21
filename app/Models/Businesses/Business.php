@@ -30,14 +30,8 @@ class Business extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
-    /* Scopes */
-
-    public function scopeIsPublished(Builder $query)
-    {
-        return $query->whereStatus(true);
-    }
-
     /* Mutators */
+
     public function setCategoriesAttribute($categories)
     {
         return $this->attributes['categories'] = json_encode($categories);

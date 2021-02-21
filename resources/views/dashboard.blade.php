@@ -46,16 +46,16 @@
                         <div class="w-full md:w-1/2 xl:w-1/3 px-3">
                             <a href="{{ route('web.businesses.index') }}">
                                 <div class="card transition hover:transform text-center items-center">
-                                    <img src="/img/businesses.png"
-                                         class="object-center"
+                                    <img src="/img/business_location.svg"
+                                         class="h-52 ml-16 pt-1 py-0 items-center"
                                          alt="Negocios en el ramo constructor"
                                          loading="lazy">
                                     <div class="px-4 py-1">
-                                        <div class="font-bold text-gray-900 text-xl mb-1">
+                                        <div class="font-bold text-gray-900 text-xl my  -1">
                                             Directorio de Negocios
                                         </div>
                                         <p class="text-gray-700 text-base pb-1">
-                                            Anuncia y Encuentra Proveedores relacionados al ramo de Construccion!
+                                            Proveedores relacionados al ramo de Construccion!
                                         </p>
                                     </div>
                                 </div>
@@ -64,15 +64,15 @@
 
                         {{--Ads--}}
                         <div class="w-full md:w-1/2 xl:w-1/3 px-3">
-                            <a href="#">
+                            <a href="{{ route('web.job-positions.index') }}">
                                 <div class="card transition hover:transform text-center items-center">
-                                    <img src="/img/ads.png" class="object-fill" alt="Anuncios Publicitarios" loading="lazy">
+                                    <img src="/img/hire.svg" class="object-cover p-8" alt="Anuncios Publicitarios" loading="lazy">
                                     <div class="px-4 py-1">
-                                        <div class="font-bold text-gray-900 text-xl mb-1">
-                                            Anuncios Publicitarios
+                                        <div class="font-bold text-gray-900 text-xl">
+                                            Tecnicos y Profesionales
                                         </div>
                                         <p class="text-gray-700 text-base pb-1">
-                                            Anuncia y Encuentra ofertas de Servicios o Productos de Construccion!
+                                            Tecnicos y Profesionales de Servicios de Construccion!
                                         </p>
                                     </div>
                                 </div>

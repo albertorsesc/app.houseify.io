@@ -10,7 +10,7 @@ class MyBusinessController extends Controller
     public function __invoke ()
     {
         return BusinessResource::collection(
-            auth()->user()->businesses
+            auth()->user()->businesses->load(['interests'])
         );
     }
 }

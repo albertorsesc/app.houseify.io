@@ -26,6 +26,10 @@
                                class="border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl">
                                 Negocios
                             </a>
+                            <a href="{{ route('web.job-positions.index') }}"
+                               class="border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl">
+                                Profesionales
+                            </a>
                         </div>
                     </div>
                 </div>

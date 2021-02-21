@@ -25,14 +25,22 @@ abstract class TestCase extends BaseTestCase
      *
      * @param $class
      * @param array $attributes
+     * @param string|null $state
      * @param int $count
      *
      * @return mixed
      */
-    public function create($class, array $attributes = [], int $count = 1)
+    public function create($class, array $attributes = [], string $state = null, int $count = 1)
     {
         if ($count > 1) {
             return $class::factory()->count($count)->create($attributes);
+        }
+        if (! is_null($state) && is_string($state)) {
+            if ($count > 1) {
+                return $class::factory()->count($count)->$state()->create();
+            }
+
+            return $class::factory()->$state()->create();
         }
         return $class::factory()->create($attributes);
     }

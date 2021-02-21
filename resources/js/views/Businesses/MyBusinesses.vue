@@ -25,6 +25,23 @@
             ></business-card>
 
         </div>
+
+        <div v-if="! myBusinesses.length" class="flex-wrap md:flex sm:justify-center p-6 mt-3 items-center rounded-lg">
+            <div class="flex flex-col md:flex-row items-center align-middle justify-center px-5 text-gray-700">
+                <div class="max-w-md">
+                    <div class="text-5xl font-dark font-bold"></div>
+                    <p class="text-2xl md:text-3xl font-light leading-normal">
+                        Registra tu Negocio o Empresa y deja que tus clientes te encuentren mas facil.
+                    </p>
+<!--                    <p class="mb-8 mt-4">Tus Negocios .</p>-->
+                </div>
+                <div class="max-w-full">
+                    <img src="/img/businesses.png" alt="Houseify.io image">
+                </div>
+
+            </div>
+        </div>
+
     </div>
 
 </template>

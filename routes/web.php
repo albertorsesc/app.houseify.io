@@ -24,6 +24,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::view('directorio-de-negocios', 'businesses.index')->name('web.businesses.index');
     Route::get('directorio-de-negocios/{business:slug}', BusinessController::class)->name('web.businesses.show');
 
+    Route::view('tecnicos-y-profesionistas/tecnico', 'job-profiles.show')->name('web.job-positions.show');
+    Route::view('tecnicos-y-profesionistas', 'job-profiles.index')->name('web.job-positions.index');
+
     Route::view('sugerencias', 'suggestions')->name('web.suggestions.index');
     Route::post('suggestions', [SuggestionController::class, 'store'])->name('suggestions.store');
 });

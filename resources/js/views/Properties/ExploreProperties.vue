@@ -68,8 +68,10 @@ export default {
         this.onScroll()
 
         Event.$on('interest-properties', property => {
-            let prop = this.properties.find(prop => prop[0].id === property.id)
-            prop.status = property.status
+            dd(this.properties.filter(filteredProperties => dd(filteredProperties)))
+            // let prop = this.properties.find(prop => prop[0].id === property.id)
+            // dd(prop.status)
+            // dd(property.status)
             /*let propert = this.properties.filter(filteredProperties => filteredProperties[0].slug === property.slug)
             dd(this.properties.splice(this.properties.indexOf(propert[0])))
             this.properties.push(property)*/
@@ -80,7 +82,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

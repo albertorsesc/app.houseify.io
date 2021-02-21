@@ -94,7 +94,9 @@
                         <div v-show="activeTab === 'my-businesses'" class="text-3xl block">
                             <my-businesses></my-businesses>
                         </div>
-                        <div v-show="activeTab === 'my-interests'" class="text-3xl block">Mis Intereses</div>
+                        <div v-show="activeTab === 'my-interests'" class="text-3xl block">
+                            <interesting-businesses></interesting-businesses>
+                        </div>
                         <div v-show="activeTab === 'search-businesses'" class="text-3xl block">Busqueda Avanzada de Propiedades</div>
                     </div>
                     <!-- /End replace -->
