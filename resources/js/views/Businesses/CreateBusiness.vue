@@ -174,6 +174,7 @@
 import { mapGetters } from 'vuex'
 import VueMultiselect from 'vue-multiselect'
 import Errors from "../../components/Errors";
+import SweetAlert from "../../models/SweetAlert";
 
 export default {
     name: "CreateBusiness",
@@ -204,6 +205,7 @@ export default {
             }).then(response => {
                 Event.$emit('businesses.new-business', response.data.data)
                 this.businessForm = {}
+                SweetAlert.success('Tu Negocio ha sido creado exitosamente!')
             }).catch(error => this.errors = error.response.status === 422 ?
                 error.response.data.errors :
                 [])

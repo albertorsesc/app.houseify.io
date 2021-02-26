@@ -34,7 +34,7 @@ class PropertyTestCase extends TestCase
         return [
             'title' => 'Beautiful House near Beach',
             'property_category_id' => PropertyCategory::query()->inRandomOrder()->first()->id,
-            'business_type' => Arr::random(BusinessType::all()),
+            'business_type' => Arr::random(BusinessType::all()->toArray()),
             'price' => rand(1000, 100000000),
             'comments' => 'Aditional Comments',
         ];

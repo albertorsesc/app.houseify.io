@@ -26,12 +26,16 @@ class JobProfileRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:50'],
-            'birthdate_at' => ['date_format:Y-m-d'],
-            'skills' => ['required', 'array', 'in:' . implode(',', array_values(JobProfile::getSkills()))],
-            'email' => ['email', 'max:150'],
+            'birthdate_at' => ['required', 'date_format:Y-m-d'],
+            'skills' => [
+                'required',
+                'array',
+                'in:' . implode(',', collect(config('job-profiles.skills'))->toArray())
+            ],
+            'email' => ['nullable', 'email', 'max:150'],
             'phone' => ['max:60'],
-            'facebook_profile' => ['url', 'max:255'],
-            'site' => ['url', 'max:255'],
+            'facebook_profile' => ['nullable', 'url', 'max:255'],
+            'site' => ['nullable', 'url', 'max:255'],
         ];
     }
 }

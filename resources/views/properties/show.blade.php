@@ -217,102 +217,6 @@
 
                             <property-features></property-features>
 
-                                <!--                            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                                                                <div class="px-4 py-5 sm:px-6">
-
-                                                                    <h3 class="flex text-lg leading-6 font-medium text-emerald-600">
-                                                                        <svg class="mr-2 h-5 w-5 text-teal-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                                                        </svg>
-                                                                        Caracteristicas de la Propiedad
-                                                                    </h3>
-                                                                    &lt;!&ndash;                                <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                                                                                                        Personal details and application.
-                                                                                                    </p>&ndash;&gt;
-                                                                </div>
-                                                                <div class="border-t border-gray-200 mx-4 py-5 sm:px-6">
-                                                                    <dl class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-3">
-                                                                        <div class="sm:col-span-1">
-                                                                            <dt class="text-sm font-medium text-gray-500 flex">
-                                                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                                                                                </svg>
-                                                                                m² Propiedad
-                                                                            </dt>
-                                                                            <dd class="mt-1 text-base text-teal-600">
-                                                                                200
-                                                                            </dd>
-                                                                        </div>
-                                                                        <div class="sm:col-span-1">
-                                                                            <dt class="text-sm font-medium text-gray-500 flex">
-                                                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                                                                                </svg>
-                                                                                m² Construccion
-                                                                            </dt>
-                                                                            <dd class="mt-1 text-base text-teal-600">
-                                                                                120
-                                                                            </dd>
-                                                                        </div>
-                                                                        <div class="sm:col-span-1">
-
-                                                                            <dt class="text-sm font-medium text-gray-500 flex">
-                                                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                                                                </svg>
-                                                                                No. Niveles
-                                                                            </dt>
-                                                                            <dd class="mt-1 text-base text-teal-600">
-                                                                                2
-                                                                            </dd>
-                                                                        </div>
-                                                                        <div class="sm:col-span-1">
-                                                                            <dt class="text-sm font-medium text-gray-500 flex">
-                                                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                                                                </svg>
-                                                                                No. Habitaciones
-                                                                            </dt>
-                                                                            <dd class="mt-1 text-base text-teal-600">
-                                                                                4
-                                                                            </dd>
-                                                                        </div>
-                                                                        <div class="sm:col-span-1">
-
-                                                                            <dt class="text-sm font-medium text-gray-500 flex">
-                                                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                                                                </svg>
-                                                                                No. Banos
-                                                                            </dt>
-                                                                            <dd class="mt-1 text-base text-teal-600">
-                                                                                3
-                                                                            </dd>
-                                                                        </div>
-                                                                        <div class="sm:col-span-1">
-                                                                            <dt class="text-sm font-medium text-gray-500 flex">
-                                                                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                                                                </svg>
-                                                                                No. Medios Banos
-                                                                            </dt>
-                                                                            <dd class="mt-1 text-base text-teal-600">
-                                                                                3
-                                                                            </dd>
-                                                                        </div>
-
-                                                                        <div class="sm:col-span-2">
-                                                                            <dt class="text-sm font-medium text-gray-500">
-                                                                                Comentarios adicionales
-                                                                            </dt>
-                                                                            <dd class="mt-1 text-sm text-emerald-700">
-                                                                                Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
-                                                                            </dd>
-                                                                        </div>
-                                                                    </dl>
-                                                                </div>
-                                                            </div>-->
-
                             <divider title="Mapa de Ubicacion"></divider>
 
                             {{--Mapa--}}
@@ -482,14 +386,6 @@
                                                         placeholder="Casa Hermosa junto a la playa..."
                                                         @change="propertyForm.title"
                                                     ></form-input>
-                                                    <div class="mt-2 flex rounded-md shadow-sm">
-                                                    <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
-                                                      houseify.io/propiedades/
-                                                    </span>
-                                                    <span class="p-2 bg-gray-100 flex-1 focus:ring-indigo-500 focus:border-indigo-500 border border-r-0 border-gray-300 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
-                                                        @{{ propertyForm.title | toKebabCase }}-ID_DE_LA_PUBLICACION
-                                                    </span>
-                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="w-full md:w-1/3 mx-2 mt-3 md:mt-0">

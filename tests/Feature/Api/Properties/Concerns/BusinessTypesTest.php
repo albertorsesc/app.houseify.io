@@ -23,6 +23,6 @@ class BusinessTypesTest extends TestCase
 
         $response = $this->getJson(route($this->routePrefix . 'index'));
         $response->assertOk();
-        $response->assertJson(['data' => BusinessType::all()]);
+        $response->assertJson(['data' => BusinessType::all()->toArray()]);
     }
 }

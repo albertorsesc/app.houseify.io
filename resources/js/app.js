@@ -17,6 +17,7 @@ Vue.component('businesses', require('./views/Businesses/Businesses').default);
 Vue.component('business-profile', require('./views/Businesses/BusinessProfile').default);
 
 Vue.component('job-profiles', require('./views/JobProfiles/JobProfiles').default);
+Vue.component('job-profile', require('./views/JobProfiles/JobProfile').default);
 
 Vue.component('profile', require('./views/User/Profile').default);
 
@@ -51,6 +52,11 @@ Vue.mixin(mixins)
  */
 /*import { mixin as clickaway } from 'vue-clickaway';
 Vue.mixin(clickaway)*/
+
+/**
+ * Vue Star Raiting
+ * https://github.com/craigh411/vue-star-rating/
+ */
 
 /** Events */
 window.Event = new Vue()

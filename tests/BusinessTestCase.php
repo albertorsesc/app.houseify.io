@@ -24,6 +24,7 @@ class BusinessTestCase extends TestCase
             'phone' => '6862894998',
             'site' => 'https://mi-negocio.com',
             'comments' => 'Comentarios Adicionales',
+            'status' => true
         ], $overrides);
     }
 

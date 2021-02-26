@@ -71,12 +71,7 @@ class BusinessesTest extends BusinessTestCase
         $response->assertJson(['data' => ['name' => $newBusiness['name']]]);
 
         $business = Business::first();
-        $this->assertDatabaseHas(
-            'businesses',
-            array_merge($business->toArray(), [
-                'categories' => collect($business->categories)->toJson()
-            ])
-        );
+        $this->assertEquals($business->categories, $newBusiness['categories']);
         $this->assertTrue($business->owner->id === auth()->id());
     }
 
@@ -88,6 +83,7 @@ class BusinessesTest extends BusinessTestCase
      */
     public function authenticated_user_can_update_a_business()
     {
+        $this->withoutExceptionHandling();
         $this->signIn();
 
         $existingBusiness = Business::factory()->create();
@@ -105,13 +101,13 @@ class BusinessesTest extends BusinessTestCase
             ]
         ]);
 
-        $this->assertDatabaseHas(
-            'businesses',
-            array_merge($newBusinessData, [
-                'categories' => collect($newBusinessData['categories'])->toJson()
-            ])
+        $this->assertEquals(
+            $existingBusiness->fresh()->categories,
+            $newBusinessData['categories']
         );
-        $this->assertTrue(auth()->user()->owns($existingBusiness, 'owner_id'));
+        $this->assertTrue(
+            auth()->user()->owns($existingBusiness, 'owner_id')
+        );
     }
 
     /**

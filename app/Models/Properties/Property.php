@@ -3,7 +3,7 @@
 namespace App\Models\Properties;
 
 use App\Models\User;
-use App\Models\Concerns\{HasLocation, HasUuid, Interestable, Locationable, Publishable};
+use App\Models\Concerns\{CanBeReported, HasLocation, HasUuid, Interestable, Locationable, Publishable};
 use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, Relations\BelongsTo, Relations\HasOne};
 
 class Property extends Model implements Locationable
@@ -12,7 +12,8 @@ class Property extends Model implements Locationable
         HasFactory,
         Publishable,
         HasLocation,
-        Interestable;
+        Interestable,
+        CanBeReported;
 
     protected $casts = ['price' => 'integer', 'status' => 'boolean', 'seller_id' => 'integer'];
     protected $fillable = ['property_category_id', 'business_type', 'title', 'price', 'comments'];
@@ -49,5 +50,10 @@ class Property extends Model implements Locationable
     public function formattedPrice() : string
     {
         return '$' . number_format($this->price);
+    }
+
+    public function getReportingCauses()
+    {
+        return config('properties.reporting_causes');
     }
 }

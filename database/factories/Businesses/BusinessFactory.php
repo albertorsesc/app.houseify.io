@@ -24,13 +24,14 @@ class BusinessFactory extends Factory
     {
         return [
             'name' => $name = $this->faker->company,
-            'owner_id' => User::factory(),
+            'owner_id' => (fn() => User::factory()),
             'categories' => $this->faker->randomElements(
                 collect(config('houseify.construction_categories'))->random(3)->toArray()
             ),
             'email' => $this->faker->email,
             'phone' => $this->faker->phoneNumber,
             'site' => $this->faker->url,
+            'facebook_profile' => $this->faker->url,
             'comments' => $this->faker->paragraph,
             'status' => true,
         ];

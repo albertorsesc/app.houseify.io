@@ -26,7 +26,7 @@ class InterestedInBusinessTest extends TestCase
     {
         $this->signIn();
         $business = $this->create(Business::class);
-        $this->logout();
+        $this->signOut();
         $this->assertEquals(0, $business->interests->count());
 
         $this->postJson(

@@ -23,12 +23,12 @@
                                :class="[activeTab === 'explore-job-profiles' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Explorar Profesionales
                             </a>
-                            <a @click="activeTab = 'my-job-profiles'"
+                            <a @click="activeTab = 'my-job-profile'"
                                role="button"
                                href="#"
                                class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
-                               :class="[activeTab === 'my-job-profiles' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
-                                Mis Profesionales
+                               :class="[activeTab === 'my-job-profile' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
+                                Mi Perfil de Trabajo
                             </a>
                             <a @click="activeTab = 'my-interests'"
                                role="button"
@@ -49,7 +49,7 @@
                         {{--Mobile--}}
                         <div class="w-full md:hidden mt-2">
                             <div class="flex-1 w-full ">
-                                <a @click="activeTab = 'explore-profesionals'"
+                                <a @click="activeTab = 'explore-job-profiles'"
                                    role="button"
                                    href="#"
                                    class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out">
@@ -57,11 +57,11 @@
                                 </a>
                             </div>
                             <div class="flex-1 md:hidden mt-2">
-                                <a @click="activeTab = 'my-job-profiles'"
+                                <a @click="activeTab = 'my-job-profile'"
                                    role="button"
                                    href="#"
                                    class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out">
-                                    Mis Perfiles
+                                    Mi Perfil de Trabajo
                                 </a>
                             </div>
                             <div class="flex-1 md:hidden mt-2">
@@ -90,8 +90,8 @@
                     <div class="px-4 py-6 sm:px-0">
                         <div v-show="activeTab === 'explore-job-profiles'" class="text-3xl block">
                         </div>
-                        <div v-show="activeTab === 'my-job-profiles'" class="text-3xl block">
-                            <my-job-profiles></my-job-profiles>
+                        <div v-show="activeTab === 'my-job-profile'" class="text-3xl block">
+                            <my-job-profile></my-job-profile>
                         </div>
                         <div v-show="activeTab === 'my-interests'" class="text-3xl block">
                         </div>

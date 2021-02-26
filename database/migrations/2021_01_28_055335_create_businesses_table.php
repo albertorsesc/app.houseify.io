@@ -23,6 +23,7 @@ class CreateBusinessesTable extends Migration
             $table->string('email', 150)->nullable();
             $table->string('phone', 50)->nullable();
             $table->string('site')->nullable();
+            $table->string('facebook_profile')->nullable();
             $table->boolean('status')->default(false);
             $table->text('comments')->nullable();
             $table->timestamps();

@@ -78,4 +78,16 @@ class PropertyTest extends PropertyTestCase
 
         $this->assertCount(1, Property::query()->isPublished()->get());
     }
+
+    /**
+     * @test
+     * @throws \Throwable
+    */
+    public function property_model_must_have_get_reporting_causes_method()
+    {
+        $this->assertTrue(
+            config('properties.reporting_causes') ===
+            (new Property())->getReportingCauses()
+        );
+    }
 }

@@ -1,10 +1,6 @@
-<template>
-
-</template>
-
 <script>
 
-import MyJobProfiles from "./MyJobProfiles";
+import MyJobProfile from "./MyJobProfile";
 
 export default {
     name: "JobProfiles",
@@ -14,8 +10,24 @@ export default {
             headerTitle: 'Tecnicos y Profesionistas',
         }
     },
+    watch: {
+        activeTab() {
+            if (this.activeTab === 'explore-job-profiles') {
+                this.headerTitle = 'Tecnicos y Profesionistas'
+            }
+            if (this.activeTab === 'my-job-profile') {
+                this.headerTitle = 'Mi Perfil de Trabajo'
+            }
+            if (this.activeTab === 'my-interests') {
+                this.headerTitle = 'Mis Intereses'
+            }
+            if (this.activeTab === 'search-job-profiles') {
+                this.headerTitle = 'Busqueda Avanzada de Profesionales'
+            }
+        }
+    },
     components: {
-        MyJobProfiles,
+        MyJobProfile,
     }
 }
 </script>

@@ -18,7 +18,7 @@ class InterestingBusinessesTest extends TestCase
     {
         $this->signIn();
         $property = $this->create(Business::class);
-        $this->logout();
+        $this->signOut();
 
         $this->signIn();
 

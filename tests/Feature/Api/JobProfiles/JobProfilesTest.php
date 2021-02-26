@@ -32,13 +32,16 @@ class JobProfilesTest extends TestCase
                     'id' => $jobProfile->id,
                     'user' => ['id' => $jobProfile->user->id],
                     'title' => $jobProfile->title,
-                    'birthdateAt' => $jobProfile->birthdate_at,
+                    'age' => $jobProfile->getAge(),
                     'skills' => $jobProfile->skills,
                     'email' => $jobProfile->email,
                     'phone' => $jobProfile->phone,
                     'facebookProfile' => $jobProfile->facebook_profile,
                     'site' => $jobProfile->site,
-                    'bio' => $jobProfile->bio
+                    'bio' => $jobProfile->bio,
+                    'meta' => [
+                        'profile' => $jobProfile->profile()
+                    ]
                 ]
             ]
         ]);
@@ -57,13 +60,6 @@ class JobProfilesTest extends TestCase
         $response = $this->postJson(route($this->routePrefix . 'store'), $jobProfile->toArray());
         $response->assertCreated();
         $response->assertJson(['data' => ['title' => $jobProfile->title]]);
-
-        $this->assertDatabaseHas(
-            'job_profiles',
-            array_merge($jobProfile->toArray(), [
-                'skills' => collect($jobProfile->skills)->toJson()
-            ])
-        );
     }
 
     /**
@@ -74,6 +70,7 @@ class JobProfilesTest extends TestCase
      */
     public function authenticated_user_can_update_a_job_profile()
     {
+        $this->withoutExceptionHandling();
         $this->signIn();
 
         $existingJobProfile = JobProfile::factory()->create();
@@ -91,12 +88,6 @@ class JobProfilesTest extends TestCase
             ]
         ]);
 
-        $this->assertDatabaseHas(
-            'job_profiles',
-            array_merge($newJobProfileData->toArray(), [
-                'skills' => collect($newJobProfileData['skills'])->toJson()
-            ])
-        );
         $this->assertTrue(auth()->user()->owns($existingJobProfile, 'user_id'));
     }
 

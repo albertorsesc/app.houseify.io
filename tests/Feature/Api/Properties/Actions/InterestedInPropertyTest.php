@@ -23,7 +23,7 @@ class InterestedInPropertyTest extends PropertyTestCase
     {
         $this->signIn();
         $property = $this->create(Property::class);
-        $this->logout();
+        $this->signOut();
         $this->assertEquals(0, $property->interests->count());
 
         $this->postJson(

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Properties;
 
+use App\Models\Properties\Concerns\BusinessType;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PropertyRequest extends FormRequest
@@ -25,7 +26,7 @@ class PropertyRequest extends FormRequest
     {
         return [
             'property_category_id' => ['required', 'exists:property_categories,id'],
-            'business_type' => ['required', 'in:' . implode(',', \App\Models\Properties\Concerns\BusinessType::all())],
+            'business_type' => ['required', 'in:' . implode(',', BusinessType::all()->toArray())],
             'title' => ['required', 'max:50'],
             'price' => ['required', 'integer', 'max:100000000', 'gt:' . 0]
         ];

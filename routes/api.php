@@ -6,8 +6,11 @@
     use App\Http\Controllers\Api\ConstructionCategoryController;
     use App\Http\Controllers\Api\CountryController;
     use App\Http\Controllers\Api\JobProfiles\JobProfileController;
+    use App\Http\Controllers\Api\JobProfiles\MyJobProfileController;
+    use App\Http\Controllers\Api\JobProfiles\SkillController;
     use App\Http\Controllers\Api\Properties\Actions\InterestPropertyController;
     use App\Http\Controllers\Api\Properties\Actions\PublishController;
+    use App\Http\Controllers\Api\Properties\Actions\ReportPropertyController;
     use App\Http\Controllers\Api\Properties\BusinessTypeController;
     use App\Http\Controllers\Api\Properties\LocationController;
     use App\Http\Controllers\Api\Properties\MyInterestedPropertiesController;
@@ -19,7 +22,6 @@
     use App\Http\Controllers\Api\Sepomex\CityByStateController;
     use App\Http\Controllers\Api\Sepomex\NeighborhoodByCityController;
     use App\Http\Controllers\Api\StateController;
-    use App\Http\Controllers\Api\SuggestionController;
     use Illuminate\Http\Request;
     use App\Http\Controllers\Api\Properties\PropertyTypeController;
 
@@ -54,6 +56,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('properties/{property:slug}/interested', [InterestPropertyController::class, 'store'])->name('properties.interested');
         Route::delete('properties/{property:slug}/uninterested', [InterestPropertyController::class, 'destroy'])->name('properties.uninterested');
 
+        Route::post('properties/{property:slug}/report', ReportPropertyController::class)->name('properties.report');
+
         Route::post('businesses/{business:slug}/location', [\App\Http\Controllers\Api\Businesses\LocationController::class, 'store'])->name('businesses.location.store');
         Route::put('businesses/{business:slug}/location', [\App\Http\Controllers\Api\Businesses\LocationController::class, 'update'])->name('businesses.location.update');
 
@@ -66,6 +70,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('me/properties/interested', MyInterestedPropertiesController::class)->name('me.properties.interested');
         Route::get('me/businesses', MyBusinessController::class)->name('me.businesses');
         Route::get('me/businesses/interested', \App\Http\Controllers\Api\Businesses\MyInterestedBusinessesController::class)->name('me.businesses.interested');
+
+        Route::get('me/job-profile', MyJobProfileController::class)->name('me.job-profile');
+
+        //        Route::put('job-profiles.rate', [RateController::class, 'update'])->name('job-profiles.rate');
+        Route::get('skills', SkillController::class)->name('skills.index');
 
         Route::apiResources([
             'properties' => PropertyController::class,

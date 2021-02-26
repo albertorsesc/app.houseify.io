@@ -65,27 +65,6 @@ class JobProfileRequestTest extends TestCase
      * @test
      * @throws \Throwable
      */
-    public function birthdate_at_must_have_Y_m_d_format()
-    {
-        $validatedField = 'birthdate_at';
-        $brokenRule = 'not-date';
-
-        $this->postJson(
-            route($this->routePrefix . 'store'),
-            [$validatedField => $brokenRule]
-        )->assertJsonValidationErrors($validatedField);
-
-        $existingJobProfile = $this->create(JobProfile::class);
-        $this->putJson(
-            route($this->routePrefix . 'update', $existingJobProfile),
-            $this->make(JobProfile::class, [$validatedField => $brokenRule])->toArray()
-        )->assertJsonValidationErrors($validatedField);
-    }
-
-    /**
-     * @test
-     * @throws \Throwable
-     */
     public function skills_is_required()
     {
         $validatedField = 'skills';
@@ -186,6 +165,29 @@ class JobProfileRequestTest extends TestCase
         $this->postJson(
             route($this->routePrefix . 'store'),
             [$validatedField => $brokenRule]
+        )->assertJsonValidationErrors($validatedField);
+
+        $existingJobProfile = $this->create(JobProfile::class);
+        $this->putJson(
+            route($this->routePrefix . 'update', $existingJobProfile),
+            $this->make(JobProfile::class, [$validatedField => $brokenRule])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function birthdate_at_is_required()
+    {
+        $validatedField = 'birthdate_at';
+        $brokenRule = null;
+
+        $this->postJson(
+            route($this->routePrefix . 'store'),
+            $this->make(JobProfile::class, [
+                $validatedField => $brokenRule
+            ])->toArray()
         )->assertJsonValidationErrors($validatedField);
 
         $existingJobProfile = $this->create(JobProfile::class);

@@ -19,6 +19,7 @@ class SuggestionsTest extends TestCase
     */
     public function authenticated_user_can_submit_a_suggestion()
     {
+        $this->withoutMiddleware();
         \Notification::fake();
 
         $this->create(User::class, ['email' => config('houseify.roles.root')[0]]);

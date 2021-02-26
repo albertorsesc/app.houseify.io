@@ -2,6 +2,8 @@
 
 namespace App\Models\Properties\Concerns;
 
+use Illuminate\Support\Collection;
+
 class BusinessType
 {
     const TYPES = [
@@ -10,12 +12,12 @@ class BusinessType
         'transfer' => 'traspaso',
     ];
 
-    public static function all() : array
+    public static function all() : Collection
     {
-        return [
+        return collect([
             self::TYPES['sale'],
             self::TYPES['rent'],
             self::TYPES['transfer'],
-        ];
+        ]);
     }
 }

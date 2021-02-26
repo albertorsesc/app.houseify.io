@@ -14,14 +14,20 @@ class JobProfileController extends Controller
     public function index() : AnonymousResourceCollection
     {
         return JobProfileResource::collection(
-            JobProfile::query()->isPublished()->with('user')->get()
+            JobProfile
+                ::query()
+                ->isPublished()
+                ->with('user')
+                ->get()
         );
     }
 
     public function store(JobProfileRequest $request) : JobProfileResource
     {
         return new JobProfileResource(
-            JobProfile::create($request->all())
+            JobProfile::create(
+                $request->all()
+            )->load('user')
         );
     }
 

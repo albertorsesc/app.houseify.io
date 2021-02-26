@@ -159,6 +159,8 @@
             'business_type' => 'Tipo de Negocio',
             'city' => 'Ciudad',
             'neighborhood' => 'Fracc/Colonia',
+            'birthdate_at' => 'Fecha de Nacimiento',
+            'skills' => 'Habilidades',
             'price' => 'Precio',
             'state_id' => 'Estado',
             'country_id' => 'Pais',

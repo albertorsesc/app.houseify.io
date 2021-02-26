@@ -82,18 +82,12 @@ class PropertyFeaturesTest extends PropertyTestCase
             route($this->routePrefix . 'update', $propertyFeature->property),
             $propertyFeatureData->toArray()
         );
-        $response->assertStatus(200);
-        $response->assertJson([
-            'data' => [
-                'id' => $propertyFeature->id,
-                'features' => ['property_size' => $propertyFeatureData->features['property_size']]
-            ]
-        ]);
+        $response->assertOk();
 
-        $this->assertDatabaseHas('property_features', [
-            'property_id' => $propertyFeature->property->id,
-            'features' => json_encode($propertyFeatureData->features)
-        ]);
+        $this->assertEquals(
+            $propertyFeature->fresh()->features,
+            $propertyFeatureData->features
+        );
     }
 
     public function authenticated_users_can_delete_a_property_feature()

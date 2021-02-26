@@ -5,17 +5,19 @@
         </div>
         <div class="px-4 -mt-16 relative">
             <div class="card transition hover:transform px-6 py-2">
-                <div class="flex justify-center justify-between items-center align-middle">
+                <div class="flex justify-center justify-evenly items-center align-middle">
                     <span class="bg-teal-200 text-teal-700 font-semibold text-xs rounded-full px-2 py-1 tracking-wide leading-none inline-block"
                           v-if="property.location"
                           v-text="property.location.state.name"
+                          :title="property.location.state.name"
                     ></span>
                     <span class="bg-blue-200 text-teal-700 font-semibold text-xs rounded-full px-2 py-1 tracking-wide leading-none inline-block"
                           v-text="limitString(property.propertyCategory.displayName, 10)"
-                          ></span>
+                          :title="property.propertyCategory.displayName"
+                    ></span>
                     <span class="bg-purple-200 text-teal-700 font-semibold text-xs rounded-full px-2 py-1 tracking-wide leading-none inline-block"
                           v-text="property.businessType"
-                          ></span>
+                    ></span>
                 </div>
                 <div class="font-semibold text-lg text-gray-700 mt-2 text-center"
                      v-text="propertyTitle"
@@ -73,7 +75,7 @@ export default {
         return {
             currentUrl: window.location.href,
 
-            propertyTitle: this.limitString(this.property.title, 24),
+            propertyTitle: this.limitString(this.property.title, 23),
         }
     },
     components: {

@@ -30,7 +30,7 @@ class PropertyFactory extends Factory
             'slug' => Str::slug($title . '-' . $uuid),
             'seller_id' => User::factory(),
             'property_category_id' => PropertyCategory::query()->inRandomOrder()->first(),
-            'business_type' => $this->faker->randomElement(\App\Models\Properties\Concerns\BusinessType::all()),
+            'business_type' => $this->faker->randomElement(\App\Models\Properties\Concerns\BusinessType::all()->toArray()),
             'price' => $this->faker->randomNumber('8'),
             'comments' => $this->faker->paragraph,
             'status' => true,

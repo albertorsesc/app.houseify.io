@@ -3,11 +3,16 @@
 namespace App\Models;
 
 use App\Models\Businesses\Business;
+use App\Models\JobProfiles\JobProfile;
 use App\Models\Properties\Property;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\{Builder, Relations\HasMany, Factories\HasFactory};
+use Illuminate\Database\Eloquent\{Builder,
+    Relations\BelongsTo,
+    Relations\HasMany,
+    Factories\HasFactory,
+    Relations\HasOne};
 use Laravel\{Sanctum\HasApiTokens, Jetstream\HasProfilePhoto, Fortify\TwoFactorAuthenticatable};
 
 
@@ -25,7 +30,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
     ];
@@ -72,6 +78,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Business::class, 'owner_id')->latest('updated_at');
     }
 
+    public function jobProfile() : HasOne
+    {
+        return $this->hasOne(JobProfile::class);
+    }
+
     /* Scopes */
 
     public function scopeInterestedProperties() : Builder
@@ -114,6 +125,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return (int) $this->id === (int) $model->{$as} || $this->isRoot();
     }
 
+    public function rate($model)
+    {
+    }
+
     /**
      * Route notifications for the Slack channel.
      *
@@ -123,5 +138,29 @@ class User extends Authenticatable implements MustVerifyEmail
     public function routeNotificationForSlack($notification) : string
     {
         return config('logging.channels.slack.url');
+    }
+
+    /**
+     * Get the default profile photo URL if no profile photo has been uploaded.
+     *
+     * @return string
+     */
+    protected function defaultProfilePhotoUrl()
+    {
+        $gravatarUrl = 'https://www.gravatar.com/avatar/';
+        $email = md5(strtolower(trim($this->email)));
+
+        $gravatar = $gravatarUrl . $email;
+        $fallback = 'https%3A%2F%2Fui-avatars.com%2Fapi%2Fname=' .
+            urlencode($this->first_name . '+' . $this->last_name) .
+            '%26background=EBF4FF%26color=7F9CF5';
+        return $gravatar . '?d=' . $fallback;
+
+//        return 'https://ui-avatars.com/api/?name='.urlencode($this->first_name. ' ' . $this->last_name).'&color=7F9CF5&background=EBF4FF';
+    }
+
+    public function fullName () : string
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 }

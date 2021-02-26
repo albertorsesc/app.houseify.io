@@ -15,9 +15,8 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-//                'first_name' => 'Alberto',
-//                'last_name' => 'Rosas',
-                'name' => 'Alberto Rosas',
+                'first_name' => 'Alberto',
+                'last_name' => 'Rosas',
                 'email' => 'alberto.rsesc@protonmail.com',
 //                'phone' => '6862894998',
                 'password' => bcrypt('password'),

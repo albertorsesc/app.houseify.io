@@ -15,7 +15,7 @@ abstract class TestCase extends BaseTestCase
         return $this->actingAs($this->create(User::class, $attributes));
     }
 
-    public function logout()
+    public function signOut()
     {
         Auth::logout();
     }

@@ -23,7 +23,7 @@ class CreateJobProfilesTable extends Migration
             $table->string('phone', 60)->nullable();
             $table->string('facebook_profile', 255)->nullable();
             $table->string('site', 255)->nullable();
-            $table->text('bio');
+            $table->text('bio')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();
         });

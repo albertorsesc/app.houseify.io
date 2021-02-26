@@ -15,7 +15,7 @@ class InterestingPropertiesTest extends PropertyTestCase
     {
         $this->signIn();
         $property = $this->create(Property::class);
-        $this->logout();
+        $this->signOut();
 
         $this->signIn();
 
