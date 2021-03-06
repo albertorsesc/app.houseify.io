@@ -100,7 +100,7 @@
                         </div>
                         <div v-show="activeTab === 'search-properties'"
                              class="text-3xl block">
-                            Busqueda Avanzada de Propiedades
+                            <search-properties></search-properties>
                         </div>
                     </div>
                     <!-- /End replace -->

@@ -1,4 +1,5 @@
 <script>
+import SearchProperties from "./SearchProperties";
 import InterestingProperties from "./InterestingProperties";
 import MyProperties from '../../views/Properties/MyProperties'
 import ExploreProperties from '../../views/Properties/ExploreProperties'
@@ -42,6 +43,7 @@ export default {
     },
     components: {
         MyProperties,
+        SearchProperties,
         ExploreProperties,
         InterestingProperties,
     }

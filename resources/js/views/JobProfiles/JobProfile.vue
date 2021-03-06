@@ -1,5 +1,6 @@
 <script>
 import MyJobProfile from "./MyJobProfile";
+import Report from "../../components/Report";
 import Rating from "../../components/Rating";
 
 export default {
@@ -12,11 +13,12 @@ export default {
     },
     data() {
         return {
-
+            localJobProfile: this.jobProfile,
         }
     },
     components: {
         Rating,
+        Report,
         MyJobProfile,
     }
 }

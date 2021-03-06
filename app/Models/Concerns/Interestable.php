@@ -36,7 +36,7 @@ trait Interestable
 
     public function interested()
     {
-        return $this->interests()->firstOrCreate(['user_id' => auth()->id()]);
+        $this->interests()->firstOrCreate(['user_id' => auth()->id()]);
     }
 
     public function uninterested()

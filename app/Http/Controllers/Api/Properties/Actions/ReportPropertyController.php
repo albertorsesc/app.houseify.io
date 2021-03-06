@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api\Properties\Actions;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Properties\ReportPropertyRequest;
+use App\Events\Reports\NewReportSubmitted;
 use App\Models\Properties\Property;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Events\Properties\PropertyReported;
+use App\Http\Requests\Properties\ReportPropertyRequest;
 
 class ReportPropertyController extends Controller
 {

@@ -64,8 +64,12 @@ abstract class TestCase extends BaseTestCase
         }
     }
 
-    public function fakeEvent()
+    public function fakeEvent($event = null)
     {
-        \Event::fake();
+        if (! is_null($event)) {
+            \Event::fake($event);
+        } else {
+            \Event::fake();
+        }
     }
 }

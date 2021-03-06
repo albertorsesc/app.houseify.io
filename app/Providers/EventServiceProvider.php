@@ -3,13 +3,13 @@
 namespace App\Providers;
 
 use App\Events\Logs\LogActions;
-use App\Events\SuggestionSubmitted;
-use App\Listeners\NewSuggestion;
+use App\Events\Properties\NewPropertyCreated;
 use App\Listeners\PersistLogActions;
-use Illuminate\Auth\Events\Verified;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use App\Events\Reports\NewReportSubmitted;
+use App\Events\Properties\PropertyReported;
+use App\Listeners\Properties\PropertyHasBeenReported;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Auth\{Events\Verified, Events\Registered, Listeners\SendEmailVerificationNotification};
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -27,6 +27,21 @@ class EventServiceProvider extends ServiceProvider
             NewSuggestion::class,
         ],*/
         LogActions::class => [PersistLogActions::class],
+
+        /* Properties */
+
+//        PropertyReported::class => [
+//            PropertyHasBeenReported::class
+//        ],
+        NewPropertyCreated::class => [
+
+        ],
+
+        /* Reports */
+
+        NewReportSubmitted::class => [
+            PropertyHasBeenReported::class,
+        ],
     ];
 
     /**

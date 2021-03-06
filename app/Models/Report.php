@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\Reports\NewReportSubmitted;
 use Illuminate\Database\Eloquent\{
     Model,
     Factories\HasFactory,
@@ -14,6 +15,12 @@ class Report extends Model
     use HasFactory;
 
     protected $fillable = ['user_id', 'reportable_id', 'reportable_type', 'reporting_cause', 'comments'];
+
+    protected static function boot ()
+    {
+        parent::boot();
+        self::created(fn ($report) => NewReportSubmitted::dispatch($report));
+    }
 
     /** Relations */
 

@@ -68,13 +68,18 @@ export default {
         this.onScroll()
 
         Event.$on('interest-properties', property => {
-            dd(this.properties.filter(filteredProperties => dd(filteredProperties)))
+            dd(property)
+            // dd('from Explore: ' + property.status)
+            let interestedProperty = {}
+            // this.properties.forEach(function (propertyChunk) {
+                // interestedProperty = propertyChunk.filter(localProperty => localProperty.id === property.id)[0]
+            // })
             // let prop = this.properties.find(prop => prop[0].id === property.id)
             // dd(prop.status)
             // dd(property.status)
-            /*let propert = this.properties.filter(filteredProperties => filteredProperties[0].slug === property.slug)
-            dd(this.properties.splice(this.properties.indexOf(propert[0])))
-            this.properties.push(property)*/
+            // let propert = this.properties.filter(filteredProperties => filteredProperties[0].id === property.id)
+            // dd(this.properties.splice(this.properties.indexOf(propert[0])))
+            // this.properties.push(property)
         })
     },
     components: {

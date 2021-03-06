@@ -2,6 +2,7 @@
 
 namespace App\Observers\Properties;
 
+use App\Events\Properties\NewPropertyCreated;
 use Illuminate\Support\Str;
 use App\Events\Logs\LogActions;
 use App\Models\Properties\Property;
@@ -19,6 +20,8 @@ class PropertyObserver
         $property->uuid = (string) Str::uuid();
         $property->slug = (string) Str::slug($property->title) . '-' . $property->uuid;
         $property->seller_id = auth()->id();
+
+        NewPropertyCreated::dispatch();
     }
 
     /**

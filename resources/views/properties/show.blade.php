@@ -14,10 +14,64 @@
                     <div class="w-full md:flex md:justify-between items-center">
                         <h2 class="font-semibold text-2xl text-teal-400" v-text="localProperty.title"></h2>
                         <div class="hidden md:flex md:justify-between">
-                            <button class="h-link bg-white border-emerald-900 -mt-1 mr-1 shadow rounded-md py-2 px-2 hover:text-gray-500 focus:outline-none focus:ring-blue-100 focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
-                                    title="Reportar Propiedad...">
-                                <svg class="text-yellow-500 hover:text-yellow-600 hover:border-yellow-700 hover:border" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                            </button>
+                            <report :model-id="localProperty.slug" model-name="properties" inline-template>
+                                <div>
+                                    <button @click="openModal" class="h-link bg-white -mt-1 mr-1 shadow-sm rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                            title="Reportar Propiedad...">
+                                        <svg class="text-yellow-500 hover:text-yellow-600 hover:border-yellow-700 hover:border" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                    </button>
+                                    <modal modal-id="reports" max-width="sm:max-w-md">
+                                        <template #title>Reportar Propiedad</template>
+                                        <template #content>
+                                            <form @submit.prevent>
+                                                <div class="w-full">
+                                                    <div class="w-full">
+                                                        <label for="reporting_cause">
+                                                            <strong class="required">*</strong>
+                                                            Causa del Reporte
+                                                        </label>
+                                                        <select v-model="report.reportingCause"
+                                                                class="h-select"
+                                                                id="reporting_cause">
+                                                            <option value="" selected disabled>Seleccione una Causa...</option>
+                                                            @foreach(\App\Models\Properties\Property::getReportingCauses() as $key => $reportingCause)
+                                                                <option value="{{ $reportingCause }}">{{ $reportingCause }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <errors :error="errors.reporting_cause"
+                                                                :options="{ noContainer: true }"
+                                                        ></errors>
+                                                    </div>
+                                                    <div class="w-full mt-4">
+                                                        <div>
+                                                            <label for="report_comments">Comentarios</label>
+                                                            <textarea v-model="report.comments"
+                                                                      id="report_comments"
+                                                                      class="h-input form-input block w-full"
+                                                                      rows="5"
+                                                                      v-text="report.comments"
+                                                            ></textarea>
+                                                            <errors :error="errors.comments"
+                                                                    :options="{ noContainer: true }"
+                                                            ></errors>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </template>
+                                        <template #footer>
+                                            <button @click="closeModal()"
+                                                    type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150">
+                                                Cancelar
+                                            </button>
+                                            <button @click="submitReport"
+                                                    class="h-link ml-2 mt-2 md:mt-0 inline-flex items-center justify-center px-4 py-2 bg-teal-500 border border-gray-200 rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:font-semibold hover:shadow-lg hover:bg-teal-400 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                                Guardar
+                                            </button>
+                                        </template>
+                                    </modal>
+                                </div>
+                            </report>
                             <button class="h-link bg-white border-emerald-900 -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                     title="Eliminar Propiedad">
                                 <svg class="text-red-500 hover:text-red-600 hover:border-red-700 hover:border" width="25" height="25"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
@@ -25,10 +79,64 @@
                         </div>
 
                         <div class="w-full md:hidden mt-2">
-                            <button class="h-link bg-white -mt-1 mr-1 shadow-sm rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
-                                    title="Reportar Propiedad...">
-                                <svg class="text-yellow-500 hover:text-yellow-600 hover:border-yellow-700 hover:border" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                            </button>
+                            <report :model-id="localProperty.slug" model-name="properties" inline-template>
+                                <div>
+                                    <button @click="openModal" class="h-link bg-white -mt-1 mr-1 shadow-sm rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                            title="Reportar Propiedad...">
+                                        <svg class="text-yellow-500 hover:text-yellow-600 hover:border-yellow-700 hover:border" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                    </button>
+                                    <modal modal-id="reports" max-width="sm:max-w-md">
+                                        <template #title>Reportar Propiedad</template>
+                                        <template #content>
+                                            <form @submit.prevent>
+                                                <div class="w-full">
+                                                    <div class="w-full">
+                                                        <label for="reporting_cause">
+                                                            <strong class="required">*</strong>
+                                                            Causa del Reporte
+                                                        </label>
+                                                        <select v-model="report.reportingCause"
+                                                                class="h-select"
+                                                                id="reporting_cause">
+                                                            <option value="" selected disabled>Seleccione una Causa...</option>
+                                                            @foreach(\App\Models\Properties\Property::getReportingCauses() as $key => $reportingCause)
+                                                                <option value="{{ $reportingCause }}">{{ $reportingCause }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <errors :error="errors.reporting_cause"
+                                                                :options="{ noContainer: true }"
+                                                        ></errors>
+                                                    </div>
+                                                    <div class="w-full mt-4">
+                                                        <div>
+                                                            <label for="report_comments">Comentarios</label>
+                                                            <textarea v-model="report.comments"
+                                                                      id="report_comments"
+                                                                      class="h-input form-input block w-full"
+                                                                      rows="5"
+                                                                      v-text="report.comments"
+                                                            ></textarea>
+                                                            <errors :error="errors.comments"
+                                                                    :options="{ noContainer: true }"
+                                                            ></errors>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </template>
+                                        <template #footer>
+                                            <button @click="closeModal()"
+                                                    type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150">
+                                                Cancelar
+                                            </button>
+                                            <button @click="submitReport"
+                                                    class="h-link ml-2 mt-2 md:mt-0 inline-flex items-center justify-center px-4 py-2 bg-teal-500 border border-gray-200 rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:font-semibold hover:shadow-lg hover:bg-teal-400 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                                Guardar
+                                            </button>
+                                        </template>
+                                    </modal>
+                                </div>
+                            </report>
                         </div>
                     </div>
                 </div>
@@ -227,7 +335,7 @@
                             </div>
 
                             <!--Timeline-->
-                            <divider title="Comentarios Publicos"></divider>
+                            {{--<divider title="Comentarios Publicos"></divider>
 
                             <div class="bg-white shadow-lg rounded-lg p-6 mt-4">
                                 <div class="flow-root">
@@ -366,7 +474,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div>--}}
 
                             <modal modal-id="update-property" max-width="sm:max-w-5xl">
                                 <template #title>Actualizar Datos de la Propiedad</template>
@@ -411,7 +519,6 @@
                                                     ></div>
                                                 </div>
                                             </div>
-
                                         </div>
 
                                         <div class="w-full md:flex md:-mx-2 mt-4">
@@ -434,8 +541,8 @@
                                                         Tipo de Propiedad
                                                     </label>
                                                     <div class="mt-1">
-                                                        <vue-multiselect v-model="propertyForm.propertyCategory.propertyType"
-                                                                         :options="propertyTypes"
+                                                        <vue-multiselect v-model="selectedPropertyType"
+                                                                         :options="getPropertyTypes"
                                                                          :searchable="false"
                                                                          label="display_name"
                                                                          :close-on-select="true"
@@ -445,7 +552,7 @@
                                                                          deselect-label=""
                                                                          :hide-selected="true"
                                                                          placeholder="Tipos de Propiedad..."
-                                                                         @select="getPropertyCategoriesByPropertyType"
+                                                                         @select="retrievePropertyCategories"
                                                         ></vue-multiselect>
                                                     </div>
                                                 </div>
@@ -457,7 +564,7 @@
                                                         Categoria de la Propiedad
                                                     </label>
                                                     <div class="mt-1">
-                                                        <vue-multiselect v-model="propertyForm.propertyCategory"
+                                                        <vue-multiselect v-model="selectedPropertyCategory"
                                                                          :options="propertyCategoriesByPropertyType"
                                                                          :searchable="false"
                                                                          label="displayName"
@@ -470,10 +577,9 @@
                                                                          placeholder="Categorias de Propiedad"
                                                         ></vue-multiselect>
                                                     </div>
-                                                    <div v-if="errors.property_category_id"
-                                                         :class="['alert alert-danger']"
-                                                         v-text="errors.property_category_id[0]"
-                                                    ></div>
+                                                    <errors :error="errors.property_category_id"
+                                                            :options="{ noContainer: true }"
+                                                    ></errors>
                                                 </div>
                                             </div>
                                         </div>

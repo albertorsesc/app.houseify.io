@@ -4,9 +4,9 @@ namespace App\Notifications;
 
 use App\Models\Suggestion;
 use Illuminate\Bus\Queueable;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 
 class NotifyNewSuggestion extends Notification implements ShouldQueue

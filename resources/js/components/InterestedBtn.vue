@@ -58,13 +58,17 @@
                     this.interests.length > 0 &&
                     this.interests[0].user_id === this.auth
                 ) {
-                    return this.isInterested = true
+                    this.isInterested = true
+                } else {
+                    this.isInterested = false
                 }
             },
             interested() {
                 axios
                     .post(`${this.endpointUrl}/interested`)
-                    .then(response => { this.isInterested = response.data.data })
+                    .then(response => {
+                        this.isInterested = response.data.data
+                    })
                     .catch(error => { console.log(error) })
             },
             uninterested() {
@@ -78,7 +82,7 @@
             endpointUrl() { return `${this.endpoint}/${this.modelId}` },
             title() { return this.isInterested ? 'No me interesa' : 'Me Interesa!' }
         },
-        mounted() {
+        created () {
             this.check()
         }
     }

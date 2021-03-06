@@ -3,6 +3,7 @@
 import { mapGetters } from 'vuex'
 import Alert from "../../components/Alert";
 import Modal from "../../components/Modal";
+import Report from '../../components/Report'
 import VueMultiselect from 'vue-multiselect'
 import Errors from "../../components/Errors";
 import Divider from "../../components/Divider";
@@ -123,6 +124,7 @@ export default {
     components: {
         Alert,
         Modal,
+        Report,
         Errors,
         Divider,
         FormInput,

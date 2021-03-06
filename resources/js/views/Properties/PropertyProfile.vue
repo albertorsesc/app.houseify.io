@@ -3,6 +3,7 @@
 import { mapGetters } from 'vuex'
 import Alert from "../../components/Alert";
 import Modal from "../../components/Modal";
+import Report from '../../components/Report'
 import VueMultiselect from 'vue-multiselect'
 import Errors from "../../components/Errors";
 import Divider from "../../components/Divider";
@@ -20,12 +21,18 @@ export default {
             type: Object,
         }
     },
+    provide() {
+        return {
+            property: this.localProperty
+        }
+    },
     data () {
         return {
             endpoint: '/properties/',
             propertyForm: {},
             localProperty: this.property,
             selectedPropertyType: {},
+            selectedPropertyCategory: {},
 
             propertyTypes: [],
             businessTypes: [],
@@ -44,7 +51,7 @@ export default {
     methods: {
         update() {
             axios.put(this.endpoint + this.localProperty.slug, {
-                property_category_id: this.propertyForm.propertyCategory ? this.propertyForm.propertyCategory.id : this.localProperty.propertyCategory.id,
+                property_category_id: this.selectedPropertyCategory.id,
                 business_type: this.propertyForm.businessType ? this.propertyForm.businessType : this.localProperty.businessType,
                 title: this.propertyForm.title ? this.propertyForm.title : this.localProperty.title,
                 price: this.propertyForm.price ? this.propertyForm.price : this.localProperty.price,
@@ -55,11 +62,11 @@ export default {
                     this.localProperty = response.data.data
                     SweetAlert.success(`La Propiedad ha sido actualizada exitosamente!`)
 
-                    if (this.property.slug !== response.data.data.slug) {
+                    /*if (this.property.slug !== response.data.data.slug) {
                         setTimeout(() => {
                             window.location.href = `/propiedades/${response.data.data.slug}`
                         }, 1500)
-                    }
+                    }*/
                 })
                 .catch(error => { this.errors = error.response.status === 422 ? error.response.data.errors : [] })
         },
@@ -73,12 +80,24 @@ export default {
                 })
                 .catch(error => { this.errors = error.response.status === 422 ? error.response.data.errors : [] })
         },
-        getPropertyCategoriesByPropertyType(selectedPropertyType) {
-            this.selectedPropertyType = selectedPropertyType ? selectedPropertyType : this.selectedPropertyType
-            this.propertyForm.propertyCategory = {}
-            axios.get(`/property-types/${this.selectedPropertyType.id}/property-categories`)
-                .then(response => { this.propertyCategoriesByPropertyType = response.data.data })
-                .catch(error => { console.log(error) })
+        getPropertyCategoriesByPropertyType(propertyType) {
+            propertyType = this.selectedPropertyType
+            this.selectedPropertyCategory = {}
+
+            axios.get(`/property-types/${propertyType.id}/property-categories`)
+                .then(response => { this.propertyCategoriesByPropertyType = response.data.data; })
+                .catch(error => {
+                    console.log('this is error ' + error)
+                })
+        },
+        retrievePropertyCategories(selected) {
+            this.selectedPropertyCategory = {}
+
+            axios.get(`/property-types/${selected.id}/property-categories`)
+                .then(response => { this.propertyCategoriesByPropertyType = response.data.data; })
+                .catch(error => {
+                    console.log('other error: ' + error)
+                })
         },
         openModal(action) {
             this.modal = {}
@@ -90,7 +109,7 @@ export default {
 
                 this.selectedPropertyType = this.localProperty.propertyCategory.propertyType
                 this.getPropertyCategoriesByPropertyType(this.selectedPropertyType)
-                this.propertyForm.propertyCategory = this.localProperty.propertyCategory
+                this.propertyForm.propertyCategory = this.selectedPropertyCategory = this.localProperty.propertyCategory
                 this.propertyForm.businessType = this.localProperty.businessType
                 this.propertyForm.title = this.localProperty.title
                 this.propertyForm.price = this.localProperty.price
@@ -118,6 +137,8 @@ export default {
             this.actionType = ''
             this.modal = {}
             this.propertyForm = {}
+            this.selectedPropertyType = {}
+            this.selectedPropertyCategory = {}
         },
     },
     created() {
@@ -128,11 +149,7 @@ export default {
             this.localProperty.location = location
         })
     },
-    provide() {
-        return {
-            property: this.localProperty
-        }
-    },
+
     computed: {
         ...mapGetters({
             getStates: 'global/getStates',
@@ -140,10 +157,18 @@ export default {
             getBusinessTypes: 'properties/getBusinessTypes'
         })
     },
+    watch: {
+        /*selectedPropertyCategory: function() {
+            this.propertyForm.propertyCategory = this.selectedPropertyCategory
+        },*/
+        selectedPropertyType: function () {
+        },
+    },
     components: {
         Alert,
         Modal,
         Errors,
+        Report,
         Divider,
         FormInput,
         CustomCarousel,

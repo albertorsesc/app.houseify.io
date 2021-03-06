@@ -3,7 +3,7 @@
 namespace App\Models\Businesses;
 
 use App\Models\User;
-use App\Models\Concerns\{HasLocation, HasUuid, Interestable, Publishable, SerializeTimestamps};
+use App\Models\Concerns\{CanBeReported, HasLocation, HasUuid, Interestable, Publishable, SerializeTimestamps};
 use Illuminate\Database\Eloquent\{Builder, Model, Relations\BelongsTo, Factories\HasFactory};
 
 class Business extends Model
@@ -13,6 +13,7 @@ class Business extends Model
         HasLocation,
         Publishable,
         Interestable,
+        CanBeReported,
         SerializeTimestamps;
 
     protected $casts = ['status' => 'boolean', 'categories' => 'array'];
@@ -42,5 +43,12 @@ class Business extends Model
     public function profile() : string
     {
         return route('web.businesses.show', $this);
+    }
+
+    public static function getReportingCauses() : array
+    {
+        return array_merge([
+            'non-existent' => 'Negocio/Empresa inexistente',
+        ], config('houseify.reporting_causes'));
     }
 }

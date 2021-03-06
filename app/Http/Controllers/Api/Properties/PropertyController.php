@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Properties;
 
+use App\Events\Properties\NewPropertyCreated;
 use App\Models\Properties\Property;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Properties\PropertyRequest;
@@ -37,7 +38,7 @@ class PropertyController extends Controller
         return new PropertyResource(
             tap($property)
                 ->update($request->all())
-                ->load('propertyCategory.propertyType')
+                ->load(['propertyCategory.propertyType', 'location.state', 'interests', 'seller'])
         );
     }
 

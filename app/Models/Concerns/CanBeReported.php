@@ -6,6 +6,7 @@ use App\Models\Report;
 
 trait CanBeReported
 {
+
     public function reports()
     {
         return $this->morphMany(Report::class, 'reportable');
@@ -25,7 +26,7 @@ trait CanBeReported
      * @return array
      * @example ['offensive' => 'Offensive Content']
      */
-    public function getReportingCauses() : array
+    public static function getReportingCauses() : array
     {
         return [];
     }

@@ -8,6 +8,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class PersistLogActions implements ShouldQueue
 {
+    use InteractsWithQueue;
+
     /**
      * Create the event listener.
      *

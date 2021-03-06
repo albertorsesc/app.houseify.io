@@ -21,9 +21,9 @@
         ],
 
         /*
-     * Reporting Causes
-    */
-        'reporting-causes' => [
+         * Reporting Causes
+        */
+        'reporting_causes' => [
             'no-answer' => 'No Contestan',
             'invalid-data' => 'Info. Erronea',
             'offensive' => 'Contenido Ofensivo',

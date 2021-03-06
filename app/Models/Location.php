@@ -26,4 +26,11 @@ class Location extends Model
     {
         return $this->belongsTo(State::class);
     }
+
+    /* Helpers */
+
+    public function getFullAddress() : string
+    {
+        return "$this->address $this->neighborhood $this->city {$this->state->name}, $this->zip_code";
+    }
 }

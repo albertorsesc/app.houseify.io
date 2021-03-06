@@ -52,8 +52,10 @@ class Property extends Model implements Locationable
         return '$' . number_format($this->price);
     }
 
-    public function getReportingCauses()
+    public static function getReportingCauses() : array
     {
-        return config('properties.reporting_causes');
+        return array_merge([
+            'taken' => 'Propiedad Vendida/Rentada',
+        ], config('houseify.reporting_causes'));
     }
 }

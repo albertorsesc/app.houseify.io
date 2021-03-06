@@ -15,7 +15,6 @@ class JobProfileObserver
     public function creating(JobProfile $jobProfile)
     {
 //        $jobProfile->uuid = (string) Str::uuid();
-//        $jobProfile->slug = (string) Str::slug($jobProfile->name);
         $jobProfile->user_id = auth()->id();
     }
 

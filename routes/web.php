@@ -18,6 +18,16 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+
+    Route::get('test-event', function () {
+        $property = \App\Models\Properties\Property::factory()->create();
+
+        $property->report([
+            'reporting_cause' => collect(config('properties.reporting_causes'))->random(1)[0],
+            'comments' => 'Comentarios locos'
+        ]);
+    });
+
     Route::view('inicio', 'dashboard')->name('dashboard');
     Route::view('propiedades', 'properties.index')->name('web.properties.index');
     Route::get('propiedades/{property:slug}', PropertyController::class)->name('web.properties.show');
