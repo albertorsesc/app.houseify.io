@@ -5,6 +5,7 @@
     use App\Http\Controllers\Api\Properties\MyPropertyController;
     use App\Http\Controllers\Api\Properties\BusinessTypeController;
     use App\Http\Controllers\Api\Properties\PropertyTypeController;
+    use App\Http\Controllers\Api\Properties\Actions\SearchController;
     use App\Http\Controllers\Api\Properties\Actions\PublishController;
     use App\Http\Controllers\Api\Properties\PropertyFeatureController;
     use App\Http\Controllers\Api\Properties\PropertyCategoryController;
@@ -37,5 +38,7 @@ Route::get('business-types', BusinessTypeController::class)->name('business-type
 
     Route::get('me/properties', MyPropertyController::class)->name('me.properties');
     Route::get('me/properties/interested', MyInterestedPropertiesController::class)->name('me.properties.interested');
+
+    Route::post('properties/search', SearchController::class)->name('properties.search');
 
     Route::apiResource('properties', PropertyController::class);

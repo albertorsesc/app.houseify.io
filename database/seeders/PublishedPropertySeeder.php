@@ -21,18 +21,46 @@ class PublishedPropertySeeder extends Seeder
     {
         \Auth::loginUsingId(1);
 
-        $property = Property::factory()->create([
-            'title' => 'Casa hermosa junto a la playa en Rosarito',
-        ]);
+        $properties = [
+            [
+                'title' => 'Casa hermosa junto a la playa en Rosarito',
+                'price' => 1000,
+                'property_category_id' => PropertyCategory::where('name', 'house')->first()->id,
+                'business_type' => BusinessType::TYPES['sale'],
+                'comments' => 'Casa en la playa'
+            ],
+            [
+                'title' => 'Oficina en zona centro',
+                'price' => 15000,
+                'property_category_id' => PropertyCategory::where('name', 'office')->first()->id,
+                'business_type' => BusinessType::all()->random(),
+            ],
+            [
+                'title' => 'Terreno con servicios',
+                'price' => 500000,
+                'property_category_id' => PropertyCategory::where('name', 'urban_land')->first()->id,
+                'business_type' => BusinessType::all()->random(),
+            ],
+            [
+                'title' => 'Departamento amueblado',
+                'price' => 10000,
+                'property_category_id' => PropertyCategory::where('name', 'department')->first()->id,
+                'business_type' => BusinessType::all()->random(),
+            ],
+        ];
 
-        $property->location()->create(
-            Location::factory()->make()->toArray()
-        );
+        foreach ($properties as $property) {
+            $newProperty = Property::create($property);
 
-        $property->propertyFeature()->create(
-            PropertyFeature::factory()->make([
-                'property_id' => null
-            ])->toArray()
-        );
+            $newProperty->location()->create(
+                Location::factory()->make()->toArray()
+            );
+
+            $newProperty->propertyFeature()->create(
+                PropertyFeature::factory()->make([
+                    'property_id' => null
+                ])->toArray()
+            );
+        }
     }
 }

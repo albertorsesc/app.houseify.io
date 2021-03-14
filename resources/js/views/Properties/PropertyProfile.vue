@@ -75,7 +75,7 @@ export default {
                 .put(`/properties/${this.localProperty.slug}/toggle`)
                 .then(() => {
                     this.localProperty.status = ! this.localProperty.status
-                    let status = this.property.status ? 'Ocultada' : 'Publicada'
+                    let status = this.localProperty.status ? 'Publicada' : 'Ocultada'
                     SweetAlert.success(`La Propiedad ha sido ${status} exitosamente!`)
                 })
                 .catch(error => { this.errors = error.response.status === 422 ? error.response.data.errors : [] })

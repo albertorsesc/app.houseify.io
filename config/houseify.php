@@ -14,8 +14,9 @@
      * Construction Categories
      * */
         'construction_categories' => [
-            'Ferreteria',
+            'A/C',
             'Electricidad',
+            'Ferreteria',
             'Pintura',
             'Plomeria',
         ],

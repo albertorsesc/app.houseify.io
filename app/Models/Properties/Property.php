@@ -3,12 +3,14 @@
 namespace App\Models\Properties;
 
 use App\Models\User;
+use Laravel\Scout\Searchable;
 use App\Models\Concerns\{CanBeReported, HasLocation, HasUuid, Interestable, Locationable, Publishable};
 use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, Relations\BelongsTo, Relations\HasOne};
 
 class Property extends Model implements Locationable
 {
     use HasUuid,
+        Searchable,
         HasFactory,
         Publishable,
         HasLocation,
@@ -57,5 +59,61 @@ class Property extends Model implements Locationable
         return array_merge([
             'taken' => 'Propiedad Vendida/Rentada',
         ], config('houseify.reporting_causes'));
+    }
+
+    /**
+     * Algolia Instant Search
+     * Index Construct
+     */
+    public function toSearchableArray() : array
+    {
+        if ($this->shouldBeSearchable()) {
+            return [
+                'id' => $this->id,
+                'uuid' => $this->uuid,
+                'title' => $this->title,
+                'slug' => $this->slug,
+                'price' => (int) $this->price,
+                'formattedPrice' => $this->formattedPrice(),
+                'comments' => $this->comments,
+                'status' => $this->status,
+                'businessType' => $this->business_type,
+                'propertyCategory' => [
+                    'displayName' => $this->propertyCategory->display_name,
+                    'propertyType' => $this->propertyCategory->propertyType->display_name,
+                ],
+                'location' => [
+                    'neighborhood' => $this->location ? $this->location->neighborhood : null,
+                    'city' => $this->location ? $this->location->city : null,
+                    'state' => [
+                        'name' => $this->location ? $this->location->state->name : null
+                    ],
+                    'fullAddress' => $this->location->getFullAddress()
+                ] ,
+                'propertyFeature' => [
+                    'propertySize' => $this->propertyFeature ? (int) $this->propertyFeature->features['property_size'] : null,
+                    'constructionSize' => $this->propertyFeature ? (int) $this->propertyFeature->features['construction_size'] : null,
+                    'levelCount' => $this->propertyFeature ? (int) $this->propertyFeature->features['level_count'] > 0 ? (int) $this->propertyFeature->features['level_count'] : '' : null,
+                    'roomCount' => $this->propertyFeature ? (int) $this->propertyFeature->features['room_count']  > 0 ? (int) $this->propertyFeature->features['room_count'] : '' : null,
+                    'bathroomCount' => $this->propertyFeature ? (int) $this->propertyFeature->features['bathroom_count'] > 0 ? (int) $this->propertyFeature->features['bathroom_count'] : '' : null,
+                    'halfBathroomCount' => $this->propertyFeature ? (int) $this->propertyFeature->features['half_bathroom_count'] > 0 ? (int) $this->propertyFeature->features['half_bathroom_count'] : '' : null,
+                ],
+                'images' => $this->images,
+                'interests' => $this->interests,
+                'meta' => [
+                    'links' => [
+                        'profile' => $this->profile()
+                    ],
+                ]
+            ];
+        }
+        return [];
+    }
+
+    public function shouldBeSearchable() : bool
+    {
+        return $this->isPublished() &&
+            $this->location &&
+            $this->propertyFeature;
     }
 }

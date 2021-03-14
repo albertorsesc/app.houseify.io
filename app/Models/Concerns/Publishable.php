@@ -13,6 +13,6 @@ trait Publishable
 
     public function toggle()
     {
-        tap($this, fn($model) => $model->status = ! $model->status)->save();
+        tap($this, fn($model) => $model->status = ! $model->status)->update();
     }
 }

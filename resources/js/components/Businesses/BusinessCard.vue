@@ -56,9 +56,9 @@
                     <div class="text-xs border-t border-gray-300 py-2">
                         <div class="flex justify-start"
                              v-if="business.location || business.phone">
-                            Mexicali, BC, Mexico
+                            {{ business.location.city }}, {{ business.location.state.code }} - Mexico
                             <span class="mx-2">&bullet;</span>
-                            <span>6862894998</span>
+                            <span v-text="business.phone"></span>
                         </div>
                     </div>
 

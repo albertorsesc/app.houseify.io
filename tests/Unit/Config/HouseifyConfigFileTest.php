@@ -10,11 +10,12 @@ class HouseifyConfigFileTest extends TestCase
      * @test
      * @throws \Throwable
      */
-    public function construction_categories_exist_in_houseify_config()
+    public function construction_categories_must_exist_in_houseify_config()
     {
         $this->assertSame([
-            'Ferreteria',
+            'A/C',
             'Electricidad',
+            'Ferreteria',
             'Pintura',
             'Plomeria',
         ], config('houseify.construction_categories'));

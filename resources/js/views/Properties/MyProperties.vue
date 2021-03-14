@@ -26,7 +26,8 @@
 
         </div>
 
-        <div v-if="! myProperties.length" class="flex-wrap md:flex sm:justify-center p-6 mt-3 items-center rounded-lg">
+        <div v-if="! myProperties.length && menuTab !== 'new-property'"
+             class="flex-wrap md:flex sm:justify-center p-6 mt-3 items-center rounded-lg">
             <div class="flex flex-col md:flex-row items-center align-middle justify-center px-5 text-gray-700">
                 <div class="max-w-md">
                     <div class="text-5xl font-dark font-bold"></div>

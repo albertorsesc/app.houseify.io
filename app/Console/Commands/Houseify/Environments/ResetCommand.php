@@ -93,7 +93,7 @@ class ResetCommand extends Command
         $this->newLine();
 
         $this->line('<green>-- Scout Flush --</green>');
-//        exec('php artisan scout:flush "App\\\Models\\\Properties\\\Property"');
+        exec('php artisan scout:flush');
 
         $this->newLine();
 
@@ -104,7 +104,7 @@ class ResetCommand extends Command
         $this->newLine();
 
         $this->line('<green>-- Scout Import --</green>');
-//        exec('php artisan scout:import "App\\\Models\\\Properties\\\Property"');
+        exec('php artisan scout:import');
 
         $this->newLine();
 

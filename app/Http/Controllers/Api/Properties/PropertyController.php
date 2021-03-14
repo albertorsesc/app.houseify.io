@@ -16,7 +16,12 @@ class PropertyController extends Controller
         return PropertyResource::collection(
             Property::query()
                     ->isPublished()
-                    ->with(['propertyCategory.propertyType', 'location.state', 'interests'])
+                    ->with([
+                        'interests',
+                        'location.state',
+                        'propertyFeature',
+                        'propertyCategory.propertyType',
+                    ])
                     ->orderBy('updated_at', 'desc')
                     ->paginate(10)
         );

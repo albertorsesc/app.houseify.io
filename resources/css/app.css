@@ -61,22 +61,47 @@ strong.required {
 * https://www.algolia.com/doc/api-reference/widgets/refinement-list/vue/#html-output
 */
 .ais-refinement-list {
+
 }
 .ais-RefinementList-item {
-    @apply mr-4;
+    @apply my-2;
 }
 .ais-RefinementList-label {
     @apply flex items-center;
 }
 .ais-RefinementList-labelText {
-    @apply ml-6 font-medium text-base text-gray-900;
+    @apply ml-3 font-medium text-sm text-gray-600;
 }
 .ais-RefinementList-checkbox {
-    @apply justify-start inline-flex outline-none border-4 border-blue-200 bg-blue-200;
-    transform: scale(2.0);
+    @apply focus:ring-emerald-400 h-4 w-4 text-emerald-400 border-gray-300 rounded;
+    transform: scale(1.2);
 }
 .ais-RefinementList-count {
-    @apply rounded-full h-8 w-8 ml-6 flex items-center text-center justify-center shadow-lg bg-teal-400 text-white font-bold text-sm;
+    @apply rounded-full h-6 w-6 ml-3 flex items-center text-center justify-center shadow-lg bg-teal-400 text-white font-bold text-sm;
+}
+
+/* Range List Radio */
+.ais-NumericMenu .ais-NumericMenu--noRefinement {
+
+}
+.ais-NumericMenu-list {
+
+}
+.ais-NumericMenu-item {
+    @apply text-xs py-1;
+}
+.ais-NumericMenu-label {
+    @apply font-medium text-sm text-gray-700;
+}
+.ais-NumericMenu-radio {
+    @apply h-4 w-4 text-emerald-400 border-gray-300 rounded-full;
+    transform: scale(1.2);
+}
+.ais-NumericMenu-radio:focus {
+    @apply ring-emerald-400;
+}
+.ais-NumericMenu-labelText {
+    @apply ml-3 text-gray-600;
 }
 
 /*
@@ -87,10 +112,10 @@ strong.required {
     @apply flex text-black items-center justify-between;
 }
 .ais-RangeInput-input {
-    @apply h-input;
+    @apply flex-1 min-w-0 block w-full px-3 py-2 rounded-none sm:text-sm border-gray-300;
 }
 .ais-RangeInput-input:focus {
-    @apply outline-none border-blue-200 border-4 shadow;
+    @apply ring-emerald-200 border-emerald-200;
 }
 .ais-RangeInput-submit {
     @apply hidden;
@@ -105,10 +130,10 @@ strong.required {
 */
 
 .ais-SearchBox-input {
-    @apply h-input;
+    @apply flex-1 block w-full px-3 py-2 rounded-md shadow-sm sm:text-sm border-gray-300;
 }
 .ais-SearchBox-input:focus {
-    @apply outline-none shadow;
+    @apply ring-emerald-200 border-emerald-200;
 }
 .ais-SearchBox-submit {
     @apply hidden
@@ -116,6 +141,7 @@ strong.required {
 .ais-SearchBox-reset {
     @apply hidden
 }
+
 
 /* Modal Transitions */
 

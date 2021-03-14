@@ -9,6 +9,7 @@ class Location extends Model
 {
     use HasFactory, SerializeTimestamps;
 
+    protected $touches = ['locationable'];
     protected $casts = ['coordinates' => 'array'];
     protected $fillable = ['locationable_id', 'locationable_type', 'address', 'neighborhood', 'city', 'state_id', 'zip_code', 'coordinates'];
 
@@ -31,6 +32,9 @@ class Location extends Model
 
     public function getFullAddress() : string
     {
-        return "$this->address $this->neighborhood $this->city {$this->state->name}, $this->zip_code";
+        $address = isset($this->address) ? $this->address : '';
+        $zipCode = isset($this->state->zip_code) ? "- $this->zip_code" : '';
+
+        return "$address $this->neighborhood $this->city {$this->state->name} $zipCode";
     }
 }

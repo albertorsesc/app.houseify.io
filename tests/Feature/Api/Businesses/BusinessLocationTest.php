@@ -38,7 +38,7 @@ class BusinessLocationTest extends BusinessTestCase
         $response->assertCreated();
         $response->assertJson([
             'data' => [
-                'address' => $business->location->address
+                'address' => $business->fresh()->location->address
             ]
         ]);
 

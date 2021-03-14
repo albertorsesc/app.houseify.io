@@ -40,7 +40,7 @@ class PropertyLocationTest extends PropertyTestCase
         $response->assertCreated();
         $response->assertJson([
             'data' => [
-                'address' => $property->location->address
+                'address' => $property->fresh()->location->address
             ]
         ]);
 
