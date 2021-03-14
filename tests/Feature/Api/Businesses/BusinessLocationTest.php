@@ -26,6 +26,7 @@ class BusinessLocationTest extends BusinessTestCase
      */
     public function store_a_business_location()
     {
+        $this->withoutExceptionHandling();
         $business = $this->create(Business::class);
         $businessLocation = $this->makeBusinessLocation($business);
 

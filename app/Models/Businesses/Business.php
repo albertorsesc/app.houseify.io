@@ -5,6 +5,7 @@ namespace App\Models\Businesses;
 use App\Models\User;
 use App\Models\Concerns\{CanBeReported, HasLocation, HasUuid, Interestable, Publishable, SerializeTimestamps};
 use Illuminate\Database\Eloquent\{Builder, Model, Relations\BelongsTo, Factories\HasFactory};
+use Illuminate\Support\Arr;
 use Laravel\Scout\Searchable;
 
 class Business extends Model

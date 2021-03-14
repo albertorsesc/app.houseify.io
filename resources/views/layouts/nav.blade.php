@@ -15,19 +15,23 @@
                     <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                         <div class="ml-10 flex items-baseline space-x-4">
                             <a href="{{ route('dashboard') }}"
-                               class="border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl">
+                               class="border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl"
+                               :class="{{ request()->routeIs('dashboard') ? '"border-white border-b-2"' : '' }}">
                                 Inicio
                             </a>
                             <a href="{{ route('web.properties.index') }}"
-                               class="border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl">
+                               class="border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl"
+                               :class="{{ request()->routeIs('web.properties.index') ? '"border-white border-b-2"' : '' }}">
                                 Propiedades
                             </a>
                             <a href="{{ route('web.businesses.index') }}"
-                               class="border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl">
+                               class="border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl"
+                               :class="{{ request()->routeIs('web.businesses.index') ? '"border-white border-b-2"' : '' }}">
                                 Negocios
                             </a>
                             <a href="{{ route('web.job-positions.index') }}"
-                               class="border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl">
+                               class="border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl"
+                               :class="{{ request()->routeIs('web.job-positions.index') ? '"border-white border-b-2"' : '' }}">
                                 Profesionales
                             </a>
                         </div>

@@ -20,7 +20,7 @@ class PublishedBusinessSeeder extends Seeder
         $businesses = [
             [
                 'name' => 'Electrica Rosas',
-                'categories' => json_encode(['Electrica', 'Ferreteria', 'Plomeria']),
+                'categories' => ['Electrica', 'Ferreteria', 'Plomeria'],
                 'email' => 'cotizaciones@electricarosas.com',
                 'phone' => '(686)289.4998',
                 'site' => 'https://electrica-rosas.com',
@@ -29,7 +29,7 @@ class PublishedBusinessSeeder extends Seeder
             ],
             [
                 'name' => 'Pinturas Locas',
-                'categories' => json_encode(['Pintura']),
+                'categories' => ['Pintura'],
                 'email' => 'cotizaciones@pinturaslocas.com',
                 'phone' => '(686)289.4998',
                 'site' => 'https://pinturas-locas.com',
@@ -38,7 +38,7 @@ class PublishedBusinessSeeder extends Seeder
             ],
             [
                 'name' => 'Polaris',
-                'categories' => json_encode(['A/C']),
+                'categories' => ['A/C'],
                 'email' => 'cotizaciones@polaris.com',
                 'phone' => '(686)289.4998',
                 'site' => 'https://polaris-aire-acondicionado.com',

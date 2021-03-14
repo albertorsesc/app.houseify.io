@@ -252,7 +252,7 @@
             <ais-hits>
                 <div class="w-full" slot-scope="{ items }">
                     <div class="flex justify-end mb-2 mt-2 align-middle">
-                        <span class="text-emerald-600 text-sm px-4 md:mt-1">Resultados: {{ items.length }}</span>
+                        <span class="text-emerald-600 text-sm px-4 md:mt-1">Resultados: {{ items.filter((item) => item.status === true).length }}</span>
                         <span class="bg-emerald-500 text-white text-sm shadow hover:shadow-inner px-4 py-1 rounded-lg ml-2">
                             <ais-clear-refinements>
                                 <span slot="resetLabel" class="text-white rounded-lg font-bold">Reiniciar filtros</span>

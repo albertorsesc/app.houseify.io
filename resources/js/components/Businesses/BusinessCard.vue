@@ -56,7 +56,9 @@
                     <div class="text-xs border-t border-gray-300 py-2">
                         <div class="flex justify-start"
                              v-if="business.location || business.phone">
-                            {{ business.location.city }}, {{ business.location.state.code }} - Mexico
+                            <span v-if="business.location">
+                                {{ business.location.city }}
+                            </span>, {{ business.location.state.code }} - Mexico
                             <span class="mx-2">&bullet;</span>
                             <span v-text="business.phone"></span>
                         </div>
@@ -66,7 +68,7 @@
 
                 <!--Categories-->
                 <div class="flex justify-evenly text-left items-start align-middle px-2">
-                    <div class="px-3 py-1 text-xs bg-emerald-200 font-light text-emerald-900 rounded-full"
+                    <div class="px-3 py-1 text-xs bg-emerald-100 font-medium leading-5 text-emerald-900 rounded-full shadow-sm"
                          v-for="(category, index) in business.categories"
                          :key="index"
                          v-text="category"

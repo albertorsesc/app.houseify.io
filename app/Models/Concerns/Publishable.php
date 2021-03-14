@@ -8,7 +8,7 @@ trait Publishable
 {
     public function scopeIsPublished(Builder $query)
     {
-        return $query->whereStatus(true);
+        return $query->where('status', 1);
     }
 
     public function toggle()
