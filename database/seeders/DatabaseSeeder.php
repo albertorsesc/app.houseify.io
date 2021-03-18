@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         StateSeeder::class,
         PublishedPropertySeeder::class,
         PublishedBusinessSeeder::class,
-//        PublishedJobProfileSeeder::class,
+        PublishedJobProfileSeeder::class,
     ];
     /**
      * Seed the application's database.

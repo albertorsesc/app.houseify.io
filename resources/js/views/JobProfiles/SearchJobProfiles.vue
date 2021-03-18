@@ -1,24 +1,24 @@
 <template>
 
     <div>
-        <search index="businesses">
+        <search index="job_profiles">
             <div class="md:flex md:-mx-2">
                 <div class="w-full md:mx-2">
                     <div class="bg-white rounded-lg shadow-md px-8 py-4 w-full mb-4">
                         <div class="align-middle mb-4">
                             <h3 class="text-lg leading-6 font-medium text-cyan-500">
-                                Filtrar por Datos del Negocio
+                                Filtrar por Datos del Tecnico/Profesional
                             </h3>
                         </div>
                         <div class="md:flex md:justify-between mt-4 md:mt-6">
                             <!--Business Categories-->
                             <div class="w-full md:w-1/3">
                                 <label class="block text-sm font-medium text-gray-700">
-                                    Categorias del Negocio
+                                    Habilidades del Tecnico
                                 </label>
                                 <div class="mt-1">
                                     <ais-refinement-list
-                                        attribute="categories"
+                                        attribute="skills"
                                     ></ais-refinement-list>
                                 </div>
                             </div>
@@ -27,27 +27,27 @@
                                 <label class="block text-sm font-medium text-gray-700">
                                     Estado
                                 </label>
-                                <ais-refinement-list
+<!--                                <ais-refinement-list
                                     attribute="location.state.name"
-                                ></ais-refinement-list>
+                                ></ais-refinement-list>-->
                             </div>
                             <!--City-->
                             <div class="w-full md:w-1/3">
                                 <label class="block text-sm font-medium text-gray-700">
                                     Ciudad
                                 </label>
-                                <ais-refinement-list
+<!--                                <ais-refinement-list
                                     attribute="location.city"
-                                ></ais-refinement-list>
+                                ></ais-refinement-list>-->
                             </div>
                             <!--Neighborhood-->
                             <div class="w-full md:w-1/3">
                                 <label class="block text-sm font-medium text-gray-700">
                                     Fraccionamiento/Colonia
                                 </label>
-                                <ais-refinement-list
+<!--                                <ais-refinement-list
                                     attribute="location.neighborhood"
-                                ></ais-refinement-list>
+                                ></ais-refinement-list>-->
                             </div>
                         </div>
 
@@ -58,7 +58,7 @@
                                     Busca por Nombre del Negocio o Informacion adicional
                                 </label>
                                 <div class="mt-1">
-                                    <ais-search-box :placeholder="''"></ais-search-box>
+<!--                                    <ais-search-box :placeholder="''"></ais-search-box>-->
                                 </div>
                             </div>
                         </div>

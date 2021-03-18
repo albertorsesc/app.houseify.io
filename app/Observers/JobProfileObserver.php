@@ -2,7 +2,9 @@
 
 namespace App\Observers;
 
+use App\Events\Logs\LogActions;
 use App\Models\JobProfiles\JobProfile;
+use Illuminate\Support\Str;
 
 class JobProfileObserver
 {
@@ -14,47 +16,55 @@ class JobProfileObserver
      */
     public function creating(JobProfile $jobProfile)
     {
-//        $jobProfile->uuid = (string) Str::uuid();
+        $jobProfile->uuid = (string) Str::uuid();
         $jobProfile->user_id = auth()->id();
     }
 
     /**
      * Handle the JobProfile "created" event.
      *
-     * @param  \App\Models\JobProfiles\JobProfile  $jobProfile
+     * @param JobProfile $jobProfile
+     *
      * @return void
      */
     public function created(JobProfile $jobProfile)
     {
-        //
+        LogActions::dispatch('STORE', $jobProfile, auth()->user());
     }
 
     /**
      * Handle the JobProfile "updated" event.
      *
-     * @param  \App\Models\JobProfiles\JobProfile  $jobProfile
+     * @param JobProfile $jobProfile
+     *
      * @return void
      */
     public function updated(JobProfile $jobProfile)
     {
-        //
+        LogActions::dispatch('UPDATE', $jobProfile, auth()->user());
+    }
+
+    public function deleting(JobProfile $jobProfile)
+    {
+        LogActions::dispatch('DELETE', $jobProfile, auth()->user());
     }
 
     /**
      * Handle the JobProfile "deleted" event.
      *
-     * @param  \App\Models\JobProfiles\JobProfile  $jobProfile
+     * @param JobProfile  $jobProfile
+     *
      * @return void
      */
     public function deleted(JobProfile $jobProfile)
     {
-        //
     }
 
     /**
      * Handle the JobProfile "restored" event.
      *
-     * @param  \App\Models\JobProfiles\JobProfile  $jobProfile
+     * @param  JobProfile  $jobProfile
+     *
      * @return void
      */
     public function restored(JobProfile $jobProfile)
@@ -65,7 +75,8 @@ class JobProfileObserver
     /**
      * Handle the JobProfile "force deleted" event.
      *
-     * @param  \App\Models\JobProfiles\JobProfile  $jobProfile
+     * @param  JobProfile  $jobProfile
+     *
      * @return void
      */
     public function forceDeleted(JobProfile $jobProfile)

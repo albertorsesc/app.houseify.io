@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\JobProfiles;
 
+use App\Http\Resources\LocationResource;
 use App\Http\Resources\UserResource;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -18,6 +19,7 @@ class JobProfileResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'uuid' => $this->uuid,
             'user' => new UserResource($this->whenLoaded('user')),
             'title' => $this->title,
             'skills' => $this->skills,
@@ -28,6 +30,8 @@ class JobProfileResource extends JsonResource
             'facebookProfile' => $this->facebook_profile,
             'site' => $this->site,
             'bio' => $this->bio,
+            'location' => new LocationResource($this->whenLoaded('location')),
+            'status' => $this->status,
             'meta' => [
                 'profile' => $this->profile()
             ]

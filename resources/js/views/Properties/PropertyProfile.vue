@@ -1,17 +1,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Alert from "../../components/Alert";
-import Modal from "../../components/Modal";
-import Report from '../../components/Report'
 import VueMultiselect from 'vue-multiselect'
-import Errors from "../../components/Errors";
-import Divider from "../../components/Divider";
 import SweetAlert from "../../models/SweetAlert";
-import PropertyLocation from "./PropertyLocation";
-import PropertyFeatures from "./PropertyFeatures";
-import FormInput from "../../components/FormInput";
-import CustomCarousel from "../../components/CustomCarousel";
 
 export default {
     name: "PropertyProfile",
@@ -149,7 +140,6 @@ export default {
             this.localProperty.location = location
         })
     },
-
     computed: {
         ...mapGetters({
             getStates: 'global/getStates',
@@ -165,16 +155,16 @@ export default {
         },
     },
     components: {
-        Alert,
-        Modal,
-        Errors,
-        Report,
-        Divider,
-        FormInput,
-        CustomCarousel,
         VueMultiselect,
-        PropertyFeatures,
-        PropertyLocation,
+        Alert: () => import(/* webpackChunkName: "alert" */ '../../components/Alert'),
+        Modal: () => import(/* webpackChunkName: "modal" */ '../../components/Modal'),
+        Errors: () => import(/* webpackChunkName: "errors" */ '../../components/Errors'),
+        Report: () => import(/* webpackChunkName: "report" */ '../../components/Report'),
+        Divider: () => import(/* webpackChunkName: "divider" */ '../../components/Divider'),
+        FormInput: () => import(/* webpackChunkName: "form-input" */ '../../components/FormInput'),
+        PropertyLocation: () => import(/* webpackChunkName: "property-location" */ './PropertyLocation'),
+        PropertyFeatures: () => import(/* webpackChunkName: "property-features" */ './PropertyFeatures'),
+        CustomCarousel: () => import(/* webpackChunkName: "custom-carousel" */ '../../components/CustomCarousel'),
     }
 }
 </script>

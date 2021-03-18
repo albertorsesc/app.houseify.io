@@ -27,8 +27,6 @@
 </template>
 
 <script>
-import PropertyCard from "../../components/Properties/PropertyCard";
-
 export default {
     name: "InterestingProperties",
     data() {
@@ -55,7 +53,7 @@ export default {
         this.onToggleInterest()
     },
     components: {
-        PropertyCard,
+        PropertyCard: () => import(/* webpackChunkName: "property-card" */ '../../components/Properties/PropertyCard'),
     }
 }
 </script>

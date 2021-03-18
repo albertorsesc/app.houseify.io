@@ -50,10 +50,6 @@
 </template>
 
 <script>
-
-import CreateJobProfile from "./CreateJobProfile";
-import JobProfileCard from "../../components/JobProfiles/JobProfileCard";
-
 export default {
     name: "MyJobProfile",
     data() {
@@ -81,8 +77,8 @@ export default {
         })
     },
     components: {
-        JobProfileCard,
-        CreateJobProfile,
+        CreateJobProfile: () => import(/* webpackChunkName: "create-job-profile" */ './CreateJobProfile'),
+        JobProfileCard: () => import(/* webpackChunkName: "job-profile-card" */ '../../components/JobProfiles/JobProfileCard'),
     }
 }
 </script>

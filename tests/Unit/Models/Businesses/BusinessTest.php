@@ -2,12 +2,13 @@
 
 namespace Tests\Unit\Models\Businesses;
 
-use Tests\TestCase;
-use App\Models\User;
-use App\Models\Businesses\Business;
+use Tests\BusinessTestCase;
+use Database\Seeders\StateSeeder;
+use Database\Seeders\CountrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\{User, Location, Businesses\Business};
 
-class BusinessTest extends TestCase
+class BusinessTest extends BusinessTestCase
 {
     use RefreshDatabase;
 
@@ -23,5 +24,22 @@ class BusinessTest extends TestCase
             User::class,
             $this->create(Business::class)->owner
         );
+    }
+
+    /**
+     *   @test
+     *   @throws \Throwable
+     */
+    public function business_has_one_location()
+    {
+        $this->loadSeeders([
+            CountrySeeder::class,
+            StateSeeder::class,
+        ]);
+        $this->signIn();
+        $business = $this->create(Business::class);
+        $this->createBusinessLocation($business);
+
+        $this->assertInstanceOf(Location::class, $business->fresh()->location);
     }
 }

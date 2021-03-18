@@ -1,16 +1,16 @@
 <template>
     <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-        <div class="md:flex md:justify-between px-4 py-5 sm:px-6 items-center">
+        <div class="flex justify-between px-4 py-5 sm:px-6 items-center">
             <h3 class="flex text-lg leading-6 font-medium text-emerald-600">
                 <svg class="mr-2 h-5 w-5 text-teal-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                Ubicacion de la Propiedad
+                Ubicacion del Tecnico
             </h3>
             <div>
                 <button @click="openModal" class="h-link bg-white border-emerald-900 -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
-                        title="Registrar Ubicacion de la Propiedad">
+                        title="Registrar Ubicacion del Tecnico">
                     <svg class="text-blue-300 hover:text-blue-600 hover:border-blue-700 hover:border" width="25" height="25" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -77,8 +77,8 @@
             </dl>
         </div>
 
-        <modal modal-id="property-location" max-width="sm:max-w-5xl">
-            <template #title>Ubicacion de la Propiedad</template>
+        <modal modal-id="job-profile-location" max-width="sm:max-w-5xl">
+            <template #title>Ubicacion de la Negocio</template>
             <template #content>
                 <form @submit.prevent>
 
@@ -89,8 +89,8 @@
                                 <form-input
                                     title="Direccion"
                                     :is-required="false"
-                                    v-model="propertyLocationForm.address"
-                                    :data="propertyLocationForm.address"
+                                    v-model="jobProfileLocationForm.address"
+                                    :data="jobProfileLocationForm.address"
                                     input-id="address"
                                     :error="errors.address"
                                 ></form-input>
@@ -107,7 +107,7 @@
                                     Estado
                                 </label>
                                 <div class="mt-1">
-                                    <vue-multiselect v-model="propertyLocationForm.state"
+                                    <vue-multiselect v-model="jobProfileLocationForm.state"
                                                      :options="getStates"
                                                      id="state_id"
                                                      label="name"
@@ -123,7 +123,7 @@
                                                      placeholder="Selecciona tu Estado..."
                                                      @select="getCities">
                                         <template slot="noResult">
-                                            <span class="text-lg text-yellow-600">Lo sentimos, no se encontraron resultados :(</span>
+                                            <span class="text-lg text-yellow-600">Lo sentimos, no se encontraron resultados :( </span>
                                         </template>
                                     </vue-multiselect>
                                 </div>
@@ -137,7 +137,7 @@
                                     Ciudad
                                 </label>
                                 <div class="mt-1">
-                                    <vue-multiselect v-model="propertyLocationForm.city"
+                                    <vue-multiselect v-model="jobProfileLocationForm.city"
                                                      :options="cities"
                                                      id="city"
                                                      :searchable="true"
@@ -161,7 +161,7 @@
                                     Fraccionamiento/Colonia
                                 </label>
                                 <div class="mt-1">
-                                    <vue-multiselect v-model="propertyLocationForm.neighborhood"
+                                    <vue-multiselect v-model="jobProfileLocationForm.neighborhood"
                                                      :options="neighborhoods"
                                                      id="neighborhood"
                                                      :searchable="true"
@@ -183,8 +183,8 @@
                         <form-input
                             title="Codigo Postal"
                             type="number"
-                            v-model="propertyLocationForm.zipCode"
-                            :data="propertyLocationForm.zipCode"
+                            v-model="jobProfileLocationForm.zipCode"
+                            :data="jobProfileLocationForm.zipCode"
                             input-id="store_zip_code"
                             :error="errors.zip_code"
                         ></form-input>
@@ -208,23 +208,23 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import SweetAlert from "../../models/SweetAlert";
 import VueMultiselect from "vue-multiselect";
+import SweetAlert from "../../models/SweetAlert";
+import {mapGetters} from "vuex";
 
 export default {
-    name: "PropertyLocation",
-    inject: ['property'],
+    name: "BusinessLocation",
+    inject: ['jobProfile'],
+    emits: ['jobProfiles.location'],
     data() {
         return {
-            endpoint: `/properties/${this.property.slug}/location`,
+            endpoint: `/job-profiles/${this.jobProfile.uuid}/location`,
 
-            location: this.property.location,
-            states: [],
+            location: this.jobProfile.location,
             cities: [],
             neighborhoods: [],
 
-            propertyLocationForm: {
+            jobProfileLocationForm: {
                 address: '',
                 neighborhood: '',
                 city: '',
@@ -242,22 +242,22 @@ export default {
             errors: [],
             actionType: '',
             modal: {
-                id: 'property-location'
+                id: 'job-profile-location'
             },
         }
     },
     methods: {
         store() {
             axios.post(this.endpoint, {
-                'address': this.propertyLocationForm.address,
-                'neighborhood': this.propertyLocationForm.neighborhood,
-                'city': this.propertyLocationForm.city,
-                'state_id': this.propertyLocationForm.state ? this.propertyLocationForm.state.id : null,
-                'zip_code': this.propertyLocationForm.zipCode,
+                'address': this.jobProfileLocationForm.address,
+                'neighborhood': this.jobProfileLocationForm.neighborhood,
+                'city': this.jobProfileLocationForm.city,
+                'state_id': this.jobProfileLocationForm.state ? this.jobProfileLocationForm.state.id : null,
+                'zip_code': this.jobProfileLocationForm.zipCode,
             }).then(response => {
                 this.closeModal()
                 this.location = response.data.data
-                Event.$emit('properties.location', this.location)
+                Event.$emit('job-profiles.location', this.location)
                 SweetAlert.success(`La Ubicacion ha sido registrada exitosamente!`)
             }).catch(error => {
                 this.errors = error.response.status === 422 ?
@@ -267,15 +267,15 @@ export default {
         },
         update() {
             axios.put(this.endpoint, {
-                'address': this.propertyLocationForm.address,
-                'neighborhood': this.propertyLocationForm.neighborhood,
-                'city': this.propertyLocationForm.city,
-                'state_id': this.propertyLocationForm.state.id,
-                'zip_code': this.propertyLocationForm.zipCode,
+                'address': this.jobProfileLocationForm.address,
+                'neighborhood': this.jobProfileLocationForm.neighborhood,
+                'city': this.jobProfileLocationForm.city,
+                'state_id': this.jobProfileLocationForm.state.id,
+                'zip_code': this.jobProfileLocationForm.zipCode,
             }).then(response => {
                 this.closeModal()
                 this.location = response.data.data
-                Event.$emit('properties.location', this.location)
+                Event.$emit('job-profiles.location', this.location)
                 SweetAlert.success(`La Ubicacion ha sido actualizada exitosamente!`)
             }).catch(error => {
                 this.errors = error.response.status === 422 ?
@@ -284,13 +284,13 @@ export default {
             })
         },
         getCities(selectedState) {
-            let state = this.isObject(selectedState) ? selectedState : this.propertyLocationForm.state
+            let state = this.isObject(selectedState) ? selectedState : this.jobProfileLocationForm.state
             axios.get(`/states/${state.name}/cities`)
                 .then(response => { this.cities = response.data })
                 .catch(error => { console.log(error) })
         },
         getNeighborhoods(selectedCity) {
-            let city = selectedCity ? selectedCity : this.propertyLocationForm.city
+            let city = selectedCity ? selectedCity : this.jobProfileLocationForm.city
 
             axios.get(`/cities/${city}/neighborhoods`)
                 .then(response => { this.neighborhoods = response.data })
@@ -300,17 +300,17 @@ export default {
             this.modal = {}
             this.actionType = this.location ? 'put' : 'post'
             this.errors = []
-            this.modal.id = 'property-location'
+            this.modal.id = 'job-profile-location'
 
             if (this.actionType === 'put') {
-                this.propertyLocationForm.address = this.location.address
-                this.propertyLocationForm.neighborhood = this.location.neighborhood
-                this.propertyLocationForm.city = this.location.city
-                this.propertyLocationForm.state = this.location.state
-                this.propertyLocationForm.zipCode = this.location.zipCode
+                this.jobProfileLocationForm.address = this.location.address
+                this.jobProfileLocationForm.neighborhood = this.location.neighborhood
+                this.jobProfileLocationForm.city = this.location.city
+                this.jobProfileLocationForm.state = this.location.state
+                this.jobProfileLocationForm.zipCode = this.location.zipCode
 
-                this.getCities(this.propertyLocationForm.state.name)
-                this.getNeighborhoods(this.propertyLocationForm.city)
+                this.getCities(this.jobProfileLocationForm.state.name)
+                this.getNeighborhoods(this.jobProfileLocationForm.city)
             }
 
             Event.$emit(`${this.modal.id}:open`)
@@ -320,7 +320,7 @@ export default {
             this.errors = []
             this.actionType = ''
             this.modal = {}
-            this.propertyLocationForm = {}
+            this.jobProfileLocationForm = {}
         },
         submit () {
             if (this.actionType === 'post') {

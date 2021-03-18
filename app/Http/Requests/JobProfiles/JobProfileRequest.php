@@ -25,7 +25,7 @@ class JobProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'max:50'],
+            'title' => ['required', 'max:100'],
             'birthdate_at' => ['required', 'date_format:Y-m-d'],
             'skills' => [
                 'required',

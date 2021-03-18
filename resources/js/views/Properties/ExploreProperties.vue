@@ -68,10 +68,6 @@
 </template>
 
 <script>
-import CustomCarousel from '../../components/CustomCarousel'
-
-import PropertyCard from '../../components/Properties/PropertyCard'
-
 export default {
     name: "ExploreProperties",
     data() {
@@ -138,8 +134,8 @@ export default {
         })
     },
     components: {
-        CustomCarousel,
-        PropertyCard,
+        CustomCarousel: () => import(/* webpackChunkName: "custom-carousel" */ '../../components/CustomCarousel'),
+        PropertyCard: () => import(/* webpackChunkName: "property-card" */ '../../components/Properties/PropertyCard'),
     }
 }
 </script>

@@ -60,9 +60,6 @@
 </template>
 
 <script>
-import InterestedBtn from "../InterestedBtn";
-import CustomCarousel from '../../components/CustomCarousel'
-
 export default {
     name: 'PropertyCard',
     props: {
@@ -79,8 +76,8 @@ export default {
         }
     },
     components: {
-        InterestedBtn,
-        CustomCarousel,
+        InterestedBtn: () => import(/* webpackChunkName: "interested-btn" */ '../InterestedBtn'),
+        CustomCarousel: () => import(/* webpackChunkName: "custom-carousel" */ '../../components/CustomCarousel'),
     }
 }
 </script>

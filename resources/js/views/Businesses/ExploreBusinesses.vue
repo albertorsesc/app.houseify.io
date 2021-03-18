@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import BusinessCard from "../../components/Businesses/BusinessCard";
 export default {
     name: "ExploreBusinesses",
     data() {
@@ -67,7 +66,7 @@ export default {
         this.onScroll()
     },
     components: {
-        BusinessCard,
+        BusinessCard: () => import(/* webpackChunkName: "business-card" */ '../../components/Businesses/BusinessCard'),
     }
 }
 </script>

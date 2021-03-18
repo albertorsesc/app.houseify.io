@@ -33,16 +33,18 @@ class JobProfileController extends Controller
 
     public function update(JobProfileRequest $request, JobProfile $jobProfile) : JobProfileResource
     {
-//        $this->authorize('update', $jobProfile);
+        $this->authorize('update', $jobProfile);
 
         return new JobProfileResource(
-            tap($jobProfile)->update($request->all())
+            tap($jobProfile)
+                ->update($request->all())
+                ->load(['location.state', 'user'])
         );
     }
 
     public function destroy(JobProfile $jobProfile)
     {
-//        $this->authorize('update', $jobProfile);
+        $this->authorize('update', $jobProfile);
 
         $jobProfile->delete();
 

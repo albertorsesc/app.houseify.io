@@ -191,7 +191,6 @@
 <script>
 import { mapGetters } from 'vuex'
 import VueMultiselect from 'vue-multiselect'
-import Errors from "../../components/Errors";
 import SweetAlert from "../../models/SweetAlert";
 
 export default {
@@ -249,7 +248,7 @@ export default {
         this.$store.dispatch('jobProfiles/fetchSkills')
     },
     components: {
-        Errors,
+        Errors: () => import(/* webpackChunkName: "errors" */ '../../components/Errors'),
         VueMultiselect,
     }
 }

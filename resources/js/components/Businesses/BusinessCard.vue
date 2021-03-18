@@ -80,7 +80,6 @@
 </template>
 
 <script>
-import InterestedBtn from "../InterestedBtn";
 
 export default {
     props: {
@@ -90,7 +89,7 @@ export default {
         }
     },
     components: {
-        InterestedBtn
+        InterestedBtn: () => import(/* webpackChunkName: "interested-btn" */ '../InterestedBtn')
     }
 }
 </script>

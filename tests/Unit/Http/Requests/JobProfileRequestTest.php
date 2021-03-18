@@ -44,10 +44,10 @@ class JobProfileRequestTest extends TestCase
      * @test
      * @throws \Throwable
      */
-    public function title_must_not_exceed_50_characters()
+    public function title_must_not_exceed_100_characters()
     {
         $validatedField = 'title';
-        $brokenRule = Str::random(51);
+        $brokenRule = Str::random(101);
 
         $this->postJson(
             route($this->routePrefix . 'store'),

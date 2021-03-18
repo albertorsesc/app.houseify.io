@@ -27,8 +27,6 @@
 </template>
 
 <script>
-import BusinessCard from "../../components/Businesses/BusinessCard";
-
 export default {
     name: "InterestingBusinesses",
     data() {
@@ -53,7 +51,7 @@ export default {
         this.onToggleInterest()
     },
     components: {
-        BusinessCard,
+        BusinessCard: () => import(/* webpackChunkName: "business-card" */ '../../components/Businesses/BusinessCard'),
     }
 }
 </script>

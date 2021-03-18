@@ -169,7 +169,6 @@
 <script>
 import { mapGetters } from 'vuex'
 import VueMultiselect from 'vue-multiselect'
-import Errors from "../../components/Errors";
 import SweetAlert from "../../models/SweetAlert";
 
 export default {
@@ -238,8 +237,8 @@ export default {
         this.$store.dispatch('properties/fetchBusinessTypes')
     },
     components: {
-        Errors,
         VueMultiselect,
+        Errors: () => import(/* webpackChunkName: "errors" */ '../../components/Errors'),
     }
 }
 </script>

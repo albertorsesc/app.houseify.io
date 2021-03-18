@@ -1,21 +1,31 @@
 const mix = require('laravel-mix');
+require('laravel-mix-bundle-analyzer');
 
 mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
+        // require('@tailwindcss/jit'),
         require('autoprefixer'),
     ]).vue();
 
 mix.copy('node_modules/sweetalert2/src/sweetalert2.scss', 'public/css/sweetalert2.css')
 mix.copy('node_modules/vue-multiselect/dist/vue-multiselect.min.css', 'public/css/vue-multiselect.min.css')
+mix.version(['public/css/app.css', 'public/js/app.js'])
+mix.extract(['vue', 'vuex', 'tailwindcss', 'postcss', 'laravel-mix', 'lodash', 'alpine'])
+
+if (!mix.inProduction()) {
+    // mix.bundleAnalyzer();
+}
 
 mix.webpackConfig({
+    plugins: [
+    ],
     watchOptions: {
         ignored: /node_modules/
     },
     output: {
-        chunkFilename: 'js/chunks/[name].js?id=[chunkhash]',
+        chunkFilename: 'js/components/[name].js?id=[chunkhash]',
     },
     resolve: {
         /*alias: {

@@ -1,9 +1,4 @@
 <script>
-import SearchProperties from "./SearchProperties";
-import InterestingProperties from "./InterestingProperties";
-import MyProperties from '../../views/Properties/MyProperties'
-import ExploreProperties from '../../views/Properties/ExploreProperties'
-
 export default {
     name: 'Properties',
     data: function () {
@@ -42,10 +37,10 @@ export default {
         }
     },
     components: {
-        MyProperties,
-        SearchProperties,
-        ExploreProperties,
-        InterestingProperties,
+        SearchProperties: () => import(/* webpackChunkName: "search-properties" */ './SearchProperties'),
+        MyProperties: () => import(/* webpackChunkName: "my-properties" */ '../../views/Properties/MyProperties'),
+        InterestingProperties: () => import(/* webpackChunkName: "interesting-properties" */ './InterestingProperties'),
+        ExploreProperties: () => import(/* webpackChunkName: "explore-properties" */ '../../views/Properties/ExploreProperties'),
     }
 }
 </script>

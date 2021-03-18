@@ -1,7 +1,4 @@
 <script>
-
-import MyJobProfile from "./MyJobProfile";
-
 export default {
     name: "JobProfiles",
     data() {
@@ -27,7 +24,8 @@ export default {
         }
     },
     components: {
-        MyJobProfile,
+        MyJobProfile: () => import(/* webpackChunkName: "job-profile" */ './MyJobProfile'),
+        SearchJobProfiles: () => import(/* webpackChunkName: "search-job-profiles" */ './SearchJobProfiles'),
     }
 }
 </script>

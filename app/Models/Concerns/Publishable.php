@@ -4,9 +4,18 @@ namespace App\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * @method static isPublished
+ */
 trait Publishable
 {
-    public function scopeIsPublished(Builder $query)
+
+    /**
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeIsPublished(Builder $query) : Builder
     {
         return $query->where('status', 1);
     }

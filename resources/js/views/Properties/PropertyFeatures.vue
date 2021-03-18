@@ -190,10 +190,8 @@
 </template>
 
 <script>
-import Modal from "../../components/Modal";
 import VueMultiselect from "vue-multiselect";
 import SweetAlert from "../../models/SweetAlert";
-import FormInput from "../../components/FormInput";
 
 export default {
     name: "PropertyFeatures",
@@ -301,9 +299,9 @@ export default {
         }
     },
     components: {
-        Modal,
-        FormInput,
         VueMultiselect,
+        Modal: () => import(/* webpackChunkName: "modal" */ '../../components/Modal'),
+        FormInput: () => import(/* webpackChunkName: "form-input" */ '../../components/FormInput'),
     }
 }
 </script>

@@ -108,7 +108,7 @@
                                 </label>
                                 <div class="mt-1">
                                     <vue-multiselect v-model="businessLocationForm.state"
-                                                     :options="states"
+                                                     :options="getStates"
                                                      id="state_id"
                                                      label="name"
                                                      track-by="id"
@@ -208,10 +208,9 @@
 </template>
 
 <script>
-import Modal from "../../components/Modal";
+import { mapGetters } from 'vuex'
 import VueMultiselect from "vue-multiselect";
 import SweetAlert from "../../models/SweetAlert";
-import FormInput from "../../components/FormInput";
 
 export default {
     name: "BusinessLocation",
@@ -333,9 +332,17 @@ export default {
             }
         }
     },
+    computed: {
+        ...mapGetters({
+            getStates: 'global/getStates'
+        })
+    },
+    created() {
+        this.$store.dispatch('global/fetchStates')
+    },
     components: {
-        Modal,
-        FormInput,
+        Modal: () => import(/* webpackChunkName: "modal" */ '../../components/Modal'),
+        FormInput: () => import(/* webpackChunkName: "form-input" */ '../../components/FormInput'),
         VueMultiselect,
     }
 }

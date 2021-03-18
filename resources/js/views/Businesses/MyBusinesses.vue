@@ -47,9 +47,6 @@
 </template>
 
 <script>
-import CreateBusiness from "./CreateBusiness";
-import BusinessCard from "../../components/Businesses/BusinessCard";
-
 export default {
     name: "MyBusinesses",
     data() {
@@ -77,8 +74,8 @@ export default {
         })
     },
     components: {
-        BusinessCard,
-        CreateBusiness,
+        CreateBusiness: () => import(/* webpackChunkName: "create-business" */ './CreateBusiness'),
+        BusinessCard: () => import(/* webpackChunkName: "business-card" */ '../../components/Businesses/BusinessCard'),
     }
 }
 </script>

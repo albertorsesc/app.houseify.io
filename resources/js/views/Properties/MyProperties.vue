@@ -47,9 +47,6 @@
 </template>
 
 <script>
-import CreateProperty from "./CreateProperty";
-import PropertyCard from '../../components/Properties/PropertyCard'
-
 export default {
     name: "MyProperties",
     data() {
@@ -77,8 +74,8 @@ export default {
         })
     },
     components: {
-        PropertyCard,
-        CreateProperty,
+        CreateProperty: () => import(/* webpackChunkName: "create-property" */ './CreateProperty'),
+        PropertyCard: () => import(/* webpackChunkName: "property-card" */ '../../components/Properties/PropertyCard'),
     }
 }
 </script>

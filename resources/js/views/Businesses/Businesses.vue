@@ -1,9 +1,4 @@
 <script>
-import MyBusinesses from "./MyBusinesses";
-import SearchBusinesses from "./SearchBusinesses";
-import ExploreBusinesses from "./ExploreBusinesses";
-import InterestingBusinesses from "./InterestingBusinesses";
-
 export default {
     name: "Businesses",
     data() {
@@ -13,10 +8,10 @@ export default {
         }
     },
     components: {
-        MyBusinesses,
-        SearchBusinesses,
-        ExploreBusinesses,
-        InterestingBusinesses,
+        MyBusinesses: () => import(/* webpackChunkName: "my-businesses" */ './MyBusinesses'),
+        SearchBusinesses: () => import(/* webpackChunkName: "search-businesses" */ './SearchBusinesses'),
+        ExploreBusinesses: () => import(/* webpackChunkName: "explore-businesses" */ './ExploreBusinesses'),
+        InterestingBusinesses: () => import(/* webpackChunkName: "interesting-businesses" */ './InterestingBusinesses'),
     }
 }
 </script>

@@ -1,15 +1,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Alert from "../../components/Alert";
-import Modal from "../../components/Modal";
-import Report from '../../components/Report'
 import VueMultiselect from 'vue-multiselect'
-import Errors from "../../components/Errors";
-import Divider from "../../components/Divider";
 import SweetAlert from "../../models/SweetAlert";
-import BusinessLocation from "./BusinessLocation";
-import FormInput from "../../components/FormInput";
 
 export default {
     name: "BusinessProfile",
@@ -60,7 +53,7 @@ export default {
         },
         toggle() {
             axios
-                .put(this.endpoint + `/${this.localBusiness.slug}/toggle`)
+                .put(this.endpoint + `/${this.localBusiness.id}/toggle`)
                 .then(() => {
                     this.localBusiness.status = ! this.localBusiness.status
                     let status = this.business.status ? 'Publicado' : 'Ocultado'
@@ -120,16 +113,17 @@ export default {
         Event.$on('businesses.location', location => {
             this.localBusiness.location = location
         })
+
     },
     components: {
-        Alert,
-        Modal,
-        Report,
-        Errors,
-        Divider,
-        FormInput,
         VueMultiselect,
-        BusinessLocation,
+        Alert: () => import(/* webpackChunkName: "alert" */ '../../components/Alert'),
+        Modal: () => import(/* webpackChunkName: "modal" */ '../../components/Modal'),
+        Report: () => import(/* webpackChunkName: "report" */ '../../components/Report'),
+        Errors: () => import(/* webpackChunkName: "errors" */ '../../components/Errors'),
+        Divider: () => import(/* webpackChunkName: "divider" */ '../../components/Divider'),
+        FormInput: () => import(/* webpackChunkName: "form-input" */ '../../components/FormInput'),
+        BusinessLocation: () => import(/* webpackChunkName: "business-location" */ './BusinessLocation'),
     }
 }
 </script>

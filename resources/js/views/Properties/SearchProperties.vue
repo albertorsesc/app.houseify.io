@@ -398,9 +398,7 @@
 </template>
 
 <script>
-import Search from "../../components/Search";
 import properties from "../../mixins/properties";
-import PropertyCard from "../../components/Properties/PropertyCard";
 
 export default {
     name: "SearchProperties",
@@ -473,17 +471,9 @@ export default {
                 .catch(error => { dd(error) })
         }
     },
-    computed: {
-    },
-    mounted() {
-        /*this.$store.dispatch('global/fetchStates')
-        this.$store.dispatch('properties/fetchPropertyTypes')
-        this.$store.dispatch('properties/fetchBusinessTypes')*/
-    },
     components: {
-        Search,
-        PropertyCard,
-        // PropertyCard: () => import(/* webpackChunkName: "js/propertyCard" */ '../../components/Properties/PropertyCard'),
+        Search: () => import(/* webpackChunkName: "search" */ '../../components/Search'),
+        PropertyCard: () => import(/* webpackChunkName: "property-card" */ '../../components/Properties/PropertyCard'),
     }
 }
 </script>

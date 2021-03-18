@@ -13,6 +13,12 @@ class JobProfilesTest extends TestCase
 
     private string $routePrefix = 'api.job-profiles.';
 
+    protected function setUp () : void
+    {
+        parent::setUp();
+        $this->signIn();
+    }
+
     /**
      * @test
      * @throws \Throwable
@@ -20,8 +26,6 @@ class JobProfilesTest extends TestCase
     */
     public function authenticated_user_can_get_all_published_job_profiles()
     {
-        $this->signIn();
-
         $jobProfile = $this->create(JobProfile::class, [], 'published');
 
         $response = $this->getJson(route($this->routePrefix . 'index'));
@@ -30,6 +34,7 @@ class JobProfilesTest extends TestCase
             'data' => [
                 [
                     'id' => $jobProfile->id,
+                    'uuid' => $jobProfile->uuid,
                     'user' => ['id' => $jobProfile->user->id],
                     'title' => $jobProfile->title,
                     'age' => $jobProfile->getAge(),
@@ -53,8 +58,6 @@ class JobProfilesTest extends TestCase
     */
     public function authenticated_user_can_store_a_job_profile()
     {
-        $this->signIn();
-
         $jobProfile = $this->make(JobProfile::class);
 
         $response = $this->postJson(route($this->routePrefix . 'store'), $jobProfile->toArray());
@@ -70,9 +73,6 @@ class JobProfilesTest extends TestCase
      */
     public function authenticated_user_can_update_a_job_profile()
     {
-        $this->withoutExceptionHandling();
-        $this->signIn();
-
         $existingJobProfile = JobProfile::factory()->create();
         $newJobProfileData = $this->make(JobProfile::class);
 
@@ -99,8 +99,7 @@ class JobProfilesTest extends TestCase
      */
     public function authenticated_user_can_delete_a_job_profile()
     {
-        $this->signIn();
-
+        $this->withoutExceptionHandling();
         $existingJobProfile = JobProfile::factory()->create();
 
         $response = $this->deleteJson(route($this->routePrefix . 'destroy', $existingJobProfile));
