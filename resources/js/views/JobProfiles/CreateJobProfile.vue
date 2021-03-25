@@ -235,8 +235,6 @@ export default {
             location.reload()
         },
     },
-    mounted() {
-    },
     computed: {
         ...mapGetters({
             getSkills: 'jobProfiles/getSkills'

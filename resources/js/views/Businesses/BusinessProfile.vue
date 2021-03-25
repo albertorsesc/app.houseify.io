@@ -53,7 +53,7 @@ export default {
         },
         toggle() {
             axios
-                .put(this.endpoint + `/${this.localBusiness.id}/toggle`)
+                .put(this.endpoint + `/${this.localBusiness.slug}/toggle`)
                 .then(() => {
                     this.localBusiness.status = ! this.localBusiness.status
                     let status = this.business.status ? 'Publicado' : 'Ocultado'
@@ -113,7 +113,6 @@ export default {
         Event.$on('businesses.location', location => {
             this.localBusiness.location = location
         })
-
     },
     components: {
         VueMultiselect,

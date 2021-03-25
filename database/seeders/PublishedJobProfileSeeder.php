@@ -28,26 +28,6 @@ class PublishedJobProfileSeeder extends Seeder
                 'site' => 'https://electricista.com',
                 'bio' => 'Se hacen trabajos a domicilio'
             ],
-            [
-                'title' => 'Pintor con mas de 10 anios de experiencia en acabados',
-                'skills' => ['Pintor'],
-                'birthdate_at' => now()->subDecades(rand(1, 5))->toDateTime(),
-                'email' => 'pintor@gmail.com',
-                'phone' => '(686)289.4998',
-                'facebook_profile' => 'https://www.facebook.com/pintor',
-                'site' => 'https://pintor.com',
-                'bio' => 'Se hacen trabajos a domicilio'
-            ],
-            [
-                'title' => 'Albanil con mas de 10 anios de experiencia en acabados',
-                'skills' => ['Albanil'],
-                'birthdate_at' => now()->subDecades(rand(1, 5))->toDateTime(),
-                'email' => 'pintor@gmail.com',
-                'phone' => '(686)289.4998',
-                'facebook_profile' => 'https://www.facebook.com/pintor',
-                'site' => 'https://pintor.com',
-                'bio' => 'Se hacen trabajos a domicilio'
-            ],
         ];
 
         foreach ($jobProfiles as $jobProfile) {

@@ -1,5 +1,5 @@
 <template>
-    <div class="my-3 w-full sm:w-1/2 md:w-1/3 px-2 mt-8 md:mt-0">
+    <div class="my-3 w-full sm:w-1/2 md:w-1/3 px-2 mt-8 md:mb-8 md:mt-4">
         <a :href="business.meta.profile">
             <div class="card transition hover:transform max-w-sm rounded-lg border border-gray-200 bg-white shadow-lg px-2 py-4">
                 <div class="text-right align-middle items-end">
@@ -21,7 +21,7 @@
                 <div class="flex items-center relative mb-3">
                     <div class="border-t border-gray-200 z-20 w-full"></div>
 
-                    <div class="rounded-full border border-emerald-200 bg-white z-20 p-4 inline-block absolute mx-8 mb-8">
+                    <div class="rounded-full border border-emerald-200 bg-white z-20 p-3 inline-block absolute mx-8 mb-8">
                         <img src="/logos/houseify-13.png" class="text-white inline-block object-contain h-20 w-20" alt="">
                     </div>
                 </div>
@@ -71,6 +71,7 @@
                     <div class="px-3 py-1 text-xs bg-emerald-100 font-medium leading-5 text-emerald-900 rounded-full shadow-sm"
                          v-for="(category, index) in business.categories"
                          :key="index"
+                         v-if="index <= 2"
                          v-text="category"
                     ></div>
                 </div>

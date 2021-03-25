@@ -89,6 +89,7 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="px-4 py-6 sm:px-0">
                         <div v-show="activeTab === 'explore-job-profiles'" class="text-3xl block">
+                            <explore-job-profiles></explore-job-profiles>
                         </div>
                         <div v-show="activeTab === 'my-job-profile'" class="text-3xl block">
                             <my-job-profile></my-job-profile>

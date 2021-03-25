@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Profesional')
+@section('title', 'Perfil de Trabajo')
 
 @section('styles')
     <link rel="stylesheet" href="/css/vue-multiselect.min.css">
@@ -57,24 +57,25 @@
                         <div class="md:mt-6 flex flex-col-reverse justify-stretch space-y-3 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
                             {{--Publish/Unpublish--}}
                             <div class="w-full md:mx-4">
-                            <span class="rounded-md shadow-sm">
-                                <button @click="toggle"
-                                        :disabled="! localJobProfile.location"
-                                        type="button"
-                                        :class="[status.btnClass, ! localJobProfile.location ? 'bg-gray-200' : '']"
-                                        class="-mt-1 flex shadow-sm justify-center w-full py-3 border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
-                                        :title="localJobProfile.status ? 'Ocultar tu Perfil del publico...' : 'Publicar tu Perfil...'">
-                                        <svg v-if="! localJobProfile.status" class="text-green-300 hover:text-green-400 hover:border-green-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                                        <svg v-if="localJobProfile.status" class="text-gray-300 hover:text-gray-400 hover:border-gray-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
-                                </button>
-                            </span>
+                                <span class="rounded-md shadow-sm">
+                                    <button @click="toggle"
+                                            :disabled="! localJobProfile.location"
+                                            type="button"
+                                            :class="[status.btnClass, ! localJobProfile.location ? 'bg-gray-200' : '']"
+                                            class="-mt-1 flex shadow-sm justify-center w-full py-3 border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                            :title="localJobProfile.status ? 'Ocultar tu Perfil del publico...' : 'Publicar tu Perfil...'">
+                                            <svg v-if="! localJobProfile.status" class="text-green-300 hover:text-green-400 hover:border-green-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                            <svg v-if="localJobProfile.status" class="text-gray-300 hover:text-gray-400 hover:border-gray-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                                    </button>
+                                </span>
                             </div>
 
-                            {{--Update Property--}}
+                            {{--Update Job Profile--}}
                             <div class="w-full md:mx-4">
-                                <button type="button"
-                                        class="items-center shadow-sm w-full py-3 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
-                                        title="Actualizar Datos de la Propiedad...">
+                                <button @click="openModal('put')"
+                                        type="button"
+                                        class="-mt-1 items-center shadow-sm w-full py-3 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                        title="Actualizar Datos del Perfil...">
                                     <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                                 </button>
                             </div>
@@ -261,6 +262,133 @@
                         </div>
                     </section>
                 </div>
+
+                <modal modal-id="update-job-profile" max-width="sm:max-w-5xl">
+                    <template #title>Actualizar Datos de tu Perfil</template>
+                    <template #content>
+                        <form @submit.prevent>
+
+                            <div class="w-full md:flex md:-mx-2 mt-4">
+                                <div class="w-full md:mx-2">
+                                    <div class="w-full">
+                                        <form-input
+                                            title="Titulo del Perfil"
+                                            v-model="jobProfileForm.title"
+                                            :data="jobProfileForm.title"
+                                            input-id="title"
+                                            :error="errors.title"
+                                        ></form-input>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="w-full md:flex md:-mx-2 mt-4">
+                                <div class="w-full md:mx-2 mt-3 md:mt-0">
+                                    <label for="skills">Habilidades de Trabajo</label>
+                                    <div class="my-1 rounded-md shadow-sm text-base">
+                                        <vue-multiselect v-model="selectedSkills"
+                                                         :placeholder="''"
+                                                         :options="getSkills"
+                                                         :multiple="true"
+                                                         :taggable="true"
+                                                         :hide-selected="true"
+                                                         id="skills"
+                                                         :searchable="true"
+                                                         :close-on-select="false"
+                                                         select-label=""
+                                                         selected-label=""
+                                                         deselect-label=""
+                                                         placeholder="Selecciona tus Habilidades de Trabajo..."
+                                        ></vue-multiselect>
+                                    </div>
+                                    <errors :error="errors.skills"
+                                            :options="{ noContainer: true }"
+                                    ></errors>
+                                </div>
+                            </div>
+
+                            <div class="w-full md:flex md:-mx-2 mt-4">
+                                <div class="w-full md:w-1/3 md:mx-2 mt-3 md:mt-0">
+                                    <form-input
+                                        title="Fecha de Nacimiento"
+                                        v-model="jobProfileForm.birthdateAt"
+                                        :data="jobProfileForm.birthdateAt"
+                                        input-id="birthdate_at"
+                                        :error="errors.birthdate_at"
+                                        type="date"
+                                    ></form-input>
+                                </div>
+                                <div class="w-full md:w-1/3 md:mx-2 mt-3 md:mt-0">
+                                    <form-input
+                                        title="Correo Electronico"
+                                        v-model="jobProfileForm.email"
+                                        :data="jobProfileForm.email"
+                                        input-id="email"
+                                        :error="errors.email"
+                                    ></form-input>
+                                </div>
+                                <div class="w-full md:w-1/3 md:mx-2 mt-3 md:mt-0">
+                                    <form-input
+                                        title="Telefono"
+                                        v-model="jobProfileForm.phone"
+                                        :data="jobProfileForm.phone"
+                                        input-id="phone"
+                                        :error="errors.phone"
+                                    ></form-input>
+                                </div>
+                            </div>
+
+                            <div class="w-full md:flex md:-mx-2 mt-4">
+                                <div class="w-full md:w-1/2 md:mx-2 mt-3 md:mt-0">
+                                    <form-input
+                                        title="Perfil de Facebook (URL)"
+                                        v-model="jobProfileForm.facebookProfile"
+                                        :data="jobProfileForm.facebookProfile"
+                                        input-id="facebook_profile"
+                                        :error="errors.facebook_profile"
+                                    ></form-input>
+                                </div>
+                                <div class="w-full md:w-1/2 md:mx-2 mt-3 md:mt-0">
+                                    <form-input
+                                        title="Sitio Web"
+                                        v-model="jobProfileForm.site"
+                                        :data="jobProfileForm.site"
+                                        input-id="site"
+                                        :error="errors.site"
+                                    ></form-input>
+                                </div>
+                            </div>
+
+                            <div class="w-full my-6 md:mt-2">
+                                <div>
+                                    <label for="comments">Comentarios</label>
+                                    <div class="mt-1">
+                                                    <textarea v-model="jobProfileForm.comments"
+                                                              id="comments"
+                                                              class="block rounded-md shadow-sm w-full outline-none border-emerald-200 bg-gray-50 focus:bg-white"
+                                                              rows="5"
+                                                    ></textarea>
+                                    </div>
+                                    <errors :error="errors.comments"
+                                            :options="{ noContainer: true }"
+                                    ></errors>
+                                </div>
+                            </div>
+
+                        </form>
+                    </template>
+                    <template #footer>
+                        <button @click="closeModal"
+                                type="button"
+                                class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150">
+                            Cancelar
+                        </button>
+                        <button @click="update"
+                                class="h-link ml-2 mt-2 md:mt-0 inline-flex items-center justify-center px-4 py-2 bg-teal-500 border border-gray-200 rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:font-semibold hover:shadow-lg hover:bg-teal-400 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                            Guardar
+                        </button>
+                    </template>
+                </modal>
             </main>
 
         </div>

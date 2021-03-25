@@ -38,6 +38,7 @@ class JobProfilesTest extends TestCase
                     'user' => ['id' => $jobProfile->user->id],
                     'title' => $jobProfile->title,
                     'age' => $jobProfile->getAge(),
+                    'birthdateAt' => $jobProfile->birthdate_at,
                     'skills' => $jobProfile->skills,
                     'email' => $jobProfile->email,
                     'phone' => $jobProfile->phone,

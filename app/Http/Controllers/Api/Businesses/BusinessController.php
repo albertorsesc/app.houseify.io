@@ -30,7 +30,10 @@ class BusinessController extends Controller
         $this->authorize('update', $business);
 
         return new BusinessResource(
-            tap($business)->update($request->all())
+            tap($business->load([
+                'owner:id',
+                'location.state'
+            ]))->update($request->all())
         );
     }
 

@@ -2,7 +2,7 @@ window._ = require('lodash');
 
 window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-axios.defaults.baseURL = 'http://localhost:3002/api/'
+axios.defaults.baseURL = 'http://localhost:3000/api/'
 window.axios.defaults.withCredentials = true;
 
 let token = document.head.querySelector('meta[name="csrf-token"]');

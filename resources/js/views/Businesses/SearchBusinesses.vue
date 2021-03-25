@@ -79,7 +79,7 @@
                     </div>
 
                     <div
-                         class="w-full md:flex sm:justify-center md:align-middle mt-6" v-cloak>
+                         class="w-full md:flex sm:justify-center md:align-middle mt-6 flex-wrap" v-cloak>
                             <business-card v-for="item in items"
                                            :key="item.objectID"
                                            v-if="item.status"

@@ -26,6 +26,7 @@ export default {
     components: {
         MyJobProfile: () => import(/* webpackChunkName: "job-profile" */ './MyJobProfile'),
         SearchJobProfiles: () => import(/* webpackChunkName: "search-job-profiles" */ './SearchJobProfiles'),
+        ExploreJobProfiles: () => import(/* webpackChunkName: "explore-job-profiles" */ './ExploreJobProfiles'),
     }
 }
 </script>
