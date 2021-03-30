@@ -4,6 +4,40 @@
 
 @import 'tailwindcss/utilities';
 
+html {
+    --scrollbarBG: #CFD8DC;
+    --thumbBG: #90A4AE;
+}
+body::-webkit-scrollbar {
+    width: 11px;
+}
+body {
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+body::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+}
+body::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG) ;
+    border-radius: 6px;
+    border: 3px solid var(--scrollbarBG);
+}
+
+
+.vertical-scrollbar::-webkit-scrollbar {
+    width: 5px;
+    height: 8px;
+    background-color: #CFD8DC; /* or add it to the track */
+}
+
+/* Add a thumb */
+.vertical-scrollbar::-webkit-scrollbar-thumb {
+    /*background: #90A4AE;*/
+    background: #47C2F2;
+}
+
+
 /* Colors */
 .bg-primary {
     background-color: #47C2F2;
@@ -20,7 +54,8 @@ a:hover {
     @apply no-underline;
 }
 .h-link:hover {
-    @apply translate-r-2 no-underline font-semibold;
+    @apply no-underline font-semibold;
+    @layer translate-r-2;
 }
 .translate-r-2 {
     transform: translateX(2px) !important;

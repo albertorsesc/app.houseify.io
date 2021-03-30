@@ -25,11 +25,15 @@ Vue.component('job-profile', require('./views/JobProfiles/JobProfile').default);
 
 Vue.component('profile', require('./views/User/Profile').default);
 
-/** Auth Helpers */
+/** Auth mixin */
 import auth from './mixins/auth';
 Vue.mixin(auth)
 
-/** Helper functions */
+/** Vuex mixin */
+import vuexMixin from './mixins/vuex';
+Vue.mixin(vuexMixin)
+
+/** Helper mixin */
 import mixins from './mixins/mixins';
 Vue.mixin(mixins)
 
@@ -68,6 +72,11 @@ Vue.mixin(clickaway)*/
 /**
  * Vue Star Raiting
  * https://github.com/craigh411/vue-star-rating/
+ */
+
+/**
+ * Vuex Persisted State
+ * https://github.com/robinvdvleuten/vuex-persistedstate
  */
 
 /** Events */

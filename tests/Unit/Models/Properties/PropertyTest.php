@@ -4,9 +4,11 @@ namespace Tests\Unit\Models\Properties;
 
 use App\Models\Interest;
 use App\Models\Location;
+use App\Models\Media;
 use App\Models\User;
 use Database\Seeders\CountrySeeder;
 use Database\Seeders\StateSeeder;
+use Illuminate\Http\UploadedFile;
 use Tests\PropertyTestCase;
 use App\Models\Properties\Property;
 use App\Models\Properties\PropertyCategory;
@@ -66,6 +68,27 @@ class PropertyTest extends PropertyTestCase
 
         $property->interested();
         $this->assertInstanceOf(Interest::class, $property->fresh()->interests->first());
+    }
+
+    /**
+     *   @test
+     *   @throws \Throwable
+     */
+    public function property_has_many_images()
+    {
+        \Storage::fake('public');
+
+        $this->signIn();
+
+        $property = $this->create(Property::class);
+
+        $requestWithImages = [
+            'images' => [UploadedFile::fake()->image('property.jpg', 1, 1),]
+        ];
+
+        $this->postJson(route('api.properties.images.store', $property), $requestWithImages);
+
+        $this->assertInstanceOf(Media::class, $property->fresh()->media()->first());
     }
 
     /**

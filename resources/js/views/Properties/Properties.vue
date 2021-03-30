@@ -1,4 +1,6 @@
 <script>
+import {mapGetters} from "vuex";
+
 export default {
     name: 'Properties',
     data: function () {
@@ -12,9 +14,9 @@ export default {
     },
     methods: {
         index () {
-            axios.get(this.endpoint).then(response => {
+            /*axios.get(this.endpoint).then(response => {
                 this.properties = response.data.data
-            }).catch(error => dd(error))
+            }).catch(error => dd(error))*/
         },
         nav(to) {
             this.activeTab = to
@@ -35,6 +37,11 @@ export default {
                 this.headerTitle = 'Busqueda Avanzada de Propiedades'
             }
         }
+    },
+    mounted() {
+        this.$store.dispatch('global/fetchStates')
+        // this.$store.dispatch('properties/fetchPropertyTypes')
+        // this.$store.dispatch('properties/fetchBusinessTypes')
     },
     components: {
         SearchProperties: () => import(/* webpackChunkName: "search-properties" */ './SearchProperties'),

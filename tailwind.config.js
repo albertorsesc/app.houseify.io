@@ -6,6 +6,9 @@ module.exports = {
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './resources/**/*.blade.php',
+        './resources/**/*.js',
+        './resources/**/*.vue',
         /*'./public/!**!/!*.html',
         './src/!**!/!*.{js,jsx,ts,tsx,vue}',*/
     ],
@@ -21,7 +24,6 @@ module.exports = {
                 teal: colors.teal,
                 cyan: colors.cyan,
                 emerald: colors.emerald,
-                rose: colors.rose,
             }
         },
     },

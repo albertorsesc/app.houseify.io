@@ -29,14 +29,6 @@
                             <errors :error="errors.title"
                                     :options="{ noContainer: true }"
                             ></errors>
-                            <div class="mt-2 flex rounded-md shadow-sm">
-                                <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
-                                  houseify.io/propiedades/
-                                </span>
-                                <span class="p-2 bg-gray-100 flex-1 focus:ring-indigo-500 focus:border-indigo-500 border border-r-0 border-gray-300 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
-                                    {{this.propertyForm.title | toKebabCase}}-ID_DE_PUBLICACION
-                                </span>
-                            </div>
                         </div>
                         <div class="sm:col-span-4 flex md:-mx-2">
                             <div class="w-full md:w-1/2 md:mx-2">
@@ -56,7 +48,7 @@
                                                      selected-label=""
                                                      deselect-label=""
                                                      :hide-selected="true"
-                                                     @select="getPropertyCategoriesByPropertyType"
+                                                     @select="lookupPropertyCategories"
                                     ></vue-multiselect>
                                 </div>
                                 <errors :error="errors.property_category_id"
@@ -65,6 +57,7 @@
                             </div>
                             <div class="w-full md:w-1/2 md:mx-2">
                                 <label for="property_category_id" class="block text-sm font-medium text-gray-700">
+                                    <strong class="required">*</strong>
                                     Categoria de la Propiedad
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base">
@@ -223,10 +216,16 @@ export default {
         cancel() {
             location.reload()
         },
+        lookupPropertyCategories(propertyType) {
+            this.propertyCategoriesByPropertyType = this.getPropertyCategories.filter(propertyCategory => {
+                return propertyCategory.propertyType.id === propertyType.id
+            })
+        },
     },
     computed: {
         ...mapGetters({
             getPropertyTypes: 'properties/getPropertyTypes',
+            getPropertyCategories: 'properties/getPropertyCategories',
             getBusinessTypes: 'properties/getBusinessTypes'
         })
     },
@@ -234,6 +233,7 @@ export default {
         window.currentTab = 'createProperty'
 
         this.$store.dispatch('properties/fetchPropertyTypes')
+        this.$store.dispatch('properties/fetchPropertyCategories')
         this.$store.dispatch('properties/fetchBusinessTypes')
     },
     components: {

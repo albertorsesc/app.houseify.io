@@ -1,7 +1,7 @@
 <template>
     <div class="my-2 w-full flex flex-col sm:w-2/3 md:w-1/2 lg:w-1/3 px-3">
         <div class="card transition hover:transform">
-            <custom-carousel module-name="properties"></custom-carousel>
+            <custom-carousel :images="property.images" module-name="properties" :size="'small'"></custom-carousel>
         </div>
         <div class="px-4 -mt-16 relative">
             <div class="card transition hover:transform px-6 py-2">

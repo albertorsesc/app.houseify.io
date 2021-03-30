@@ -20,6 +20,7 @@ const actions = {
             axios.get("/construction-categories")
                 .then(response => {
                     commit('SET_CONSTRUCTION_CATEGORIES', response.data.data)
+                    localStorage.setItem('constructionCategories', this.$store.state.categories)
                 })
                 .catch(error => {
                     reject(error)
@@ -29,16 +30,26 @@ const actions = {
     },
 
     fetchStates({ commit }){
-        return new Promise((resolve, reject) => {
-            axios.get("/states")
-                .then(response => {
-                    commit('SET_STATES', response.data.data)
-                })
-                .catch(error => {
-                    reject(error)
-                    console.log("Error fetching States")
-                })
-        })
+        let storage = window.localStorage
+        if (
+            storage.hasOwnProperty('app') &&
+            JSON.parse(storage.app).hasOwnProperty('global') &&
+            JSON.parse(storage.app).global.hasOwnProperty('states')
+        ) {
+            commit('SET_STATES', JSON.parse(storage.app).global.states)
+            dd('states from global.js')
+        } else {
+            return new Promise((resolve, reject) => {
+                axios.get("/states")
+                    .then(response => {
+                        commit('SET_STATES', response.data.data)
+                    })
+                    .catch(error => {
+                        reject(error)
+                        console.log("Error fetching States")
+                    })
+            })
+        }
     }
 }
 
@@ -56,5 +67,5 @@ export default {
     state,
     getters,
     actions,
-    mutations
+    mutations,
 }

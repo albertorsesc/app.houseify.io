@@ -17,6 +17,7 @@ class PropertyController extends Controller
             Property::query()
                     ->isPublished()
                     ->with([
+                        'media',
                         'interests',
                         'location.state',
                         'propertyFeature',

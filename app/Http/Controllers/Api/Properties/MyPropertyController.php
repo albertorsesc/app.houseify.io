@@ -13,7 +13,12 @@ class MyPropertyController extends Controller
             auth()
                 ->user()
                 ->properties
-                ->load(['propertyCategory.propertyType', 'location.state', 'interests'])
+                ->load([
+                    'media',
+                    'interests',
+                    'location.state',
+                    'propertyCategory.propertyType',
+                ])
         );
     }
 }

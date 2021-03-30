@@ -52,12 +52,6 @@ export default {
                     this.closeModal()
                     this.localProperty = response.data.data
                     SweetAlert.success(`La Propiedad ha sido actualizada exitosamente!`)
-
-                    /*if (this.property.slug !== response.data.data.slug) {
-                        setTimeout(() => {
-                            window.location.href = `/propiedades/${response.data.data.slug}`
-                        }, 1500)
-                    }*/
                 })
                 .catch(error => { this.errors = error.response.status === 422 ? error.response.data.errors : [] })
         },
@@ -99,7 +93,7 @@ export default {
                 this.modal.id = 'update-property'
 
                 this.selectedPropertyType = this.localProperty.propertyCategory.propertyType
-                this.getPropertyCategoriesByPropertyType(this.selectedPropertyType)
+                this.lookupPropertyCategories(this.selectedPropertyType)
                 this.propertyForm.propertyCategory = this.selectedPropertyCategory = this.localProperty.propertyCategory
                 this.propertyForm.businessType = this.localProperty.businessType
                 this.propertyForm.title = this.localProperty.title
@@ -110,13 +104,6 @@ export default {
             if (action === 'report') {
                 this.modal = {
                     id: 'reports',
-                }
-            }
-
-            if (action === 'get-images') {
-                this.modal = {
-                    id: 'get-images',
-                    maxWidth: 'sm:max-w-screen-lg',
                 }
             }
 
@@ -131,20 +118,26 @@ export default {
             this.selectedPropertyType = {}
             this.selectedPropertyCategory = {}
         },
+        lookupPropertyCategories(propertyType) {
+            this.propertyCategoriesByPropertyType = this.getPropertyCategories.filter(propertyCategory => {
+                return propertyCategory.propertyType.id === propertyType.id
+            })
+        },
+    },
+    computed: {
+        ...mapGetters({
+            getBusinessTypes: 'properties/getBusinessTypes',
+            getPropertyTypes: 'properties/getPropertyTypes',
+            getPropertyCategories: 'properties/getPropertyCategories',
+        }),
     },
     created() {
         this.$store.dispatch('properties/fetchPropertyTypes')
+        this.$store.dispatch('properties/fetchPropertyCategories')
         this.$store.dispatch('properties/fetchBusinessTypes')
 
         Event.$on('properties.location', location => {
             this.localProperty.location = location
-        })
-    },
-    computed: {
-        ...mapGetters({
-            getStates: 'global/getStates',
-            getPropertyTypes: 'properties/getPropertyTypes',
-            getBusinessTypes: 'properties/getBusinessTypes'
         })
     },
     watch: {
@@ -152,6 +145,7 @@ export default {
             this.propertyForm.propertyCategory = this.selectedPropertyCategory
         },*/
         selectedPropertyType: function () {
+            // this.selectedPropertyCategory = {}
         },
     },
     components: {
@@ -165,6 +159,7 @@ export default {
         PropertyLocation: () => import(/* webpackChunkName: "property-location" */ './PropertyLocation'),
         PropertyFeatures: () => import(/* webpackChunkName: "property-features" */ './PropertyFeatures'),
         CustomCarousel: () => import(/* webpackChunkName: "custom-carousel" */ '../../components/CustomCarousel'),
+        PropertyImages: () => import(/* webpackChunkName: "property-images" */ '../../components/Properties/PropertyImages')
     }
 }
 </script>

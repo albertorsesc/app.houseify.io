@@ -1,3 +1,4 @@
+public/images
 /storage/ssl
 /node_modules
 /public/hot
@@ -15,3 +16,5 @@ yarn-error.logpublic/css/app.css
 public/js/app.js
 public/css/app.css
 public/mix-manifest.json
+storage/debugbar
+public/vendor

@@ -13,10 +13,11 @@ class PropertyController extends Controller
         return view('properties.show', [
             'property' => new PropertyResource(
                 $property->load([
-                    'propertyCategory.propertyType',
+                    'media',
+                    'seller:id',
                     'location.state',
                     'propertyFeature',
-                    'seller:id'
+                    'propertyCategory.propertyType',
                 ])
             )
         ]);

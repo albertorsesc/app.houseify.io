@@ -172,7 +172,9 @@
                                         <div class="card-body">
                                             {{--                            <a @click="openModal('get-images')" href="#">--}}
                                             <custom-carousel
+                                                :images="localProperty.images"
                                                 :module-name="'properties'"
+                                                :size="'medium'"
                                             ></custom-carousel>
                                             {{--                            </a>--}}
                                         </div>
@@ -181,9 +183,9 @@
                                 </div>
 
                                 <div class="w-full md:w-1/3 mt-4">
-                                    <div class="hidden md:block md:flex md:justify-between md:-mx-2 mt-1 mb-2">
+                                    <div class="hidden md:flex md:justify-between md:-mx-2 mt-1 mb-2">
                                         {{--Publish/Unpublish--}}
-                                        <div class="w-full md:mx-2 mb-2 md:mb-0">
+                                        <div class="w-full md:w-1/2 md:mx-2 mb-2 md:mb-0">
                                             <span class="rounded-md shadow-sm">
                                                 <button @click="toggle"
                                                         :disabled="! localProperty.location"
@@ -198,13 +200,15 @@
                                         </div>
 
                                         {{--Update Property--}}
-                                        <div class="w-full md:mx-2">
-                                            <button @click="openModal('put')"
-                                                    type="button"
-                                                    class="-mt-1 items-center shadow-sm w-full py-3 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
-                                                    title="Actualizar Datos de la Propiedad...">
-                                                <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                                            </button>
+                                        <div class="w-full md:w-1/2 md:mx-2">
+                                            <span class="rounded-md shadow-sm">
+                                                <button @click="openModal('put')"
+                                                        type="button"
+                                                        class="-mt-1 items-center shadow-sm w-full py-3 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                                        title="Actualizar Datos de la Propiedad...">
+                                                    <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                                </button>
+                                            </span>
                                         </div>
                                     </div>
 
@@ -317,9 +321,16 @@
 
                             </div>
 
+                            @if(auth()->check() && auth()->id() === $property->seller_id)
+                            <div>
+                                <divider title="Imagenes"></divider>
+                                <property-images></property-images>
+                            </div>
+                            @endif
+
                             <divider title="Ubicacion"></divider>
 
-                            <property-location></property-location>{{--:property="localProperty"--}}
+                            <property-location></property-location>
 
                             <divider title="Caracteristicas"></divider>
 
@@ -334,147 +345,7 @@
                                 </div>
                             </div>
 
-                            <!--Timeline-->
-                            {{--<divider title="Comentarios Publicos"></divider>
-
-                            <div class="bg-white shadow-lg rounded-lg p-6 mt-4">
-                                <div class="flow-root">
-                                    <ul class="-mb-8">
-                                        <li>
-                                            <div class="relative pb-8">
-                                                <span class="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                                                <div class="relative flex items-start space-x-3">
-                                                    <div class="relative">
-                                                        <img class="h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white" src="https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=8&amp;w=256&amp;h=256&amp;q=80" alt="">
-
-                                                        <span class="absolute -bottom-0.5 -right-1 bg-white rounded-tl px-0.5 py-px">
-                  <!-- Heroicon name: chat-alt -->
-                  <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
-                  </svg>
-                </span>
-                                                    </div>
-                                                    <div class="min-w-0 flex-1">
-                                                        <div>
-                                                            <div class="text-sm">
-                                                                <a href="#" class="font-medium text-gray-900">Eduardo Benz</a>
-                                                            </div>
-                                                            <p class="mt-0.5 text-sm text-gray-500">
-                                                                Commented 6d ago
-                                                            </p>
-                                                        </div>
-                                                        <div class="mt-2 text-sm text-gray-700">
-                                                            <p>
-                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum nec varius. Et diam cursus quis sed purus nam.
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="relative pb-8">
-                                                <span class="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                                                <div class="relative flex items-start space-x-3">
-                                                    <div>
-                                                        <div class="relative px-1">
-                                                            <div class="h-8 w-8 bg-gray-100 rounded-full ring-8 ring-white flex items-center justify-center">
-                                                                <!-- Heroicon name: user-circle -->
-                                                                <svg class="h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
-                                                                </svg>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="min-w-0 flex-1 py-1.5">
-                                                        <div class="text-sm text-gray-500">
-                                                            <a href="#" class="font-medium text-gray-900">Hilary Mahy</a>
-                                                            assigned
-                                                            <a href="#" class="font-medium text-gray-900">Kristin Watson</a>
-                                                            <span class="whitespace-nowrap">2d ago</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="relative pb-8">
-                                                <span class="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                                                <div class="relative flex items-start space-x-3">
-                                                    <div>
-                                                        <div class="relative px-1">
-                                                            <div class="h-8 w-8 bg-gray-100 rounded-full ring-8 ring-white flex items-center justify-center">
-                                                                <!-- Heroicon name: tag -->
-                                                                <svg class="h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                                    <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-                                                                </svg>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="min-w-0 flex-1 py-0">
-                                                        <div class="text-sm leading-8 text-gray-500">
-                  <span class="mr-0.5">
-                    <a href="#" class="font-medium text-gray-900">Hilary Mahy</a>
-                    added tags
-                  </span>
-                                                            <span class="mr-0.5">
-                    <a href="#" class="relative inline-flex items-center rounded-full border border-gray-300 px-3 py-0.5 text-sm">
-                      <span class="absolute flex-shrink-0 flex items-center justify-center">
-                        <span class="h-1.5 w-1.5 rounded-full bg-rose-500" aria-hidden="true"></span>
-                      </span>
-                      <span class="ml-3.5 font-medium text-gray-900">Bug</span>
-                    </a>
-
-                    <a href="#" class="relative inline-flex items-center rounded-full border border-gray-300 px-3 py-0.5 text-sm">
-                      <span class="absolute flex-shrink-0 flex items-center justify-center">
-                        <span class="h-1.5 w-1.5 rounded-full bg-indigo-500" aria-hidden="true"></span>
-                      </span>
-                      <span class="ml-3.5 font-medium text-gray-900">Accessibility</span>
-                    </a>
-                  </span>
-                                                            <span class="whitespace-nowrap">6h ago</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="relative pb-8">
-                                                <div class="relative flex items-start space-x-3">
-                                                    <div class="relative">
-                                                        <img class="h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=8&amp;w=256&amp;h=256&amp;q=80" alt="">
-
-                                                        <span class="absolute -bottom-0.5 -right-1 bg-white rounded-tl px-0.5 py-px">
-                                                          <!-- Heroicon name: chat-alt -->
-                                                          <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                            <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
-                                                          </svg>
-                                                        </span>
-                                                    </div>
-                                                    <div class="min-w-0 flex-1">
-                                                        <div>
-                                                            <div class="text-sm">
-                                                                <a href="#" class="font-medium text-gray-900">Jason Meyers</a>
-                                                            </div>
-                                                            <p class="mt-0.5 text-sm text-gray-500">
-                                                                Commented 2h ago
-                                                            </p>
-                                                        </div>
-                                                        <div class="mt-2 text-sm text-gray-700">
-                                                            <p>
-                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum nec varius. Et diam cursus quis sed purus nam. Scelerisque amet elit non sit ut tincidunt condimentum. Nisl ultrices eu venenatis diam.
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>--}}
+                            {{--Timeline--}}
 
                             <modal modal-id="update-property" max-width="sm:max-w-5xl">
                                 <template #title>Actualizar Datos de la Propiedad</template>
@@ -503,7 +374,7 @@
                                                         Tipos de Negocio
                                                     </label>
                                                     <vue-multiselect v-model="propertyForm.businessType"
-                                                                     :options="businessTypes"
+                                                                     :options="getBusinessTypes"
                                                                      :searchable="false"
                                                                      :close-on-select="true"
                                                                      :show-labels="true"
@@ -552,7 +423,7 @@
                                                                          deselect-label=""
                                                                          :hide-selected="true"
                                                                          placeholder="Tipos de Propiedad..."
-                                                                         @select="retrievePropertyCategories"
+                                                                         @select="lookupPropertyCategories"
                                                         ></vue-multiselect>
                                                     </div>
                                                 </div>
@@ -618,6 +489,7 @@
                     <!-- /End replace -->
                 </div>
             </main>
+
         </div>
     </property-profile>
 

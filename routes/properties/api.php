@@ -4,6 +4,7 @@
     use App\Http\Controllers\Api\Properties\LocationController;
     use App\Http\Controllers\Api\Properties\MyPropertyController;
     use App\Http\Controllers\Api\Properties\BusinessTypeController;
+    use App\Http\Controllers\Api\Properties\PropertyImageController;
     use App\Http\Controllers\Api\Properties\PropertyTypeController;
     use App\Http\Controllers\Api\Properties\Actions\SearchController;
     use App\Http\Controllers\Api\Properties\Actions\PublishController;
@@ -35,6 +36,9 @@ Route::get('business-types', BusinessTypeController::class)->name('business-type
     Route::delete('properties/{property:slug}/uninterested', [InterestPropertyController::class, 'destroy'])->name('properties.uninterested');
 
     Route::post('properties/{property:slug}/report', ReportPropertyController::class)->name('properties.report');
+
+    Route::post('properties/{property:slug}/images', [PropertyImageController::class, 'store'])->name('properties.images.store');
+    Route::delete('properties/{property:slug}/images/{media:id}', [PropertyImageController::class, 'destroy'])->name('properties.images.destroy');
 
     Route::get('me/properties', MyPropertyController::class)->name('me.properties');
     Route::get('me/properties/interested', MyInterestedPropertiesController::class)->name('me.properties.interested');

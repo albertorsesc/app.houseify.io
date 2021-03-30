@@ -6,12 +6,14 @@ use App\Models\Properties\PropertyType;
 
 class PropertyTypeController
 {
-    public function __invoke ()
+    public function __invoke () : \Illuminate\Http\JsonResponse
     {
         return response()->json([
-            'data' => PropertyType::query()
-                                  ->orderBy('id')
-                                  ->get()
+            'data' => PropertyType
+                ::query()
+                ->select(['id', 'display_name'])
+                ->orderBy('id')
+                ->get()
         ]);
     }
 }

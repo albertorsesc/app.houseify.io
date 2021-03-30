@@ -30,7 +30,7 @@ class PropertyResource extends JsonResource
             'propertyFeature' => new PropertyFeatureResource($this->whenLoaded('propertyFeature')),
             'seller' => $this->whenLoaded('seller'),
             'interests' => $this->whenLoaded('interests'),
-//            'images' => $this->whenLoaded('images'),
+            'images' => $this->whenLoaded('media'),
             'meta' => [
                 'links' => [
                     'profile' => $this->profile()

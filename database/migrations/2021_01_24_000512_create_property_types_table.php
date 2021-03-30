@@ -16,7 +16,7 @@ class CreatePropertyTypesTable extends Migration
         Schema::create('property_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('display_name');
+            $table->string('display_name')->index();
         });
     }
 

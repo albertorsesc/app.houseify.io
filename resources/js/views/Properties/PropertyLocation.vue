@@ -8,10 +8,10 @@
                 </svg>
                 Ubicacion de la Propiedad
             </h3>
-            <div>
-                <button @click="openModal" class="h-link bg-white border-emerald-900 -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+            <div v-if="property.seller.id === auth">
+                <button @click="openModal" class="h-link bg-white border-emerald-900 -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-emerald-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-emerald-50 active:text-emerald-800"
                         title="Registrar Ubicacion de la Propiedad">
-                    <svg class="text-blue-300 hover:text-blue-600 hover:border-blue-700 hover:border" width="25" height="25" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="text-emerald-400 hover:text-emerald-600 hover:border-emerald-700 hover:border" width="25" height="25" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </button>
@@ -77,7 +77,9 @@
             </dl>
         </div>
 
-        <modal modal-id="property-location" max-width="sm:max-w-5xl">
+        <modal v-if="property.seller.id === auth"
+               modal-id="property-location"
+               max-width="sm:max-w-5xl">
             <template #title>Ubicacion de la Propiedad</template>
             <template #content>
                 <form @submit.prevent>

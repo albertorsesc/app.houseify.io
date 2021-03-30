@@ -12,9 +12,12 @@ class PropertyCategoryController extends Controller
     public function index() : AnonymousResourceCollection
     {
         return PropertyCategoryResource::collection(
-            PropertyCategory::with('propertyType')
-                            ->orderBy('display_name')
-                            ->get()
+            PropertyCategory
+                ::query()
+                ->select(['id', 'display_name', 'property_type_id'])
+                ->with('propertyType:id,display_name')
+                ->orderBy('display_name')
+                ->get()
         );
     }
 }

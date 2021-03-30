@@ -88,7 +88,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function scopeInterestedProperties() : Builder
     {
         return Property::query()
-                       ->with(['propertyCategory.propertyType', 'seller', 'interests', 'location.state'])
+                       ->with(['propertyCategory.propertyType', 'seller', 'interests', 'location.state', 'media'])
                        ->whereHas('interests', function($query) {
                            return $query->where('user_id', $this->id);
                        });

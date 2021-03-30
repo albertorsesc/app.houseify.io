@@ -4,6 +4,7 @@ namespace App\Models\Properties;
 
 use App\Models\User;
 use Laravel\Scout\Searchable;
+use App\Models\Concerns\HandlesMedia;
 use App\Models\Concerns\{CanBeReported, HasLocation, HasUuid, Interestable, Locationable, Publishable};
 use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, Relations\BelongsTo, Relations\HasOne};
 
@@ -14,6 +15,7 @@ class Property extends Model implements Locationable
         HasFactory,
         Publishable,
         HasLocation,
+        HandlesMedia,
         Interestable,
         CanBeReported;
 

@@ -42,7 +42,7 @@
             </main>
         </div>--}}
 
-        @stack('modals')
+{{--        @stack('modals')--}}
 
         @livewireScripts
         <div class="min-h-screen">

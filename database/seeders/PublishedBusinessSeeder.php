@@ -20,7 +20,7 @@ class PublishedBusinessSeeder extends Seeder
         $businesses = [
             [
                 'name' => 'Electrica Rosas',
-                'categories' => ['Electrica', 'Ferreteria', 'Plomeria'],
+                'categories' => ['Electricidad', 'Ferreteria', 'Plomeria'],
                 'email' => 'cotizaciones@electricarosas.com',
                 'phone' => '(686)289.4998',
                 'site' => 'https://electrica-rosas.com',

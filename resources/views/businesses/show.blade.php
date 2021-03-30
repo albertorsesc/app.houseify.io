@@ -165,7 +165,7 @@
                                                 type="button"
                                                 :class="[status.btnClass, ! localBusiness.location ? 'bg-gray-200' : '']"
                                                 class="-mt-1 flex shadow-sm justify-center w-full py-3 border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
-                                                :title="localBusiness.status ? 'Ocultar el Negocio del publico...' : 'Hacer publico el Negocio...'">
+                                                :title="localBusiness.status ? 'Ocultar mi Negocio del publico...' : 'Publicar mi Negocio...'">
                                                 <svg v-if="! localBusiness.status" class="text-green-300 hover:text-green-400 hover:border-green-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                                 <svg v-if="localBusiness.status" class="text-gray-300 hover:text-gray-400 hover:border-gray-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
                                         </button>
@@ -198,100 +198,91 @@
                                                                 para desaparecer de la Busqueda Avanzada.
                                                             </alert>-->
 
-                                <div class="w-full mb-2">
-                                    <div class="w-full bg-white shadow overflow-hidden sm:rounded-lg items-center">
-                                        <div class="w-full bg-contain bg-center h-44 py-4 object-contain bg-no-repeat"
-                                             style="background-image: url(/img/businesses.png)">
-                                        </div>
-                                        <div class="px-4 py-6 sm:px-10 items-center">
-                                            <dl class="px-2">
-                                                <divider title="Detalles"></divider>
-
-                                                <div class="md:flex md:justify-between">{{--grid grid-cols-1 gap-x-44 gap-y-8 sm:grid-cols-3--}}
-                                                    {{--Status--}}
-                                                    <div class="mt-4 md:mt-0">
-                                                        <dt class="text-sm font-medium text-gray-500">
-                                                            Estatus
-                                                        </dt>
-                                                        <dd class="mt-1 flex md:mt-3 text-sm text-gray-900">
-                                                            <svg v-if="localBusiness.status" class="h-5 w-5 text-green-500"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                                                            <svg v-else class="h-5 w-5 text-gray-500"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
-                                                            <span class="px-2 inline-flex text-base leading-5 font-semibold rounded-full text-gray-500"
-                                                                  v-text="localBusiness.status ? 'Publicado' : 'No Publicado'"
-                                                            ></span>
-                                                        </dd>
-                                                    </div>
-                                                    {{--Categories--}}
-                                                    <div class="mt-4 md:mt-0">
-                                                        <dt class="text-sm font-medium text-gray-500">
-                                                            Categorias del Negocio
-                                                        </dt>
-                                                        <div class="flex mt-2 md:mt-3">
-                                                            <div class="mr-3"
-                                                                 v-for="(category, index) in localBusiness.categories"
-                                                                 :key="index">
-                                                                <span class="text-xs border-emerald-900 border-1 shadow rounded-full bg-blue-50 px-4 py-2 my-2"
-                                                                      v-text="category"
-                                                                ></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    {{--Phone--}}
-                                                    <div class="mt-4 md:mt-0" v-if="localBusiness.phone">
-                                                        <dt class="text-sm font-medium text-gray-500">
-                                                            Telefono
-                                                        </dt>
-                                                        <dd class="mt-1 md:mt-3 text-sm text-gray-900"
-                                                            v-text="localBusiness.phone"
-                                                        ></dd>
-                                                    </div>
-                                                    {{--Email--}}
-                                                    <div class="mt-4 md:mt-0" v-if="localBusiness.email">
-                                                        <dt class="text-sm font-medium text-gray-500">
-                                                            Correo Electronico
-                                                        </dt>
-                                                        <dd class="mt-1 md:mt-3 text-sm text-gray-900"
-                                                            v-text="localBusiness.email"
-                                                        ></dd>
-                                                    </div>
-                                                </div>
-
-                                                <div class="md:flex md:justify-start mt-6">
-                                                    {{--Site--}}
-                                                    <div class="w-full md:w-1/4 mt-4 md:mt-0" v-if="localBusiness.site">
-                                                        <dt class="text-sm font-medium text-gray-500">
-                                                            Sitio Web
-                                                        </dt>
-                                                        <dd class="mt-1 md:mt-3 text-sm text-gray-900">
-                                                            <a :href="localBusiness.site"
-                                                               class="h-link"
-                                                               v-text="localBusiness.site"
-                                                            ></a>
-                                                        </dd>
-                                                    </div>
-                                                    {{--UpdatedAt--}}
-                                                    <div class="w-full md:w-1/4 mt-4 md:mt-0 md:ml-16">
-                                                        <dt class="text-sm font-medium text-gray-500">
-                                                            Actualizado hace:
-                                                        </dt>
-                                                        <dd class="mt-1 md:mt-3 text-sm text-gray-900">
-                                                            @{{ localBusiness.meta.updatedAt }}
-                                                        </dd>
-                                                    </div>
-                                                </div>
-
-                                                <divider title="Informacion Adicional"></divider>
-
-                                                <div class="w-full" v-text="localBusiness.comments">
-                                                    <dd class="text-sm text-gray-600"
-                                                        v-text="localBusiness.comments"
-                                                    ></dd>
-                                                </div>
-                                            </dl>
+                                <!-- This example requires Tailwind CSS v2.0+ -->
+                                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                                    <div class="px-4 py-5 sm:px-6">
+                                        <h3 class="text-lg leading-6 font-medium text-gray-600">
+                                            Detalles del Negocio
+                                        </h3>
+                                        <div class="flex justify-end">
+{{--                                            <img src="/logos/houseify-13.png" class="w-24 h-16 flex-shrink-0 mx-auto bg-white rounded-full" alt="">--}}
+                                            <div class="rounded-full border border-emerald-200 bg-white z-20 p-3 inline-block absolute -mt-24">
+                                                <img src="/logos/houseify-13.png" class="text-white inline-block object-contain h-20 w-20" loading="lazy" alt="">
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+                                        <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">
+                                                    Nombre del Negocio
+                                                </dt>
+                                                <dd class="mt-1 text-sm text-gray-900" v-text="localBusiness.name"></dd>
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">
+                                                    Estatus
+                                                </dt>
+                                                <dd class="mt-1 flex text-sm text-gray-900">
+                                                    <svg v-if="localBusiness.status" class="h-5 w-5 text-green-500"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                                    <svg v-else class="h-5 w-5 text-gray-500"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                                                    <span class="px-2 inline-flex text-base leading-5 font-semibold rounded-full text-gray-500"
+                                                          v-text="localBusiness.status ? 'Publicado' : 'No Publicado'"
+                                                    ></span>
+                                                </dd>
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">
+                                                    Categorias del Negocio
+                                                </dt>
+                                                <dd class="mt-2 text-sm flex text-gray-900">
+                                                    <div class="mr-3"
+                                                         v-for="(category, index) in localBusiness.categories"
+                                                         :key="index">
+                                                            <span class="px-3 py-1 text-sm bg-emerald-100 font-medium leading-5 text-emerald-900 rounded-full shadow-sm"
+                                                                  v-text="category"
+                                                            ></span>
+                                                    </div>
+                                                </dd>
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">
+                                                    Correo Electronico
+                                                </dt>
+                                                <dd class="mt-1 text-sm text-gray-900" v-text="localBusiness.email"></dd>
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">
+                                                    Telefono
+                                                </dt>
+                                                <dd class="mt-1 text-sm text-gray-900" v-text="localBusiness.phone"></dd>
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">
+                                                    Sitio Web
+                                                </dt>
+                                                <dd class="mt-1 text-sm text-gray-900">
+                                                    <a :href="localBusiness.site"
+                                                       class="h-link"
+                                                       v-text="localBusiness.site"
+                                                    ></a>
+                                                </dd>
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">
+                                                    Actualizado hace:
+                                                </dt>
+                                                <dd class="mt-1 text-sm text-gray-900" v-text="localBusiness.meta.updatedAt"></dd>
+                                            </div>
+                                            <div class="sm:col-span-2">
+                                                <dt class="text-sm font-medium text-gray-500">
+                                                    Informacion Adicional
+                                                </dt>
+                                                <dd class="mt-1 text-sm text-gray-900" v-text="localBusiness.comments"></dd>
+                                            </div>
+                                        </dl>
+                                    </div>
                                 </div>
-
                             </div>
 
                             <divider title="Direccion"></divider>
@@ -466,14 +457,6 @@
                                                         :is-disabled="true"
                                                         :custom-classes="'text-gray-400 bg-gray-100'"
                                                     ></form-input>
-                                                    <div class="mt-2 md:flex rounded-md shadow-sm">
-                                                    <span class="inline-flex items-center px-3 rounded-l-md border md:border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-                                                      houseify.io/directorio-de-negocios/
-                                                    </span>
-                                                    <span class="p-2 bg-gray-100 flex-1 focus:ring-indigo-500 focus:border-indigo-500 border md:border-r-0 border-gray-300 block w-full min-w-0 rounded-none rounded-r-md text-sm border-gray-300">
-                                                    @{{ businessForm.name | toKebabCase }}
-                                                    </span>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

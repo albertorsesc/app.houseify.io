@@ -17,7 +17,7 @@ class CreatePropertyCategoriesTable extends Migration
             $table->id();
             $table->foreignId('property_type_id')->constrained();
             $table->string('name', 50);
-            $table->string('display_name', 50);
+            $table->string('display_name', 50)->index();
         });
     }
 

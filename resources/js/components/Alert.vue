@@ -30,7 +30,11 @@
                     border: 'border-yellow-400',
                     svg: 'text-yellow-600'
                 },
-
+                danger: {
+                    bg: 'bg-red-100',
+                    border: 'border-red-400',
+                    svg: 'text-red-600'
+                },
                 primary: {
                     bg: 'bg-teal-200',
                     border: 'border-teal-400',

@@ -78,6 +78,10 @@
                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
                                     Sugerencias
                                 </a>
+                                <a href="/ayuda"
+                                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                                    Ayuda
+                                </a>
 
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf

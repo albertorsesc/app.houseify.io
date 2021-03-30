@@ -18,7 +18,7 @@ class PropertyTypesTest extends PropertyTestCase
 
         $response = $this->getJson(route('api.property-types.index'));
         $response->assertOk();
-        $response->assertJsonStructure(['data' => [['id', 'name', 'display_name',]]]);
+        $response->assertJsonStructure(['data' => [['id', 'display_name',]]]);
     }
 
 }
