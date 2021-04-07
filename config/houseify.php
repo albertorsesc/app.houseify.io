@@ -19,6 +19,9 @@
             'Ferreteria',
             'Pintura',
             'Plomeria',
+            'Jardineria',
+            'Vidrieria',
+
         ],
 
         /*

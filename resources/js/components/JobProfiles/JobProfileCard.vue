@@ -32,9 +32,20 @@
                             </svg>
                         </div>
                     </div>
-                    <img class="w-24 h-24 bg-gray-300 rounded-lg shadow-lg flex-shrink-0"
+<!--                    <img class="w-24 h-24 bg-gray-300 rounded-lg shadow-lg flex-shrink-0"
                          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60"
-                         alt="">
+                         alt="">-->
+                    <img v-if="jobProfile.photo !== null && jobProfile.photo.includes('png')"
+                         :src="jobProfile.photo.replace('public', 'storage')"
+                         class="w-24 h-24 bg-white rounded-lg shadow-lg flex-shrink-0 object-cover"
+                         loading="lazy"
+                         :alt="jobProfile.user.firstName + ' ' + jobProfile.user.lastName">
+                    <span v-else class="h-24 w-24 bg-white rounded-lg shadow-md flex-shrink-0">
+                        <svg class="w-full h-full font-light text-gray-200"
+                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    </span>
                 </div>
                 <div>
                     <div class="-mt-px flex divide-x divide-gray-200">

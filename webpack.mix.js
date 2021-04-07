@@ -11,7 +11,22 @@ mix.js('resources/js/app.js', 'public/js')
 
 mix.copy('node_modules/sweetalert2/src/sweetalert2.scss', 'public/css/sweetalert2.css')
 mix.copy('node_modules/vue-multiselect/dist/vue-multiselect.min.css', 'public/css/vue-multiselect.min.css')
-mix.extract(['vue', 'vuex', 'tailwindcss', 'postcss', 'laravel-mix', 'lodash', 'alpine'])
+mix.extract([
+    'vue',
+    'vuex',
+    'tailwindcss',
+    'postcss',
+    'laravel-mix',
+    'lodash',
+    'alpine',
+    'vuex-persistedstate',
+    'vue2-dropzone',
+    'vue-multiselect',
+    'vue-instantsearch',
+    'algoliasearch',
+    '@chenfengyuan/vue-carousel',
+    'sweetalert2',
+])
 
 if (!mix.inProduction()) {
     // mix.bundleAnalyzer();

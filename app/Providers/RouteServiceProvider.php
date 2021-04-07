@@ -43,13 +43,15 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware('web')
+            Route::middleware(['web', 'prevent-back-history'])
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
 
             $this->mapPropertiesApiRoutes();
             $this->mapBusinessesApiRoutes();
+            $this->mapBusinessesWebRoutes();
             $this->mapJobProfilesApiRoutes();
+            $this->mapJobProfilesWebRoutes();
 
         });
     }
@@ -59,7 +61,8 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware(['api', 'auth:sanctum'])
              ->name('api.')
              ->prefix('api')
-             ->group(base_path('routes/properties/api.php'));
+            ->namespace($this->namespace)
+            ->group(base_path('routes/properties/api.php'));
     }
 
     public function mapBusinessesApiRoutes ()
@@ -67,7 +70,15 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware(['api', 'auth:sanctum'])
              ->name('api.')
              ->prefix('api')
-             ->group(base_path('routes/businesses/api.php'));
+            ->namespace($this->namespace)
+            ->group(base_path('routes/businesses/api.php'));
+    }
+
+    public function mapBusinessesWebRoutes()
+    {
+        Route::middleware(['web', 'auth:sanctum'])
+             ->namespace($this->namespace)
+             ->group(base_path('routes/businesses/web.php'));
     }
 
     public function mapJobProfilesApiRoutes ()
@@ -75,7 +86,15 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware(['api', 'auth:sanctum'])
              ->name('api.')
              ->prefix('api')
+            ->namespace($this->namespace)
              ->group(base_path('routes/job-profiles/api.php'));
+    }
+
+    public function mapJobProfilesWebRoutes()
+    {
+        Route::middleware(['web', 'auth:sanctum'])
+             ->namespace($this->namespace)
+             ->group(base_path('routes/job-profiles/web.php'));
     }
 
     /**

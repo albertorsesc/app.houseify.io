@@ -18,6 +18,8 @@ class HouseifyConfigFileTest extends TestCase
             'Ferreteria',
             'Pintura',
             'Plomeria',
+            'Jardineria',
+            'Vidrieria',
         ], config('houseify.construction_categories'));
     }
 }

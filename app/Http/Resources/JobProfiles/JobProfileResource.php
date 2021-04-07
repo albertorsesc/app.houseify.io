@@ -31,7 +31,9 @@ class JobProfileResource extends JsonResource
             'site' => $this->site,
             'bio' => $this->bio,
             'location' => new LocationResource($this->whenLoaded('location')),
+            'likes' => $this->whenLoaded('likes'),
             'status' => $this->status,
+            'photo' => $this->photo,
             'meta' => [
                 'profile' => $this->profile()
             ]

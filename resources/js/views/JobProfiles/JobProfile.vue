@@ -111,9 +111,9 @@ export default {
     },
     components: {
         VueMultiselect,
+        Likes: () => import(/* webpackChunkName: "likes" */ '../../components/Likes'),
         Modal: () => import(/* webpackChunkName: "modal" */ '../../components/Modal'),
         Errors: () => import(/* webpackChunkName: "errors" */ '../../components/Errors'),
-        Rating: () => import(/* webpackChunkName: "rating" */ '../../components/Rating'),
         Report: () => import(/* webpackChunkName: "report" */ '../../components/Report'),
         MyJobProfile: () => import(/* webpackChunkName: "job-profile" */ './MyJobProfile'),
         Divider: () => import(/* webpackChunkName: "divider" */ '../../components/Divider'),

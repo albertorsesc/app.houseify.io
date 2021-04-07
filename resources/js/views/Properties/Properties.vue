@@ -39,7 +39,7 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch('global/fetchStates')
+        // this.$store.dispatch('global/fetchStates')
         // this.$store.dispatch('properties/fetchPropertyTypes')
         // this.$store.dispatch('properties/fetchBusinessTypes')
     },

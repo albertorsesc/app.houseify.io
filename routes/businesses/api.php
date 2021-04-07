@@ -1,8 +1,9 @@
 <?php
 
-    use App\Http\Controllers\Api\Businesses\Actions\ReportBusinessController;
+    use App\Http\Controllers\Api\Businesses\Actions\LikeController;
     use App\Http\Controllers\Api\Businesses\BusinessController;
     use App\Http\Controllers\Api\Businesses\MyBusinessController;
+    use App\Http\Controllers\Api\Businesses\Actions\ReportBusinessController;
     use App\Http\Controllers\Api\Businesses\Actions\InterestBusinessController;
 
     Route::post('businesses/{business:slug}/location', [\App\Http\Controllers\Api\Businesses\LocationController::class, 'store'])->name('businesses.location.store');
@@ -10,6 +11,9 @@
 
     Route::post('businesses/{business:slug}/interested', [InterestBusinessController::class, 'store'])->name('businesses.interested');
     Route::delete('businesses/{business:slug}/uninterested', [InterestBusinessController::class, 'destroy'])->name('businesses.uninterested');
+
+    Route::post('businesses/{business:slug}/like', [LikeController::class, 'store'])->name('businesses.likes.store');
+    Route::delete('businesses/{business:slug}/dislike', [LikeController::class, 'destroy'])->name('businesses.likes.destroy');
 
     Route::put('businesses/{business:slug}/toggle', \App\Http\Controllers\Api\Businesses\Actions\PublishController::class)->name('businesses.toggle');
 

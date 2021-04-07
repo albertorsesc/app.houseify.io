@@ -38,21 +38,47 @@
 
             <main class="py-10">
                 <!-- Page header -->
-                <div class="max-w-3xl mx-auto px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
-                    <div class="flex items-center space-x-5">
+                <div class="max-w-3xl mx-auto px-4 sm:px-6 md:flex align-middle md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
+                    <div class="flex justify-between items-center space-x-5">
                         <div class="flex-shrink-0">
-                            <div class="relative">
-                                <img class="h-16 w-16 rounded-full"
-                                     src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
-                                     alt="">
-                                <span class="absolute inset-0 shadow-inner rounded-full" aria-hidden="true"></span>
-                            </div>
+                                <div class="rounded-full border border-emerald-200 hover:border hover:border-emerald-300 hover:shadow-md bg-white z-20 px-1 py-1 inline-block">
+                                    <div class="flex">
+                                        <label for="file-upload"
+                                               class="relative cursor-pointer">
+                                            <form action="{{ route('job-profiles.photo.store', $jobProfile) }}"
+                                                  method="POST"
+                                                  id="photo-form"
+                                                  enctype="multipart/form-data">
+                                                @csrf
+                                                @method('PUT')
+                                                <input id="file-upload"
+                                                       name="photo"
+                                                       type="file"
+                                                       class="hidden sr-only"
+                                                       onchange="document.getElementById('photo-form').submit()">
+                                            </form>
+
+                                            @if ($jobProfile->photo)
+                                                <img src="{{ str_replace('public', 'storage', $jobProfile->photo) }}"
+                                                     class="text-white inline-block object-cover object-center rounded-full h-20 w-20"
+                                                     loading="lazy"
+                                                     alt="{{ $jobProfile->user->first_name . $jobProfile->user->last_name }}">
+                                            @else
+                                                <img src="/logos/houseify-13.png"
+                                                     class="text-white inline-block object-contain rounded-full h-20 w-20"
+                                                     loading="lazy"
+                                                     alt="Houseify.io">
+                                            @endif
+                                        </label>
+                                    </div>
+                                </div>
                         </div>
-                        <div>
+                        <div class="">
                             <h1 class="text-2xl font-bold text-gray-900" v-text="jobProfile.user.fullName"></h1>
                             <p class="text-sm font-medium text-gray-500" v-text="jobProfile.title"></p>
                         </div>
                     </div>
+
                     <div class="w-full md:w-1/3 mt-4 md:float-right">
                         <div class="md:mt-6 flex flex-col-reverse justify-stretch space-y-3 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
                             {{--Publish/Unpublish--}}
@@ -93,6 +119,11 @@
                                         <h2 id="applicant-information-title" class="text-lg leading-6 font-medium text-gray-900">
                                             Area de Expertiz/Habilidades
                                         </h2>
+                                        <likes
+                                            :endpoint="`/job-profiles/${localJobProfile.uuid}`"
+                                            :model="localJobProfile"
+                                            :model-id="localJobProfile.uuid"
+                                        ></likes>
                                         <!--Rating-->
 {{--                                        <rating endpoint="/api/job-profiles" :model-id="jobProfile.id"></rating>--}}
                                     </div>

@@ -16,17 +16,31 @@ const getters = {
 
 const actions = {
     fetchConstructionCategories({ commit }){
-        return new Promise((resolve, reject) => {
-            axios.get("/construction-categories")
-                .then(response => {
-                    commit('SET_CONSTRUCTION_CATEGORIES', response.data.data)
-                    localStorage.setItem('constructionCategories', this.$store.state.categories)
-                })
-                .catch(error => {
-                    reject(error)
-                    console.log("Error fetching Construction Categories")
-                })
-        })
+        let storage = window.localStorage
+        if (
+            storage.hasOwnProperty('app') &&
+            JSON.parse(storage.app).hasOwnProperty('global') &&
+            JSON.parse(storage.app).global.hasOwnProperty('categories') &&
+            JSON.parse(storage.app).global.categories.length > 0
+        ) {
+            commit(
+                'SET_CONSTRUCTION_CATEGORIES',
+                JSON.parse(storage.app).global.categories
+            )
+            dd('constructionCategories from global.js')
+        } else {
+            return new Promise((resolve, reject) => {
+                axios.get("/construction-categories")
+                    .then(response => {
+                        commit('SET_CONSTRUCTION_CATEGORIES', response.data.data)
+                        // localStorage.setItem('constructionCategories', this.$store.state.categories)
+                    })
+                    .catch(error => {
+                        reject(error)
+                        console.log("Error fetching Construction Categories")
+                    })
+            })
+        }
     },
 
     fetchStates({ commit }){
@@ -34,7 +48,8 @@ const actions = {
         if (
             storage.hasOwnProperty('app') &&
             JSON.parse(storage.app).hasOwnProperty('global') &&
-            JSON.parse(storage.app).global.hasOwnProperty('states')
+            JSON.parse(storage.app).global.hasOwnProperty('states') &&
+            JSON.parse(storage.app).global.states.length > 0
         ) {
             commit('SET_STATES', JSON.parse(storage.app).global.states)
             dd('states from global.js')

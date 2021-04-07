@@ -40,8 +40,11 @@ class BusinessesTest extends BusinessTestCase
                     'email' => $business->email,
                     'phone' => $business->phone,
                     'site' => $business->site,
+                    'facebookProfile' => $business->facebook_profile,
+                    'linkedInProfile' => $business->linkedin_profile,
                     'comments' => $business->comments,
                     'status' => $business->status,
+                    'logo' => $business->logo,
                     'meta' => [
                         'profile' => $business->profile(),
                         'updatedAt' => $business->updated_at->diffForHumans()

@@ -13,7 +13,8 @@ class MyJobProfileController extends Controller
         return view('job-profiles.show', [
             'jobProfile' => new JobProfileResource(
                 $jobProfile->load([
-                    'user',
+                    'likes',
+                    'user:id',
                     'location.state'
                 ])
             )

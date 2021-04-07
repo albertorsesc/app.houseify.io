@@ -36,11 +36,11 @@ class BusinessTestCase extends TestCase
         ]);
     }
 
-    public function createBusinessLocation(Business $property)
+    public function createBusinessLocation(Business $business)
     {
         return $this->create(Location::class, [
-            'locationable_id' => $property->id,
-            'locationable_type' => get_class($property)
+            'locationable_id' => $business->id,
+            'locationable_type' => get_class($business)
         ]);
     }
 }

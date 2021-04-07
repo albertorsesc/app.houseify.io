@@ -48,8 +48,8 @@
                                                         <div>
                                                             <label for="report_comments">Comentarios</label>
                                                             <textarea v-model="report.comments"
-                                                                      id="report_comments"
                                                                       class="h-input form-input block w-full"
+                                                                      id="report_comments"
                                                                       rows="5"
                                                                       v-text="report.comments"
                                                             ></textarea>
@@ -114,7 +114,7 @@
                                                         <div>
                                                             <label for="report_comments">Comentarios</label>
                                                             <textarea v-model="report.comments"
-                                                                      id="report_comments"
+                                                                      id="report_comments_mobile"
                                                                       class="h-input form-input block w-full"
                                                                       rows="5"
                                                                       v-text="report.comments"
@@ -146,7 +146,6 @@
             </header>
 
             <main class="">
-
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="py-6 sm:px-0">
                         <div>
@@ -158,56 +157,74 @@
 
                             <div class="w-full mb-2 md:flex">
                                 <div class="w-full md:w-1/6 mr-2 mb-2 md:mb-0">
-                                    <span class="rounded-md shadow-sm">
-                                        {{--Publish/UnPublish--}}
-                                        <button @click="toggle"
-                                                :disabled="! localBusiness.location"
-                                                type="button"
-                                                :class="[status.btnClass, ! localBusiness.location ? 'bg-gray-200' : '']"
-                                                class="-mt-1 flex shadow-sm justify-center w-full py-3 border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
-                                                :title="localBusiness.status ? 'Ocultar mi Negocio del publico...' : 'Publicar mi Negocio...'">
-                                                <svg v-if="! localBusiness.status" class="text-green-300 hover:text-green-400 hover:border-green-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                                                <svg v-if="localBusiness.status" class="text-gray-300 hover:text-gray-400 hover:border-gray-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
-                                        </button>
-                                    </span>
+                                <span class="rounded-md shadow-sm">
+                                    {{--Publish/UnPublish--}}
+                                    <button @click="toggle"
+                                            :disabled="! localBusiness.location"
+                                            type="button"
+                                            :class="[status.btnClass, ! localBusiness.location ? 'bg-gray-200' : '']"
+                                            class="-mt-1 flex shadow-sm justify-center w-full py-3 border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                            :title="localBusiness.status ? 'Ocultar mi Negocio del publico...' : 'Publicar mi Negocio...'">
+                                            <svg v-if="! localBusiness.status" class="text-green-300 hover:text-green-400 hover:border-green-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                            <svg v-if="localBusiness.status" class="text-gray-300 hover:text-gray-400 hover:border-gray-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                                    </button>
+                                </span>
                                 </div>
                                 <div class="w-full md:w-1/6 mb-2 md:mb-0">
-                                    <span class="rounded-md shadow-sm">
-                                        <button @click="openModal('put')"
-                                                type="button"
-                                                class="-mt-1 items-center shadow-sm w-full py-3 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
-                                                title="Actualizar Datos del Negocio...">
-                                            <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                                        </button>
-                                    </span>
+                                <span class="rounded-md shadow-sm">
+                                    <button @click="openModal('put')"
+                                            type="button"
+                                            class="-mt-1 items-center shadow-sm w-full py-3 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                            title="Actualizar Datos del Negocio...">
+                                        <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                    </button>
+                                </span>
+                                </div>
+                                <div class="w-full md:w-1/2 flex justify-end">
+                                    <likes
+                                        :endpoint="`/businesses/${localBusiness.slug}`"
+                                        :model="localBusiness"
+                                    ></likes>
                                 </div>
                             </div>
 
                             <div>
-                                <!--                            <alert :type="'warning'">Para Publicar la propiedad es necesario registrar su Direccion</alert>
-
-                                                            <alert :type="'primary'">
-                                                                Aparece en nuestra
-                                                                <a href="#" class="h-link">
-                                                                    Busqueda Avanzada
-                                                                </a> agregando las Caracteristicas relevantes!
-                                                            </alert>
-
-                                                            <alert :type="'info'">
-                                                                Al cambiar tu Negocio a "No Publica" podria tomar unos momentos
-                                                                para desaparecer de la Busqueda Avanzada.
-                                                            </alert>-->
-
-                                <!-- This example requires Tailwind CSS v2.0+ -->
                                 <div class="bg-white shadow overflow-hidden sm:rounded-lg">
                                     <div class="px-4 py-5 sm:px-6">
                                         <h3 class="text-lg leading-6 font-medium text-gray-600">
                                             Detalles del Negocio
                                         </h3>
                                         <div class="flex justify-end">
-{{--                                            <img src="/logos/houseify-13.png" class="w-24 h-16 flex-shrink-0 mx-auto bg-white rounded-full" alt="">--}}
-                                            <div class="rounded-full border border-emerald-200 bg-white z-20 p-3 inline-block absolute -mt-24">
-                                                <img src="/logos/houseify-13.png" class="text-white inline-block object-contain h-20 w-20" loading="lazy" alt="">
+                                            <div class="rounded-full border border-emerald-200 hover:border hover:border-emerald-300 hover:ml-2 hover:shadow-md bg-white z-20 p-1 inline-block absolute -mt-24">
+                                                <div class="flex">
+                                                    <label for="file-upload"
+                                                           class="relative cursor-pointer">
+                                                        <form action="{{ route('businesses.logo.store', $business) }}"
+                                                              method="POST"
+                                                              id="logo-form"
+                                                              enctype="multipart/form-data">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <input id="file-upload"
+                                                                   name="logo"
+                                                                   type="file"
+                                                                   class="hidden sr-only"
+                                                                   onchange="document.getElementById('logo-form').submit()">
+                                                        </form>
+
+                                                        @if ($business->logo)
+                                                            <img src="{{ str_replace('public', 'storage', $business->logo) }}"
+                                                                 class="text-white inline-block object-cover object-center rounded-full h-20 w-20"
+                                                                 loading="lazy"
+                                                                 alt="{{ $business->name }}">
+                                                        @else
+                                                            <img src="/logos/houseify-13.png"
+                                                                 class="text-white inline-block object-contain rounded-full h-20 w-20"
+                                                                 loading="lazy"
+                                                                 alt="Houseify.io">
+                                                        @endif
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

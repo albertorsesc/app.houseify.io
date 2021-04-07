@@ -32,6 +32,7 @@ class BusinessFactory extends Factory
             'phone' => $this->faker->phoneNumber,
             'site' => $this->faker->url,
             'facebook_profile' => $this->faker->url,
+            'linkedin_profile' => $this->faker->url,
             'comments' => $this->faker->paragraph,
             'status' => true,
         ];

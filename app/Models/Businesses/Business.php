@@ -2,15 +2,16 @@
 
 namespace App\Models\Businesses;
 
+use App\Models\Like;
 use App\Models\User;
-use App\Models\Concerns\{CanBeReported, HasLocation, HasUuid, Interestable, Publishable, SerializeTimestamps};
-use Illuminate\Database\Eloquent\{Builder, Model, Relations\BelongsTo, Factories\HasFactory};
-use Illuminate\Support\Arr;
 use Laravel\Scout\Searchable;
+use App\Models\Concerns\{CanBeReported, HasLocation, HasUuid, Interestable, Likeable, Publishable, SerializeTimestamps};
+use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo, Factories\HasFactory, Relations\MorphMany};
 
 class Business extends Model
 {
     use HasUuid,
+        Likeable,
         Searchable,
         HasFactory,
         HasLocation,
@@ -20,7 +21,7 @@ class Business extends Model
         SerializeTimestamps;
 
     protected $casts = ['status' => 'boolean', 'categories' => 'array'];
-    protected $fillable = ['name', 'categories', 'email', 'phone', 'site', 'comments'];
+    protected $fillable = ['name', 'categories', 'email', 'phone', 'site', 'facebook_profile', 'linkedin_profile', 'logo', 'comments'];
 
     public function getRouteKeyName() : string
     {

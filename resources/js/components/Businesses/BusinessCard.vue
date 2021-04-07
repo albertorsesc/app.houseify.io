@@ -19,11 +19,23 @@
 
                 <!--Logo-->
                 <div class="flex items-center relative mb-3">
-                    <div class="border-t border-gray-200 z-20 w-full"></div>
-
-                    <div class="rounded-full border border-emerald-200 bg-white z-20 p-3 inline-block absolute mx-8 mb-8">
-                        <img src="/logos/houseify-13.png" class="text-white inline-block object-contain h-20 w-20" alt="">
+<!--                    <div class="border-t border-gray-200 z-20 w-full"></div>-->
+                    <div class="rounded-full border border-emerald-200 bg-white z-20 px-1 py-1 inline-block absolute mx-8 mb-8">
+                        <img v-if="business.logo !== null && business.logo.includes('png')"
+                             :src="business.logo.replace('public', 'storage')"
+                             class="inline-block object-cover object-center rounded-full h-20 w-20"
+                             loading="lazy"
+                             :alt="business.name">
+                        <img v-else
+                             src="/logos/houseify-13.png"
+                             class="text-white inline-block object-contain rounded-full h-20 w-20"
+                             loading="lazy"
+                             alt="Houseify.io">
                     </div>
+
+<!--                    <div class="rounded-full border border-emerald-200 bg-white z-20 p-3 inline-block absolute mx-8 mb-8">
+                        <img src="/logos/houseify-13.png" class="text-white inline-block object-contain h-20 w-20" alt="">
+                    </div>-->
                 </div>
 
                 <!--Rating-->
@@ -56,8 +68,8 @@
                     <div class="text-xs border-t border-gray-300 py-2">
                         <div class="flex justify-start"
                              v-if="business.location || business.phone">
-                            <span v-if="business.location">
-                                {{ business.location.city }}
+                            <span v-if="business.location" :title="business.location.city">
+                                {{ limitString(business.location.city, 10) }}
                             </span>, {{ business.location.state.code }} - Mexico
                             <span class="mx-2">&bullet;</span>
                             <span v-text="business.phone"></span>

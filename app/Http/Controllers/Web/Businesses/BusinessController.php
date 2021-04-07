@@ -14,7 +14,8 @@ class BusinessController extends Controller
             'business' => new BusinessResource(
                 $business->load([
                     'location.state',
-                    'owner:id'
+                    'owner:id',
+                    'likes'
                 ])
             )
         ]);

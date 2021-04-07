@@ -62,7 +62,7 @@
                             </a>
                         </div>
 
-                        {{--Ads--}}
+                        {{--JobProfiles--}}
                         <div class="w-full md:w-1/2 xl:w-1/3 px-3">
                             <a href="{{ route('web.job-positions.index') }}">
                                 <div class="card transition hover:transform text-center items-center">
@@ -80,20 +80,27 @@
                         </div>
                     </div>
                 </div>
-                <!-- /End replace -->
-                <div class="w-full md:w-1/2 xl:w-1/3 px-3 mt-4 md:mt-0">
-               <div class="bg-white border-4 border-dashed border-gray-200 rounded-lg text-center items-center">
-                   <img src="/img/professionals.png" class="object-fill" alt="Bolsa de Trabajo">
-                   <div class="px-4">
-                       <div class="font-bold text-gray-900 text-xl mb-1">
-                           Bolsa de Trabajo
-                       </div>
-                       <p class="text-gray-700 text-base pb-2">
-                           Anunciate o Encuentra profesionales de la Construccion (Proximamente)
-                       </p>
-                   </div>
-               </div>
-           </div>
+                <div class="md:flex md:justify-between md:justify-center">
+                    <div class="w-full md:w-1/2 xl:w-1/3 px-3 mt-4 md:mt-0">
+                        <div class="bg-white border-4 border-dashed border-gray-200 rounded-lg text-center items-center">
+                            <img src="/img/professionals.png" class="object-fill" alt="Bolsa de Trabajo">
+                            <div class="px-4">
+                                <div class="font-bold text-gray-900 text-xl mb-1">
+                                    Bolsa de Trabajo
+                                </div>
+                                <p class="text-gray-700 text-base pb-2">
+                                    Anunciate o Encuentra profesionales de la Construccion (Proximamente)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 xl:w-1/3 px-3 mt-4 md:mt-0">
+                        <div class="bg-white border-4 border-dashed border-gray-200 rounded-lg text-center items-center h-full"></div>
+                    </div>
+                    <div class="w-full md:w-1/2 xl:w-1/3 px-3 mt-4 md:mt-0">
+                        <div class="bg-white border-4 border-dashed border-gray-200 rounded-lg text-center items-center h-full"></div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>

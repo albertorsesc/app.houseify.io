@@ -70,11 +70,6 @@ Vue.use(VueInstantSearch);
 Vue.mixin(clickaway)*/
 
 /**
- * Vue Star Raiting
- * https://github.com/craigh411/vue-star-rating/
- */
-
-/**
  * Vuex Persisted State
  * https://github.com/robinvdvleuten/vuex-persistedstate
  */

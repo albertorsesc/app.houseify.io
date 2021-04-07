@@ -24,6 +24,8 @@ class CreateBusinessesTable extends Migration
             $table->string('phone', 50)->nullable();
             $table->string('site')->nullable();
             $table->string('facebook_profile')->nullable();
+            $table->string('linkedin_profile')->nullable();
+            $table->string('logo')->nullable();
             $table->boolean('status')->default(false);
             $table->text('comments')->nullable();
             $table->timestamps();

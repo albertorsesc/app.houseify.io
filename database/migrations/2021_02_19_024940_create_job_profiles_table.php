@@ -25,6 +25,7 @@ class CreateJobProfilesTable extends Migration
             $table->string('facebook_profile', 255)->nullable();
             $table->string('site', 255)->nullable();
             $table->text('bio')->nullable();
+            $table->string('photo')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();
         });

@@ -28,14 +28,6 @@
                             <errors :error="errors.name"
                                     :options="{ noContainer: true }"
                             ></errors>
-                            <div class="mt-2 w-full md:flex rounded-md shadow-sm">
-                                <span class="inline-flex items-center px-3 py-2 rounded-l-md border md:border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-                                  houseify.io/directorio-de-negocios/
-                                </span>
-                                <span class="py-2 px-2 md:p-3 bg-gray-100 flex-1 focus:ring-indigo-500 focus:border-indigo-500 border border-r-0 border-gray-300 block w-full min-w-0 rounded-none rounded-r-md text-sm border-gray-300">
-                                    {{this.businessForm.name | toKebabCase}}
-                                </span>
-                            </div>
                         </div>
 
                         <div class="sm:col-span-4 md:-mx-2">

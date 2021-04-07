@@ -22,6 +22,7 @@ export default {
             endpoint: '/businesses/',
             localBusiness: this.business,
             businessForm: {},
+            logo: '',
 
             selectedConstructionCategories: [],
 
@@ -96,6 +97,22 @@ export default {
             this.modal = {}
             this.businessForm = {}
         },
+        handleImage(e) {
+            let reader = new FileReader()
+            let target = e.target
+            reader.readAsDataURL(target.files[0])
+
+            reader.onloadend = (file) => {
+                this.logo = reader.result
+                dd(this.logo)
+            }
+
+            /*axios.put(`/businesses/${this.localBusiness.slug}/image`, {
+                logo: this.logo
+            }).then(response => {
+                dd(response)
+            }).catch(error => dd(error))*/
+        },
     },
     watch: {
         selectedConstructionCategories () {
@@ -104,11 +121,13 @@ export default {
     },
     computed: {
         ...mapGetters({
-            getConstructionCategories: 'global/getConstructionCategories'
+            getConstructionCategories: 'global/getConstructionCategories',
+            getStates: 'global/getStates'
         })
     },
     created() {
         this.$store.dispatch('global/fetchConstructionCategories')
+        this.$store.dispatch('global/fetchStates')
 
         Event.$on('businesses.location', location => {
             this.localBusiness.location = location
@@ -116,6 +135,7 @@ export default {
     },
     components: {
         VueMultiselect,
+        Likes: () => import(/* webpackChunkName: "likes" */ '../../components/Likes'),
         Alert: () => import(/* webpackChunkName: "alert" */ '../../components/Alert'),
         Modal: () => import(/* webpackChunkName: "modal" */ '../../components/Modal'),
         Report: () => import(/* webpackChunkName: "report" */ '../../components/Report'),

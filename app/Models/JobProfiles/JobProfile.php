@@ -5,12 +5,13 @@ namespace App\Models\JobProfiles;
 use Carbon\Carbon;
 use App\Models\User;
 use Laravel\Scout\Searchable;
-use App\Models\Concerns\{HasLocation, Publishable, CanBeReported, SerializeTimestamps};
+use App\Models\Concerns\{HasLocation, Likeable, Publishable, CanBeReported, SerializeTimestamps};
 use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, Relations\BelongsTo};
 
 class JobProfile extends Model
 {
-    use HasFactory,
+    use Likeable,
+        HasFactory,
         Searchable,
         hasLocation,
         Publishable,
@@ -18,7 +19,7 @@ class JobProfile extends Model
         SerializeTimestamps;
 
     protected $casts = ['skills' => 'array', 'status' => 'boolean', 'birthdate_at' => 'datetime:Y-m-d'];
-    protected $fillable = ['title', 'skills', 'birthdate_at', 'email', 'phone', 'facebook_profile', 'site', 'bio'];
+    protected $fillable = ['title', 'skills', 'birthdate_at', 'email', 'phone', 'facebook_profile', 'site', 'bio', 'photo'];
 
     public function getRouteKeyName() : string
     {

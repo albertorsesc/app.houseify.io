@@ -26,10 +26,14 @@ class BusinessResource extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'site' => $this->site,
-            'status' => $this->status,
+            'facebookProfile' => $this->facebook_profile,
+            'linkedInProfile' => $this->linkedin_profile,
             'comments' => $this->comments,
             'location' => new LocationResource($this->whenLoaded('location')),
             'interests' => $this->whenLoaded('interests'),
+            'likes' => $this->whenLoaded('likes'),
+            'status' => $this->status,
+            'logo' => $this->logo,
             'meta' => [
                 'profile' => $this->profile(),
                 'updatedAt' => $this->updated_at->diffForHumans()
