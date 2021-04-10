@@ -25,7 +25,7 @@ class UploadPhotoController extends Controller
             \Log::error($exception->getMessage());
             return response()
                 ->redirectTo('web.job-profiles.show', $jobProfile)
-                ->withErrors(['photo' => 'Ocurrio un error al guardar el archivo, intente utilizar otra imagen.']);
+                ->withErrors(['photo' => 'Ocurrio un error al guardar el archivo, intente utilizar otra imágen.']);
         }
 
         $jobProfile->update([

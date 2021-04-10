@@ -18,6 +18,8 @@ const appState = createPersistedState({
         'properties.propertyTypes',
         'properties.propertyCategories',
         'properties.businessTypes',
+        // job-profiles.js
+        'jobProfiles.skills',
     ]
 })
 

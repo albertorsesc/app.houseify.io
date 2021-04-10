@@ -14,7 +14,7 @@ class MyJobProfileController extends Controller
             'jobProfile' => new JobProfileResource(
                 $jobProfile->load([
                     'likes',
-                    'user:id',
+                    'user:id,first_name,last_name',
                     'location.state'
                 ])
             )

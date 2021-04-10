@@ -18,14 +18,14 @@ class JobProfileTestCase extends TestCase
     public function makeJobProfile($overrides = []) : array
     {
         return array_merge([
-            'title' => 'Albanil con 15 anios de experiencia',
+            'title' => 'Albañil con 15 anios de experiencia',
             'skills' => collect(config('job-profiles.skills'))->random(3)->toArray(),
             'birthdate_at' => now()->subDecades(rand(1, 4))->toDateTime(),
             'email' => 'albanil@construcciones.com',
             'phone' => '6862894998',
             'site' => 'https://albanil.com',
             'facebook_profile' => 'https://www.facebook.com/albanil',
-            'bio' => 'Soy Albanil',
+            'bio' => 'Soy Albañil',
             'status' => true
         ], $overrides);
     }

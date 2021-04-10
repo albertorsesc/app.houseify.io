@@ -29,7 +29,7 @@
         */
         'reporting_causes' => [
             'no-answer' => 'No Contestan',
-            'invalid-data' => 'Info. Erronea',
+            'invalid-data' => 'Info. Errónea',
             'offensive' => 'Contenido Ofensivo',
             'spam' => 'Spam/Irrelevante',
             'suspicious' => 'Posible Fraude/Sospechoso',

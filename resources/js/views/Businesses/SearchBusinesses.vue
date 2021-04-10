@@ -14,7 +14,7 @@
                             <!--Business Categories-->
                             <div class="w-full md:w-1/3">
                                 <label class="block text-sm font-medium text-gray-700">
-                                    Categorias del Negocio
+                                    Categorías del Negocio
                                 </label>
                                 <div class="mt-1">
                                     <ais-refinement-list

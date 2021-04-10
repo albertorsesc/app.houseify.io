@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-        <div class="md:flex md:justify-between px-4 py-5 sm:px-6 items-center">
+        <div class="flex justify-between px-4 py-5 sm:px-6 items-center">
             <h3 class="flex text-lg leading-6 font-medium text-emerald-600">
                 <svg class="mr-2 h-5 w-5 text-teal-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -34,7 +34,7 @@
                         <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                         </svg>
-                        m² Construccion
+                        m² Construcción
                     </dt>
                     <dd class="mt-1 text-base text-teal-600"
                         v-text="propertyFeatures.features.construction_size"
@@ -67,7 +67,7 @@
                         <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                         </svg>
-                        No. Banos
+                        No. Baños
                     </dt>
                     <dd class="mt-1 text-base text-teal-600"
                         v-text="propertyFeatures.features.bathroom_count"
@@ -78,7 +78,7 @@
                         <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                         </svg>
-                        No. Medios Banos
+                        No. Medios Baños
                     </dt>
                     <dd class="mt-1 text-base text-teal-600"
                         v-text="propertyFeatures.features.half_bathroom_count"
@@ -116,7 +116,7 @@
                         </div>
                         <div class="w-full md:w-1/3 mx-2 mt-4 md:mt-0">
                             <form-input
-                                title="m² de Construccion"
+                                title="m² de Construcción"
                                 type="number"
                                 :is-required="false"
                                 v-model="propertyFeaturesForm.features.construction_size"
@@ -152,7 +152,7 @@
                         </div>
                         <div class="w-full md:w-1/3 mx-2 mt-4 md:mt-0">
                             <form-input
-                                title="No. de Banos"
+                                title="No. de Baños"
                                 type="number"
                                 :is-required="false"
                                 v-model="propertyFeaturesForm.features.bathroom_count"
@@ -163,7 +163,7 @@
                         </div>
                         <div class="w-full md:w-1/3 mx-2 mt-4 md:mt-0">
                             <form-input
-                                title="No. de Medios Banos"
+                                title="No. de Medios Baños"
                                 type="number"
                                 :is-required="false"
                                 v-model="propertyFeaturesForm.features.half_bathroom_count"
@@ -236,7 +236,7 @@ export default {
             }).then(response => {
                 this.closeModal()
                 this.propertyFeatures = response.data.data
-                SweetAlert.success(`La Ubicacion ha sido registrada exitosamente!`)
+                SweetAlert.success(`La Ubicación ha sido registrada exitosamente!`)
             }).catch(error => {
                 this.errors = error.response.status === 422 ?
                     error.response.data.errors :
@@ -256,7 +256,7 @@ export default {
             }).then(response => {
                 this.closeModal()
                 this.propertyFeatures = response.data.data
-                SweetAlert.success(`La Ubicacion ha sido actualizada exitosamente!`)
+                SweetAlert.success(`La Ubicación ha sido actualizada exitosamente!`)
             }).catch(error => {
                 this.errors = error.response.status === 422 ?
                     error.response.data.errors :

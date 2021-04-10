@@ -16,11 +16,11 @@
                     <div class="w-full md:flex md:justify-between items-center">
                         <h2 class="font-semibold text-2xl text-teal-400"></h2>
                         <div class="hidden md:flex md:justify-between">
-                            <button class="h-link bg-white border-emerald-900 -mt-1 mr-1 shadow rounded-md py-2 px-2 hover:text-gray-500 focus:outline-none focus:ring-blue-100 focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                            <button v-if="isAuthenticated" class="h-link bg-white border-emerald-900 -mt-1 mr-1 shadow rounded-md py-2 px-2 hover:text-gray-500 focus:outline-none focus:ring-blue-100 focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                     title="Reportar Propiedad...">
                                 <svg class="text-yellow-500 hover:text-yellow-600 hover:border-yellow-700 hover:border" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                             </button>
-                            <button class="h-link bg-white border-emerald-900 -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                            <button v-if="isAuthenticated && localJobProfile.user.id === auth" class="h-link bg-white border-emerald-900 -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                     title="Eliminar Propiedad">
                                 <svg class="text-red-500 hover:text-red-600 hover:border-red-700 hover:border" width="25" height="25"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                             </button>
@@ -37,7 +37,6 @@
             </header>
 
             <main class="py-10">
-                <!-- Page header -->
                 <div class="max-w-3xl mx-auto px-4 sm:px-6 md:flex align-middle md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
                     <div class="flex justify-between items-center space-x-5">
                         <div class="flex-shrink-0">
@@ -79,7 +78,8 @@
                         </div>
                     </div>
 
-                    <div class="w-full md:w-1/3 mt-4 md:float-right">
+                    <div v-if="isAuthenticated && localJobProfile.user.id === auth"
+                         class="w-full md:w-1/3 mt-4 md:float-right">
                         <div class="md:mt-6 flex flex-col-reverse justify-stretch space-y-3 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
                             {{--Publish/Unpublish--}}
                             <div class="w-full md:mx-4">
@@ -110,22 +110,23 @@
                 </div>
 
                 <div class="mt-4 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
-                    <div class="space-y-6 lg:col-start-1 lg:col-span-2">
+                    <div class="space-y-6 lg:col-start-1"
+                         :class="[isAuthenticated && localJobProfile.user.id === auth ? 'lg:col-span-2' : 'lg:col-span-12']">
                         <!-- Description list-->
-                        <section aria-labelledby="applicant-information-title">
+                        <section aria-labelledby="job-profile-information">
                             <div class="bg-white shadow sm:rounded-lg">
                                 <div class="px-4 py-5 sm:px-6">
                                     <div class="flex justify-between">
-                                        <h2 id="applicant-information-title" class="text-lg leading-6 font-medium text-gray-900">
+                                        <h2 id="job-profile-information" class="text-lg leading-6 font-medium text-gray-900">
                                             Area de Expertiz/Habilidades
                                         </h2>
+                                        {{--Likes--}}
                                         <likes
+                                            v-if="isAuthenticated && localJobProfile.user.id === auth"
                                             :endpoint="`/job-profiles/${localJobProfile.uuid}`"
                                             :model="localJobProfile"
                                             :model-id="localJobProfile.uuid"
                                         ></likes>
-                                        <!--Rating-->
-{{--                                        <rating endpoint="/api/job-profiles" :model-id="jobProfile.id"></rating>--}}
                                     </div>
                                     <p class="flex mt-2 max-w-2xl text-sm text-gray-500">
                                     <span v-for="skill in jobProfile.skills"
@@ -136,45 +137,45 @@
                                 </div>
                                 <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
                                     <dl class="flex-wrap md:flex sm:justify-between mt-3">
-                                        <div class="w-full md:w-1/2 py-1" v-if="jobProfile.phone">
+                                        <div class="w-full md:w-1/2 py-1" v-if="localJobProfile.phone">
                                             <dt class="text-sm font-medium text-gray-500">
                                                 Telefono
                                             </dt>
-                                            <dd class="mt-1 text-sm text-gray-900" v-text="jobProfile.phone"></dd>
+                                            <dd class="mt-1 text-sm text-gray-900" v-text="localJobProfile.phone"></dd>
                                         </div>
-                                        <div class="w-full md:w-1/2 py-1" v-if="jobProfile.email">
+                                        <div class="w-full md:w-1/2 py-1" v-if="localJobProfile.email">
                                             <dt class="text-sm font-medium text-gray-500">
-                                                Correo Electronico
+                                                Correo Electrónico
                                             </dt>
-                                            <dd class="mt-1 text-sm text-gray-900" v-text="jobProfile.email"></dd>
+                                            <dd class="mt-1 text-sm text-gray-900" v-text="localJobProfile.email"></dd>
                                         </div>
                                         <div class="w-full md:w-1/2 py-4">
                                             <dt class="text-sm font-medium text-gray-500">
                                                 Edad
                                             </dt>
-                                            <dd class="mt-1 text-sm text-gray-900" v-text="jobProfile.age"></dd>
+                                            <dd class="mt-1 text-sm text-gray-900" v-text="localJobProfile.age"></dd>
                                         </div>
-                                        <div class="w-full md:w-1/2 py-4" v-if="jobProfile.facebookProfile">
+                                        <div class="w-full md:w-1/2 py-4" v-if="localJobProfile.facebookProfile">
                                             <dt class="text-sm font-medium text-gray-500">
                                                 Perfil de Facebook
                                             </dt>
                                             <dd class="mt-1 text-sm text-gray-900">
-                                                <a :href="jobProfile.facebookProfile"
+                                                <a :href="localJobProfile.facebookProfile"
                                                    class="h-link"
                                                    target="_blank"
-                                                   v-text="jobProfile.facebookProfile"
+                                                   v-text="localJobProfile.facebookProfile"
                                                 ></a>
                                             </dd>
                                         </div>
-                                        <div class="w-full md:w-1/2 py-2" v-if="jobProfile.site">
+                                        <div class="w-full md:w-1/2 py-2" v-if="localJobProfile.site">
                                             <dt class="text-sm font-medium text-gray-500">
                                                 Sitio Web
                                             </dt>
                                             <dd class="mt-1 text-sm text-gray-900">
-                                                <a :href="jobProfile.site"
+                                                <a :href="localJobProfile.site"
                                                    class="h-link"
                                                    target="_blank"
-                                                   v-text="jobProfile.site"
+                                                   v-text="localJobProfile.site"
                                                 ></a>
                                             </dd>
                                         </div>
@@ -183,18 +184,20 @@
                                         <dt class="text-sm font-medium text-gray-500">
                                             Acerca de mi
                                         </dt>
-                                        <dd class="mt-1 text-sm text-gray-900" v-text="jobProfile.bio"></dd>
+                                        <dd class="mt-1 text-sm text-gray-900" v-text="localJobProfile.bio"></dd>
                                     </div>
                                 </div>
                             </div>
 
-                            <divider title="Direccion"></divider>
+                            <divider title="Dirección"></divider>
 
                             <job-profile-location></job-profile-location>
                         </section>
                     </div>
 
-                    <section aria-labelledby="timeline-title" class="lg:col-start-3 lg:col-span-1">
+                    <section v-if="isAuthenticated && jobProfile.user.id === auth"
+                             aria-labelledby="timeline-title"
+                             class="lg:col-start-3 lg:col-span-1">
                         <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
                             <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Actividad</h2>
 
@@ -294,7 +297,9 @@
                     </section>
                 </div>
 
-                <modal modal-id="update-job-profile" max-width="sm:max-w-5xl">
+                <modal v-if="isAuthenticated && localJobProfile.user.id === auth"
+                       modal-id="update-job-profile"
+                       max-width="sm:max-w-5xl">
                     <template #title>Actualizar Datos de tu Perfil</template>
                     <template #content>
                         <form @submit.prevent>
@@ -351,7 +356,7 @@
                                 </div>
                                 <div class="w-full md:w-1/3 md:mx-2 mt-3 md:mt-0">
                                     <form-input
-                                        title="Correo Electronico"
+                                        title="Correo Electrónico"
                                         v-model="jobProfileForm.email"
                                         :data="jobProfileForm.email"
                                         input-id="email"

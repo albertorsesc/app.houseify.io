@@ -35,7 +35,7 @@
                                             Propiedades
                                         </div>
                                         <p class="text-gray-700 text-base pb-4">
-                                            Explora las Propiedades disponibles!
+                                            ¡Explora las Propiedades disponibles!
                                         </p>
                                     </div>
                                 </div>
@@ -55,7 +55,7 @@
                                             Directorio de Negocios
                                         </div>
                                         <p class="text-gray-700 text-base pb-1">
-                                            Proveedores relacionados al ramo de Construccion!
+                                            ¡Proveedores relacionados con el ramo de Construcción!
                                         </p>
                                     </div>
                                 </div>
@@ -69,10 +69,10 @@
                                     <img src="/img/hire.svg" class="object-cover p-8" alt="Anuncios Publicitarios" loading="lazy">
                                     <div class="px-4 py-1">
                                         <div class="font-bold text-gray-900 text-xl">
-                                            Tecnicos y Profesionales
+                                            Técnicos y Profesionales
                                         </div>
                                         <p class="text-gray-700 text-base pb-1">
-                                            Tecnicos y Profesionales de Servicios de Construccion!
+                                            ¡Técnicos y Profesionales de Servicios de Construcción!
                                         </p>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                     Bolsa de Trabajo
                                 </div>
                                 <p class="text-gray-700 text-base pb-2">
-                                    Anunciate o Encuentra profesionales de la Construccion (Proximamente)
+                                    Anuncia Empleos o Profesionales de la Construcción (Próximamente)
                                 </p>
                             </div>
                         </div>

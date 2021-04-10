@@ -8,7 +8,7 @@
                    @vdropzone-error="onUploadError">
         <div class="dropzone-custom-content">
             <h3 class="dropzone-custom-title">Arrastre sus imágenes aqui!</h3>
-            <div class="subtitle">...o seleccione una imagen desde su computadora.</div>
+            <div class="subtitle">...o seleccione una imágen desde su computadora.</div>
         </div>
     </vue-drop-zone>
 </template>

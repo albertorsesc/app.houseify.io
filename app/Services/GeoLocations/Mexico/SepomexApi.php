@@ -15,18 +15,18 @@ class SepomexApi
     {
         return Http::get(
             $this->getEndpoint(self::METHODS['city-by-state'], urldecode($stateName))
-        )->json()['response']['municipios'];
+        )['response']['municipios'];
     }
 
     public function getNeighborhoodsByCity($cityName)
     {
         return Http::get(
             $this->getEndpoint(self::METHODS['neighborhoods-by-city'], $cityName)
-        )->json()['response']['colonia'];
+        )['response']['colonia'];
     }
 
-    public function getEndpoint($method, $query)
+    public function getEndpoint($method, $query) : string
     {
-        return config('sepomex.url') . $method . '/' . $query . '?type=json';
+        return config('sepomex.url') . $method . '/' . $query . '?token=' . config('sepomex.token');
     }
 }

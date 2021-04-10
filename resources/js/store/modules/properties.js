@@ -21,6 +21,7 @@ const actions = {
     fetchPropertyTypes({ commit }) {
         let storage = window.localStorage
         if (
+            this.auth &&
             storage.hasOwnProperty('app') &&
             JSON.parse(storage.app).hasOwnProperty('properties') &&
             JSON.parse(storage.app).properties.hasOwnProperty('propertyTypes') &&
@@ -31,7 +32,7 @@ const actions = {
                 JSON.parse(storage.app).properties.propertyTypes
             )
             dd('propertyTypes from properties.js')
-        } else {
+        } else if (this.auth) {
             return new Promise((resolve, reject) => {
                 axios.get("/property-types")
                     .then(response => {
@@ -48,6 +49,7 @@ const actions = {
     fetchPropertyCategories({ commit }) {
         let storage = window.localStorage
         if (
+            this.auth &&
             storage.hasOwnProperty('app') &&
             JSON.parse(storage.app).hasOwnProperty('properties') &&
             JSON.parse(storage.app).properties.hasOwnProperty('propertyCategories') &&
@@ -58,7 +60,7 @@ const actions = {
                 JSON.parse(storage.app).properties.propertyCategories
             )
             dd('propertyCategories from properties.js')
-        } else {
+        } else if (this.auth) {
             return new Promise((resolve, reject) => {
                 axios.get("/property-categories")
                     .then(response => {
@@ -75,6 +77,7 @@ const actions = {
     fetchBusinessTypes({ commit }) {
         let storage = window.localStorage
         if (
+            this.auth &&
             storage.hasOwnProperty('app') &&
             JSON.parse(storage.app).hasOwnProperty('properties') &&
             JSON.parse(storage.app).properties.hasOwnProperty('businessTypes') &&
@@ -85,7 +88,7 @@ const actions = {
                 JSON.parse(storage.app).properties.businessTypes
             )
             dd('businessTypes from properties.js')
-        } else {
+        } else if (this.auth) {
             return new Promise((resolve, reject) => {
                 axios.get("/business-types")
                     .then(response => {

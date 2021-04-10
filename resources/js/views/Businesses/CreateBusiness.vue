@@ -8,7 +8,7 @@
                             Nuevo Negocio
                         </h3>
                         <p class="mt-1 text-sm text-gray-500">
-                            Registra los datos basicos de tu negocio.
+                            Registra los datos básicos de tu negocio.
                         </p>
                     </div>
 
@@ -33,7 +33,7 @@
                         <div class="sm:col-span-4 md:-mx-2">
                             <div class="w-full md:mx-2">
                                 <label for="categories" class="block text-sm font-medium text-gray-700">
-                                    Categorias
+                                    Categorías
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base ring-white">
                                     <vue-multiselect v-model="businessForm.categories"
@@ -48,7 +48,7 @@
                                                      select-label=""
                                                      selected-label=""
                                                      deselect-label=""
-                                                     placeholder="Selecciona las Categorias de Construccion de tu Negocio..."
+                                                     placeholder="Selecciona las Categorías de Construcción de tu Negocio..."
                                     ></vue-multiselect>
                                 </div>
 <!--                                <vue-multiselect v-model="businessForm.categories"
@@ -76,7 +76,7 @@
                         <div class="sm:col-span-4 md:flex md:-mx-2">
                             <div class="w-full md:w-1/2 md:mx-2">
                                 <label for="email" class="block text-sm font-medium text-gray-700">
-                                    Correo Electronico
+                                    Correo Electrónico
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base">
                                     <input type="email"
@@ -148,12 +148,14 @@
 
             <div class="pt-5">
                 <div class="flex justify-end">
-                    <button @click="cancel" type="button" class="ml-3 h-link inline-flex items-center justify-center px-4 py-2 bg-white border border-gray-200 border border-gray-200 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:font-semibold focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-primary transition ease-in-out duration-150">
+                    <button @click="cancel"
+                            type="button"
+                            class="ml-3 h-btn">
                         Cancelar
                     </button>
                     <button @click="store"
                             type="submit"
-                            class="ml-3 h-link inline-flex items-center justify-center px-4 py-2 bg-white border border-gray-200 rounded-md font-semibold text-xs text-emerald-500 uppercase tracking-widest hover:font-semibold hover:shadow-lg hover:bg-teal-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-primary transition ease-in-out duration-150">
+                            class="ml-3 h-btn-success">
                         Guardar
                     </button>
                 </div>

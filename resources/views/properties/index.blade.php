@@ -42,7 +42,7 @@
                                href="#"
                                class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
                                :class="[activeTab === 'search-properties' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
-                                Busqueda de Propiedades
+                                Búsqueda de Propiedades
                             </a>
                         </div>
 
@@ -77,7 +77,7 @@
                                    role="button"
                                    href="#"
                                    class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out">
-                                    Busqueda de Propiedades
+                                    Búsqueda de Propiedades
                                 </a>
                             </div>
                         </div>

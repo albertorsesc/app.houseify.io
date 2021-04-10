@@ -45,7 +45,7 @@
 {{--        @stack('modals')--}}
 
         @livewireScripts
-        <div class="min-h-screen">
+        <div class="min-h-screen w-full">
 
                 <div id="app" v-cloak>
 

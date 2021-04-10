@@ -10,16 +10,28 @@ const getters = {
 
 const actions = {
     fetchSkills({ commit }) {
-        return new Promise((resolve, reject) => {
-            axios.get("/skills")
-                .then(response => {
-                    commit('SET_SKILLS', response.data.data)
-                })
-                .catch(error => {
-                    reject(error)
-                    console.log("Error fetching Skills")
-                })
-        })
+        let storage = window.localStorage
+        if (
+            this.auth &&
+            storage.hasOwnProperty('app') &&
+            JSON.parse(storage.app).hasOwnProperty('jobProfiles') &&
+            JSON.parse(storage.app).jobProfiles.hasOwnProperty('skills') &&
+            JSON.parse(storage.app).jobProfiles.skills.length > 0
+        ) {
+            commit('SET_SKILLS', JSON.parse(storage.app).jobProfiles.skills)
+            dd('skills from jobProfiles.js')
+        } else if (this.auth) {
+            return new Promise((resolve, reject) => {
+                axios.get("/skills")
+                    .then(response => {
+                        commit('SET_SKILLS', response.data.data)
+                    })
+                    .catch(error => {
+                        reject(error)
+                        console.log("Error fetching Skills")
+                    })
+            })
+        }
     },
 }
 

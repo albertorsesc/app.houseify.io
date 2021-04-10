@@ -48,6 +48,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
 
             $this->mapPropertiesApiRoutes();
+            $this->mapPropertiesWebRoutes();
             $this->mapBusinessesApiRoutes();
             $this->mapBusinessesWebRoutes();
             $this->mapJobProfilesApiRoutes();
@@ -65,6 +66,13 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/properties/api.php'));
     }
 
+    public function mapPropertiesWebRoutes()
+    {
+        Route::middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/properties/web.php'));
+    }
+
     public function mapBusinessesApiRoutes ()
     {
         Route::middleware(['api', 'auth:sanctum'])
@@ -76,7 +84,7 @@ class RouteServiceProvider extends ServiceProvider
 
     public function mapBusinessesWebRoutes()
     {
-        Route::middleware(['web', 'auth:sanctum'])
+        Route::middleware(['web'])
              ->namespace($this->namespace)
              ->group(base_path('routes/businesses/web.php'));
     }
@@ -92,7 +100,7 @@ class RouteServiceProvider extends ServiceProvider
 
     public function mapJobProfilesWebRoutes()
     {
-        Route::middleware(['web', 'auth:sanctum'])
+        Route::middleware(['web'])
              ->namespace($this->namespace)
              ->group(base_path('routes/job-profiles/web.php'));
     }

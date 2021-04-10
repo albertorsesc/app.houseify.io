@@ -46,6 +46,30 @@ body::-webkit-scrollbar-thumb {
     background-color: #00ECB0;
 }
 
+.h-btn {
+    @apply inline-flex items-center justify-center px-4 py-2 bg-white border border-gray-200 border border-gray-200 rounded-md shadow-sm font-semibold text-xs text-gray-700 uppercase tracking-widest transition ease-in-out duration-150;
+}
+.h-btn, .h-btn-success {
+    @layer .h-link;
+}
+.h-btn:hover {
+    @apply font-semibold;
+}
+.h-btn:focus {
+    @apply outline-none border-gray-700 ring-gray-500;
+}
+.h-btn:active, .h-btn-success:active {
+    @layer .bg-primary;
+}
+.h-btn-success {
+    @apply inline-flex items-center justify-center px-4 py-2 bg-white border border-gray-200 rounded-md shadow-sm font-semibold text-xs text-emerald-500 uppercase tracking-widest transition ease-in-out duration-150;
+}
+.h-btn-success:hover {
+    @apply font-semibold shadow-lg bg-teal-500 text-white;
+}
+.h-btn-success:focus {
+    @apply outline-none border-gray-700 ring-gray-500;
+}
 a {
     @apply no-underline;
     transition: all .2s ease !important;

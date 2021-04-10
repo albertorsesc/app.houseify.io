@@ -37,7 +37,7 @@
         'different'            => 'Los campos :attribute y :other deben ser diferentes.',
         'digits'               => ':attribute debe ser un número de :digits dígitos.',
         'digits_between'       => ':attribute debe contener entre :min y :max dígitos.',
-        'dimensions'           => ':attribute tiene dimensiones de imagen inválidas.',
+        'dimensions'           => ':attribute tiene dimensiones de imágen inválidas.',
         'distinct'             => ':attribute tiene un valor duplicado.',
         'email'                => ':attribute debe ser una dirección de correo válida.',
         'ends_with'            => ':attribute debe finalizar con alguno de los siguientes valores: :values',
@@ -56,7 +56,7 @@
             'string'  => ':attribute debe contener :value o más caracteres.',
             'array'   => ':attribute debe contener :value o más elementos.',
         ],
-        'image'                => ':attribute debe ser una imagen.',
+        'image'                => ':attribute debe ser una imágen.',
         'in'                   => ':attribute es inválido.',
         'in_array'             => ':attribute no existe en :other.',
         'integer'              => ':attribute debe ser un número entero.',
@@ -154,7 +154,7 @@
             'phone' => 'Telefono',
             'body' => 'Cuerpo',
             'excerpt' => 'Descripcion Corta',
-            'category' => 'Categoria',
+            'category' => 'Categoría',
             'comments' => 'Comentarios',
             'business_type' => 'Tipo de Negocio',
             'city' => 'Ciudad',
@@ -164,17 +164,17 @@
             'price' => 'Precio',
             'state_id' => 'Estado',
             'country_id' => 'Pais',
-            'categories' => 'Categorias',
+            'categories' => 'Categorías',
 
             /* User */
             'first_name' => 'Nombre',
             'last_name' => 'Apellido',
-            'email' => 'Correo Electronico',
+            'email' => 'Correo Electrónico',
             'password' => 'Contrasena',
             'password_confirmation' => 'Confirmacion de Contrasena',
 
             /* Properties */
-            'property_category_id' => 'Categoria de la Propiedad',
+            'property_category_id' => 'Categoría de la Propiedad',
 
             /* Reports */
             'reporting_cause' => 'Causas del Reporte',

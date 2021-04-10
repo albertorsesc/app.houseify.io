@@ -14,7 +14,7 @@ class LikeController extends Controller
 
         return response()->json([
             'data' => [
-                'likes' => $business->likes,
+                'likes' => $business->likes()->get(['id', 'liked_by', 'liked']),
                 'likedByAuth' => $business->hasLikeByAuth()
             ]
         ]);

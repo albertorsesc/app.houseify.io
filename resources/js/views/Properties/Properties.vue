@@ -34,7 +34,7 @@ export default {
                 this.headerTitle = 'Mis Intereses'
             }
             if (this.activeTab === 'search-properties') {
-                this.headerTitle = 'Busqueda Avanzada de Propiedades'
+                this.headerTitle = 'Búsqueda Avanzada de Propiedades'
             }
         }
     },

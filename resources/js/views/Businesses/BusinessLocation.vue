@@ -6,11 +6,11 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                Ubicacion de la Negocio
+                Ubicación de la Negocio
             </h3>
-            <div>
+            <div v-if="isAuthenticated && business.owner.id === auth">
                 <button @click="openModal" class="h-link bg-white border-emerald-900 -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-emerald-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-emerald-50 active:text-emerald-800"
-                        title="Registrar Ubicacion del Negocio">
+                        title="Registrar Ubicación del Negocio">
                     <svg class="text-emerald-300 hover:text-emerald-600 hover:border-emerald-700 hover:border" width="25" height="25" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -57,7 +57,7 @@
                         <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                         </svg>
-                        Direccion
+                        Dirección
                     </dt>
                     <dd class="mt-1 text-base text-teal-600"
                         v-text="location.address"
@@ -68,7 +68,7 @@
                         <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                         </svg>
-                        Codigo Postal
+                        Código Postal
                     </dt>
                     <dd class="mt-1 text-base text-teal-600"
                         v-text="location.zipCode"
@@ -78,7 +78,7 @@
         </div>
 
         <modal modal-id="business-location" max-width="sm:max-w-5xl">
-            <template #title>Ubicacion de la Negocio</template>
+            <template #title>Ubicación de la Negocio</template>
             <template #content>
                 <form @submit.prevent>
 
@@ -87,7 +87,7 @@
                         <div class="w-full mx-2">
                             <div class="w-full">
                                 <form-input
-                                    title="Direccion"
+                                    title="Dirección"
                                     :is-required="false"
                                     v-model="businessLocationForm.address"
                                     :data="businessLocationForm.address"
@@ -181,7 +181,7 @@
                     <!--ZipCode-->
                     <div class="w-full md:w-1/3 mt-3 md:mt-2">
                         <form-input
-                            title="Codigo Postal"
+                            title="Código Postal"
                             type="number"
                             v-model="businessLocationForm.zipCode"
                             :data="businessLocationForm.zipCode"
@@ -259,7 +259,7 @@ export default {
                 this.closeModal()
                 this.location = response.data.data
                 Event.$emit('businesses.location', this.location)
-                SweetAlert.success(`La Ubicacion ha sido registrada exitosamente!`)
+                SweetAlert.success(`La Ubicación ha sido registrada exitosamente!`)
             }).catch(error => {
                 this.errors = error.response.status === 422 ?
                     error.response.data.errors :
@@ -277,7 +277,7 @@ export default {
                 this.closeModal()
                 this.location = response.data.data
                 Event.$emit('businesses.location', this.location)
-                SweetAlert.success(`La Ubicacion ha sido actualizada exitosamente!`)
+                SweetAlert.success(`La Ubicación ha sido actualizada exitosamente!`)
             }).catch(error => {
                 this.errors = error.response.status === 422 ?
                     error.response.data.errors :

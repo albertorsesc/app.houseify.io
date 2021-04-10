@@ -22,7 +22,7 @@ class CountrySeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'name' => 'Mexico',
+                'name' => 'México',
                 'code' => 'MX',
                 'is_supported' => true,
             ],

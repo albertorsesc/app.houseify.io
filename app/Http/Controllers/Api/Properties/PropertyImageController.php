@@ -12,7 +12,7 @@ class PropertyImageController extends Controller
     public function store(Request $request, Property $property)
     {
         if ($property->media()->count() >= 15) {
-            return response()->json(['error' => 'Alcanzaste el numero maximo de Imagenes para esta Propiedad :/'], 422);
+            return response()->json(['error' => 'Alcanzaste el numero maximo de Imágenes para esta Propiedad :/'], 422);
         }
         $request->validate([
             'images.*' => ['mimes:jpeg,png']

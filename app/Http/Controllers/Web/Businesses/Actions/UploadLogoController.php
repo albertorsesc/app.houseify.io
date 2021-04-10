@@ -25,7 +25,7 @@ class UploadLogoController extends Controller
             \Log::error($exception->getMessage());
             return response()
                 ->redirectTo(route('web.businesses.show', $business))
-                ->withErrors(['logo' => 'Ocurrio un error al guardar el archivo, intente utilizar otra imagen.']);
+                ->withErrors(['logo' => 'Ocurrio un error al guardar el archivo, intente utilizar otra imágen.']);
         }
 
         $business->update([

@@ -19,7 +19,7 @@ export default {
                 this.headerTitle = 'Mis Intereses'
             }
             if (this.activeTab === 'search-job-profiles') {
-                this.headerTitle = 'Busqueda Avanzada de Profesionales'
+                this.headerTitle = 'Búsqueda Avanzada de Profesionales'
             }
         }
     },

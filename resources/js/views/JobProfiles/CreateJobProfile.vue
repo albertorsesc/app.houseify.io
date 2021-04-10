@@ -8,7 +8,7 @@
                             Nuevo Perfil de Trabajo
                         </h3>
                         <p class="mt-1 text-sm text-gray-500">
-                            Registra tus datos basicos para el perfil.
+                            Registra tus datos básicos para el perfil.
                         </p>
                     </div>
 
@@ -66,7 +66,7 @@
                             <!--Email-->
                             <div class="w-full md:w-1/3 md:mx-2">
                                 <label for="email" class="block text-sm font-medium text-gray-700">
-                                    Correo Electronico
+                                    Correo Electrónico
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base">
                                     <input type="email"

@@ -33,7 +33,7 @@
                                         <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
                                             <div>
                                                 <div class="flex text-sm font-medium text-emerald-600 truncate">
-                                                    <p>Ubicacion</p>
+                                                    <p>Ubicación</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -102,7 +102,7 @@
                                 <!--Property Category-->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">
-                                        Categoria de la Propiedad
+                                        Categoría de la Propiedad
                                     </label>
                                     <ais-refinement-list
                                         attribute="propertyCategory.displayName"
@@ -139,7 +139,7 @@
                         <div v-show="filtersTab === 'location'" class="bg-white rounded-lg shadow-md px-8 pt-4 pb-20 w-full mb-4">
                             <div class="align-middle mb-4">
                                 <h3 class="text-lg leading-6 font-medium text-cyan-500">
-                                    Filtrar por Ubicacion
+                                    Filtrar por Ubicación
                                 </h3>
                             </div>
                             <div class="flex justify-between my-2">
@@ -195,7 +195,7 @@
                                 <!--Construction size-->
                                 <div class="w-1/3 md:mx-2">
                                     <label class="block text-sm font-medium text-gray-700">
-                                        m² de Construccion
+                                        m² de Construcción
                                     </label>
                                     <div class="mt-2 flex">
                                         <ais-numeric-menu
@@ -220,7 +220,7 @@
                                 <!--Bathroom count-->
                                 <div class="w-full md:w-1/3 md:mx-2">
                                     <label class="block text-sm font-medium text-gray-700">
-                                        No. de Banos
+                                        No. de Baños
                                     </label>
                                     <div class="mt-2 flex">
                                         <ais-numeric-menu
@@ -231,7 +231,7 @@
                                 <!--Half bathroom count-->
                                 <div class="w-full md:w-1/3 md:mx-2">
                                     <label class="block text-sm font-medium text-gray-700">
-                                        No. de Medios Banos
+                                        No. de Medios Baños
                                     </label>
                                     <div class="mt-2 flex">
                                         <ais-numeric-menu
@@ -299,7 +299,7 @@
                                                     <!--Category-->
                                                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                                         <dt class="text-xs md:text-sm font-medium text-gray-500">
-                                                            Categoria de la Propiedad
+                                                            Categoría de la Propiedad
                                                         </dt>
                                                         <dd class="mt-1 text-xs md:text-sm text-gray-900 sm:mt-0 sm:col-span-2"
                                                             v-text="item.propertyCategory.displayName"
@@ -308,7 +308,7 @@
                                                     <!--Location-->
                                                     <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                                         <dt class="text-xs md:text-sm font-medium text-gray-500">
-                                                            Direccion
+                                                            Dirección
                                                         </dt>
                                                         <dd class="mt-1 text-xs md:text-sm text-gray-900 sm:mt-0 sm:col-span-2"
                                                             v-text="item.location.fullAddress"
@@ -330,7 +330,7 @@
                                                                 </li>
                                                                 <!--Construction Size-->
                                                                 <li class="my-3 mx-4 w-full flex text-xs items-center align-middle font-light">
-                                                                    <span class="text-gray-600">m² Construccion:</span>
+                                                                    <span class="text-gray-600">m² Construcción:</span>
                                                                     <strong v-text="item.propertyFeature.constructionSize"
                                                                             class="ml-2 text-gray-900"
                                                                     ></strong>
@@ -354,14 +354,14 @@
                                                             </ul>
                                                             <ul class="">
                                                                 <li class="my-3 mx-4 w-full flex text-xs items-center align-middle font-light">
-                                                                    <span class="text-gray-600">Banos:</span>
+                                                                    <span class="text-gray-600">Baños:</span>
                                                                     <strong v-text="item.propertyFeature.bathroomCount"
                                                                             class="ml-2 text-gray-900"
                                                                     ></strong>
                                                                 </li>
                                                                 <!--HalfBathRoom-->
                                                                 <li class="my-3 mx-4 w-full text-xs items-center align-middle font-light">
-                                                                    <span class="text-gray-600">1/2 Banos:</span>
+                                                                    <span class="text-gray-600">1/2 Baños:</span>
                                                                     <strong v-text="item.propertyFeature.halfBathroomCount"
                                                                             class="ml-2 text-gray-900"
                                                                     ></strong>

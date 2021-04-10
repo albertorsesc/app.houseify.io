@@ -5,7 +5,7 @@
         /* Skills */
         'skills' => [
             'Aire Acondicionado',
-            'Albanil',
+            'Albañil',
             'Arquitecto',
             'Carpintero',
             'Contratista',
@@ -20,7 +20,7 @@
             'Soldador',
             'Supervisor de Obra',
             'Tapicero',
-            'Tablaroquero',
+            'Tabla roquero',
             'Yesero',
         ],
 

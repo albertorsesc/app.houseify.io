@@ -8,7 +8,7 @@
                             Nueva Propiedad
                         </h3>
                         <p class="mt-1 text-sm text-gray-500">
-                            Registra los datos basicos de tu propiedad.
+                            Registra los datos básicos de tu propiedad.
                         </p>
                     </div>
 
@@ -17,7 +17,7 @@
                         <div class="sm:col-span-4">
                             <label for="title" class="block text-sm font-medium text-gray-700">
                                 <strong class="required">*</strong>
-                                Titulo de la Publicacion
+                                Título de la Publicación
                             </label>
                             <div class="my-1 flex rounded-md shadow-sm">
                                 <input type="text"
@@ -58,7 +58,7 @@
                             <div class="w-full md:w-1/2 md:mx-2">
                                 <label for="property_category_id" class="block text-sm font-medium text-gray-700">
                                     <strong class="required">*</strong>
-                                    Categoria de la Propiedad
+                                    Categoría de la Propiedad
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base">
                                     <vue-multiselect v-model="propertyForm.propertyCategory"
@@ -145,12 +145,14 @@
 
             <div class="pt-5">
                 <div class="flex justify-end">
-                    <button @click="cancel" type="button" class="ml-3 h-link inline-flex items-center justify-center px-4 py-2 bg-white border border-gray-200 border border-gray-200 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:font-semibold focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-primary transition ease-in-out duration-150">
+                    <button @click="cancel"
+                            type="button"
+                            class="ml-3 h-btn">
                         Cancelar
                     </button>
                     <button @click="store"
                             type="submit"
-                            class="ml-3 h-link inline-flex items-center justify-center px-4 py-2 bg-white border border-gray-200 rounded-md font-semibold text-xs text-emerald-500 uppercase tracking-widest hover:font-semibold hover:shadow-lg hover:bg-teal-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-primary transition ease-in-out duration-150">
+                            class="ml-3 h-btn-success">
                         Guardar
                     </button>
                 </div>

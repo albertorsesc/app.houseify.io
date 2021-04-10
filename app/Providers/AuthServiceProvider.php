@@ -43,7 +43,7 @@ class AuthServiceProvider extends ServiceProvider
                 ['id' => $notifiable->id, 'hash' => sha1($notifiable->email)]
             );
             return (new MailMessage)
-                ->subject('[Houseify.io] Correo Electronico de verificacion')
+                ->subject('[Houseify.io] Correo Electrónico de verificacion')
                 ->greeting('Bienvenido a Houseify.io!')
                 ->line('Agradecemos te hayas unido a esta comunidad creada especialmente para todos los que estamos relacionado al ramo de la construccion!')
                 ->line('Este correo es para verificar tu identidad, por favor haz click en el enlace para accesar a tu cuenta!')

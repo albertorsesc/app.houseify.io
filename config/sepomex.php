@@ -1,5 +1,6 @@
 <?php
 
     return [
-        'url' => env('SEPOMEX_API')
+        'url' => env('SEPOMEX_API'),
+        'token' => env('SEPOMEX_TOKEN')
     ];

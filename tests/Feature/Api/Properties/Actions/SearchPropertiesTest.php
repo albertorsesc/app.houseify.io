@@ -32,7 +32,6 @@ class SearchPropertiesTest extends PropertyTestCase
         $response = $this->postJson(route($this->route), [
             'title_or_comments' => 'campo'
         ]);
-
         $this->assertCount(1, $response->getOriginalContent());
 
         $response = $this->postJson(route($this->route), [
