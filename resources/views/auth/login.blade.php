@@ -35,20 +35,21 @@
                 </a>
             </div>
 
-            <div class="md:flex md:items-center items-end md:justify-end mt-4">
+            <div class="md:flex md:items-center items-end align-middle md:justify-end mt-4">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                    <a class="mt-8 underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('¿Olvidaste tu contraseña?') }}
                     </a>
                 @endif
 
-                <a class="block md:hidden underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                <a class="mt-2 block md:hidden underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
                     {{ __('Crear una cuenta') }}
                 </a>
 
-                <x-jet-button class="ml-4 mt-4" onclick="login">
+                <button class="ml-4 mt-4 h-btn-success"
+                        onclick="login">
                     {{ __('Iniciar sesión') }}
-                </x-jet-button>
+                </button>
             </div>
         </form>
     </x-jet-authentication-card>

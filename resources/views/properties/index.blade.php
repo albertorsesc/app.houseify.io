@@ -11,36 +11,36 @@
         <div>
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <div class="w-full md:flex md:justify-between items-center">
+                    <div class="w-full lg:flex lg:justify-between items-center">
                         <h2 class="font-semibold text-2xl text-teal-400">
                             @{{ headerTitle }}
                         </h2>
-                        <div class="hidden md:flex md:justify-between">
+                        <div class="hidden md:flex md:justify-between md:mt-4">
                             <a @click="activeTab = 'explore-properties'"
                                role="button"
                                href="#"
-                               class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
+                               class="h-link mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5"
                                :class="[activeTab === 'explore-properties' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Explorar Propiedades
                             </a>
                             <a @click="activeTab = 'my-properties'"
                                role="button"
                                href="#"
-                               class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
+                               class="h-link mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5"
                                :class="[activeTab === 'my-properties' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Mis Propiedades
                             </a>
                             <a @click="activeTab = 'interesting-properties'"
                                role="button"
                                href="#"
-                               class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
+                               class="h-link mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5"
                                :class="[activeTab === 'interesting-properties' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Mis Intereses
                             </a>
                             <a @click="activeTab = 'search-properties'"
                                role="button"
                                href="#"
-                               class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
+                               class="h-link mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5"
                                :class="[activeTab === 'search-properties' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Búsqueda de Propiedades
                             </a>
@@ -52,7 +52,8 @@
                                 <a @click="activeTab = 'explore-properties'"
                                    role="button"
                                    href="#"
-                                   class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out">
+                                   class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out"
+                                   :class="[activeTab === 'explore-properties' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                     Explorar Propiedades
                                 </a>
                             </div>
@@ -60,7 +61,8 @@
                                 <a @click="activeTab = 'my-properties'"
                                    role="button"
                                    href="#"
-                                   class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out">
+                                   class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out"
+                                   :class="[activeTab === 'my-properties' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                     Mis Propiedades
                                 </a>
                             </div>

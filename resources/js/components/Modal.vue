@@ -2,7 +2,7 @@
     <div :id="modalId"
          v-show="showModal"
          @keydown.escape.window="showModal = false"
-         class="z-50 fixed top-0 overflow-y-auto min-h-screen inset-x-0 px-4 pt-6 sm:px-0 sm:flex sm:items-top sm:justify-center"
+         class="z-50 fixed top-0 overflow-y-auto inset-0 px-4 pt-6 sm:px-0 sm:flex sm:items-top sm:justify-center"
          style="display: none;"
          tabindex="-1"
          role="dialog">
@@ -19,7 +19,7 @@
 
             <transition name="modal-dialog" appear>
                 <div v-if="showModal && viewAs === 'card'"
-                     class="bg-white rounded-lg align-bottom overflow-y-auto shadow-xl transform transition-all h-full sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                     class="bg-white rounded-lg align-bottom overflow-y-auto shadow-xl transform transition-all md:fixed sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                      aria-labelledby="modal"
                      aria-modal="true"
                      role="document"
@@ -98,7 +98,7 @@ export default {
         showModal () {
             if (this.showModal) {
                 document.body.classList.add('overflow-y-hidden', 'xs:mr-2')
-                let id = document.getElementById(this.modalId).attributes.id.value
+                document.getElementById(this.modalId).attributes.id.value
             } else {
                 setTimeout(() => {
                     document.body.classList.remove('overflow-y-hidden', 'xs:mr-2')

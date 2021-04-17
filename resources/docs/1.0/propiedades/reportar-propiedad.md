@@ -4,6 +4,7 @@
 ---
 
 - [Causas de Reporte](#report-causes)
+- [Reportar Publicacion](#report-post)
 
 ### Houseify procura revisar cuidadosamente todas las publicaciones de Propiedades para asegurar su veracidad y legitimidad. <br><br> En el caso de encontrar alguna publicación que cumpla con las siguientes especificaciones, agradecemos enormemente su apoyo en reportar estas publicaciones para mantener la plataforma útil para todos.
 
@@ -18,6 +19,7 @@
 * Posible Fraude/Sospechoso
 * Otro
 
+<a name="report-post"></a>
 ## Reportar Propiedad
 ---
 * Visita la Propiedad a reportar.

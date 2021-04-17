@@ -24,10 +24,8 @@ export default {
             localProperty: this.property,
             selectedPropertyType: {},
             selectedPropertyCategory: {},
-
-            propertyTypes: [],
-            businessTypes: [],
             propertyCategoriesByPropertyType: [],
+            sellerId: this.property.seller.uuid,
 
             modal: {},
             actionType: '',
@@ -54,6 +52,15 @@ export default {
                     SweetAlert.success(`La Propiedad ha sido actualizada exitosamente!`)
                 })
                 .catch(error => { this.errors = error.response.status === 422 ? error.response.data.errors : [] })
+        },
+        destroy() {
+            axios.delete(`${this.endpoint}${this.localProperty.slug}`)
+            .then(() => {
+                setTimeout( () => {
+                    window.location.href = `/propiedades` },
+                    1500
+                )
+            }).catch(error => { console.log(error) })
         },
         toggle() {
             axios
@@ -118,10 +125,23 @@ export default {
             this.selectedPropertyType = {}
             this.selectedPropertyCategory = {}
         },
+        onDelete() {
+            SweetAlert.danger(
+                `Eliminar la Propiedad: ${this.localProperty.title}`,
+                'La Propiedad ha sido eliminada exitosamente!',
+            )
+        },
         lookupPropertyCategories(propertyType) {
             this.propertyCategoriesByPropertyType = this.getPropertyCategories.filter(propertyCategory => {
                 return propertyCategory.propertyType.id === propertyType.id
             })
+        },
+        copy() {
+            let publicProfile = this.localProperty.meta.links.publicProfile
+            navigator.clipboard.writeText(publicProfile)
+            Event.$emit('copied')
+            // publicProfile.select()
+            // document.execCommand('copy')
         },
     },
     computed: {
@@ -136,8 +156,13 @@ export default {
         this.$store.dispatch('properties/fetchPropertyCategories')
         this.$store.dispatch('properties/fetchBusinessTypes')
 
+        Event.$on('SweetAlert:destroy', () => { this.destroy() })
+
         Event.$on('properties.location', location => {
             this.localProperty.location = location
+        })
+        Event.$on('properties.features', features => {
+            this.localProperty.propertyFeature = features
         })
     },
     watch: {
@@ -158,6 +183,7 @@ export default {
         FormInput: () => import(/* webpackChunkName: "form-input" */ '../../components/FormInput'),
         PropertyLocation: () => import(/* webpackChunkName: "property-location" */ './PropertyLocation'),
         PropertyFeatures: () => import(/* webpackChunkName: "property-features" */ './PropertyFeatures'),
+        ActionMessage: () => import(/* webpackChunkName: "action-message" */ '../../components/ActionMessage'),
         CustomCarousel: () => import(/* webpackChunkName: "custom-carousel" */ '../../components/CustomCarousel'),
         PropertyImages: () => import(/* webpackChunkName: "property-images" */ '../../components/Properties/PropertyImages')
     }

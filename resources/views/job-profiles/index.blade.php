@@ -19,28 +19,28 @@
                             <a @click="activeTab = 'explore-job-profiles'"
                                role="button"
                                href="#"
-                               class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
+                               class="h-link mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5"
                                :class="[activeTab === 'explore-job-profiles' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Explorar Profesionales
                             </a>
                             <a @click="activeTab = 'my-job-profile'"
                                role="button"
                                href="#"
-                               class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
+                               class="h-link mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5"
                                :class="[activeTab === 'my-job-profile' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Mi Perfil de Trabajo
                             </a>
                             <a @click="activeTab = 'my-interests'"
                                role="button"
                                href="#"
-                               class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
+                               class="h-link mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5"
                                :class="[activeTab === 'my-interests' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Mis Intereses
                             </a>
                             <a @click="activeTab = 'search-job-profiles'"
                                role="button"
                                href="#"
-                               class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
+                               class="h-link mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5"
                                :class="[activeTab === 'search-job-profiles' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Búsqueda de Profesionales
                             </a>

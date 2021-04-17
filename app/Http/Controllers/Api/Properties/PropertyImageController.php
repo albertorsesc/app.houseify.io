@@ -15,7 +15,7 @@ class PropertyImageController extends Controller
             return response()->json(['error' => 'Alcanzaste el numero maximo de Imágenes para esta Propiedad :/'], 422);
         }
         $request->validate([
-            'images.*' => ['mimes:jpeg,png']
+            'images.*' => ['mimes:jpeg,png,jpg']
         ]);
 
         foreach ($request->images as $image) {

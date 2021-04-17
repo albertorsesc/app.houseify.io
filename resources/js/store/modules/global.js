@@ -33,7 +33,6 @@ const actions = {
                 axios.get("/construction-categories")
                     .then(response => {
                         commit('SET_CONSTRUCTION_CATEGORIES', response.data.data)
-                        // localStorage.setItem('constructionCategories', this.$store.state.categories)
                     })
                     .catch(error => {
                         reject(error)
@@ -46,7 +45,6 @@ const actions = {
     fetchStates({ commit }){
         let storage = window.localStorage
         if (
-            this.auth &&
             storage.hasOwnProperty('app') &&
             JSON.parse(storage.app).hasOwnProperty('global') &&
             JSON.parse(storage.app).global.hasOwnProperty('states') &&
@@ -54,7 +52,7 @@ const actions = {
         ) {
             commit('SET_STATES', JSON.parse(storage.app).global.states)
             dd('states from global.js')
-        } else if (this.auth) {
+        } else {
             return new Promise((resolve, reject) => {
                 axios.get("/states")
                     .then(response => {

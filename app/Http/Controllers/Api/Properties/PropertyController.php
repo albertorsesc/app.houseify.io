@@ -19,6 +19,7 @@ class PropertyController extends Controller
                     ->with([
                         'media',
                         'interests',
+                        'seller:id',
                         'location.state',
                         'propertyFeature',
                         'propertyCategory.propertyType',
@@ -44,7 +45,12 @@ class PropertyController extends Controller
         return new PropertyResource(
             tap($property)
                 ->update($request->all())
-                ->load(['propertyCategory.propertyType', 'location.state', 'interests', 'seller'])
+                ->load([
+                    'propertyCategory.propertyType',
+                    'location.state',
+                    'interests',
+                    'seller:id'
+                ])
         );
     }
 

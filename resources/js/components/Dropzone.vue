@@ -42,7 +42,7 @@ export default {
                 dictResponseError: 'Algo ocurrio, refresque la pag. o intente mas tarde.',
                 thumbnailWidth: 150,
                 thumbnailHeight: 150,
-                maxFilesize: 4.0,
+                maxFilesize: 4.5,
                 // addRemoveLinks: true,
                 // dictRemoveFile: 'Eliminar',
                 dictCancelUpload: 'Cancelar',
@@ -63,14 +63,15 @@ export default {
             }*/
         },
         onUploadError(some, errorMessage, xMLHttpRequestError) {
-            // console.log(xMLHttpRequestError.statusText)
+            this.dropzoneOptions.dictResponseError = errorMessage.errors['images.0'][0]
+            if (xMLHttpRequestError.status) {
+                document.querySelector('[data-dz-errormessage]').innerHTML = this.dropzoneOptions.dictResponseError
+            }
         },
     },
     mounted() {
         Event.$on('vdropzone-success-multiple', (file, response) => {
-            dd(file)
-            dd(response)
-            dd('hi')
+
         })
     },
     components: {

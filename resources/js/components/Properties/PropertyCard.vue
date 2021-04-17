@@ -1,17 +1,17 @@
 <template>
-    <div class="my-2 w-full flex flex-col sm:w-2/3 md:w-1/2 lg:w-1/3 px-3">
+    <div class="my-4 w-full flex flex-col md:w-1/2 lg:w-1/3 px-3">
         <div class="card transition hover:transform">
             <custom-carousel :images="property.images" module-name="properties" :size="'small'"></custom-carousel>
         </div>
         <div class="px-4 -mt-16 relative">
             <div class="card transition hover:transform px-6 py-2">
-                <div class="flex justify-center justify-evenly items-center align-middle">
-                    <span class="bg-teal-200 text-teal-700 font-semibold text-xs rounded-full px-2 py-1 tracking-wide leading-none inline-block"
+                <div class="flex justify-center items-center align-middle">
+<!--                    <span class="bg-teal-200 text-teal-700 font-semibold text-xs rounded-full px-2 py-1 tracking-wide leading-none inline-block"
                           v-if="property.location"
                           v-text="property.location.state.name"
                           :title="property.location.state.name"
-                    ></span>
-                    <span class="bg-blue-200 text-teal-700 font-semibold text-xs rounded-full px-2 py-1 tracking-wide leading-none inline-block"
+                    ></span>-->
+                    <span class="mr-4 bg-blue-200 text-teal-700 font-semibold text-xs rounded-full px-2 py-1 tracking-wide leading-none inline-block"
                           v-text="limitString(property.propertyCategory.displayName, 10)"
                           :title="property.propertyCategory.displayName"
                     ></span>
@@ -23,7 +23,24 @@
                      v-text="propertyTitle"
                      :title="property.title"
                 ></div>
-                <div class="mb-1 text-center align-middle">
+
+                <div class="text-sm md:text-xs py-1">
+                    <div class="flex justify-center">
+                            <span v-if="property.location && property.location.city"
+                                  :title="property.location.city">
+                                {{ limitString(property.location.city, 15) }},
+                            </span>
+                        <span v-if="property.location && property.location.state"
+                              v-text="property.location.state.code">
+                            </span>
+<!--                        <span class="mx-2">&bullet;</span>-->
+<!--                        <span v-if="property.phone"
+                              v-text="property.phone"
+                        ></span>-->
+                    </div>
+                </div>
+
+                <div class="mb-1 text-center align-middle -mt-2">
                     <span class="text-green-700 font-bold text-base" v-text="property.formattedPrice"></span>
                     <span class="ml-1 text-sm text-gray-500">m.n.</span>
                 </div>
@@ -45,7 +62,7 @@
 
                     <div class="mt-1 right-0 items-center align-middle px-4 text-green-500">
                         <a :href="property.meta.links.profile"
-                           class="no-underline h-link hover:text-green-400 -mt-6"
+                           class="h-link no-underline h-link hover:text-green-400 -mt-6"
                            title="Visitar Propiedad">
                             <svg class="h-5 w-5 text-base" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -66,7 +83,7 @@ export default {
         property: {
             required: true,
             type: Object,
-        }
+        },
     },
     data() {
         return {

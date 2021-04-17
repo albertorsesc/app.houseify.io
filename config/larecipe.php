@@ -14,7 +14,7 @@ return [
     */
 
     'docs'        => [
-        'route'   => '/ayuda',
+        'route'   => '/docs',
         'path'    => '/resources/docs',
         'landing' => 'overview',
         'middleware' => ['web'],
@@ -146,14 +146,14 @@ return [
 
     'seo'                 => [
         'author'          => 'houseify.io',
-        'description'     => 'Documentacion de ayuda oficial de houseify.io',
-        'keywords'        => '',
+        'description'     => 'Documentación de ayuda oficial de houseify.io',
+        'keywords'        => 'houseify,houseify.io,soporte,ayuda,documentación,manual,aviso de privacidad',
         'og'              => [
-            'title'       => '',
+            'title'       => 'Documentación Oficial de Houseify',
             'type'        => 'article',
-            'url'         => '',
-            'image'       => '',
-            'description' => '',
+            'url'         => '/docs',
+            'image'       => '/logos/houseify-13.png',
+            'description' => 'Documentación Oficial de Houseify en donde encontraras recursos para administrar publicaciones, avisos de privacidad, políticas de contenido y buenas prácticas para aprovechar al máximo lo que Houseify te brinda.',
         ]
     ],
 

@@ -15,14 +15,22 @@ class BusinessController extends Controller
         return BusinessResource::collection(
             Business::query()
                     ->isPublished()
-                    ->with(['owner:id', 'location.state', 'interests'])
+                    ->with([
+                        'owner:id',
+                        'interests',
+                        'location.state',
+                    ])
                     ->paginate(10)
         );
     }
 
     public function store(BusinessRequest $request) : BusinessResource
     {
-        return new BusinessResource(Business::create($request->all()));
+        $business = Business::create($request->all());
+
+        return new BusinessResource(
+            $business
+        );
     }
 
     public function update(BusinessRequest $request, Business $business) : BusinessResource

@@ -76,6 +76,3 @@ mix.browserSync({
     }
 });
 
-if (mix.inProduction()) {
-    mix.version();
-}

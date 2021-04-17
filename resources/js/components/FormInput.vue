@@ -2,9 +2,9 @@
     <div :class="['form-group', error ? errorClasses : '']">
         <label v-if="title" :for="inputId">
             <strong class="required" v-if="isRequired">*</strong>
-            {{ title }}
+            {{ title }} <span class="text-gray-500 font-light text-xs" v-text="isRequired ? '(requerido)' : '(opcional)'"></span>
         </label>
-        <div class="rounded-md shadow-sm mb-1 mt-1">
+        <div class="rounded-md shadow-sm mb-1 mt-2">
             <input :type="type"
                    :value="data"
                    @input="update($event.target.value)"

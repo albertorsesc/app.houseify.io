@@ -15,22 +15,24 @@
                     <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 
                         <div class="sm:col-span-4">
-                            <label for="title" class="block text-sm font-medium text-gray-700">
-                                <strong class="required">*</strong>
-                                Título de la Publicación
-                            </label>
-                            <div class="my-1 flex rounded-md shadow-sm">
-                                <input type="text"
-                                       v-model="propertyForm.title"
-                                       id="title"
-                                       autocomplete="title"
-                                       class="h-input flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
+                            <div class="w-full">
+                                <label for="title" class="block text-sm font-medium text-gray-700">
+                                    <strong class="required">*</strong>
+                                    Título de la Publicación
+                                </label>
+                                <div class="my-1 flex rounded-md shadow-sm">
+                                    <input type="text"
+                                           v-model="propertyForm.title"
+                                           id="title"
+                                           autocomplete="title"
+                                           class="h-input flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                </div>
+                                <errors :error="errors.title"
+                                        :options="{ noContainer: true }"
+                                ></errors>
                             </div>
-                            <errors :error="errors.title"
-                                    :options="{ noContainer: true }"
-                            ></errors>
                         </div>
-                        <div class="sm:col-span-4 flex md:-mx-2">
+                        <div class="sm:col-span-4 md:flex md:-mx-2">
                             <div class="w-full md:w-1/2 md:mx-2">
                                 <label for="property_type" class="block text-sm font-medium text-gray-700">
                                     <strong class="required">*</strong>
@@ -55,7 +57,7 @@
                                         :options="{ noContainer: true }"
                                 ></errors>
                             </div>
-                            <div class="w-full md:w-1/2 md:mx-2">
+                            <div class="w-full md:w-1/2 md:mx-2 mt-6 md:mt-0">
                                 <label for="property_category_id" class="block text-sm font-medium text-gray-700">
                                     <strong class="required">*</strong>
                                     Categoría de la Propiedad
@@ -84,7 +86,7 @@
                             </div>
                         </div>
 
-                        <div class="sm:col-span-4 flex md:-mx-2">
+                        <div class="md:col-span-4 md:flex md:-mx-2">
                             <div class="w-full md:w-1/2 md:mx-2">
                                 <label for="business_type" class="block text-sm font-medium text-gray-700">
                                     <strong class="required">*</strong>
@@ -108,7 +110,7 @@
                                         :options="{ noContainer: true }"
                                 ></errors>
                             </div>
-                            <div class="w-full md:w-1/2 md:mx-2">
+                            <div class="w-full md:w-1/2 md:mx-2 mt-6 md:mt-0">
                                 <label for="price" class="block text-sm font-medium text-gray-700">
                                     <strong class="required">*</strong>
                                     Precio

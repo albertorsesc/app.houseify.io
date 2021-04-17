@@ -105,6 +105,7 @@
                                 <label for="state_id">
                                     <strong class="required">*</strong>
                                     Estado
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
                                 </label>
                                 <div class="mt-1">
                                     <vue-multiselect v-model="businessLocationForm.state"
@@ -135,6 +136,7 @@
                                 <label for="city">
                                     <strong class="required">*</strong>
                                     Ciudad
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
                                 </label>
                                 <div class="mt-1">
                                     <vue-multiselect v-model="businessLocationForm.city"
@@ -159,6 +161,7 @@
                                 <label for="neighborhood">
                                     <strong class="required">*</strong>
                                     Fraccionamiento/Colonia
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
                                 </label>
                                 <div class="mt-1">
                                     <vue-multiselect v-model="businessLocationForm.neighborhood"
@@ -178,16 +181,18 @@
                         </div>
                     </div>
 
-                    <!--ZipCode-->
-                    <div class="w-full md:w-1/3 mt-3 md:mt-2">
-                        <form-input
-                            title="Código Postal"
-                            type="number"
-                            v-model="businessLocationForm.zipCode"
-                            :data="businessLocationForm.zipCode"
-                            input-id="store_zip_code"
-                            :error="errors.zip_code"
-                        ></form-input>
+                    <div class="w-full md:flex md:-mx-2 mt-4">
+                        <!--ZipCode-->
+                        <div class="w-full md:w-1/3 mx-2 mt-3 md:mt-0">
+                            <form-input
+                                title="Código Postal"
+                                type="number"
+                                v-model="businessLocationForm.zipCode"
+                                :data="businessLocationForm.zipCode"
+                                input-id="store_zip_code"
+                                :error="errors.zip_code"
+                            ></form-input>
+                        </div>
                     </div>
 
                 </form>

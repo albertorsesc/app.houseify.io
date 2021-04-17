@@ -16,7 +16,7 @@ class CreateJobProfilesTable extends Migration
         Schema::create('job_profiles', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique()->index();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('title', 100);
             $table->date('birthdate_at')->nullable();
             $table->json('skills');

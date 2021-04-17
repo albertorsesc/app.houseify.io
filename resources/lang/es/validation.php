@@ -114,7 +114,7 @@
         'string'               => ':attribute debe ser una cadena de caracteres.',
         'timezone'             => ':attribute debe ser una zona horaria válida.',
         'unique'               => 'El valor del campo :attribute ya está en uso.',
-        'uploaded'             => ':attribute no se pudo subir.',
+        'uploaded'             => 'Hubo un error, favor de intentar con otro archivo.', /*':attribute no se pudo subir.'*/
         'url'                  => 'El formato del campo :attribute es inválido. (https://sitio.com)',
         'uuid'                 => ':attribute debe ser un UUID válido.',
 

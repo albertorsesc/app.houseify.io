@@ -31,7 +31,7 @@
                 @csrf
 
                 <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Cerrar Sesion
+                    Cerrar Sesión
                 </button>
             </form>
         </div>

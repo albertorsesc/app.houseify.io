@@ -33,7 +33,8 @@ class PropertyResource extends JsonResource
             'images' => $this->whenLoaded('media'),
             'meta' => [
                 'links' => [
-                    'profile' => $this->profile()
+                    'profile' => $this->profile(),
+                    'publicProfile' => $this->publicProfile()
                 ],
                 'updatedAt' => $this->updated_at->diffForHumans()
             ]

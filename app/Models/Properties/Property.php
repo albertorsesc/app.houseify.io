@@ -5,10 +5,16 @@ namespace App\Models\Properties;
 use App\Models\User;
 use Laravel\Scout\Searchable;
 use App\Models\Concerns\HandlesMedia;
-use App\Models\Concerns\{CanBeReported, HasLocation, HasUuid, Interestable, Locationable, Publishable};
+use App\Models\Concerns\{CanBeReported,
+    DeletesRelations,
+    HasLocation,
+    HasUuid,
+    Interestable,
+    Locationable,
+    Publishable};
 use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, Relations\BelongsTo, Relations\HasOne};
 
-class Property extends Model implements Locationable
+class Property extends Model implements Locationable, DeletesRelations
 {
     use HasUuid,
         Searchable,
@@ -51,6 +57,11 @@ class Property extends Model implements Locationable
         return route('web.properties.show', $this);
     }
 
+    public function publicProfile() : string
+    {
+        return route('web.public.properties.show', $this);
+    }
+
     public function formattedPrice() : string
     {
         return '$' . number_format($this->price);
@@ -61,6 +72,14 @@ class Property extends Model implements Locationable
         return array_merge([
             'taken' => 'Propiedad Vendida/Rentada',
         ], config('houseify.reporting_causes'));
+    }
+
+    public function onDelete()
+    {
+        $this->location()->delete();
+        $this->media()->each(fn ($media) => $media->delete());
+        $this->reports()->each(fn ($report) => $report->delete());
+        $this->interests()->each(fn ($interest) => $interest->delete());
     }
 
     /**
@@ -102,6 +121,11 @@ class Property extends Model implements Locationable
                 ],
                 'images' => $this->images,
                 'interests' => $this->interests,
+                'seller' => [
+                    'meta' => [
+                        'profile' => $this->profile()
+                    ]
+                ],
                 'meta' => [
                     'links' => [
                         'profile' => $this->profile()

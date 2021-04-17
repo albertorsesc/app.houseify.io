@@ -104,7 +104,6 @@ export default {
 
             reader.onloadend = (file) => {
                 this.logo = reader.result
-                dd(this.logo)
             }
 
             /*axios.put(`/businesses/${this.localBusiness.slug}/image`, {

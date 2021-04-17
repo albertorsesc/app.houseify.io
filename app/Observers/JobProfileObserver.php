@@ -46,6 +46,7 @@ class JobProfileObserver
 
     public function deleting(JobProfile $jobProfile)
     {
+        $jobProfile->location()->delete();
         LogActions::dispatch('DELETE', $jobProfile, auth()->user());
     }
 

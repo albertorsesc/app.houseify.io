@@ -104,7 +104,7 @@ class ResetCommand extends Command
         $this->newLine();
 
         $this->line('<green>-- Scout Import --</green>');
-//        exec('php artisan scout:import');
+        exec('php artisan scout:import');
 
         $this->newLine();
 

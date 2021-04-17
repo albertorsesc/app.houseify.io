@@ -16,9 +16,7 @@ class PropertyFeatureController extends Controller
 
         $property->load('propertyFeature');
 
-        return response()->json([
-            'data' => new PropertyFeatureResource($property->propertyFeature)
-        ], 201);
+        return response()->json(new PropertyFeatureResource($property->propertyFeature), 201);
     }
 
     public function update(PropertyFeatureRequest $request, Property $property) : PropertyFeatureResource

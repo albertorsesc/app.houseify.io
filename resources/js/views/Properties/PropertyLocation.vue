@@ -9,9 +9,9 @@
                 Ubicación de la Propiedad
             </h3>
             <div v-if="property.seller.id === auth">
-                <button @click="openModal" class="h-link bg-white border-emerald-900 -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-emerald-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-emerald-50 active:text-emerald-800"
+                <button @click="openModal" class="h-link bg-white -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-emerald-500 focus:outline-none focus:shadow-outline-blue active:bg-emerald-50 active:text-emerald-800"
                         title="Registrar Ubicación de la Propiedad">
-                    <svg class="text-emerald-400 hover:text-emerald-600 hover:border-emerald-700 hover:border" width="25" height="25" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="text-emerald-400 hover:text-emerald-600" width="25" height="25" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </button>
@@ -107,6 +107,7 @@
                                 <label for="state_id">
                                     <strong class="required">*</strong>
                                     Estado
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
                                 </label>
                                 <div class="mt-1">
                                     <vue-multiselect v-model="propertyLocationForm.state"
@@ -137,6 +138,7 @@
                                 <label for="city">
                                     <strong class="required">*</strong>
                                     Ciudad
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
                                 </label>
                                 <div class="mt-1">
                                     <vue-multiselect v-model="propertyLocationForm.city"
@@ -161,6 +163,7 @@
                                 <label for="neighborhood">
                                     <strong class="required">*</strong>
                                     Fraccionamiento/Colonia
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
                                 </label>
                                 <div class="mt-1">
                                     <vue-multiselect v-model="propertyLocationForm.neighborhood"
@@ -180,16 +183,19 @@
                         </div>
                     </div>
 
-                    <!--ZipCode-->
-                    <div class="w-full md:w-1/3 mt-3 md:mt-2">
-                        <form-input
-                            title="Código Postal"
-                            type="number"
-                            v-model="propertyLocationForm.zipCode"
-                            :data="propertyLocationForm.zipCode"
-                            input-id="store_zip_code"
-                            :error="errors.zip_code"
-                        ></form-input>
+                    <div class="w-full md:flex md:-mx-2 mt-4">
+                        <!--ZipCode-->
+                        <div class="w-full md:w-1/3 mx-1 mt-3 md:mt-0">
+                            <form-input
+                                title="Código Postal"
+                                type="number"
+                                v-model="propertyLocationForm.zipCode"
+                                :data="propertyLocationForm.zipCode"
+                                input-id="store_zip_code"
+                                :error="errors.zip_code"
+                                custom-classes=""
+                            ></form-input>
+                        </div>
                     </div>
 
                 </form>
@@ -288,10 +294,7 @@ export default {
         getCities(selectedState) {
             let state = this.isObject(selectedState) ? selectedState : this.propertyLocationForm.state
             axios.get(`/states/${state.name}/cities`)
-                .then(response => {
-                    this.cities = response.data
-                    dd(response)
-                })
+                .then(response => { this.cities = response.data })
                 .catch(error => { console.log(error) })
         },
         getNeighborhoods(selectedCity) {
@@ -342,7 +345,9 @@ export default {
         })
     },
     created() {
-        this.$store.dispatch('global/fetchStates')
+        if (this.auth === this.property.seller.id) {
+            this.$store.dispatch('global/fetchStates')
+        }
     },
     components: {
         VueMultiselect,

@@ -1,5 +1,6 @@
 <template>
-    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+    <div v-if="property.seller.id === auth"
+         class="bg-white shadow overflow-hidden sm:rounded-lg">
         <div class="flex justify-between px-4 py-5 sm:px-6 items-center">
             <h3 class="flex text-lg leading-6 font-medium text-emerald-600">
                 <svg class="mr-2 h-5 w-5 text-teal-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -8,12 +9,13 @@
                 </svg>
                 Imágenes de la Propiedad
             </h3>
-            <div>
+            <div v-if="images.length > 0">
                 <button @click="openModal"
-                        class="h-link bg-white border-emerald-900 -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-emerald-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-emerald-50 active:text-emerald-800"
+                        class="h-link bg-white border-emerald-900 -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-emerald-500 focus:outline-none focus:shadow-outline-blue active:text-emerald-800"
                         title="Administrar Imágenes de la Propiedad...">
-                    <svg class="text-emerald-400 hover:text-emerald-600 hover:border-emerald-700 hover:border" width="25" height="25" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <svg class="h-6 w-6 text-emerald-400 hover:text-emerald-600 appearance-none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
                 </button>
                 <modal modal-id="manage-property-images" max-width="sm:max-w-5xl">

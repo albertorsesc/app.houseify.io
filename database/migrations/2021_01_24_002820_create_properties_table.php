@@ -19,7 +19,7 @@ class CreatePropertiesTable extends Migration
             $table->string('slug', 100)->unique()->index();
             $table->string('title', 50);
             $table->foreignId('property_category_id')->constrained();
-            $table->foreignId('seller_id')->constrained('users');
+            $table->foreignId('seller_id')->constrained('users')->cascadeOnDelete();
             $table->string('business_type', 15);
             $table->unsignedInteger('price');
             $table->text('comments')->nullable();

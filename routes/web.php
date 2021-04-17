@@ -1,6 +1,7 @@
 <?php
 
     use App\Http\Controllers\Web\JobProfiles\MyJobProfileController;
+    use App\Models\Concerns\InterventionImage\Filters\SmallFilter;
     use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuggestionController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -30,3 +31,8 @@ Route::middleware(['auth:sanctum', 'verified', 'prevent-back-history'])->group(f
     Route::post('suggestions', [SuggestionController::class, 'store'])->name('suggestions.store');
 });
 
+//    Route::get('resize', function () {
+//        \Intervention\Image\Facades\Image::make('img/undraw_location_review_dmxd.png')
+//                                         ->filter(new \App\Models\Concerns\InterventionImage\Filters\MediumFilter())
+//                                         ->save('img/business_location_1.png');
+//    });

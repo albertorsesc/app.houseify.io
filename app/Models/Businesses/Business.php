@@ -46,7 +46,15 @@ class Business extends Model
 
     public function profile() : string
     {
-        return route('web.businesses.show', $this);
+        if ($this->owner->id === auth()->id()) {
+            return route('web.businesses.show', $this);
+        }
+        return route('web.public.businesses.show', $this);
+    }
+
+    public function publicProfile() : string
+    {
+        return route('web.public.businesses.show', $this);
     }
 
     public static function getReportingCauses() : array
@@ -54,6 +62,11 @@ class Business extends Model
         return array_merge([
             'non-existent' => 'Negocio/Empresa inexistente',
         ], config('houseify.reporting_causes'));
+    }
+
+    public function onDelete()
+    {
+        $this->location()->delete();
     }
 
     /**

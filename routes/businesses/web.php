@@ -8,6 +8,8 @@
             'businesses/{business:slug}/image',
             UploadLogoController::class
         )->name('businesses.logo.store');
+
+        Route::get('directorio-de-negocios/{business:slug}', [BusinessController::class, 'show'])->name('web.businesses.show');
     });
 
-    Route::get('directorio-de-negocios/{business:slug}', BusinessController::class)->name('web.businesses.show');
+    Route::get('i/directorio-de-negocios/{business:slug}', [BusinessController::class, 'display'])->name('web.public.businesses.show');

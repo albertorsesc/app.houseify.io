@@ -15,7 +15,7 @@ class CreatePropertyFeaturesTable extends Migration
     {
         Schema::create('property_features', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('property_id')->constrained();
+            $table->foreignId('property_id')->constrained()->cascadeOnDelete();
             $table->json('features');
         });
     }

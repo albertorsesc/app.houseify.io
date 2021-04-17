@@ -5,7 +5,7 @@
         <span @click="like"
               class="items-center align-middle cursor-pointer">
             <svg class="h-6 w-6 hover:text-emerald-300"
-                 :class="isLiked ? 'text-emerald-300' : 'text-gray-300'"
+                 :class="[isLiked ? 'text-emerald-300' : 'text-gray-300']"
                  fill="none"
                  xmlns="http://www.w3.org/2000/svg"
                  viewBox="0 0 24 24"
@@ -20,7 +20,7 @@
         <span @click="dislike"
               class="items-center align-middle cursor-pointer">
             <svg class="h-6 w-6 text-gray-300 hover:text-red-400"
-                 :class="! isLiked && isLiked !== null ? 'text-red-400' : 'text-gray-300'"
+                 :class="[! isLiked && isLiked !== null ? 'text-red-400' : 'text-gray-300']"
                  xmlns="http://www.w3.org/2000/svg"
                  fill="none"
                  viewBox="0 0 24 24"
@@ -83,7 +83,8 @@ export default {
         },
         check() {
             this.redirectIfGuest()
-            if (this.authLike && this.authLike.length) {
+
+            if (this.authLike && this.authLike.length > 0) {
                 if (this.authLike.filter(like => like.liked == true).length) {
                     this.isLiked = true
                 } if (this.authLike.filter(like => like.liked == false).length) {

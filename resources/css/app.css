@@ -72,17 +72,34 @@ body::-webkit-scrollbar-thumb {
 }
 a {
     @apply no-underline;
+}
+a {
     transition: all .2s ease !important;
 }
 a:hover {
     @apply no-underline;
 }
+.h-link {
+    @apply duration-500 ease-in-out
+}
+.h-link {
+    @layer h-transition
+}
 .h-link:hover {
     @apply no-underline font-semibold;
-    @layer translate-r-2;
+}
+.h-link:hover {
+    @layer h-transition translate-r-2;
 }
 .translate-r-2 {
-    transform: translateX(2px) !important;
+    transform: translateX(5px) !important;
+}
+.h-transition {
+    -webkit-transition: all .45s ease;
+    transition: all .45s ease;
+}
+.h-transform {
+    transform: translateY(5px);
 }
 .card {
     @apply bg-white shadow rounded-lg border-none;
@@ -90,18 +107,11 @@ a:hover {
 .card:hover {
     @apply shadow-2xl;
 }
-.transition {
-    -webkit-transition: all .45s ease;
-    transition: all .45s ease;
-}
-.h-transform {
-    transform: translateY(5px);
-}
 .h-input {
-    @apply /*form-input*/ block rounded-md shadow-sm w-full bg-white outline-none border-teal-200;
+    @apply block rounded-md shadow-sm w-full bg-white outline-none border-teal-200;
 }
 .h-input:focus {
-    @apply outline-none shadow border-none;
+    @apply outline-none shadow border-none appearance-none;
 }
 .h-select {
     @apply w-full block bg-white text-gray-700 outline-none border-teal-200 rounded-md py-3 px-3;
@@ -254,4 +264,13 @@ strong.required {
 .modal-dialog-enter, .modal-dialog-leave-to !* .fade-leave-active below version 2.1.8 *! {
     opacity: 0;
 }*/
+
+/* Transitions */
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
 

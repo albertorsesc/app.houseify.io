@@ -8,20 +8,21 @@
                 Caracteristicas de la Propiedad
             </h3>
             <div v-if="property.seller.id === auth">
-                <button @click="openModal" class="h-link bg-white border-emerald-900 -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                <button @click="openModal" class="h-link bg-white -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-emerald-500 focus:outline-none focus:shadow-outline-blue active:bg-emerald-50 active:text-emerald-800"
                         title="Registrar Caracteristicas de la Propiedad">
-                    <svg class="text-emerald-400 hover:text-emerald-600 hover:border-emerald-700 hover:border" width="25" height="25" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="text-emerald-400 hover:text-emerald-600" width="25" height="25" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </button>
             </div>
         </div>
-        <div v-if="propertyFeatures" class="border-t border-gray-200 mx-4 py-5 sm:px-6">
-            <dl class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-3">
-                <div v-if="propertyFeatures.features.property_size" class="sm:col-span-1">
+        <div v-if="isPropertyFeatureNotEmpty || property.comments" class="border-t border-gray-200 mx-4 py-5 sm:px-6">
+            <dl v-if="isPropertyFeatureNotEmpty" class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-3">
+                <div v-if="isNotEmpty(propertyFeatures.features.property_size)"
+                     class="sm:col-span-1">
                     <dt class="text-sm font-medium text-gray-500 flex">
                         <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
                         </svg>
                         m² Propiedad
                     </dt>
@@ -29,10 +30,10 @@
                         v-text="propertyFeatures.features.property_size"
                     ></dd>
                 </div>
-                <div v-if="propertyFeatures.features.construction_size" class="sm:col-span-1">
+                <div v-if="isNotEmpty(propertyFeatures.features.construction_size)" class="sm:col-span-1">
                     <dt class="text-sm font-medium text-gray-500 flex">
                         <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
                         </svg>
                         m² Construcción
                     </dt>
@@ -40,10 +41,10 @@
                         v-text="propertyFeatures.features.construction_size"
                     ></dd>
                 </div>
-                <div v-if="propertyFeatures.features.level_count" class="sm:col-span-1">
+                <div v-if="isNotEmpty(propertyFeatures.features.level_count)" class="sm:col-span-1">
                     <dt class="text-sm font-medium text-gray-500 flex">
                         <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
                         </svg>
                         No. Niveles
                     </dt>
@@ -51,10 +52,11 @@
                         v-text="propertyFeatures.features.level_count"
                     ></dd>
                 </div>
-                <div v-if="propertyFeatures.features.room_count" class="sm:col-span-1">
+                <div v-if="isNotEmpty(propertyFeatures.features.room_count)"
+                     class="sm:col-span-1">
                     <dt class="text-sm font-medium text-gray-500 flex">
                         <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
                         </svg>
                         No. Habitaciones
                     </dt>
@@ -62,10 +64,10 @@
                         v-text="propertyFeatures.features.room_count"
                     ></dd>
                 </div>
-                <div v-if="propertyFeatures.features.bathroom_count" class="sm:col-span-1">
+                <div v-if="isNotEmpty(propertyFeatures.features.bathroom_count)" class="sm:col-span-1">
                     <dt class="text-sm font-medium text-gray-500 flex">
                         <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
                         </svg>
                         No. Baños
                     </dt>
@@ -73,10 +75,10 @@
                         v-text="propertyFeatures.features.bathroom_count"
                     ></dd>
                 </div>
-                <div v-if="propertyFeatures.features.half_bathroom_count" class="sm:col-span-1">
+                <div v-if="isNotEmpty(propertyFeatures.features.half_bathroom_count)" class="sm:col-span-1">
                     <dt class="text-sm font-medium text-gray-500 flex">
                         <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
                         </svg>
                         No. Medios Baños
                     </dt>
@@ -85,7 +87,8 @@
                     ></dd>
                 </div>
             </dl>
-            <div class="sm:col-span-2 mt-4">
+            <div v-if="property.comments"
+                 class="sm:col-span-2 mt-4">
                 <dt class="text-sm font-medium text-gray-500">
                     Comentarios adicionales
                 </dt>
@@ -193,11 +196,13 @@
 
 <script>
 import VueMultiselect from "vue-multiselect";
+import properties from '../../mixins/properties'
 import SweetAlert from "../../models/SweetAlert";
 
 export default {
     name: "PropertyFeatures",
     inject: ['property'],
+    mixins: [properties],
     data() {
         return {
             endpoint: `/properties/${this.property.slug}/features`,
@@ -235,7 +240,8 @@ export default {
                 }
             }).then(response => {
                 this.closeModal()
-                this.propertyFeatures = response.data.data
+                this.propertyFeatures = response.data
+                Event.$emit('properties.features', this.propertyFeatures)
                 SweetAlert.success(`La Ubicación ha sido registrada exitosamente!`)
             }).catch(error => {
                 this.errors = error.response.status === 422 ?

@@ -21,7 +21,17 @@ module.exports = {
             }, timeToReload)
         },
         limitString(string, limit) {
-            return string ? string.substring(0, limit) + '...' : ''
+            return string ? string.substring(0, limit) + '.' : ''
+        },
+        formatPhone(string) {
+            let cleaned = ('' + string).replace(/\D/g, '');
+            let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+
+            if (match) {
+                return '(' + match[1] + ') ' + match[2] + '-' + match[3]
+            };
+
+            return string
         },
         isNotEmpty(number) {
             return parseInt(number) !== null && parseInt(number) > 0

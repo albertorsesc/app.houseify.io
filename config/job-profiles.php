@@ -20,6 +20,8 @@
             'Soldador',
             'Supervisor de Obra',
             'Tapicero',
+            'Tecnico en Linea Blanca',
+            'Reparador de Electrodomesticos',
             'Tabla roquero',
             'Yesero',
         ],

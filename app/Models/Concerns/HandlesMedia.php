@@ -7,8 +7,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
 
-trait HandlesMedia {
-
+trait HandlesMedia
+{
     // Relationship
     public function media () : \Illuminate\Database\Eloquent\Relations\MorphMany
     {
@@ -62,25 +62,27 @@ trait HandlesMedia {
 
     public function deleteMedia ($mediaId)
     {
-        $this->media()->find($mediaId)->delete();
+        $media = $this->media()->find($mediaId);
+        \Storage::delete($media->file_name);
+        $media->delete();
     }
 
-    public static function crypt(string $string)
+    public static function crypt(string $string) : string
     {
         return Str::limit(\Crypt::encrypt($string));
     }
 
-    public static function limitedHash(string $string)
+    public static function limitedHash(string $string) : string
     {
         return Str::limit(hash('sha256', $string),20, '');
     }
 
-    public static function getPluralModelName($model)
+    public static function getPluralModelName($model) : string
     {
         return Str::plural(Str::lower(class_basename($model)));
     }
 
-    public function getAcceptedExtensions()
+    public function getAcceptedExtensions() : array
     {
         return ['jpeg', 'png'];
     }

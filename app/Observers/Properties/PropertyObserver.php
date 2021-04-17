@@ -60,6 +60,18 @@ class PropertyObserver
     }
 
     /**
+     * Handle the Property "deleting" event.
+     *
+     * @param Property  $property
+     *
+     * @return void
+     */
+    public function deleting(Property $property)
+    {
+        $property->onDelete();
+    }
+
+    /**
      * Handle the Property "deleted" event.
      *
      * @param Property  $property

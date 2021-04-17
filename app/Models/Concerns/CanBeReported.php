@@ -6,7 +6,6 @@ use App\Models\Report;
 
 trait CanBeReported
 {
-
     public function reports()
     {
         return $this->morphMany(Report::class, 'reportable');

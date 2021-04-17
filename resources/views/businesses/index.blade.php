@@ -19,28 +19,28 @@
                             <a @click="activeTab = 'explore-businesses'"
                                role="button"
                                href="#"
-                               class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
+                               class="h-link mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5"
                                :class="[activeTab === 'explore-businesses' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Explorar Negocios
                             </a>
                             <a @click="activeTab = 'my-businesses'"
                                role="button"
                                href="#"
-                               class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
+                               class="h-link mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5"
                                :class="[activeTab === 'my-businesses' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Mis Negocios
                             </a>
                             <a @click="activeTab = 'my-interests'"
                                role="button"
                                href="#"
-                               class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
+                               class="h-link mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5"
                                :class="[activeTab === 'my-interests' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Mis Intereses
                             </a>
                             <a @click="activeTab = 'search-businesses'"
                                role="button"
                                href="#"
-                               class="mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5 transition duration-150 ease-in-out"
+                               class="h-link mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5"
                                :class="[activeTab === 'search-businesses' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Búsqueda de Negocios
                             </a>
@@ -52,7 +52,8 @@
                                 <a @click="activeTab = 'explore-businesses'"
                                    role="button"
                                    href="#"
-                                   class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out">
+                                   class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out"
+                                   :class="[activeTab === 'explore-businesses' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                     Explorar Negocios
                                 </a>
                             </div>
@@ -60,7 +61,8 @@
                                 <a @click="activeTab = 'my-businesses'"
                                    role="button"
                                    href="#"
-                                   class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out">
+                                   class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out"
+                                   :class="[activeTab === 'my-businesses' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                     Mis Negocios
                                 </a>
                             </div>
@@ -68,7 +70,8 @@
                                 <a @click="activeTab = 'my-interests'"
                                    role="button"
                                    href="#"
-                                   class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out">
+                                   class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out"
+                                   :class="[activeTab === 'my-interests' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                     Mis Intereses
                                 </a>
                             </div>
@@ -76,7 +79,8 @@
                                 <a @click="activeTab = 'search-businesses'"
                                    role="button"
                                    href="#"
-                                   class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out">
+                                   class="text-base font-normal text-cyan-500 hover:border-emerald-400 border-b-2 hover:text-cyan-600 leading-5 transition duration-150 ease-in-out"
+                                   :class="[activeTab === 'search-businesses' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                     Búsqueda de Negocios
                                 </a>
                             </div>

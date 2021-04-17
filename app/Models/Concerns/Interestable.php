@@ -6,15 +6,6 @@ use App\Models\Interest;
 
 trait Interestable
 {
-
-    //    protected static function bootInterestableTrait()
-    //    {
-    //        static::deleting(function ($model) {
-    //            $model->favorites->each->delete();
-    //        });
-
-    //    }
-
     public function interests()
     {
         return $this->morphMany(Interest::class, 'interestable');

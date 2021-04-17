@@ -21,7 +21,7 @@
                 <div class="flex items-center relative mb-3">
 <!--                    <div class="border-t border-gray-200 z-20 w-full"></div>-->
                     <div class="rounded-full border border-emerald-200 bg-white z-20 px-1 py-1 inline-block absolute mx-8 mb-8">
-                        <img v-if="business.logo !== null && business.logo.includes('png')"
+                        <img v-if="business.logo && business.logo.includes('png')"
                              :src="business.logo.replace('public', 'storage')"
                              class="inline-block object-cover object-center rounded-full h-20 w-20"
                              loading="lazy"
@@ -42,14 +42,21 @@
                         ></h2>
                     </div>
 
-                    <div class="text-xs border-t border-gray-300 py-2">
-                        <div class="flex justify-start"
-                             v-if="business.location || business.phone">
-                            <span v-if="business.location" :title="business.location.city">
-                                {{ limitString(business.location.city, 10) }}
-                            </span>, {{ business.location.state.code }} - México
+                    <div class="text-sm border-t border-gray-500 leading-relaxed font-medium py-2">
+                        <div class="flex justify-evenly align-middle items-center text-gray-700">
+                            <span v-if="business.location && business.location.neighborhood"
+                                  :title="business.location.neighborhood">
+                                {{ limitString(business.location.neighborhood, 10) }},
+                            </span>
+                            <span v-if="business.location && business.location.city"
+                                  :title="business.location.city">
+                                {{ limitString(business.location.city, 10) }},
+                            </span>
+                            <span v-if="business.location && business.location.state"
+                                  v-text="'  ' + business.location.state.code">
+                            </span>
                             <span class="mx-2">&bullet;</span>
-                            <span v-text="business.phone"></span>
+                            <span v-if="business.phone" v-text="formatPhone(business.phone)" class="text-sm text-gray-600"></span>
                         </div>
                     </div>
 

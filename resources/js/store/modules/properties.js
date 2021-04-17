@@ -2,7 +2,6 @@ const state = {
     businessTypes: [],
     propertyTypes: [],
     propertyCategories: [],
-
 }
 
 const getters = {
@@ -21,18 +20,17 @@ const actions = {
     fetchPropertyTypes({ commit }) {
         let storage = window.localStorage
         if (
-            this.auth &&
             storage.hasOwnProperty('app') &&
             JSON.parse(storage.app).hasOwnProperty('properties') &&
             JSON.parse(storage.app).properties.hasOwnProperty('propertyTypes') &&
-            JSON.parse(storage.app).properties.propertyTypes.length
+            JSON.parse(storage.app).properties.propertyTypes.length > 0
         ) {
             commit(
                 'SET_PROPERTY_TYPES',
                 JSON.parse(storage.app).properties.propertyTypes
             )
             dd('propertyTypes from properties.js')
-        } else if (this.auth) {
+        } else {
             return new Promise((resolve, reject) => {
                 axios.get("/property-types")
                     .then(response => {
@@ -44,12 +42,10 @@ const actions = {
                     })
             })
         }
-
     },
     fetchPropertyCategories({ commit }) {
         let storage = window.localStorage
         if (
-            this.auth &&
             storage.hasOwnProperty('app') &&
             JSON.parse(storage.app).hasOwnProperty('properties') &&
             JSON.parse(storage.app).properties.hasOwnProperty('propertyCategories') &&
@@ -60,7 +56,7 @@ const actions = {
                 JSON.parse(storage.app).properties.propertyCategories
             )
             dd('propertyCategories from properties.js')
-        } else if (this.auth) {
+        } else {
             return new Promise((resolve, reject) => {
                 axios.get("/property-categories")
                     .then(response => {
@@ -77,7 +73,6 @@ const actions = {
     fetchBusinessTypes({ commit }) {
         let storage = window.localStorage
         if (
-            this.auth &&
             storage.hasOwnProperty('app') &&
             JSON.parse(storage.app).hasOwnProperty('properties') &&
             JSON.parse(storage.app).properties.hasOwnProperty('businessTypes') &&
@@ -88,7 +83,7 @@ const actions = {
                 JSON.parse(storage.app).properties.businessTypes
             )
             dd('businessTypes from properties.js')
-        } else if (this.auth) {
+        } else {
             return new Promise((resolve, reject) => {
                 axios.get("/business-types")
                     .then(response => {
@@ -96,7 +91,7 @@ const actions = {
                     })
                     .catch(error => {
                         reject(error)
-                        console.log("Error fetching Business Types")
+                        dd("Error fetching Business Types")
                     })
             })
         }

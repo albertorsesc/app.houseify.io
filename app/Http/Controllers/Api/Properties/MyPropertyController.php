@@ -15,6 +15,7 @@ class MyPropertyController extends Controller
                 ->properties
                 ->load([
                     'media',
+                    'seller:id',
                     'interests',
                     'location.state',
                     'propertyCategory.propertyType',

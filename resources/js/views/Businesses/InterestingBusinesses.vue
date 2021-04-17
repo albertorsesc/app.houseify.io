@@ -11,7 +11,7 @@
                 <div class="container flex flex-col md:flex-row items-center justify-center px-5 text-gray-700">
                     <div class="max-w-md">
                         <div class="text-5xl font-dark font-bold">hmm..</div>
-                        <p class="text-2xl md:text-3xl font-light leading-normal">Parece que no estas interesado en ningun negocio aun. </p>
+                        <p class="text-2xl md:text-3xl font-light leading-normal">Parece que no estás interesado en ningún negocio aun. </p>
                         <p class="mb-8 mt-4">Explora Negocios tal vez encuentres algo que te agrade.</p>
                     </div>
                     <div class="max-w-lg">

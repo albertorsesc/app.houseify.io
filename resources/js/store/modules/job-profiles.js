@@ -12,7 +12,6 @@ const actions = {
     fetchSkills({ commit }) {
         let storage = window.localStorage
         if (
-            this.auth &&
             storage.hasOwnProperty('app') &&
             JSON.parse(storage.app).hasOwnProperty('jobProfiles') &&
             JSON.parse(storage.app).jobProfiles.hasOwnProperty('skills') &&
@@ -20,7 +19,7 @@ const actions = {
         ) {
             commit('SET_SKILLS', JSON.parse(storage.app).jobProfiles.skills)
             dd('skills from jobProfiles.js')
-        } else if (this.auth) {
+        } else {
             return new Promise((resolve, reject) => {
                 axios.get("/skills")
                     .then(response => {

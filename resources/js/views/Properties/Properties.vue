@@ -39,9 +39,6 @@ export default {
         }
     },
     mounted() {
-        // this.$store.dispatch('global/fetchStates')
-        // this.$store.dispatch('properties/fetchPropertyTypes')
-        // this.$store.dispatch('properties/fetchBusinessTypes')
     },
     components: {
         SearchProperties: () => import(/* webpackChunkName: "search-properties" */ './SearchProperties'),

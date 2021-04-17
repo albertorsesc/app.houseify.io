@@ -115,7 +115,7 @@
                         <!-- Description list-->
                         <section aria-labelledby="job-profile-information">
                             <div class="bg-white shadow sm:rounded-lg">
-                                <div class="px-4 py-5 sm:px-6">
+                                <div class="px-4 py-4 sm:px-6">
                                     <div class="flex justify-between">
                                         <h2 id="job-profile-information" class="text-lg leading-6 font-medium text-gray-900">
                                             Area de Expertiz/Habilidades
@@ -128,11 +128,11 @@
                                             :model-id="localJobProfile.uuid"
                                         ></likes>
                                     </div>
-                                    <p class="flex mt-2 max-w-2xl text-sm text-gray-500">
-                                    <span v-for="skill in jobProfile.skills"
-                                          class="flex-shrink-0 shadow-xs mr-2 inline-block px-2 py-0.5 border border-green-200 text-green-800 text-sm font-medium bg-green-100 rounded-full"
-                                          v-text="skill"
-                                    ></span>
+                                    <p class="flex max-w-2xl text-sm text-gray-500">
+                                        <span v-for="skill in jobProfile.skills"
+                                              class="flex-shrink-0 shadow-xs mr-2 inline-block px-2 py-0.5 border border-green-200 text-green-800 text-sm font-medium bg-green-100 rounded-full"
+                                              v-text="skill"
+                                        ></span>
                                     </p>
                                 </div>
                                 <div class="border-t border-gray-200 px-4 py-5 sm:px-6">

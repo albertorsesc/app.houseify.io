@@ -6,12 +6,20 @@
     <link rel="stylesheet" href="/css/vue-multiselect.min.css">
 @endsection
 
+@section('meta')
+    <meta property="og:url" content="{{ $business->publicProfile() }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ $business->name }}" />
+    <meta name="description" content="Propiedad en {{ $business->location ? $business->location->city . ' - ' . $business->location->state->code : null }}" />
+    <meta property="og:image" content="/#" />
+@endsection
+
 @section('content')
     <business-profile :business="{{ json_encode($business) }}" inline-template>
         <div>
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <div class="w-full flex justify-between items-center">
+                    <div class="w-full md:flex md:justify-between items-center">
                         <h2 class="font-semibold text-2xl text-teal-400"
                             v-text="localBusiness.name"
                         ></h2>
@@ -150,11 +158,37 @@
             <div class="mt-4 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
                 <div class="space-y-6 lg:col-start-1"
                      :class="[isAuthenticated && localBusiness.owner.id === auth ? 'lg:col-span-2' : 'lg:col-span-12']">
+                    <div class="md:hidden">
+                        <div class="w-full">
+                                <span class="rounded-md shadow-sm">
+                                    {{--Publish/UnPublish--}}
+                                    <button @click="toggle"
+                                            :disabled="! localBusiness.location"
+                                            type="button"
+                                            :class="[status.btnClass, ! localBusiness.location ? 'bg-gray-200' : '']"
+                                            class="-mt-1 flex shadow-sm justify-center w-full py-3 border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                            :title="localBusiness.status ? 'Ocultar mi Negocio del publico...' : 'Publicar mi Negocio...'">
+                                            <svg v-if="! localBusiness.status" class="text-green-300 hover:text-green-400 hover:border-green-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                            <svg v-if="localBusiness.status" class="text-gray-300 hover:text-gray-400 hover:border-gray-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                                    </button>
+                                </span>
+                        </div>
+                        <div class="w-full mt-3">
+                                <span class="rounded-md shadow-sm">
+                                    <button @click="openModal('put')"
+                                            type="button"
+                                            class="-mt-1 items-center shadow-sm w-full py-3 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                            title="Actualizar Datos del Negocio...">
+                                        <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                    </button>
+                                </span>
+                        </div>
+                    </div>
                     <!-- Description list-->
                     <section aria-labelledby="business-information">
 
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                            <div class="py-6 sm:px-0">
+                            <div class="py-2 md:py-0 sm:px-0">
                                 <div>
                                     <div v-if="localBusiness.owner.id === auth && ! localBusiness.location" class="mb-4">
                                         <alert :type="'warning'">
@@ -239,8 +273,8 @@
                                                         <dt class="text-sm font-medium text-gray-500">
                                                             Categorías del Negocio
                                                         </dt>
-                                                        <dd class="mt-2 text-sm flex text-gray-900">
-                                                            <div class="mr-3"
+                                                        <dd class="mt-2 text-sm flex flex-wrap text-gray-900">
+                                                            <div class="mr-3 my-2"
                                                                  v-for="(category, index) in localBusiness.categories"
                                                                  :key="index">
                                                             <span class="px-3 py-1 text-sm bg-emerald-100 font-medium leading-5 text-emerald-900 rounded-full shadow-sm"
@@ -249,19 +283,43 @@
                                                             </div>
                                                         </dd>
                                                     </div>
-                                                    <div class="sm:col-span-1">
+                                                    <div v-if="localBusiness.email" class="sm:col-span-1">
                                                         <dt class="text-sm font-medium text-gray-500">
                                                             Correo Electrónico
                                                         </dt>
                                                         <dd class="mt-1 text-sm text-gray-900" v-text="localBusiness.email"></dd>
                                                     </div>
-                                                    <div class="sm:col-span-1">
+                                                    <div v-if="localBusiness.phone" class="sm:col-span-1">
                                                         <dt class="text-sm font-medium text-gray-500">
                                                             Telefono
                                                         </dt>
-                                                        <dd class="mt-1 text-sm text-gray-900" v-text="localBusiness.phone"></dd>
+                                                        <dd class="mt-1 text-sm text-gray-900"
+                                                            v-text="formatPhone(localBusiness.phone)"
+                                                        ></dd>
                                                     </div>
-                                                    <div class="sm:col-span-1">
+                                                    <div v-if="localBusiness.facebookProfile" class="sm:col-span-1">
+                                                        <dt class="text-sm font-medium text-gray-500">
+                                                            Perfil de Facebook
+                                                        </dt>
+                                                        <dd class="mt-1 text-sm text-gray-900">
+                                                            <a :href="localBusiness.facebookProfile"
+                                                               class="h-link"
+                                                               v-text="localBusiness.facebookProfile"
+                                                            ></a>
+                                                        </dd>
+                                                    </div>
+                                                    <div v-if="localBusiness.linkedinProfile" class="sm:col-span-1">
+                                                        <dt class="text-sm font-medium text-gray-500">
+                                                            Perfil de LinkedIn
+                                                        </dt>
+                                                        <dd class="mt-1 text-sm text-gray-900">
+                                                            <a :href="localBusiness.linkedinProfile"
+                                                               class="h-link"
+                                                               v-text="localBusiness.linkedinProfile"
+                                                            ></a>
+                                                        </dd>
+                                                    </div>
+                                                    <div v-if="localBusiness.site" class="sm:col-span-1">
                                                         <dt class="text-sm font-medium text-gray-500">
                                                             Sitio Web
                                                         </dt>
@@ -278,7 +336,7 @@
                                                         </dt>
                                                         <dd class="mt-1 text-sm text-gray-900" v-text="localBusiness.meta.updatedAt"></dd>
                                                     </div>
-                                                    <div class="sm:col-span-2">
+                                                    <div v-if="localBusiness.comments" class="sm:col-span-2">
                                                         <dt class="text-sm font-medium text-gray-500">
                                                             Informacion Adicional
                                                         </dt>
@@ -301,148 +359,7 @@
                                                                 </div>
                                                             </div>-->
 
-                                    <divider title="Comentarios"></divider>
-
-                                    <div class="bg-white shadow-lg rounded-lg p-6 mt-4">
-                                        <div class="flow-root">
-                                            <ul class="-mb-8">
-                                                <li>
-                                                    <div class="relative pb-8">
-                                                        <span class="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                                                        <div class="relative flex items-start space-x-3">
-                                                            <div class="relative">
-                                                                <img class="h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white" src="https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=8&amp;w=256&amp;h=256&amp;q=80" alt="">
-
-                                                                <span class="absolute -bottom-0.5 -right-1 bg-white rounded-tl px-0.5 py-px">
-      <!-- Heroicon name: chat-alt -->
-      <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
-      </svg>
-    </span>
-                                                            </div>
-                                                            <div class="min-w-0 flex-1">
-                                                                <div>
-                                                                    <div class="text-sm">
-                                                                        <a href="#" class="font-medium text-gray-900">Eduardo Benz</a>
-                                                                    </div>
-                                                                    <p class="mt-0.5 text-sm text-gray-500">
-                                                                        Commented 6d ago
-                                                                    </p>
-                                                                </div>
-                                                                <div class="mt-2 text-sm text-gray-700">
-                                                                    <p>
-                                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum nec varius. Et diam cursus quis sed purus nam.
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-
-                                                <li>
-                                                    <div class="relative pb-8">
-                                                        <span class="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                                                        <div class="relative flex items-start space-x-3">
-                                                            <div>
-                                                                <div class="relative px-1">
-                                                                    <div class="h-8 w-8 bg-gray-100 rounded-full ring-8 ring-white flex items-center justify-center">
-                                                                        <!-- Heroicon name: user-circle -->
-                                                                        <svg class="h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
-                                                                        </svg>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="min-w-0 flex-1 py-1.5">
-                                                                <div class="text-sm text-gray-500">
-                                                                    <a href="#" class="font-medium text-gray-900">Hilary Mahy</a>
-                                                                    assigned
-                                                                    <a href="#" class="font-medium text-gray-900">Kristin Watson</a>
-                                                                    <span class="whitespace-nowrap">2d ago</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-
-                                                <li>
-                                                    <div class="relative pb-8">
-                                                        <span class="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                                                        <div class="relative flex items-start space-x-3">
-                                                            <div>
-                                                                <div class="relative px-1">
-                                                                    <div class="h-8 w-8 bg-gray-100 rounded-full ring-8 ring-white flex items-center justify-center">
-                                                                        <!-- Heroicon name: tag -->
-                                                                        <svg class="h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                                            <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-                                                                        </svg>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="min-w-0 flex-1 py-0">
-                                                                <div class="text-sm leading-8 text-gray-500">
-      <span class="mr-0.5">
-        <a href="#" class="font-medium text-gray-900">Hilary Mahy</a>
-        added tags
-      </span>
-                                                                    <span class="mr-0.5">
-        <a href="#" class="relative inline-flex items-center rounded-full border border-gray-300 px-3 py-0.5 text-sm">
-          <span class="absolute flex-shrink-0 flex items-center justify-center">
-            <span class="h-1.5 w-1.5 rounded-full bg-rose-500" aria-hidden="true"></span>
-          </span>
-          <span class="ml-3.5 font-medium text-gray-900">Bug</span>
-        </a>
-
-        <a href="#" class="relative inline-flex items-center rounded-full border border-gray-300 px-3 py-0.5 text-sm">
-          <span class="absolute flex-shrink-0 flex items-center justify-center">
-            <span class="h-1.5 w-1.5 rounded-full bg-indigo-500" aria-hidden="true"></span>
-          </span>
-          <span class="ml-3.5 font-medium text-gray-900">Accessibility</span>
-        </a>
-      </span>
-                                                                    <span class="whitespace-nowrap">6h ago</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-
-                                                <li>
-                                                    <div class="relative pb-8">
-                                                        <div class="relative flex items-start space-x-3">
-                                                            <div class="relative">
-                                                                <img class="h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=8&amp;w=256&amp;h=256&amp;q=80" alt="">
-
-                                                                <span class="absolute -bottom-0.5 -right-1 bg-white rounded-tl px-0.5 py-px">
-      <!-- Heroicon name: chat-alt -->
-      <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
-      </svg>
-    </span>
-                                                            </div>
-                                                            <div class="min-w-0 flex-1">
-                                                                <div>
-                                                                    <div class="text-sm">
-                                                                        <a href="#" class="font-medium text-gray-900">Jason Meyers</a>
-                                                                    </div>
-                                                                    <p class="mt-0.5 text-sm text-gray-500">
-                                                                        Commented 2h ago
-                                                                    </p>
-                                                                </div>
-                                                                <div class="mt-2 text-sm text-gray-700">
-                                                                    <p>
-                                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum nec varius. Et diam cursus quis sed purus nam. Scelerisque amet elit non sit ut tincidunt condimentum. Nisl ultrices eu venenatis diam.
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <modal modal-id="update-business" max-width="sm:max-w-5xl">
+                                    <modal v-if="localBusiness.owner.id === auth" modal-id="update-business" max-width="sm:max-w-5xl">
                                         <template #title>Actualizar Datos de tu Negocio</template>
                                         <template #content>
                                             <form @submit.prevent>
@@ -452,7 +369,6 @@
                                                         <div class="w-full">
                                                             <form-input
                                                                 title="Nombre del Negocio"
-                                                                v-model="businessForm.name"
                                                                 :data="businessForm.name"
                                                                 input-id="name"
                                                                 :error="errors.name"
@@ -465,7 +381,12 @@
 
                                                 <div class="w-full md:flex md:-mx-2 mt-4">
                                                     <div class="w-full md:mx-2 mt-3 md:mt-0">
-                                                        <div class="my-1 rounded-md shadow-sm text-base">
+                                                        <label for="neighborhood">
+                                                            <strong class="required">*</strong>
+                                                            Categorías
+                                                            <span class="text-gray-500 font-light text-xs">(requerido)</span>
+                                                        </label>
+                                                        <div class="mt-2 rounded-md shadow-sm text-base">
                                                             <vue-multiselect v-model="selectedConstructionCategories"
                                                                              :placeholder="''"
                                                                              :options="getConstructionCategories"
@@ -488,6 +409,7 @@
                                                 </div>
 
                                                 <div class="w-full md:flex md:-mx-2 mt-4">
+                                                    {{--Email--}}
                                                     <div class="w-full md:w-1/3 md:mx-2 mt-3 md:mt-0">
                                                         <form-input
                                                             title="Correo Electrónico"
@@ -497,7 +419,8 @@
                                                             :error="errors.email"
                                                         ></form-input>
                                                     </div>
-                                                    <div class="mt-2 md:mt-0 w-full md:w-1/3 md:mx-2">
+                                                    {{--Phone--}}
+                                                    <div class="w-full md:w-1/3 md:mx-2 mt-3 md:mt-0">
                                                         <form-input
                                                             title="Telefono"
                                                             v-model="businessForm.phone"
@@ -506,6 +429,7 @@
                                                             :error="errors.phone"
                                                         ></form-input>
                                                     </div>
+                                                    {{--Site--}}
                                                     <div class="w-full md:w-1/3 md:mx-2 mt-3 md:mt-0">
                                                         <form-input
                                                             title="Sitio Web"
@@ -517,10 +441,13 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="w-full my-6 md:mt-2">
+                                                <div class="w-full my-6 md:mt-3">
                                                     <div>
-                                                        <label for="comments">Comentarios</label>
-                                                        <div class="mt-1">
+                                                        <label for="comments">
+                                                            Comentarios
+                                                            <span class="text-gray-500 font-light text-xs">(opcional)</span>
+                                                        </label>
+                                                        <div class="mt-2">
                                                     <textarea v-model="businessForm.comments"
                                                               id="comments"
                                                               class="block rounded-md shadow-sm w-full outline-none border-emerald-200 bg-gray-50 focus:bg-white"
@@ -558,7 +485,7 @@
                 <section v-if="isAuthenticated && localBusiness.owner.id === auth"
                          aria-labelledby="timeline-title" class="lg:col-start-3 lg:col-span-1">
                     <div class="md:mt-6">
-                        <div class="md:flex mb-2">
+                        <div class="hidden md:flex mb-2">
                             <div class="w-full md:w-1/2 mr-2 mb-2 md:mb-0">
                                 <span class="rounded-md shadow-sm">
                                     {{--Publish/UnPublish--}}

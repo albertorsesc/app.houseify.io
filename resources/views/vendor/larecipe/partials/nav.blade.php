@@ -53,7 +53,7 @@
                 {{-- account --}}
                 <larecipe-dropdown>
                     <larecipe-button type="white" class="ml-2">
-                        {{ auth()->user()->name ?? 'Opciones' }} <i class="fa fa-angle-down"></i>
+                        {{ auth()->user()->first_name ?? 'Opciones' }} <i class="fa fa-angle-down"></i>
                     </larecipe-button>
 
                     <template slot="list">

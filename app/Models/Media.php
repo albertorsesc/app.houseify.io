@@ -15,4 +15,9 @@ class Media extends Model
     {
         return $this->morphTo();
     }
+
+    public function getFullUrl()
+    {
+        return \Storage::url($this->file_name);
+    }
 }

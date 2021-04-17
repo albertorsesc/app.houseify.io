@@ -18,7 +18,7 @@ class CreateBusinessesTable extends Migration
             $table->string('name', 150)->unique();
             $table->uuid('uuid')->unique();
             $table->string('slug')->unique()->index();
-            $table->foreignId('owner_id')->constrained('users');
+            $table->foreignId('owner_id')->constrained('users')->cascadeOnDelete();
             $table->json('categories');
             $table->string('email', 150)->nullable();
             $table->string('phone', 50)->nullable();
