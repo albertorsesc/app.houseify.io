@@ -26,7 +26,6 @@ class JobProfileRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:100'],
-            'birthdate_at' => ['required', 'date_format:Y-m-d'],
             'skills' => [
                 'required',
                 'array',

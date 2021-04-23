@@ -21,7 +21,16 @@ export default {
         return {
             endpoint: '/businesses/',
             localBusiness: this.business,
-            businessForm: {},
+            businessForm: {
+                name: '',
+                categories: [],
+                email: '',
+                phone: '',
+                facebookProfile: '',
+                linkedinProfile: '',
+                site: '',
+                comments: '',
+            },
             logo: '',
 
             selectedConstructionCategories: [],
@@ -42,6 +51,8 @@ export default {
                 categories: this.businessForm.categories ? this.businessForm.categories : this.localBusiness.categories,
                 email: this.businessForm.email ? this.businessForm.email : this.localBusiness.email,
                 phone: this.businessForm.phone ? this.businessForm.phone : this.localBusiness.phone,
+                facebook_profile: this.businessForm.facebookProfile ? this.businessForm.facebookProfile : this.localBusiness.facebookProfile,
+                linkedin_profile: this.businessForm.linkedinProfile ? this.businessForm.linkedinProfile : this.localBusiness.linkedinProfile,
                 site: this.businessForm.site ? this.businessForm.site : this.localBusiness.site,
                 comments: this.businessForm.comments,
             })
@@ -70,14 +81,13 @@ export default {
             if (action === 'put') {
                 this.modal.id = 'update-business'
 
-                // this.selectedPropertyType = this.localBusiness.businessCategory.businessType
-                // this.getPropertyCategoriesByPropertyType(this.selectedPropertyType)
-                // this.businessForm.businessCategory = this.localBusiness.businessCategory
                 this.businessForm.categories = this.selectedConstructionCategories = this.localBusiness.categories
                 this.businessForm.name = this.localBusiness.name
                 this.businessForm.categories = this.localBusiness.categories
                 this.businessForm.email = this.localBusiness.email
                 this.businessForm.phone = this.localBusiness.phone
+                this.businessForm.facebookProfile = this.localBusiness.facebookProfile
+                this.businessForm.linkedinProfile = this.localBusiness.linkedinProfile
                 this.businessForm.site = this.localBusiness.site
                 this.businessForm.comments = this.localBusiness.comments
             }

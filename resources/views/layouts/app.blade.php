@@ -25,6 +25,8 @@
         @livewireStyles
     </head>
     <body class="font-sans antialiased bg-gray-50">
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v10.0&appId=1068288016992504&autoLogAppEvents=1" nonce="nK4w4gy6"></script>
 {{--        <x-jet-banner />--}}
 
         {{--<div class="min-h-screen bg-gray-100">

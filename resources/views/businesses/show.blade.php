@@ -29,7 +29,7 @@
                                 <div>
                                     <button @click="openModal" class="h-link bg-white -mt-1 mr-1 shadow-sm rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                             title="Reportar Propiedad...">
-                                        <svg class="text-yellow-500 hover:text-yellow-600 hover:border-yellow-700 hover:border" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                        <svg class="text-yellow-500 hover:text-yellow-600" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                                     </button>
                                     <modal modal-id="reports" max-width="sm:max-w-md">
                                         <template #title>Reportar Negocio/Empresa</template>
@@ -85,7 +85,7 @@
                             </report>
                             <button class="h-link bg-white border-emerald-900 -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                     title="Eliminar Negocio">
-                                <svg class="text-red-500 hover:text-red-600 hover:border-red-700 hover:border" width="25" height="25"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                <svg class="text-red-500 hover:text-red-600" width="25" height="25"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                             </button>
                         </div>
 
@@ -95,7 +95,7 @@
                                 <div>
                                     <button @click="openModal" class="h-link bg-white -mt-1 mr-1 shadow-sm rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                             title="Reportar Propiedad...">
-                                        <svg class="text-yellow-500 hover:text-yellow-600 hover:border-yellow-700 hover:border" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                        <svg class="text-yellow-500 hover:text-yellow-600" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                                     </button>
                                     <modal modal-id="reports" max-width="sm:max-w-md">
                                         <template #title>Reportar Negocio/Empresa</template>
@@ -158,30 +158,33 @@
             <div class="mt-4 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
                 <div class="space-y-6 lg:col-start-1"
                      :class="[isAuthenticated && localBusiness.owner.id === auth ? 'lg:col-span-2' : 'lg:col-span-12']">
-                    <div class="md:hidden">
-                        <div class="w-full">
-                                <span class="rounded-md shadow-sm">
-                                    {{--Publish/UnPublish--}}
-                                    <button @click="toggle"
-                                            :disabled="! localBusiness.location"
-                                            type="button"
-                                            :class="[status.btnClass, ! localBusiness.location ? 'bg-gray-200' : '']"
-                                            class="-mt-1 flex shadow-sm justify-center w-full py-3 border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
-                                            :title="localBusiness.status ? 'Ocultar mi Negocio del publico...' : 'Publicar mi Negocio...'">
-                                            <svg v-if="! localBusiness.status" class="text-green-300 hover:text-green-400 hover:border-green-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                                            <svg v-if="localBusiness.status" class="text-gray-300 hover:text-gray-400 hover:border-gray-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
-                                    </button>
-                                </span>
+                    <div class="flex justify-end md:hidden mx-2 md:-mx-3 mt-1 mb-2">
+                        {{--Publish/UnPublish--}}
+                        <div class="w-full md:w-1/3 mx-2 md:mx-3 mb-2 md:mb-0">
+                            <span class="rounded-md shadow-sm">
+                                <button @click="toggle"
+                                        :disabled="! localBusiness.location"
+                                        type="button"
+                                        :class="[status.btnClass, ! localBusiness.location ? 'bg-gray-200' : '']"
+                                        class="-mt-1 flex shadow-sm justify-center w-full py-3 border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                        :title="localBusiness.status ? 'Ocultar mi Negocio del publico...' : 'Publicar mi Negocio...'">
+                                        <span v-if="! localBusiness.status" class="text-green-300 hover:text-green-400">Publicar</span>
+                                        <span v-if="localBusiness.status" class="text-gray-300 hover:text-gray-400">Ocultar</span>
+                                </button>
+                            </span>
                         </div>
-                        <div class="w-full mt-3">
-                                <span class="rounded-md shadow-sm">
-                                    <button @click="openModal('put')"
-                                            type="button"
-                                            class="-mt-1 items-center shadow-sm w-full py-3 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
-                                            title="Actualizar Datos del Negocio...">
-                                        <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                                    </button>
-                                </span>
+
+                        {{--Update--}}
+                        <div class="w-full md:w-1/3 mx-2 md:mx-3">
+                            <span class="rounded-md shadow-sm">
+                                <button @click="openModal('put')"
+                                        type="button"
+                                        class="-mt-1 items-center shadow-sm w-full py-3 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                        title="Actualizar Datos del Negocio...">
+                                    <span class="text-gray-300">Editar</span>
+{{--                                    <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>--}}
+                                </button>
+                            </span>
                         </div>
                     </div>
                     <!-- Description list-->
@@ -199,7 +202,7 @@
                                     {{--Likes--}}
                                     <div v-if="isAuthenticated"
                                          class="w-1/2 md:w-4/5 mb-2 items-end align-middle flex justify-end">
-                                        <div class="w-1/12 md:w-4/5 md:flex md:justify-end ">
+                                        <div class="w-1/12 md:w-4/5 md:flex sm:justify-end ">
                                             <likes
                                                 :endpoint="`/businesses/${localBusiness.slug}`"
                                                 :model="localBusiness"
@@ -291,7 +294,7 @@
                                                     </div>
                                                     <div v-if="localBusiness.phone" class="sm:col-span-1">
                                                         <dt class="text-sm font-medium text-gray-500">
-                                                            Telefono
+                                                            Teléfono
                                                         </dt>
                                                         <dd class="mt-1 text-sm text-gray-900"
                                                             v-text="formatPhone(localBusiness.phone)"
@@ -410,7 +413,7 @@
 
                                                 <div class="w-full md:flex md:-mx-2 mt-4">
                                                     {{--Email--}}
-                                                    <div class="w-full md:w-1/3 md:mx-2 mt-3 md:mt-0">
+                                                    <div class="w-full md:w-1/2 md:mx-2 mt-3 md:mt-0">
                                                         <form-input
                                                             title="Correo Electrónico"
                                                             v-model="businessForm.email"
@@ -420,13 +423,36 @@
                                                         ></form-input>
                                                     </div>
                                                     {{--Phone--}}
-                                                    <div class="w-full md:w-1/3 md:mx-2 mt-3 md:mt-0">
+                                                    <div class="w-full md:w-1/2 md:mx-2 mt-3 md:mt-0">
                                                         <form-input
-                                                            title="Telefono"
+                                                            title="Teléfono"
                                                             v-model="businessForm.phone"
                                                             :data="businessForm.phone"
                                                             input-id="phone"
                                                             :error="errors.phone"
+                                                        ></form-input>
+                                                    </div>
+                                                </div>
+
+                                                <div class="w-full md:flex md:-mx-2 mt-4">
+                                                    {{--Facebook Profile--}}
+                                                    <div class="w-full md:w-1/3 md:mx-2 mt-3 md:mt-0">
+                                                        <form-input
+                                                            title="Perfil de Facebook"
+                                                            v-model="businessForm.facebookProfile"
+                                                            :data="businessForm.facebookProfile"
+                                                            input-id="facebook_profile"
+                                                            :error="errors.facebook_profile"
+                                                        ></form-input>
+                                                    </div>
+                                                    {{--LinkedIn Profile--}}
+                                                    <div class="w-full md:w-1/3 md:mx-2 mt-3 md:mt-0">
+                                                        <form-input
+                                                            title="Perfil de LinkedIn"
+                                                            v-model="businessForm.linkedinProfile"
+                                                            :data="businessForm.linkedinProfile"
+                                                            input-id="linkedin_profile"
+                                                            :error="errors.linkedin_profile"
                                                         ></form-input>
                                                     </div>
                                                     {{--Site--}}
@@ -485,32 +511,34 @@
                 <section v-if="isAuthenticated && localBusiness.owner.id === auth"
                          aria-labelledby="timeline-title" class="lg:col-start-3 lg:col-span-1">
                     <div class="md:mt-6">
-                        <div class="hidden md:flex mb-2">
+                        <div class="hidden lg:flex mb-2">
+                            {{--Publish/UnPublish--}}
                             <div class="w-full md:w-1/2 mr-2 mb-2 md:mb-0">
                                 <span class="rounded-md shadow-sm">
-                                    {{--Publish/UnPublish--}}
                                     <button @click="toggle"
                                             :disabled="! localBusiness.location"
                                             type="button"
                                             :class="[status.btnClass, ! localBusiness.location ? 'bg-gray-200' : '']"
                                             class="-mt-1 flex shadow-sm justify-center w-full py-3 border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                             :title="localBusiness.status ? 'Ocultar mi Negocio del publico...' : 'Publicar mi Negocio...'">
-                                            <svg v-if="! localBusiness.status" class="text-green-300 hover:text-green-400 hover:border-green-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                                            <svg v-if="localBusiness.status" class="text-gray-300 hover:text-gray-400 hover:border-gray-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                                        <span v-if="! localBusiness.status" class="text-green-300 hover:text-green-400">Publicar</span>
+                                        <span v-if="localBusiness.status" class="text-gray-300 hover:text-gray-400">Ocultar</span>
                                     </button>
                                 </span>
                             </div>
+                            {{--Update--}}
                             <div class="w-full md:w-1/2 mb-2 md:mb-0">
                                 <span class="rounded-md shadow-sm">
                                     <button @click="openModal('put')"
                                             type="button"
                                             class="-mt-1 items-center shadow-sm w-full py-3 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                             title="Actualizar Datos del Negocio...">
-                                        <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                        <span class="text-gray-300">Editar</span>
                                     </button>
                                 </span>
                             </div>
                         </div>
+
                         <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
                             <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Actividad</h2>
 

@@ -2,7 +2,6 @@
 
 namespace App\Models\JobProfiles;
 
-use Carbon\Carbon;
 use App\Models\User;
 use Laravel\Scout\Searchable;
 use App\Models\Concerns\{HasLocation, Likeable, Publishable, CanBeReported, SerializeTimestamps};
@@ -18,8 +17,8 @@ class JobProfile extends Model
         CanBeReported,
         SerializeTimestamps;
 
-    protected $casts = ['skills' => 'array', 'status' => 'boolean', 'birthdate_at' => 'datetime:Y-m-d'];
-    protected $fillable = ['title', 'skills', 'birthdate_at', 'email', 'phone', 'facebook_profile', 'site', 'bio', 'photo'];
+    protected $casts = ['skills' => 'array', 'status' => 'boolean',];
+    protected $fillable = ['title', 'skills', 'email', 'phone', 'facebook_profile', 'linkedin_profile', 'site', 'bio', 'photo'];
 
     public function getRouteKeyName() : string
     {
@@ -51,11 +50,6 @@ class JobProfile extends Model
         return route('web.job-profiles.show', $this);
     }
 
-    public function getAge() : int
-    {
-        return Carbon::parse($this->birthdate_at)->age;
-    }
-
     public static function getReportingCauses () : array
     {
         return array_merge([
@@ -75,7 +69,6 @@ class JobProfile extends Model
                 'uuid' => $this->uuid,
                 'title' => $this->title,
                 'slug' => $this->slug,
-                'age' => $this->getAge(),
                 'skills' => $this->skills,
                 'email' => $this->email,
                 'phone' => $this->phone,
@@ -106,6 +99,6 @@ class JobProfile extends Model
 
     public function shouldBeSearchable() : bool
     {
-        return $this->isPublished() && $this->location;
+        return $this->status && $this->location;
     }
 }

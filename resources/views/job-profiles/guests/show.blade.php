@@ -68,7 +68,7 @@
                                     <dl class="flex-wrap md:flex sm:justify-between mt-3">
                                         <div class="w-full md:w-1/2 py-1" v-if="localJobProfile.phone">
                                             <dt class="text-sm font-medium text-gray-500">
-                                                Telefono
+                                                Teléfono
                                             </dt>
                                             <dd class="mt-1 text-sm text-gray-900" v-text="localJobProfile.phone"></dd>
                                         </div>

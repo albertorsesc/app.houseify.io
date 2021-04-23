@@ -36,34 +36,29 @@
 
                 <div class="px-8 pb-1 w-full mt-8 items-center">
 
-                    <div class="flex items-center">
+                    <div class="flex">
                         <h2 class="text-gray-800 text-xl font-bold"
                             v-text="business.name"
                         ></h2>
                     </div>
 
                     <div class="text-sm border-t border-gray-500 leading-relaxed font-medium py-2">
-                        <div class="flex justify-evenly align-middle items-center text-gray-700">
-                            <span v-if="business.location && business.location.neighborhood"
-                                  :title="business.location.neighborhood">
-                                {{ limitString(business.location.neighborhood, 10) }},
-                            </span>
+                        <div class="flex justify-start align-middle items-center text-gray-700">
                             <span v-if="business.location && business.location.city"
-                                  :title="business.location.city">
-                                {{ limitString(business.location.city, 10) }},
+                                  :title="business.location.city"
+                                  class="mr-4">
+                                {{ limitString(business.location.city, 15) }},
                             </span>
                             <span v-if="business.location && business.location.state"
                                   v-text="'  ' + business.location.state.code">
                             </span>
-                            <span class="mx-2">&bullet;</span>
-                            <span v-if="business.phone" v-text="formatPhone(business.phone)" class="text-sm text-gray-600"></span>
                         </div>
                     </div>
 
                 </div>
 
                 <!--Categories-->
-                <div class="flex justify-evenly text-left items-start align-middle px-2">
+                <div class="flex justify-evenly text-left items-start align-middle">
                     <div class="px-3 py-1 text-xs bg-emerald-100 font-medium leading-5 text-emerald-900 rounded-full shadow-sm"
                          v-for="(category, index) in business.categories"
                          :key="index"

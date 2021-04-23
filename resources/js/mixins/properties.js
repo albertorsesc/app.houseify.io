@@ -1,9 +1,7 @@
 module.exports = {
-    computed: {
+    methods: {
         // Property Features
-        isPropertyFeatureNotEmpty() {
-            let propertyFeature = this.property.propertyFeature
-
+        isPropertyFeatureNotEmpty(propertyFeature) {
             if (propertyFeature && Object.keys(propertyFeature.features).length > 0) {
                 return this.isNotEmpty(propertyFeature.features.property_size) ||
                     this.isNotEmpty(propertyFeature.features.construction_size) ||
@@ -14,5 +12,5 @@ module.exports = {
             }
             return false
         },
-    }
+    },
 }

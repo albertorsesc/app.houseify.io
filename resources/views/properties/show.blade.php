@@ -19,7 +19,7 @@
         <div>
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <div class="w-full sm:flex sm:justify-between">
+                    <div class="w-full md:flex md:justify-between">
                         <h2 class="font-semibold text-2xl text-teal-400"
                             v-text="localProperty.title"
                         ></h2>
@@ -161,7 +161,7 @@
                             @if($property->seller->id === auth()->id())
                                 {{--Delete--}}
                                 <button @click="onDelete"
-                                        class="h-link bg-white border-emerald-900 -mt-1 shadow rounded-md py-2 px-2 float-left appearance-none hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                        class="h-link bg-white -mt-1 mr-1 shadow-sm rounded-md py-2 px-2 hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                         title="Eliminar Propiedad">
                                     <svg class="text-red-500 hover:text-red-600" width="25" height="25"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                 </button>
@@ -182,10 +182,10 @@
 
                             <alert v-if="localProperty.seller.id === auth && ! localProperty.propertyFeature && localProperty.location"
                                    :type="'primary'">
-                                Aparece en nuestra
+                                ¡ Aparece en nuestra
                                 <a href="#" class="h-link">
                                     Búsqueda Avanzada
-                                </a> agregando las Caracteristicas relevantes!
+                                </a> agregando las Características relevantes!
                             </alert>
 
                             <!--<alert :type="'info'">
@@ -196,32 +196,32 @@
                             <div class="w-full mb-2 md:flex mt-4">
                                 <div class="md:hidden">
                                     @if(auth()->check() && auth()->user()->owns($property, 'seller_id'))
-                                        <div class="md:hidden  md:-mx-2 mt-1 mb-2">
+                                        <div class="flex justify-end md:hidden mx-2 md:-mx-3 mt-1 mb-2">
                                             {{--Publish/Unpublish--}}
-                                            <div class="w-full md:w-1/2 md:mx-2 mb-2 md:mb-0">
-                                        <span class="rounded-md shadow-sm">
-                                            <button @click="toggle"
-                                                    :disabled="! localProperty.location"
-                                                    type="button"
-                                                    :class="[status.btnClass, ! localProperty.location ? 'bg-gray-200' : '']"
-                                                    class="-mt-1 flex shadow-sm justify-center w-full py-3 border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
-                                                    :title="localProperty.status ? 'Ocultar esta Propiedad del publico...' : 'Hacer publico esta Propiedad...'">
-                                                <svg v-if="! localProperty.status" class="text-green-300 hover:text-green-400 hover:border-green-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                                                <svg v-if="localProperty.status" class="text-gray-300 hover:text-gray-400 hover:border-gray-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
-                                            </button>
-                                        </span>
+                                            <div class="w-full md:w-1/3 mx-2 md:mx-3 mb-2 md:mb-0">
+                                                <span class="rounded-md shadow-sm">
+                                                    <button @click="toggle"
+                                                            :disabled="! localProperty.location"
+                                                            type="button"
+                                                            :class="[status.btnClass, ! localProperty.location ? 'bg-gray-200' : '']"
+                                                            class="-mt-1 flex shadow-sm justify-center w-full py-3 border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                                            :title="localProperty.status ? 'Ocultar esta Propiedad del publico...' : 'Hacer publico esta Propiedad...'">
+                                                        <svg v-if="! localProperty.status" class="text-green-300 hover:text-green-400 hover:border-green-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                                        <svg v-if="localProperty.status" class="text-gray-300 hover:text-gray-400 hover:border-gray-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                                                    </button>
+                                                </span>
                                             </div>
 
                                             {{--Update Property--}}
-                                            <div class="w-full md:w-1/2 md:mx-2">
-                                        <span class="rounded-md shadow-sm">
-                                            <button @click="openModal('put')"
-                                                    type="button"
-                                                    class="-mt-1 items-center shadow-sm w-full py-3 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
-                                                    title="Actualizar Datos de la Propiedad...">
-                                                <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                                            </button>
-                                        </span>
+                                            <div class="w-full md:w-1/3 mx-2 md:mx-3">
+                                                <span class="rounded-md shadow-sm">
+                                                    <button @click="openModal('put')"
+                                                            type="button"
+                                                            class="-mt-1 items-center shadow-sm w-full py-3 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                                            title="Actualizar Datos de la Propiedad...">
+                                                        <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                                    </button>
+                                                </span>
                                             </div>
                                         </div>
                                     @endif
@@ -252,8 +252,8 @@
                                                     :class="[status.btnClass, ! localProperty.location ? 'bg-gray-200' : '']"
                                                     class="-mt-1 flex shadow-sm justify-center w-full py-3 border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                                     :title="localProperty.status ? 'Ocultar esta Propiedad del publico...' : 'Hacer publico esta Propiedad...'">
-                                                <svg v-if="! localProperty.status" class="text-green-300 hover:text-green-400 hover:border-green-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                                                <svg v-if="localProperty.status" class="text-gray-300 hover:text-gray-400 hover:border-gray-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                                                <span v-if="! localProperty.status" class="text-green-300 hover:text-green-400">Publicar</span>
+                                                <span v-if="localProperty.status" class="text-gray-300 hover:text-gray-400">Ocultar</span>
                                             </button>
                                         </span>
                                         </div>
@@ -265,7 +265,7 @@
                                                     type="button"
                                                     class="-mt-1 items-center shadow-sm w-full py-3 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                                     title="Actualizar Datos de la Propiedad...">
-                                                <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                                <span class="text-gray-300">Editar</span>
                                             </button>
                                         </span>
                                         </div>
@@ -413,16 +413,14 @@
 
                             @if(auth()->check() && auth()->id() === $property->seller_id)
                             <div>
-                                <divider title="Imágenes"></divider>
+
                                 <property-images></property-images>
                             </div>
                             @endif
 
-                            <divider title="Ubicación"></divider>
+
 
                             <property-location></property-location>
-
-                            <divider title="Caracteristicas"></divider>
 
                             <property-features></property-features>
 
@@ -442,21 +440,19 @@
                                         <form @submit.prevent>
 
                                             <div class="w-full md:flex md:-mx-2 mt-4">
-                                                <div class="w-full md:w-2/3 mx-2">
-                                                    <div class="w-full">
-                                                        <form-input
-                                                            title="Título de la Publicación"
-                                                            :is-required="true"
-                                                            v-model="propertyForm.title"
-                                                            :data="propertyForm.title"
-                                                            input-id="title"
-                                                            :error="errors.title"
-                                                            placeholder="Casa Hermosa junto a la playa..."
-                                                            @change="propertyForm.title"
-                                                        ></form-input>
-                                                    </div>
+                                                <div class="w-full md:w-2/3 md:mx-2">
+                                                    <form-input
+                                                        title="Título de la Publicación"
+                                                        :is-required="true"
+                                                        v-model="propertyForm.title"
+                                                        :data="propertyForm.title"
+                                                        input-id="title"
+                                                        :error="errors.title"
+                                                        placeholder="Casa Hermosa junto a la playa..."
+                                                        @change="propertyForm.title"
+                                                    ></form-input>
                                                 </div>
-                                                <div class="w-full md:w-1/3 mx-2 mt-3 md:mt-0">
+                                                <div class="w-full md:w-1/3 md:mx-2 mt-3 md:mt-0">
                                                     <div :class="['form-group', errors.business_type ? 'invalid' : '']">
                                                         <label for="business_type">
                                                             <strong class="required">*</strong>
@@ -485,7 +481,7 @@
                                             </div>
 
                                             <div class="w-full md:flex md:-mx-2 mt-4">
-                                                <div class="w-full md:w-1/3 mx-2 mt-3 md:mt-0">
+                                                <div class="w-full md:w-1/3 md:mx-2 mt-3 md:mt-0">
                                                     <form-input
                                                         title="Precio"
                                                         type="number"
@@ -497,7 +493,7 @@
                                                         placeholder="300000"
                                                     ></form-input>
                                                 </div>
-                                                <div class="w-full md:w-1/3 mx-2 mt-3 md:mt-0">
+                                                <div class="w-full md:w-1/3 md:mx-2 mt-3 md:mt-0">
                                                     <div class="form-group">
                                                         <label for="property_type_id">
                                                             <strong class="required">*</strong>
@@ -521,7 +517,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="w-full md:w-1/3 mx-2 mt-3 md:mt-0 mb-4">
+                                                <div class="w-full md:w-1/3 md:mx-2 mt-3 md:mt-0 mb-4">
                                                     <div :class="['form-group', errors.property_category_id ? 'invalid' : '']">
                                                         <label for="property_category_id">
                                                             <strong class="required">*</strong>
@@ -549,7 +545,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="w-full my-6 mx-2 md:mt-0">
+                                            <div class="w-full my-6 md:mx-2 md:mt-0">
                                                 <div class="form-group">
                                                     <label for="comments">Comentarios</label>
                                                     <span class="text-gray-500 font-light text-xs">(opcional)</span>

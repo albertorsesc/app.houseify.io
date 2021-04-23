@@ -17,6 +17,10 @@
                             <label for="name" class="block text-sm font-medium text-gray-700">
                                 <strong class="required">*</strong>
                                 Nombre del Negocio
+                                <span class="text-gray-500 font-light text-xs">(requerido)</span>
+                                <span class="ml-2 text-gray-700 font-light text-xs">
+                                    Asegúrate de introducir el nombre correcto, una vez registrado no puede ser cambiado.
+                                </span>
                             </label>
                             <div class="my-1 flex rounded-md shadow-sm">
                                 <input type="text"
@@ -34,6 +38,7 @@
                             <div class="w-full md:mx-2">
                                 <label for="categories" class="block text-sm font-medium text-gray-700">
                                     Categorías
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base ring-white">
                                     <vue-multiselect v-model="businessForm.categories"
@@ -48,28 +53,9 @@
                                                      select-label=""
                                                      selected-label=""
                                                      deselect-label=""
-                                                     placeholder="Selecciona las Categorías de Construcción de tu Negocio..."
+                                                     placeholder="Selecciona las Categorías de tu Negocio..."
                                     ></vue-multiselect>
                                 </div>
-<!--                                <vue-multiselect v-model="businessForm.categories"
-                                                 :options="categories"
-                                                 id="categories"
-                                                 :multiple="true"
-                                                 :value="Array"
-                                                 label="name"
-                                                 :searchable="true"
-                                                 :show-labels="true"
-                                                 select-label=""
-                                                 selected-label=""
-                                                 deselect-label=""
-                                                 :close-on-select="false"
-                                                 :clear-on-select="false"
-                                                 :hide-selected="true"
-                                                 placeholder="Selecciona tu Estado...">
-                                    <template slot="noResult">
-                                        <span class="text-lg text-yellow-600">Lo sentimos, no se encontraron resultados :(</span>
-                                    </template>
-                                </vue-multiselect>-->
                             </div>
                         </div>
 
@@ -77,6 +63,7 @@
                             <div class="w-full md:w-1/2 md:mx-2">
                                 <label for="email" class="block text-sm font-medium text-gray-700">
                                     Correo Electrónico
+                                    <span class="text-gray-500 font-light text-xs">(opcional)</span>
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base">
                                     <input type="email"
@@ -91,7 +78,8 @@
                             </div>
                             <div class="mt-4 md:mt-0 w-full md:w-1/2 md:mx-2">
                                 <label for="phone" class="block text-sm font-medium text-gray-700">
-                                    Telefono
+                                    Teléfono
+                                    <span class="text-gray-500 font-light text-xs">(opcional)</span>
                                 </label>
                                 <div class="my-1 flex rounded-md shadow-sm">
                                     <input type="text"
@@ -109,7 +97,38 @@
                         <div class="sm:col-span-4 md:flex md:-mx-2">
                             <div class="w-full md:mx-2">
                                 <label for="site" class="block text-sm font-medium text-gray-700">
+                                    Perfil de Facebook
+                                    <span class="text-gray-500 font-light text-xs">(opcional)</span>
+                                </label>
+                                <div class="my-1 rounded-md shadow-sm text-base">
+                                    <input type="text"
+                                           v-model="businessForm.facebookProfile"
+                                           id="facebook_profile"
+                                           class="h-input flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                </div>
+                                <errors :error="errors.facebook_profile"
+                                        :options="{ noContainer: true }"
+                                ></errors>
+                            </div>
+                            <div class="w-full md:mx-2">
+                                <label for="site" class="block text-sm font-medium text-gray-700">
+                                    Perfil de LinkedIn
+                                    <span class="text-gray-500 font-light text-xs">(opcional)</span>
+                                </label>
+                                <div class="my-1 rounded-md shadow-sm text-base">
+                                    <input type="text"
+                                           v-model="businessForm.linkedinProfile"
+                                           id="linkedin_profile"
+                                           class="h-input flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                </div>
+                                <errors :error="errors.linkedin_profile"
+                                        :options="{ noContainer: true }"
+                                ></errors>
+                            </div>
+                            <div class="w-full md:mx-2">
+                                <label for="site" class="block text-sm font-medium text-gray-700">
                                     Sitio Web
+                                    <span class="text-gray-500 font-light text-xs">(opcional)</span>
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base">
                                     <input type="text"
@@ -118,7 +137,7 @@
                                            autocomplete="site"
                                            class="h-input flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
                                 </div>
-                                <errors :error="errors.email"
+                                <errors :error="errors.site"
                                         :options="{ noContainer: true }"
                                 ></errors>
                             </div>
@@ -128,6 +147,7 @@
                         <div class="sm:col-span-4">
                             <label for="about" class="block text-sm font-medium text-gray-700">
                                 Comentarios adicionales
+                                <span class="text-gray-500 font-light text-xs">(opcional)</span>
                             </label>
                             <div class="mt-1">
                                 <textarea id="about"

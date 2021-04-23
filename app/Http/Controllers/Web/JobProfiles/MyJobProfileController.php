@@ -11,17 +11,22 @@ class MyJobProfileController extends Controller
 {
     public function show (JobProfile $jobProfile)
     {
+        abort_unless(
+            $jobProfile->status ||
+            $jobProfile->wasCreatedByAuth('user_id'),
+            404,
+        );
+
         return view('job-profiles.show', [
             'jobProfile' => new JobProfileResource(
                 $jobProfile->load([
-                    'likes:id,likeable_type,likeable_id',
+                    'likes',
+                    'location.state:id,name',
                     'user:id,first_name,last_name',
-                    'location.state:id,name'
                 ])
             )
         ]);
     }
-
     public function display (JobProfile $jobProfile)
     {
         return view('job-profiles.guests.show', [

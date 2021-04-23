@@ -18,11 +18,11 @@ class CreateJobProfilesTable extends Migration
             $table->uuid('uuid')->unique()->index();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('title', 100);
-            $table->date('birthdate_at')->nullable();
             $table->json('skills');
             $table->string('email', 150)->nullable();
             $table->string('phone', 60)->nullable();
             $table->string('facebook_profile', 255)->nullable();
+            $table->string('linkedin_profile', 255)->nullable();
             $table->string('site', 255)->nullable();
             $table->text('bio')->nullable();
             $table->string('photo')->nullable();

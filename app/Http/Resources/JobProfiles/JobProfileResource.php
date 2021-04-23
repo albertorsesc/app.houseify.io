@@ -23,8 +23,6 @@ class JobProfileResource extends JsonResource
             'user' => new UserResource($this->whenLoaded('user')),
             'title' => $this->title,
             'skills' => $this->skills,
-            'birthdateAt' => $this->birthdate_at->format('Y-m-d'),
-            'age' => $this->getAge(),
             'email' => $this->email,
             'phone' => $this->phone,
             'facebookProfile' => $this->facebook_profile,

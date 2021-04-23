@@ -53,7 +53,7 @@
                                         <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
                                             <div>
                                                 <div class="flex text-sm font-medium text-emerald-600 truncate">
-                                                    <p>Caracteristicas</p>
+                                                    <p>Características</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -70,7 +70,7 @@
                     </div>
                 </div>
 
-                <div class="w-full md:w-2/3 md:mx-2">
+                <div class="mt-4 w-full md:w-2/3 md:mx-2">
                     <div>
                         <!--Basic Details-->
                         <div v-show="filtersTab === 'basic-details'"
@@ -80,7 +80,7 @@
                                     Filtrar por Datos Basicos
                                 </h3>
                             </div>
-                            <div class="flex justify-between mt-6">
+                            <div class="md:flex md:justify-between mt-6">
                                 <!--Business Type-->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">
@@ -91,7 +91,7 @@
                                     ></ais-refinement-list>
                                 </div>
                                 <!--Property Type-->
-                                <div>
+                                <div class="my-3 md:my-0">
                                     <label class="block text-sm font-medium text-gray-700">
                                         Tipo de Propiedad
                                     </label>
@@ -100,7 +100,7 @@
                                     ></ais-refinement-list>
                                 </div>
                                 <!--Property Category-->
-                                <div>
+                                <div class="my-3 md:my-0">
                                     <label class="block text-sm font-medium text-gray-700">
                                         Categoría de la Propiedad
                                     </label>
@@ -109,20 +109,20 @@
                                     ></ais-refinement-list>
                                 </div>
                             </div>
-                            <div class="flex justify-between mt-6 md:-mx-2">
+                            <div class="md:flex md:justify-between md:-mx-2 md:mt-4">
                                 <!--Price Range-->
-                                <div class="w-1/3 md:mx-2">
+                                <div class="w-full md:w-1/3 md:mx-2">
                                     <label class="block text-sm font-medium text-gray-700">
                                         Rango de Precio
                                     </label>
-                                    <div class="flex mt-4">
+                                    <div class="md:flex my-3">
                                         <ais-numeric-menu
                                             attribute="price"
                                             :items="priceRanges"/>
                                     </div>
                                 </div>
                                 <!--Title and Comments-->
-                                <div class="w-2/3 md:mx-2">
+                                <div class="w-full md:w-2/3 md:mx-2">
                                     <label class="block text-sm font-medium text-gray-700">
                                         Busca por Titulo o Comentarios
                                     </label>
@@ -136,15 +136,16 @@
                         </div>
 
                         <!--Location-->
-                        <div v-show="filtersTab === 'location'" class="bg-white rounded-lg shadow-md px-8 pt-4 pb-20 w-full mb-4">
+                        <div v-show="filtersTab === 'location'"
+                             class="bg-white rounded-lg shadow-md px-8 pt-4 pb-20 w-full mb-4">
                             <div class="align-middle mb-4">
                                 <h3 class="text-lg leading-6 font-medium text-cyan-500">
                                     Filtrar por Ubicación
                                 </h3>
                             </div>
-                            <div class="flex justify-between my-2">
+                            <div class="md:flex md:justify-between my-2">
                                 <!--State-->
-                                <div>
+                                <div class="my-3 md:my-0">
                                     <label class="block text-sm font-medium text-gray-700">
                                         Estado
                                     </label>
@@ -153,7 +154,7 @@
                                     ></ais-refinement-list>
                                 </div>
                                 <!--City-->
-                                <div>
+                                <div class="my-3 md:my-0">
                                     <label class="block text-sm font-medium text-gray-700">
                                         Ciudad
                                     </label>
@@ -162,7 +163,7 @@
                                     ></ais-refinement-list>
                                 </div>
                                 <!--Neighborhood-->
-                                <div>
+                                <div class="my-3 md:my-0">
                                     <label class="block text-sm font-medium text-gray-700">
                                         Fraccionamiento/Colonia
                                     </label>
@@ -174,15 +175,16 @@
                         </div>
 
                         <!--Features-->
-                        <div v-show="filtersTab === 'features'" class="bg-white rounded-lg shadow-md px-8 py-4 w-full mb-4">
+                        <div v-show="filtersTab === 'features'"
+                             class="bg-white rounded-lg shadow-md px-8 py-4 w-full mb-4">
                             <div class="align-middle mb-4">
                                 <h3 class="text-lg leading-6 font-medium text-cyan-500">
-                                    Filtrar por Caracteristicas
+                                    Filtrar por Características
                                 </h3>
                             </div>
-                            <div class="flex justify-between my-2 md:-mx-2">
+                            <div class="md:flex md:justify-between my-2 md:-mx-2">
                                 <!--Property Size-->
-                                <div class="w-1/3 md:mx-2">
+                                <div class="w-full md:w-1/3 md:mx-2">
                                     <label class="block text-sm font-medium text-gray-700">
                                         m² Propiedad
                                     </label>
@@ -193,7 +195,7 @@
                                     </div>
                                 </div>
                                 <!--Construction size-->
-                                <div class="w-1/3 md:mx-2">
+                                <div class="w-full md:w-1/3 md:mx-2 my-2 md:my-0">
                                     <label class="block text-sm font-medium text-gray-700">
                                         m² de Construcción
                                     </label>
@@ -204,7 +206,7 @@
                                     </div>
                                 </div>
                                 <!--Level count-->
-                                <div class="w-1/3 md:mx-2">
+                                <div class="w-full md:w-1/3 md:mx-2 my-2 md:my-0">
                                     <label class="block text-sm font-medium text-gray-700">
                                         No. de Niveles
                                     </label>
@@ -216,9 +218,9 @@
                                 </div>
                             </div>
 
-                            <div class="flex justify-between my-4 md:-mx-2">
+                            <div class="md:flex md:justify-between my-4 md:-mx-2">
                                 <!--Bathroom count-->
-                                <div class="w-full md:w-1/3 md:mx-2">
+                                <div class="w-full md:w-1/3 md:mx-2 my-2 md:my-0">
                                     <label class="block text-sm font-medium text-gray-700">
                                         No. de Baños
                                     </label>
@@ -229,7 +231,7 @@
                                     </div>
                                 </div>
                                 <!--Half bathroom count-->
-                                <div class="w-full md:w-1/3 md:mx-2">
+                                <div class="w-full md:w-1/3 md:mx-2 my-2 md:my-0">
                                     <label class="block text-sm font-medium text-gray-700">
                                         No. de Medios Baños
                                     </label>
@@ -317,19 +319,21 @@
                                                     <!--Features-->
                                                     <div class="bg-gray-50 items-center align-middle px-4 py-1 sm:grid sm:grid-cols-3 sm:px-6">
                                                         <dt class="text-xs md:text-sm font-medium text-gray-500">
-                                                            Caracteristicas
+                                                            Características
                                                         </dt>
-                                                        <div class="flex justify-between space-x-4">
+                                                        <div class="md:flex md:justify-between space-x-4">
                                                             <ul class="">
                                                                 <!--Property Size-->
-                                                                <li class="my-3 mx-4 w-full flex text-xs items-center align-middle font-light">
+                                                                <li v-if="isNotEmpty(item.propertyFeature.propertySize)"
+                                                                    class="my-3 mx-4 w-full flex text-xs items-center align-middle font-light">
                                                                     <span class="text-gray-600">m² Propiedad:</span>
                                                                     <strong v-text="item.propertyFeature.propertySize"
                                                                             class="ml-2 text-gray-900"
                                                                     ></strong>
                                                                 </li>
                                                                 <!--Construction Size-->
-                                                                <li class="my-3 mx-4 w-full flex text-xs items-center align-middle font-light">
+                                                                <li v-if="isNotEmpty(item.propertyFeature.constructionSize)"
+                                                                    class="my-3 mx-4 w-full flex text-xs items-center align-middle font-light">
                                                                     <span class="text-gray-600">m² Construcción:</span>
                                                                     <strong v-text="item.propertyFeature.constructionSize"
                                                                             class="ml-2 text-gray-900"
@@ -338,14 +342,16 @@
                                                             </ul>
                                                             <ul class="">
                                                                 <!--Level Count-->
-                                                                <li class="my-3 mx-4 w-full flex text-xs items-center align-middle font-light">
+                                                                <li v-if="isNotEmpty(item.propertyFeature.levelCount)"
+                                                                    class="my-3 mx-4 w-full flex text-xs items-center align-middle font-light">
                                                                     <span class="text-gray-600">Niveles:</span>
                                                                     <strong v-text="item.propertyFeature.levelCount"
                                                                             class="ml-2 text-gray-900"
                                                                     ></strong>
                                                                 </li>
                                                                 <!--Room Count-->
-                                                                <li class="my-3 mx-4 w-full flex text-xs items-center align-middle font-light">
+                                                                <li v-if="isNotEmpty(item.propertyFeature.roomCount)"
+                                                                    class="my-3 mx-4 w-full flex text-xs items-center align-middle font-light">
                                                                     <span class="text-gray-600">Habitaciones:</span>
                                                                     <strong v-text="item.propertyFeature.roomCount"
                                                                             class="ml-2 text-gray-900"
@@ -353,14 +359,16 @@
                                                                 </li>
                                                             </ul>
                                                             <ul class="">
-                                                                <li class="my-3 mx-4 w-full flex text-xs items-center align-middle font-light">
+                                                                <li v-if="isNotEmpty(item.propertyFeature.bathroomCount)"
+                                                                    class="my-3 mx-4 w-full flex text-xs items-center align-middle font-light">
                                                                     <span class="text-gray-600">Baños:</span>
                                                                     <strong v-text="item.propertyFeature.bathroomCount"
                                                                             class="ml-2 text-gray-900"
                                                                     ></strong>
                                                                 </li>
                                                                 <!--HalfBathRoom-->
-                                                                <li class="my-3 mx-4 w-full text-xs items-center align-middle font-light">
+                                                                <li v-if="isNotEmpty(item.propertyFeature.halfBathroomCount)"
+                                                                    class="my-3 mx-4 w-full text-xs items-center align-middle font-light">
                                                                     <span class="text-gray-600">1/2 Baños:</span>
                                                                     <strong v-text="item.propertyFeature.halfBathroomCount"
                                                                             class="ml-2 text-gray-900"

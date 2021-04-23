@@ -30,7 +30,7 @@ class BusinessObserver
      */
     public function created(Business $business)
     {
-        LogActions::dispatch('STORE', $business, auth()->user());
+//        LogActions::dispatch('STORE', $business, auth()->user());
     }
 
     /**

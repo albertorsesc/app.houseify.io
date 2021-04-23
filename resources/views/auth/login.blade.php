@@ -1,4 +1,10 @@
 <x-guest-layout>
+    <div id="fb-root"></div>
+    <script async defer
+            crossorigin="anonymous"
+            src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v10.0&appId=1068288016992504&autoLogAppEvents=1"
+            nonce="nK4w4gy6"
+    ></script>
     <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
@@ -50,6 +56,10 @@
                         onclick="login">
                     {{ __('Iniciar sesión') }}
                 </button>
+
+            </div>
+            <div class="w-full md:w-1/2 mx-auto flex justify-center items-center align-middle mt-4">
+                <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="false"></div>
             </div>
         </form>
     </x-jet-authentication-card>

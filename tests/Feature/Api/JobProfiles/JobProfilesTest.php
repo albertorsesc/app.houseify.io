@@ -37,8 +37,6 @@ class JobProfilesTest extends TestCase
                     'uuid' => $jobProfile->uuid,
                     'user' => ['id' => $jobProfile->user->id],
                     'title' => $jobProfile->title,
-                    'age' => $jobProfile->getAge(),
-                    'birthdateAt' => $jobProfile->birthdate_at->format('Y-m-d'),
                     'skills' => $jobProfile->skills,
                     'email' => $jobProfile->email,
                     'phone' => $jobProfile->phone,
@@ -100,7 +98,6 @@ class JobProfilesTest extends TestCase
      */
     public function authenticated_user_can_delete_a_job_profile()
     {
-        $this->withoutExceptionHandling();
         $existingJobProfile = JobProfile::factory()->create();
 
         $response = $this->deleteJson(route($this->routePrefix . 'destroy', $existingJobProfile));

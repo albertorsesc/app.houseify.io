@@ -46,10 +46,7 @@ class Business extends Model
 
     public function profile() : string
     {
-        if ($this->owner->id === auth()->id()) {
-            return route('web.businesses.show', $this);
-        }
-        return route('web.public.businesses.show', $this);
+        return route('web.businesses.show', $this);
     }
 
     public function publicProfile() : string
@@ -61,6 +58,7 @@ class Business extends Model
     {
         return array_merge([
             'non-existent' => 'Negocio/Empresa inexistente',
+            'not-owner' => 'Dueño del Negocio/Empresa incorrecto',
         ], config('houseify.reporting_causes'));
     }
 
@@ -95,7 +93,7 @@ class Business extends Model
                     ],
                     'fullAddress' => $this->location->getFullAddress()
                 ] ,
-//                'images' => $this->images,
+                'logo' => $this->logo,
 //                'interests' => $this->interests,
                 'meta' => [
                     'links' => [

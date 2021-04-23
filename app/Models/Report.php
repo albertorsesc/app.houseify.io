@@ -16,10 +16,11 @@ class Report extends Model
 
     protected $fillable = ['user_id', 'reportable_id', 'reportable_type', 'reporting_cause', 'comments'];
 
-    protected static function boot ()
+    protected static function booted ()
     {
-        parent::boot();
-        self::created(fn ($report) => NewReportSubmitted::dispatch($report));
+        self::created(function ($report) {
+            NewReportSubmitted::dispatch($report);
+        });
     }
 
     /** Relations */

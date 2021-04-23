@@ -39,9 +39,9 @@ class BusinessesTest extends BusinessTestCase
                     'categories' => $business->categories,
                     'email' => $business->email,
                     'phone' => $business->phone,
-                    'site' => $business->site,
                     'facebookProfile' => $business->facebook_profile,
-                    'linkedInProfile' => $business->linkedin_profile,
+                    'linkedinProfile' => $business->linkedin_profile,
+                    'site' => $business->site,
                     'comments' => $business->comments,
                     'status' => $business->status,
                     'logo' => $business->logo,
@@ -86,7 +86,6 @@ class BusinessesTest extends BusinessTestCase
      */
     public function authenticated_user_can_update_a_business()
     {
-        $this->withoutExceptionHandling();
         $this->signIn();
 
         $existingBusiness = Business::factory()->create();
@@ -121,7 +120,6 @@ class BusinessesTest extends BusinessTestCase
      */
     public function authenticated_user_can_delete_a_business()
     {
-        $this->withoutExceptionHandling();
         $this->signIn();
 
         $existingBusiness = Business::factory()->create();

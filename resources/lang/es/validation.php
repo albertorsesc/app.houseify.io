@@ -151,7 +151,7 @@
             /* Common Words */
             'title' => 'Titulo',
             'name' => 'Nombre',
-            'phone' => 'Telefono',
+            'phone' => 'Teléfono',
             'body' => 'Cuerpo',
             'excerpt' => 'Descripcion Corta',
             'category' => 'Categoría',

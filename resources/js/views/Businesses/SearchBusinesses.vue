@@ -53,7 +53,7 @@
 
                         <div class="flex justify-between mt-6 my-2">
                             <!--Name and Comments-->
-                            <div class="w-2/3">
+                            <div class="w-full md:w-2/3">
                                 <label class="block text-sm font-medium text-gray-700">
                                     Busca por Nombre del Negocio o Informacion adicional
                                 </label>

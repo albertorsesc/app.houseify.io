@@ -29,6 +29,8 @@ class BusinessRequest extends FormRequest
             'categories' => ['required', 'array', 'in:' . implode(',', config('houseify.construction_categories'))],
             'phone' => ['max:50'],
             'site' => ['nullable', 'url', 'max:255'],
+            'facebook_profile' => ['nullable', 'url', 'max:255'],
+            'linkedin_profile' => ['nullable', 'url', 'max:255'],
         ];
     }
 }

@@ -129,7 +129,7 @@
 
                             <property-location></property-location>
 
-                            <divider title="Caracteristicas"></divider>
+                            <divider title="Características"></divider>
 
                             <property-features></property-features>
 

@@ -26,22 +26,23 @@ class EventServiceProvider extends ServiceProvider
         /*SuggestionSubmitted::class => [
             NewSuggestion::class,
         ],*/
-        LogActions::class => [PersistLogActions::class],
+//        LogActions::class => [PersistLogActions::class],
 
         /* Properties */
-
-//        PropertyReported::class => [
-//            PropertyHasBeenReported::class
-//        ],
-        NewPropertyCreated::class => [
-
-        ],
-
-        /* Reports */
 
         NewReportSubmitted::class => [
             PropertyHasBeenReported::class,
         ],
+
+        /*NewPropertyCreated::class => [
+
+        ],*/
+
+        /* Reports */
+
+        /*NewReportSubmitted::class => [
+            PropertyHasBeenReported::class,
+        ],*/
     ];
 
     /**

@@ -11,11 +11,6 @@ class JobProfileController extends Controller
 {
     public function __invoke (JobProfile $jobProfile)
     {
-        dd($jobProfile->load([
-            'location.state',
-            'user:id',
-            'likes'
-        ]));
         return view('job-profiles.show', [
             'jobProfile' => new JobProfileResource(
                 $jobProfile->load([

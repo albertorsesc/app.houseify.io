@@ -17,7 +17,7 @@ class JobProfileController extends Controller
             JobProfile
                 ::query()
                 ->isPublished()
-                ->with('user')
+                ->with(['user', 'location.state'])
                 ->get()
         );
     }

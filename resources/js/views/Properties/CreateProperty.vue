@@ -19,6 +19,7 @@
                                 <label for="title" class="block text-sm font-medium text-gray-700">
                                     <strong class="required">*</strong>
                                     Título de la Publicación
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
                                 </label>
                                 <div class="my-1 flex rounded-md shadow-sm">
                                     <input type="text"
@@ -37,6 +38,7 @@
                                 <label for="property_type" class="block text-sm font-medium text-gray-700">
                                     <strong class="required">*</strong>
                                     Tipo de Propiedad
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base">
                                     <vue-multiselect v-model="selectedPropertyType"
@@ -61,6 +63,7 @@
                                 <label for="property_category_id" class="block text-sm font-medium text-gray-700">
                                     <strong class="required">*</strong>
                                     Categoría de la Propiedad
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base">
                                     <vue-multiselect v-model="propertyForm.propertyCategory"
@@ -91,6 +94,7 @@
                                 <label for="business_type" class="block text-sm font-medium text-gray-700">
                                     <strong class="required">*</strong>
                                     Tipo de Negocio
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base">
                                     <vue-multiselect v-model="propertyForm.businessType"
@@ -114,6 +118,7 @@
                                 <label for="price" class="block text-sm font-medium text-gray-700">
                                     <strong class="required">*</strong>
                                     Precio
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
                                 </label>
                                 <div class="my-1 flex rounded-md shadow-sm">
                                     <input type="number"
@@ -131,6 +136,7 @@
                         <div class="sm:col-span-6">
                             <label for="about" class="block text-sm font-medium text-gray-700">
                                 Comentarios adicionales
+                                <span class="text-gray-500 font-light text-xs">(opcional)</span>
                             </label>
                             <div class="mt-1">
                                 <textarea id="about" v-model="propertyForm.comments" rows="6" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
@@ -154,7 +160,8 @@
                     </button>
                     <button @click="store"
                             type="submit"
-                            class="ml-3 h-btn-success">
+                            class="ml-3 h-btn-success"
+                            :disabled="isLoading">
                         Guardar
                     </button>
                 </div>
@@ -190,11 +197,14 @@ export default {
 
             selectedPropertyType: {},
 
+
+            isLoading: false,
             errors: [],
         }
     },
     methods: {
         store() {
+            this.isLoading = true
             axios.post(this.endpoint, {
                 title: this.propertyForm.title,
                 property_category_id: this.propertyForm.propertyCategory ? this.propertyForm.propertyCategory.id : null,
@@ -205,10 +215,10 @@ export default {
                 Event.$emit('properties.new-property', response.data.data)
                 this.propertyForm = {}
                 SweetAlert.success('Tu Propiedad ha sido creada exitosamente!')
-
             }).catch(error => this.errors = error.response.status === 422 ?
                 error.response.data.errors :
                 [])
+            this.isLoading = false
         },
         getPropertyCategoriesByPropertyType(selectedPropertyType) {
             this.selectedPropertyType = selectedPropertyType ? selectedPropertyType : this.selectedPropertyType

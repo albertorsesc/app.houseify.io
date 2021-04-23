@@ -71,6 +71,7 @@ class Property extends Model implements Locationable, DeletesRelations
     {
         return array_merge([
             'taken' => 'Propiedad Vendida/Rentada',
+            'not-owner' => 'Dueño de la Propiedad incorrecto',
         ], config('houseify.reporting_causes'));
     }
 

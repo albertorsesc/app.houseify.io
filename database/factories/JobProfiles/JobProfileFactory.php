@@ -24,7 +24,6 @@ class JobProfileFactory extends Factory
         return [
             'title' => $this->faker->realText(50),
             'skills' => $this->faker->randomElements(config('job-profiles.skills')),
-            'birthdate_at' => $this->faker->dateTimeThisCentury()->format('Y-m-d'),
             'email' => $this->faker->safeEmail,
             'phone' => $this->faker->phoneNumber,
             'facebook_profile' => $this->faker->url,

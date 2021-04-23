@@ -15,14 +15,14 @@ class SepomexApi
     {
         return Http::get(
             $this->getEndpoint(self::METHODS['city-by-state'], urldecode($stateName))
-        )['response']['municipios'];
+        )['response']['municipios'] ?? [];
     }
 
     public function getNeighborhoodsByCity($cityName)
     {
         return Http::get(
             $this->getEndpoint(self::METHODS['neighborhoods-by-city'], $cityName)
-        )['response']['colonia'];
+        )['response']['colonia'] ?? [];
     }
 
     public function getEndpoint($method, $query) : string

@@ -28,6 +28,8 @@ class PropertyHasBeenReported implements ShouldQueue
     {
         $property = $event->report->reportable;
 
+        $property->unpublish();
+
         $property->seller->notify(
             new PropertyHasBeenReportedNotification($event->report)
         );

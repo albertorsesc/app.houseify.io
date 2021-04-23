@@ -27,7 +27,7 @@ class BusinessResource extends JsonResource
             'phone' => $this->phone,
             'site' => $this->site,
             'facebookProfile' => $this->facebook_profile,
-            'linkedInProfile' => $this->linkedin_profile,
+            'linkedinProfile' => $this->linkedin_profile,
             'comments' => $this->comments,
             'location' => new LocationResource($this->whenLoaded('location')),
             'interests' => $this->whenLoaded('interests'),

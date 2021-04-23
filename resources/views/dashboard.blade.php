@@ -71,7 +71,7 @@
 
                         {{--JobProfiles--}}
                         <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/3 mt-4 md:mt-6 px-3">
-                            <a href="{{ route('web.job-positions.index') }}">
+                            <a href="{{ route('web.job-profiles.index') }}">
                                 <div class="card transition hover:transform text-center items-center">
                                     <img src="/img/hire.svg" class="object-cover p-8" alt="Anuncios Publicitarios" loading="lazy">
                                     <div class="px-4 py-1">

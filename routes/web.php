@@ -25,7 +25,7 @@ Route::middleware(['auth:sanctum', 'verified', 'prevent-back-history'])->group(f
 
     Route::view('directorio-de-negocios', 'businesses.index')->name('web.businesses.index');
 
-    Route::view('tecnicos-y-profesionistas', 'job-profiles.index')->name('web.job-positions.index');
+    Route::view('tecnicos-y-profesionistas', 'job-profiles.index')->name('web.job-profiles.index');
 
     Route::view('sugerencias', 'suggestions')->name('web.suggestions.index');
     Route::post('suggestions', [SuggestionController::class, 'store'])->name('suggestions.store');

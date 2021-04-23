@@ -25,18 +25,17 @@
                 ></div>
 
                 <div class="text-sm md:text-xs py-1">
-                    <div class="flex justify-center">
-                            <span v-if="property.location && property.location.city"
-                                  :title="property.location.city">
-                                {{ limitString(property.location.city, 15) }},
-                            </span>
+                    <div class="flex justify-center items-center">
+                        <span v-if="property.location && property.location.city"
+                              :title="property.location.city">
+                            {{ limitString(property.location.city, 18) }}
+                        </span>
+
+                        <span class="mx-2">&bullet;</span>
+
                         <span v-if="property.location && property.location.state"
                               v-text="property.location.state.code">
                             </span>
-<!--                        <span class="mx-2">&bullet;</span>-->
-<!--                        <span v-if="property.phone"
-                              v-text="property.phone"
-                        ></span>-->
                     </div>
                 </div>
 
@@ -59,15 +58,15 @@
                        title="Compartir">
                         <i class="fab fa-facebook text-blue-500 text-lg"></i>
                     </a>
-
-                    <div class="mt-1 right-0 items-center align-middle px-4 text-green-500">
+                    <div class="mt-1 ml-2 right-0 items-center align-middle">
                         <a :href="property.meta.links.profile"
-                           class="h-link no-underline h-link hover:text-green-400 -mt-6"
-                           title="Visitar Propiedad">
-                            <svg class="h-5 w-5 text-base" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                           class="h-link flex no-underline text-sm font-medium text-gray-300 hover:text-emerald-400"
+                           title="Ver Propiedad">
+<!--                            <svg class="h-5 w-5 text-base" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                            </svg>
+                            </svg>-->
+                            Ver
                         </a>
                     </div>
                 </div>

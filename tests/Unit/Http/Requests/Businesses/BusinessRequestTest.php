@@ -259,4 +259,88 @@ class BusinessRequestTest extends BusinessTestCase
             $this->make(Business::class, [$validatedField => $brokenRule])->toArray()
         )->assertJsonValidationErrors($validatedField);
     }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function facebook_profile_must_have_a_valid_format()
+    {
+        $validatedField = 'facebook_profile';
+        $brokenRule = 'not-a-site';
+
+        $this->postJson(
+            route($this->routePrefix . 'store'),
+            $this->make(Business::class, [$validatedField => $brokenRule])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+
+        $existingAd = $this->create(Business::class);
+        $this->putJson(
+            route($this->routePrefix . 'update', $existingAd),
+            $this->make(Business::class, [$validatedField => $brokenRule])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function facebook_profile_must_not_exceed_255_characters()
+    {
+        $validatedField = 'facebook_profile';
+        $brokenRule = 'https//' . Str::random(249);
+
+        $this->postJson(
+            route($this->routePrefix . 'store'),
+            $this->make(Business::class, [$validatedField => $brokenRule])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+
+        $existingAd = $this->create(Business::class);
+        $this->putJson(
+            route($this->routePrefix . 'update', $existingAd),
+            $this->make(Business::class, [$validatedField => $brokenRule])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function linkedin_profile_must_have_a_valid_format()
+    {
+        $validatedField = 'linkedin_profile';
+        $brokenRule = 'not-a-site';
+
+        $this->postJson(
+            route($this->routePrefix . 'store'),
+            $this->make(Business::class, [$validatedField => $brokenRule])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+
+        $existingAd = $this->create(Business::class);
+        $this->putJson(
+            route($this->routePrefix . 'update', $existingAd),
+            $this->make(Business::class, [$validatedField => $brokenRule])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function linkedin_profile_must_not_exceed_255_characters()
+    {
+        $validatedField = 'linkedin_profile';
+        $brokenRule = 'https//' . Str::random(249);
+
+        $this->postJson(
+            route($this->routePrefix . 'store'),
+            $this->make(Business::class, [$validatedField => $brokenRule])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+
+        $existingAd = $this->create(Business::class);
+        $this->putJson(
+            route($this->routePrefix . 'update', $existingAd),
+            $this->make(Business::class, [$validatedField => $brokenRule])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+    }
 }

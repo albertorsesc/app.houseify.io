@@ -32,7 +32,8 @@ class JobProfilePolicy
      */
     public function view(User $user, JobProfile $jobProfile)
     {
-        //
+        return (auth()->check() && $jobProfile->status) ||
+            $jobProfile->user_id === $user->id;
     }
 
     /**

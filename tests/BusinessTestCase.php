@@ -23,6 +23,8 @@ class BusinessTestCase extends TestCase
             'email' => 'info@minegocio.com',
             'phone' => '6862894998',
             'site' => 'https://mi-negocio.com',
+            'facebook_profile' => 'https://facebook.com/mi-negocio',
+            'linkedin_profile' => 'https://linkedin.com/mi-negocio',
             'comments' => 'Comentarios Adicionales',
             'status' => true
         ], $overrides);

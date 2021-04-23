@@ -18,6 +18,8 @@
                             <label for="title" class="block text-sm font-medium text-gray-700">
                                 <strong class="required">*</strong>
                                 Titulo del Perfil
+                                <span class="text-gray-500 font-light text-xs">(requerido)</span>
+                                <span class="text-gray-600 font-light text-xs">Escriba una breve presentación.</span>
                             </label>
                             <div class="my-1 flex rounded-md shadow-sm">
                                 <input type="text"
@@ -38,6 +40,7 @@
                                 <label for="skills" class="block text-sm font-medium text-gray-700">
                                     <strong class="required">*</strong>
                                     Habilidades
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base ring-white">
                                     <vue-multiselect v-model="jobProfileForm.skills"
@@ -64,9 +67,10 @@
 
                         <div class="sm:col-span-4 md:flex md:-mx-2">
                             <!--Email-->
-                            <div class="w-full md:w-1/3 md:mx-2">
+                            <div class="w-full md:w-1/2 md:mx-2">
                                 <label for="email" class="block text-sm font-medium text-gray-700">
                                     Correo Electrónico
+                                    <span class="text-gray-500 font-light text-xs">(opcional)</span>
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base">
                                     <input type="email"
@@ -80,9 +84,10 @@
                                 ></errors>
                             </div>
                             <!--Phone-->
-                            <div class="mt-4 md:mt-0 w-full md:w-1/3 md:mx-2">
+                            <div class="mt-4 md:mt-0 w-full md:w-1/2 md:mx-2">
                                 <label for="phone" class="block text-sm font-medium text-gray-700">
-                                    Telefono
+                                    Teléfono
+                                    <span class="text-gray-500 font-light text-xs">(opcional)</span>
                                 </label>
                                 <div class="my-1 flex rounded-md shadow-sm">
                                     <input type="text"
@@ -95,46 +100,14 @@
                                         :options="{ noContainer: true }"
                                 ></errors>
                             </div>
-                            <!--BirthdateAt-->
-                            <div class="mt-4 md:mt-0 w-full md:w-1/3 md:mx-2">
-                                <label for="birthdate_at" class="block text-sm font-medium text-gray-700">
-                                    <strong class="required">*</strong>
-                                    Fecha de Nacimiento
-                                </label>
-                                <div class="my-1 flex rounded-md shadow-sm">
-                                    <input type="date"
-                                           v-model="jobProfileForm.birthdateAt"
-                                           id="birthdate_at"
-                                           autocomplete="birthdate_at"
-                                           class="h-input flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
-                                </div>
-                                <errors :error="errors.birthdate_at"
-                                        :options="{ noContainer: true }"
-                                ></errors>
-                            </div>
                         </div>
 
                         <div class="sm:col-span-4 md:flex md:-mx-2">
-                            <!--Site-->
-                            <div class="w-full md:w-1/2 md:mx-2">
-                                <label for="site" class="block text-sm font-medium text-gray-700">
-                                    Sitio Web
-                                </label>
-                                <div class="my-1 rounded-md shadow-sm text-base">
-                                    <input type="text"
-                                           v-model="jobProfileForm.site"
-                                           id="site"
-                                           autocomplete="site"
-                                           class="h-input flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
-                                </div>
-                                <errors :error="errors.site"
-                                        :options="{ noContainer: true }"
-                                ></errors>
-                            </div>
                             <!--Facebook Profile-->
-                            <div class="w-full md:w-1/2 md:mx-2">
+                            <div class="w-full md:w-1/3 md:mx-2">
                                 <label for="facebook_profile" class="block text-sm font-medium text-gray-700">
                                     Perfil de Facebook
+                                    <span class="text-gray-500 font-light text-xs">(opcional)</span>
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base">
                                     <input type="text"
@@ -147,13 +120,47 @@
                                         :options="{ noContainer: true }"
                                 ></errors>
                             </div>
+                            <!--LinkedIn Profile-->
+                            <div class="w-full md:w-1/3 md:mx-2">
+                                <label for="facebook_profile" class="block text-sm font-medium text-gray-700">
+                                    Perfil de LinkedIn
+                                    <span class="text-gray-500 font-light text-xs">(opcional)</span>
+                                </label>
+                                <div class="my-1 rounded-md shadow-sm text-base">
+                                    <input type="text"
+                                           v-model="jobProfileForm.linkedinProfile"
+                                           id="linkedin_profile"
+                                           autocomplete="linkedin_profile"
+                                           class="h-input flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                </div>
+                                <errors :error="errors.linkedin_profile"
+                                        :options="{ noContainer: true }"
+                                ></errors>
+                            </div>
+                            <!--Site-->
+                            <div class="w-full md:w-1/3 md:mx-2">
+                                <label for="site" class="block text-sm font-medium text-gray-700">
+                                    Sitio Web
+                                    <span class="text-gray-500 font-light text-xs">(opcional)</span>
+                                </label>
+                                <div class="my-1 rounded-md shadow-sm text-base">
+                                    <input type="text"
+                                           v-model="jobProfileForm.site"
+                                           id="site"
+                                           autocomplete="site"
+                                           class="h-input flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                </div>
+                                <errors :error="errors.site"
+                                        :options="{ noContainer: true }"
+                                ></errors>
+                            </div>
                         </div>
 
                         <!--Comments-->
                         <div class="sm:col-span-4">
                             <label for="bio" class="block text-sm font-medium text-gray-700">
-                                <strong class="required">*</strong>
                                 Comentarios adicionales
+                                <span class="text-gray-500 font-light text-xs">(opcional)</span>
                             </label>
                             <div class="mt-1">
                                 <textarea id="bio"
@@ -201,11 +208,11 @@ export default {
             jobProfileForm: {
                 title: '',
                 skills: [],
-                birthdateAt: '',
                 email: '',
                 phone: '',
                 site: '',
                 facebookProfile: '',
+                linkedinProfile: '',
                 bio: ''
             },
 
@@ -217,11 +224,11 @@ export default {
             axios.post(this.endpoint, {
                 title: this.jobProfileForm.title,
                 skills: this.jobProfileForm.skills,
-                birthdate_at: this.jobProfileForm.birthdateAt,
                 email: this.jobProfileForm.email,
                 phone: this.jobProfileForm.phone,
                 site: this.jobProfileForm.site,
                 facebook_profile: this.jobProfileForm.facebookProfile,
+                linkedin_profile: this.jobProfileForm.linkedinProfile,
                 bio: this.jobProfileForm.bio
             }).then(response => {
                 Event.$emit('job-profiles.new-job-profile', response.data.data)
@@ -246,8 +253,8 @@ export default {
         this.$store.dispatch('jobProfiles/fetchSkills')
     },
     components: {
-        Errors: () => import(/* webpackChunkName: "errors" */ '../../components/Errors'),
         VueMultiselect,
+        Errors: () => import(/* webpackChunkName: "errors" */ '../../components/Errors'),
     }
 }
 </script>

@@ -9,15 +9,15 @@
                 Ubicación del Tecnico
             </h3>
             <div v-if="isAuthenticated && jobProfile.user.id === auth">
-                <button @click="openModal" class="h-link bg-white border-emerald-900 -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                <button @click="openModal" class="h-link bg-white border-emerald-900 -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none"
                         title="Registrar Ubicación del Tecnico">
-                    <svg class="text-blue-300 hover:text-blue-600 hover:border-blue-700 hover:border" width="25" height="25" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="text-emerald-400 hover:text-emerald-600" width="25" height="25" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </button>
             </div>
         </div>
-        <div v-if="location" class="border-t border-gray-200 mx-4 py-5 sm:px-6">
+        <div v-if="location" class="border-t border-gray-200 py-5 px-6">
             <dl class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-3">
                 <div class="sm:col-span-1">
                     <dt class="text-sm font-medium text-gray-500 flex">
@@ -80,33 +80,32 @@
         <modal v-if="isAuthenticated && jobProfile.user.id === auth"
                modal-id="job-profile-location"
                max-width="sm:max-w-5xl">
-            <template #title>Ubicación de la Negocio</template>
+            <template #title>Ubicación del Técnico</template>
             <template #content>
                 <form @submit.prevent>
 
                     <div class="w-full md:flex md:-mx-2 mt-4">
                         <!--Address-->
-                        <div class="w-full mx-2">
-                            <div class="w-full">
-                                <form-input
-                                    title="Dirección"
-                                    :is-required="false"
-                                    v-model="jobProfileLocationForm.address"
-                                    :data="jobProfileLocationForm.address"
-                                    input-id="address"
-                                    :error="errors.address"
-                                ></form-input>
-                            </div>
+                        <div class="w-full md:mx-2">
+                            <form-input
+                                title="Dirección"
+                                :is-required="false"
+                                v-model="jobProfileLocationForm.address"
+                                :data="jobProfileLocationForm.address"
+                                input-id="address"
+                                :error="errors.address"
+                            ></form-input>
                         </div>
                     </div>
 
                     <div class="w-full md:flex md:-mx-2 mt-4">
                         <!--State-->
-                        <div class="w-full md:w-1/3 mx-2 mt-3 md:mt-0">
+                        <div class="w-full md:w-1/3 md:mx-2 mt-4 md:mt-0">
                             <div class="form-group">
                                 <label for="state_id">
                                     <strong class="required">*</strong>
                                     Estado
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
                                 </label>
                                 <div class="mt-1">
                                     <vue-multiselect v-model="jobProfileLocationForm.state"
@@ -132,11 +131,12 @@
                             </div>
                         </div>
                         <!--City-->
-                        <div class="w-full md:w-1/3 mx-2 mt-3 md:mt-0">
+                        <div class="w-full md:w-1/3 md:mx-2 mt-4 md:mt-0">
                             <div class="form-group">
                                 <label for="city">
                                     <strong class="required">*</strong>
                                     Ciudad
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
                                 </label>
                                 <div class="mt-1">
                                     <vue-multiselect v-model="jobProfileLocationForm.city"
@@ -156,11 +156,12 @@
                             </div>
                         </div>
                         <!--Neighborhood-->
-                        <div class="w-full md:w-1/3 mx-2 mt-3 md:mt-0">
+                        <div class="w-full md:w-1/3 md:mx-2 mt-4 md:mt-0">
                             <div class="form-group">
                                 <label for="neighborhood">
                                     <strong class="required">*</strong>
                                     Fraccionamiento/Colonia
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
                                 </label>
                                 <div class="mt-1">
                                     <vue-multiselect v-model="jobProfileLocationForm.neighborhood"
@@ -180,16 +181,20 @@
                         </div>
                     </div>
 
-                    <!--ZipCode-->
-                    <div class="w-full md:w-1/3 mt-3 md:mt-2">
-                        <form-input
-                            title="Código Postal"
-                            type="number"
-                            v-model="jobProfileLocationForm.zipCode"
-                            :data="jobProfileLocationForm.zipCode"
-                            input-id="store_zip_code"
-                            :error="errors.zip_code"
-                        ></form-input>
+                    <div class="w-full md:flex md:-mx-2 mt-4">
+                        <!--ZipCode-->
+                        <div class="w-full md:w-1/3 mt-4 md:mx-2 md:mt-2">
+                            <form-input
+                                title="Código Postal"
+                                type="number"
+                                v-model="jobProfileLocationForm.zipCode"
+                                :data="jobProfileLocationForm.zipCode"
+                                input-id="store_zip_code"
+                                :error="errors.zip_code"
+                            ></form-input>
+                        </div>
+                        <div class="w-full md:w-1/3 mt-4 md:mx-2 md:mt-2"></div>
+                        <div class="w-full md:w-1/3 mt-4 md:mx-2 md:mt-2"></div>
                     </div>
 
                 </form>

@@ -178,29 +178,6 @@ class JobProfileRequestTest extends TestCase
      * @test
      * @throws \Throwable
      */
-    public function birthdate_at_is_required()
-    {
-        $validatedField = 'birthdate_at';
-        $brokenRule = null;
-
-        $this->postJson(
-            route($this->routePrefix . 'store'),
-            $this->make(JobProfile::class, [
-                $validatedField => $brokenRule
-            ])->toArray()
-        )->assertJsonValidationErrors($validatedField);
-
-        $existingJobProfile = $this->create(JobProfile::class);
-        $this->putJson(
-            route($this->routePrefix . 'update', $existingJobProfile),
-            $this->make(JobProfile::class, [$validatedField => $brokenRule])->toArray()
-        )->assertJsonValidationErrors($validatedField);
-    }
-
-    /**
-     * @test
-     * @throws \Throwable
-     */
     public function phone_must_not_exceed_60_characters()
     {
         $validatedField = 'phone';

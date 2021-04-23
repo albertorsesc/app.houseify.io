@@ -13,7 +13,7 @@ trait CanBeReported
 
     public function report(array $data)
     {
-        $this->reports()->firstOrCreate([
+        $this->reports()->create([
             'user_id' => auth()->id(),
             'reporting_cause' => $data['reporting_cause'],
             'comments' => $data['comments'] ?? null,

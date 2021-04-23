@@ -145,7 +145,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return string
      */
-    protected function defaultProfilePhotoUrl()
+    protected function defaultProfilePhotoUrl() : string
     {
         $gravatarUrl = 'https://www.gravatar.com/avatar/';
         $email = md5(strtolower(trim($this->email)));

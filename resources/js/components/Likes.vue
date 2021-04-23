@@ -114,6 +114,7 @@ export default {
     },
     created () {
         this.check()
+        dd(this.isLiked)
     },
 }
 </script>

@@ -31,9 +31,9 @@
                                :class="{{ request()->routeIs('web.businesses.index') ? '"border-white border-b-2"' : '' }}">
                                 Negocios
                             </a>
-                            <a href="{{ route('web.job-positions.index') }}"
+                            <a href="{{ route('web.job-profiles.index') }}"
                                class="h-link border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl"
-                               :class="{{ request()->routeIs('web.job-positions.index') ? '"border-white border-b-2"' : '' }}">
+                               :class="{{ request()->routeIs('web.job-profiles.index') ? '"border-white border-b-2"' : '' }}">
                                 Profesionales
                             </a>
                         </div>
@@ -97,16 +97,21 @@
                                      aria-orientation="vertical"
                                      aria-labelledby="user-menu">
                                     <a href="{{ route('profile.show') }}"
-                                       class="h-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                                       class="h-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                       :class="{{ request()->routeIs('profile.show') ? '"border-white border-b-2"' : '' }}"
+                                       role="menuitem">
                                         Perfil
                                     </a>
 
                                     <a href="{{ route('web.suggestions.index') }}"
-                                       class="h-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                                       class="h-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                       :class="{{ request()->routeIs('web.suggestions.index') ? '"border-white border-b-2"' : '' }}"
+                                       role="menuitem">
                                         Sugerencias
                                     </a>
                                     <a href="/docs"
-                                       class="h-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                                       class="h-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                       role="menuitem">
                                         Ayuda
                                     </a>
 
@@ -146,25 +151,25 @@
                 @auth
                     <a href="{{ route('dashboard') }}"
                        class="text-gray-700 block px-3 py-2 rounded-md text-base font-medium"
-                       :class="{{ request()->routeIs('dashboard') ? '"bg-gray-100 border-white border-b-2"' : '' }}">
+                       :class="{{ request()->routeIs('dashboard') || request()->segment(1) === 'inicio' ? '"bg-gray-100 border-white border-b-2"' : '' }}">
                         Inicio
                     </a>
 
                     <a href="{{ route('web.properties.index') }}"
                        class="text-gray-500 hover:bg-gray-100 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                       :class="{{ request()->routeIs('web.properties.index') ? '"bg-gray-100 border-white border-b-2"' : '' }}">
+                       :class="{{ request()->routeIs('web.properties.index') || request()->segment(1) === 'propiedades' ? '"bg-gray-100 border-white border-b-2"' : '' }}">
                         Propiedades
                     </a>
 
                     <a href="{{ route('web.businesses.index') }}"
                        class="text-gray-500 hover:bg-gray-100 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                       :class="{{ request()->routeIs('web.businesses.index') ? '"bg-gray-100 border-white border-b-2"' : '' }}">
+                       :class="{{ request()->routeIs('web.businesses.index') || request()->segment(1) === 'directorio-de-negocios' ? '"bg-gray-100 border-white border-b-2"' : '' }}">
                         Negocios
                     </a>
 
-                    <a href="{{ route('web.job-positions.index') }}"
+                    <a href="{{ route('web.job-profiles.index') }}"
                        class="text-gray-500 hover:bg-gray-100 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                       :class="{{ request()->routeIs('web.job-positions.index') ? '"bg-gray-100 border-white border-b-2"' : '' }}">
+                       :class="{{ request()->routeIs('web.job-profiles.index') || request()->segment(1) === 'tecnicos-y-profesionales' ? '"bg-gray-100 border-white border-b-2"' : '' }}">
                         Profesionales
                     </a>
                 @endauth
@@ -202,13 +207,13 @@
                     <div class="mt-3 px-2 space-y-1">
                         <a href="{{ route('profile.show') }}"
                            class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
-                           :class="{{ request()->routeIs('profile.show') ? '"bg-gray-100 border-white border-b-2"' : '' }}"
+                           :class="{{ request()->routeIs('profile.show') || request()->segment(1) === 'profile' ? '"bg-gray-100 border-white border-b-2"' : '' }}"
                            role="menuitem">
                             Perfil
                         </a>
                         <a href="{{ route('web.suggestions.index') }}"
                            class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
-                           :class="{{ request()->routeIs('web.suggestions.index') ? '"bg-gray-100 border-white border-b-2"' : '' }}"
+                           :class="{{ request()->routeIs('web.suggestions.index') || request()->segment(1) === 'sugerencias' ? '"bg-gray-100 border-white border-b-2"' : '' }}"
                            role="menuitem">
                             Sugerencias
                         </a>
