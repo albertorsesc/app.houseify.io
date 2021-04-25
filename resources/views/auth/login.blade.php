@@ -1,10 +1,6 @@
 <x-guest-layout>
-    <div id="fb-root"></div>
-    <script async defer
-            crossorigin="anonymous"
-            src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v10.0&appId=1068288016992504&autoLogAppEvents=1"
-            nonce="nK4w4gy6"
-    ></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
     <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
@@ -58,8 +54,22 @@
                 </button>
 
             </div>
-            <div class="w-full md:w-1/2 mx-auto flex justify-center items-center align-middle mt-4">
-                <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="false"></div>
+
+            <div class="w-full mx-auto flex justify-center items-center align-middle mt-4">
+                <div class="w-full md:w-1/2">
+                    <a href="{{ route('facebook.redirect') }}"
+                       class="py-2 px-3 bg-blue-500 rounded-full shadow text-white text-sm md:text-xs">
+                        <i class="fab fa-facebook h-5 w-5 rounded-full"></i>
+                        {{ __('Iniciar sesión con Facebook') }}
+                    </a>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <a href="{{ route('google.redirect') }}"
+                       class="flex align-middle items-center py-2 px-3 bg-white rounded-full shadow text-gray-700 text-sm md:text-xs">
+                        <img src="/logos/google-icon.png" class="mr-2 object-contain h-3 w-3 rounded-full" alt="">
+                        {{ __('Iniciar sesión con Google') }}
+                    </a>
+                </div>
             </div>
         </form>
     </x-jet-authentication-card>

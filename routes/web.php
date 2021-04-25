@@ -1,16 +1,21 @@
 <?php
 
-    use App\Http\Controllers\Web\JobProfiles\MyJobProfileController;
-    use App\Models\Concerns\InterventionImage\Filters\SmallFilter;
+    use App\Http\Controllers\Auth\FacebookLoginController;
+    use App\Http\Controllers\Auth\GoogleLoginController;
     use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\SuggestionController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use App\Http\Controllers\Web\Businesses\BusinessController;
-use App\Http\Controllers\Web\Properties\PropertyController;
 
-Route::get('/', function () {
+    Route::get('/', function () {
     return redirect('/inicio');
 });
+
+Route::get('/auth/login/facebook/redirect', [FacebookLoginController::class, 'redirectToProvider'])->name('facebook.redirect');
+Route::get('/auth/login/facebook/callback', [FacebookLoginController::class, 'handleProviderCallback'])->name('facebook.callback');
+
+Route::get('/auth/login/google/redirect', [GoogleLoginController::class, 'redirectToProvider'])->name('google.redirect');
+Route::get('/auth/login/google/callback', [GoogleLoginController::class, 'handleProviderCallback'])->name('google.callback');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
