@@ -23,7 +23,10 @@ class LocationController extends Controller
 
     public function update(LocationRequest $request, Property $property) : LocationResource
     {
-        $property->location()->update($request->all());
+        $property->location()->update(
+            $request->all() +
+            ['coordinates' => $property->location->getCoordinates()]
+        );
 
         $property->load('location.state');
 

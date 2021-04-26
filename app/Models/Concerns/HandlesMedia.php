@@ -19,7 +19,7 @@ trait HandlesMedia
 
     public function getMedia($size = null)
     {
-        return $this->media->pluck('file_name');
+        return $this->media()->get(['file_name']);
         /*return collect($this->media->pluck('file_name'))->map(function ($image) use ($size) {
             return 'img/' . $size . '/' . Str::after($image, 'public/');
         })->toArray();*/

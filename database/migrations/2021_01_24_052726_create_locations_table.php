@@ -23,6 +23,7 @@ class CreateLocationsTable extends Migration
             $table->foreignId('state_id')->constrained('states');
             $table->string('zip_code', 20)->nullable();
             $table->json('coordinates')->nullable();
+            $table->string('google_map_url')->nullable();
             $table->timestamps();
         });
     }

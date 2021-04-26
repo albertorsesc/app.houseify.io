@@ -11,7 +11,8 @@ use App\Models\Concerns\{CanBeReported,
     HasUuid,
     Interestable,
     Locationable,
-    Publishable};
+    Publishable,
+    UsesGMaps};
 use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, Relations\BelongsTo, Relations\HasOne};
 
 class Property extends Model implements Locationable, DeletesRelations
@@ -120,7 +121,7 @@ class Property extends Model implements Locationable, DeletesRelations
                     'bathroomCount' => $this->propertyFeature ? (int) $this->propertyFeature->features['bathroom_count'] > 0 ? (int) $this->propertyFeature->features['bathroom_count'] : '' : null,
                     'halfBathroomCount' => $this->propertyFeature ? (int) $this->propertyFeature->features['half_bathroom_count'] > 0 ? (int) $this->propertyFeature->features['half_bathroom_count'] : '' : null,
                 ],
-                'images' => $this->images,
+                'images' => $this->getMedia(),
                 'interests' => $this->interests,
                 'seller' => [
                     'meta' => [

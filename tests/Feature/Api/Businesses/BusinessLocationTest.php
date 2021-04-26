@@ -26,7 +26,6 @@ class BusinessLocationTest extends BusinessTestCase
      */
     public function store_a_business_location()
     {
-        $this->withoutExceptionHandling();
         $business = $this->create(Business::class);
         $businessLocation = $this->makeBusinessLocation($business);
 
@@ -43,7 +42,10 @@ class BusinessLocationTest extends BusinessTestCase
             ]
         ]);
 
-        $this->assertDatabaseHas('locations', $business->fresh()->location->toArray());
+        $this->assertDatabaseHas(
+            'locations',
+            Arr::except($business->fresh()->location->toArray(), 'coordinates')
+        );
     }
 
     /**
@@ -66,6 +68,6 @@ class BusinessLocationTest extends BusinessTestCase
         $response->assertOk();
         $response->assertJson(['data' => ['address' => $businessLocationData->address]]);
 
-        $this->assertDatabaseHas('locations', $businessLocationData->toArray());
+        $this->assertDatabaseHas('locations', Arr::except($business->fresh()->location->toArray(), 'coordinates'));
     }
 }

@@ -22,11 +22,12 @@ class LocationResource extends JsonResource
             'city' => $this->city,
             'state' => $this->whenLoaded('state'),
             'zipCode' => $this->zip_code,
-            'fullAddress' => $this->getFullAddress()
-            /*'coordinates' => [
+            'fullAddress' => $this->getFullAddress(),
+            'coordinates' => [
                 'latitude' => $latitude = $this->coordinates['latitude'],
                 'longitude' => $longitude = $this->coordinates['longitude'],
-            ],*/
+            ],
+            'gmap' => $this->getGoogleMap(),
         ];
     }
 }

@@ -42,7 +42,7 @@ class JobProfileLocationTest extends JobProfileTestCase
             ]
         ]);
 
-        $this->assertDatabaseHas('locations', $jobProfile->fresh()->location->toArray());
+        $this->assertDatabaseHas('locations', Arr::except($jobProfile->fresh()->location->toArray(), 'coordinates'));
     }
 
     /**

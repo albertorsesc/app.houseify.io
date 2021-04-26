@@ -44,7 +44,7 @@ class PropertyLocationTest extends PropertyTestCase
             ]
         ]);
 
-        $this->assertDatabaseHas('locations', $property->fresh()->location->toArray());
+        $this->assertDatabaseHas('locations', Arr::except($property->fresh()->location->toArray(), 'coordinates'));
     }
 
     /**
@@ -67,6 +67,6 @@ class PropertyLocationTest extends PropertyTestCase
         $response->assertOk();
         $response->assertJson(['data' => ['address' => $propertyLocationData->address]]);
 
-        $this->assertDatabaseHas('locations', $propertyLocationData->toArray());
+        $this->assertDatabaseHas('locations',  Arr::except($property->fresh()->location->toArray(), 'coordinates'));
     }
 }

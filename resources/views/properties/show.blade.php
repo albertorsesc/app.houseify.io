@@ -6,6 +6,47 @@
     <link rel="stylesheet" href="/css/vue-multiselect.min.css">
 @endsection
 
+@section('scripts')
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script>
+        let map;
+
+        function initMap() {
+            @if ($property->location)
+                const coordinates = {
+                    lat: {{ $property->location->coordinates['latitude'] }},
+                    lng: {{ $property->location->coordinates['longitude'] }}
+                }
+
+                let zoom = 15;
+                @if ($property->location->address)
+                    zoom = 20
+                @endif
+
+                map = new google.maps.Map(document.getElementById("map"), {
+                    center: coordinates,
+                    zoom: zoom,
+                });
+
+                map.addListener('click', function(e) {
+                    window.location.href = '{{ $property->location->getGoogleMap() }}'
+                });
+
+                new google.maps.Marker({
+                    position: coordinates,
+                    map,
+                    title: "{{ $property->location->getFullAddress() }}",
+                });
+            @endif
+        }
+    </script>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.gmaps_api') }}&callback=initMap&libraries=&v=weekly"
+        async
+    ></script>
+@endsection
+
 @section('meta')
     <meta property="og:url" content="{{ $property->publicProfile() }}" />
     <meta property="og:type" content="website" />
@@ -413,25 +454,24 @@
 
                             @if(auth()->check() && auth()->id() === $property->seller_id)
                             <div>
-
                                 <property-images></property-images>
                             </div>
                             @endif
 
-
-
                             <property-location></property-location>
 
-                            <property-features></property-features>
-
-                            <divider title="Mapa de Ubicación"></divider>
+                            @if ($property->location && $property->location->coordinates)
+                            <divider title="Mapa"></divider>
 
                             {{--Mapa--}}
-                            <div class="mt-2 flex">
-                                <div class="w-full">
-                                    <div class="border-gray-300 h-auto"></div>
+                            <div class="flex">
+                                <div class="w-full bg-white rounded-lg shadow p-3">
+                                    <div id="map" class="rounded-lg border-gray-300 h-80"></div>
                                 </div>
                             </div>
+                            @endif
+
+                            <property-features></property-features>
 
                             @if(auth()->check() && auth()->id() === $property->seller_id)
                                 <modal modal-id="update-property" max-width="sm:max-w-5xl">

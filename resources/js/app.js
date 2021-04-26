@@ -62,11 +62,9 @@ Vue.use(VueInstantSearch);
  */
 
 /**
- * Vue-Clickaway
- * https://github.com/simplesmiler/vue-clickaway
+ * Gmap Vue
+ * https://diegoazh.github.io/gmap-vue/#about-gmapvue
  */
-/*import { mixin as clickaway } from 'vue-clickaway';
-Vue.mixin(clickaway)*/
 
 /**
  * Vuex Persisted State

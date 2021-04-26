@@ -15,7 +15,12 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie', 'livewire/*',],
+    'paths' => [
+        'api/*',
+        'livewire/*',
+        'sanctum/csrf-cookie',
+        'https://maps.googleapis.com/*',
+    ],
 
     'allowed_methods' => ['*'],
 
