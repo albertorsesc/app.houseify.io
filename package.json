@@ -33,7 +33,6 @@
     "dependencies": {
         "@chenfengyuan/vue-carousel": "^1.0.6",
         "algoliasearch": "^4.8.5",
-        "gmap-vue": "^1.5.0",
         "sweetalert2": "^10.13.1",
         "vue": "^2.6.12",
         "vue-instantsearch": "^3.4.3",
