@@ -170,8 +170,9 @@
             'first_name' => 'Nombre',
             'last_name' => 'Apellido',
             'email' => 'Correo Electrónico',
-            'password' => 'Contrasena',
-            'password_confirmation' => 'Confirmacion de Contrasena',
+            'password' => 'Contraseña',
+            'current_password' => 'Contraseña Actual',
+            'password_confirmation' => 'Confirmación de Contraseña',
 
             /* Properties */
             'property_category_id' => 'Categoría de la Propiedad',

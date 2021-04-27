@@ -5,6 +5,7 @@ namespace Database\Factories\Businesses;
 use App\Models\Businesses\Business;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class BusinessFactory extends Factory
 {
@@ -23,8 +24,10 @@ class BusinessFactory extends Factory
     public function definition()
     {
         return [
+            'uuid' => $this->faker->uuid,
             'name' => $name = $this->faker->company,
-            'owner_id' => (fn() => User::factory()),
+            'slug' => Str::slug($name),
+            'owner_id' => User::factory(),
             'categories' => $this->faker->randomElements(
                 collect(config('houseify.construction_categories'))->random(3)->toArray()
             ),

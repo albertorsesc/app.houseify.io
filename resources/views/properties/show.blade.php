@@ -52,7 +52,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{ $property->title }}" />
     <meta name="description" content="Propiedad en {{ $property->location ? $property->location->city . ' - ' . $property->location->state->code : null }}" />
-    <meta property="og:image" content="/" />
+    <meta property="og:image" content="{{ $property->media ? optional($property->media->first())->getFullUrl() : '' }}" />
 @endsection
 
 @section('content')

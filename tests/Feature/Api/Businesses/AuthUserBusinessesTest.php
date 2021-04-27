@@ -13,7 +13,7 @@ class AuthUserBusinessesTest extends TestCase
     /**
      * @test
      * @throws \Throwable
-     * @only ['authenticated', 'seller']
+     * @only ['authenticated', 'owner']
      */
     public function authorized_user_can_get_own_businesses()
     {

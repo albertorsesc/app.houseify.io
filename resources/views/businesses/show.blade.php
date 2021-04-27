@@ -6,12 +6,53 @@
     <link rel="stylesheet" href="/css/vue-multiselect.min.css">
 @endsection
 
+@section('scripts')
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script>
+        let map;
+
+        function initMap() {
+            @if ($business->location)
+            const coordinates = {
+                lat: {{ $business->location->coordinates['latitude'] }},
+                lng: {{ $business->location->coordinates['longitude'] }}
+            }
+
+            let zoom = 15;
+            @if ($business->location->address)
+                zoom = 20
+            @endif
+
+                map = new google.maps.Map(document.getElementById("map"), {
+                center: coordinates,
+                zoom: zoom,
+            });
+
+            map.addListener('click', function(e) {
+                window.location.href = '{{ $business->location->getGoogleMap() }}'
+            });
+
+            new google.maps.Marker({
+                position: coordinates,
+                map,
+                title: "{{ $business->location->getFullAddress() }}",
+            });
+            @endif
+        }
+    </script>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.gmaps_api') }}&callback=initMap&libraries=&v=weekly"
+        async
+    ></script>
+@endsection
+
 @section('meta')
     <meta property="og:url" content="{{ $business->publicProfile() }}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{ $business->name }}" />
     <meta name="description" content="Propiedad en {{ $business->location ? $business->location->city . ' - ' . $business->location->state->code : null }}" />
-    <meta property="og:image" content="/#" />
+    <meta property="og:image" content="{{ $business->media ? $business->media->first()->getFullUrl() : '' }}" />
 @endsection
 
 @section('content')
@@ -200,7 +241,7 @@
                                     </div>
 
                                     {{--Likes--}}
-                                    <div v-if="isAuthenticated"
+                                    <div v-if="isAuthenticated && localBusiness.owner.id !== auth"
                                          class="w-1/2 md:w-4/5 mb-2 items-end align-middle flex justify-end">
                                         <div class="w-1/12 md:w-4/5 md:flex sm:justify-end ">
                                             <likes
@@ -217,7 +258,7 @@
                                                 <h3 class="text-lg leading-6 font-medium text-gray-600">
                                                     Detalles del Negocio
                                                 </h3>
-                                                <div class="flex justify-end">
+                                                <div class="flex justify-end mt-8">
                                                     <div class="rounded-full border border-emerald-200 hover:border hover:border-emerald-300 hover:ml-2 hover:shadow-md bg-white z-20 p-1 inline-block absolute -mt-24">
                                                         <div class="flex">
                                                             <label for="file-upload"
@@ -354,13 +395,16 @@
 
                                     <business-location></business-location>
 
-                                    <divider title="Mapa" v-if="localBusiness.location"></divider>
+                                    @if ($business->location && $business->location->coordinates)
+                                        <divider title="Mapa"></divider>
 
-                                    <!--                        <div class="mt-2 flex">
-                                                                <div class="w-full mt-2">
-                                                                    <div class="border-gray-300 h-auto"></div>
-                                                                </div>
-                                                            </div>-->
+                                        {{--Mapa--}}
+                                        <div class="flex">
+                                            <div class="w-full bg-white rounded-lg shadow p-3">
+                                                <div id="map" class="rounded-lg border-gray-300 h-80"></div>
+                                            </div>
+                                        </div>
+                                    @endif
 
                                     <modal v-if="localBusiness.owner.id === auth" modal-id="update-business" max-width="sm:max-w-5xl">
                                         <template #title>Actualizar Datos de tu Negocio</template>

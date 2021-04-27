@@ -78,12 +78,14 @@
     </x-slot>
 
     <x-slot name="actions">
-        <x-jet-action-message class="mr-3" on="saved">
+        <x-jet-action-message class="mr-3 text-emerald-500" on="saved">
             {{ __('Actualizado.') }}
         </x-jet-action-message>
 
-        <x-jet-button wire:loading.attr="disabled" wire:target="photo">
-            {{ __('Actualizar') }}
-        </x-jet-button>
+        <button wire:loading.attr="disabled"
+                wire:target="photo"
+                class="h-btn-success">
+            Actualizar
+        </button>
     </x-slot>
 </x-jet-form-section>

@@ -6,6 +6,47 @@
     <link rel="stylesheet" href="/css/vue-multiselect.min.css">
 @endsection
 
+@section('scripts')
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script>
+        let map;
+
+        function initMap() {
+            @if ($jobProfile->location)
+            const coordinates = {
+                lat: {{ $jobProfile->location->coordinates['latitude'] }},
+                lng: {{ $jobProfile->location->coordinates['longitude'] }}
+            }
+
+            let zoom = 15;
+            @if ($jobProfile->location->address)
+                zoom = 20
+            @endif
+
+                map = new google.maps.Map(document.getElementById("map"), {
+                center: coordinates,
+                zoom: zoom,
+            });
+
+            map.addListener('click', function(e) {
+                window.location.href = '{{ $jobProfile->location->getGoogleMap() }}'
+            });
+
+            new google.maps.Marker({
+                position: coordinates,
+                map,
+                title: "{{ $jobProfile->location->getFullAddress() }}",
+            });
+            @endif
+        }
+    </script>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.gmaps_api') }}&callback=initMap&libraries=&v=weekly"
+        async
+    ></script>
+@endsection
+
 @section('content')
 
     <job-profile :job-profile="{{ json_encode($jobProfile) }}"
@@ -70,6 +111,7 @@
                     </div>
 
                     <div class="flex md:justify-between items-center space-x-5">
+                        {{--Image--}}
                         <div class="flex-shrink-0">
                             <div class="rounded-full border border-emerald-200 hover:border hover:border-emerald-300 hover:shadow-md bg-white z-20 px-1 py-1 inline-block">
                                 <div class="flex">
@@ -227,6 +269,17 @@
                             <divider title="Dirección"></divider>
 
                             <job-profile-location></job-profile-location>
+
+                            @if ($jobProfile->location && $jobProfile->location->coordinates)
+                                <divider title="Mapa"></divider>
+
+                                {{--Mapa--}}
+                                <div class="flex">
+                                    <div class="w-full bg-white rounded-lg shadow p-3">
+                                        <div id="map" class="rounded-lg border-gray-300 h-80"></div>
+                                    </div>
+                                </div>
+                            @endif
                         </section>
                     </div>
 

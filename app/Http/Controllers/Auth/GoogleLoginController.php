@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\Auth\NewSocialMediaUserRegistration;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Laravel\Socialite\Facades\Socialite;
@@ -18,15 +19,18 @@ class GoogleLoginController extends Controller
     {
         $googleUser = Socialite::driver('google')->user();
 
-        $user = User::firstOrCreate(
-            ['provider_id' => $googleUser->getId()],
-            [
-                'email' => $googleUser->getEmail(),
-                'first_name' => $googleUser->getName(),
-                'last_name' => 'G',
-                'email_verified_at' => now()->toDateTimeString(),
-            ]
-        );
+        $user = User::query()
+            ->firstOrCreate(
+                [
+                    'provider_id' => $googleUser->getId(),
+                    'email' => $googleUser->getEmail(),
+                ],
+                [
+                    'first_name' => $googleUser->getName(),
+                    'last_name' => 'G',
+                    'email_verified_at' => now()->toDateTimeString(),
+                ]
+            );
 
         auth()->login($user, true);
 

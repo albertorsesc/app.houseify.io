@@ -22,9 +22,10 @@ class BusinessesTest extends BusinessTestCase
      */
     public function authenticated_user_can_get_all_businesses()
     {
-        $this->signIn();
+        $this->fakeEvent();
 
-        $business = Business::factory()->create();
+        $business = $this->create(Business::class);
+        $this->signIn();
 
         $response = $this->getJson(route($this->routePrefix . 'index'));
         $response->assertOk();
@@ -62,9 +63,9 @@ class BusinessesTest extends BusinessTestCase
      */
     public function authenticated_user_can_store_a_business()
     {
-        $this->signIn();
-
         $newBusiness = $this->makeBusiness();
+
+        $this->signIn();
 
         $response = $this->postJson(
             route($this->routePrefix . 'store'),
@@ -88,7 +89,7 @@ class BusinessesTest extends BusinessTestCase
     {
         $this->signIn();
 
-        $existingBusiness = Business::factory()->create();
+        $existingBusiness = $this->create(Business::class);
         $newBusinessData = $this->makeBusiness();
 
         $response = $this->putJson(
@@ -122,7 +123,7 @@ class BusinessesTest extends BusinessTestCase
     {
         $this->signIn();
 
-        $existingBusiness = Business::factory()->create();
+        $existingBusiness = $this->create(Business::class);
 
         $response = $this->deleteJson(route($this->routePrefix . 'destroy', $existingBusiness));
         $response->assertStatus(204);

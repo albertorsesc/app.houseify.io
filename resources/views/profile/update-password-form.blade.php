@@ -32,8 +32,8 @@
             {{ __('Actualizado.') }}
         </x-jet-action-message>
 
-        <x-jet-button>
-            {{ __('Actualizar') }}
-        </x-jet-button>
+        <button class="h-btn-success">
+            Actualizar
+        </button>
     </x-slot>
 </x-jet-form-section>

@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\Auth\NewSocialMediaUserRegistration;
 use App\Events\Logs\LogActions;
 use App\Events\Properties\NewPropertyCreated;
+use App\Listeners\Auth\SendPasswordToNewSocialUser;
 use App\Listeners\PersistLogActions;
 use App\Events\Reports\NewReportSubmitted;
 use App\Events\Properties\PropertyReported;
@@ -21,6 +23,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        NewSocialMediaUserRegistration::class => [
+            SendPasswordToNewSocialUser::class,
         ],
         Verified::class => [],
         /*SuggestionSubmitted::class => [
