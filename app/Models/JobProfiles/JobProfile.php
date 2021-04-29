@@ -4,7 +4,7 @@ namespace App\Models\JobProfiles;
 
 use App\Models\User;
 use Laravel\Scout\Searchable;
-use App\Models\Concerns\{HasLocation, Likeable, Publishable, CanBeReported, SerializeTimestamps};
+use App\Models\Concerns\{HasLocation, Interestable, Likeable, Publishable, CanBeReported, SerializeTimestamps};
 use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, Relations\BelongsTo};
 
 class JobProfile extends Model
@@ -14,6 +14,7 @@ class JobProfile extends Model
         Searchable,
         hasLocation,
         Publishable,
+        Interestable,
         CanBeReported,
         SerializeTimestamps;
 

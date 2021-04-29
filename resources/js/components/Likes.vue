@@ -2,23 +2,28 @@
     <!--Likes-->
     <div class="flex justify-between md:w-1/8 space-x-5">
         <!--Like-->
-        <span @click="like"
-              class="items-center align-middle cursor-pointer">
-            <svg class="h-6 w-6 hover:text-emerald-300"
-                 :class="[isLiked ? 'text-emerald-300' : 'text-gray-300']"
-                 fill="none"
-                 xmlns="http://www.w3.org/2000/svg"
-                 viewBox="0 0 24 24"
-                 stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-            </svg>
-            <span class="text-xs text-gray-400 font-light"
-                  :class="getLikesCount < 99 ? 'ml-2' : ''"
-                  v-text="getLikesCount"></span>
-        </span>
+        <div title="Me Gusta!">
+            <span @click="like"
+                  class="items-center align-middle cursor-pointer">
+
+                    <svg class="h-6 w-6 hover:text-emerald-300"
+                         :class="[isLiked ? 'text-emerald-300' : 'text-gray-300']"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                </svg>
+
+                <span class="text-xs text-gray-400 font-light"
+                      :class="getLikesCount < 99 ? 'ml-2' : ''"
+                      v-text="getLikesCount"></span>
+            </span>
+        </div>
         <!--Dislike-->
-        <span @click="dislike"
-              class="items-center align-middle cursor-pointer">
+        <div title="Me Disgusta">
+            <span @click="dislike"
+                  class="items-center align-middle cursor-pointer">
             <svg class="h-6 w-6 text-gray-300 hover:text-red-400"
                  :class="[! isLiked && isLiked !== null ? 'text-red-400' : 'text-gray-300']"
                  xmlns="http://www.w3.org/2000/svg"
@@ -31,6 +36,7 @@
                   :class="[getDislikesCount < 99 ? 'ml-2' : 'ml-1']"
                   v-text="getDislikesCount"></span>
         </span>
+        </div>
     </div>
 </template>
 

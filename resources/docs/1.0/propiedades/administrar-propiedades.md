@@ -22,19 +22,19 @@
   <img src="/docs-img/create-property-btn.png" class="shadow-lg rounded-lg sm:w-full">
 
 * Registra los detalles básicos de la Propiedad
-  <br>
+  <br><br>
   <img src="/docs-img/property-form.png" class="shadow-lg rounded-lg sm:w-full">
 
 <a name="mostrar-propiedad"></a>
 ## Mostrar Propiedad
 ---
 * Haz clic en el icono <img src="/docs-img/eye-icon.png" class="align-middle ml-2 w-10 object-center shadow-lg rounded-lg">
-  <br>
+  <br><br>
   <img src="/docs-img/property-card.png" class="w-26 h-26 object-center shadow-lg rounded-lg">
   <br>
 
 * Perfil de la Propiedad
-  <br>
+  <br><br>
   <img src="/docs-img/property-profile.png" class="w-full object-center shadow-lg rounded-lg">
 
 <a name="actualizar-propiedad"></a>

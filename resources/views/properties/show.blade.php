@@ -12,7 +12,7 @@
         let map;
 
         function initMap() {
-            @if ($property->location)
+            @if ($property->location && $property->location->coordinates)
                 const coordinates = {
                     lat: {{ $property->location->coordinates['latitude'] }},
                     lng: {{ $property->location->coordinates['longitude'] }}

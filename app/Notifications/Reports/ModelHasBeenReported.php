@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Notifications\Properties;
+namespace App\Notifications\Reports;
 
 use App\Models\Report;
 use Illuminate\Bus\Queueable;
@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\{MailMessage, SlackMessage};
 
-class PropertyHasBeenReported extends Notification implements ShouldQueue
+class ModelHasBeenReported extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -16,15 +16,17 @@ class PropertyHasBeenReported extends Notification implements ShouldQueue
      * @var Report
      */
     public Report $report;
+    public $relation;
 
     /**
      * Create a new notification instance.
      *
      * @param Report $report
      */
-    public function __construct(Report $report)
+    public function __construct(Report $report, $relation)
     {
         $this->report = $report;
+        $this->relation = $relation;
     }
 
     /**
@@ -49,7 +51,10 @@ class PropertyHasBeenReported extends Notification implements ShouldQueue
     {
         return (new MailMessage)->markdown(
             'emails.properties.reports.report-submitted',
-            ['report' => $this->report]
+            [
+                'report' => $this->report,
+                'relation' => $this->relation
+            ]
         )->subject('[Houseify.io] Una de tus Propiedades ha sido reportada!');
     }
 

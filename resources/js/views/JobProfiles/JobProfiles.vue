@@ -27,6 +27,7 @@ export default {
         MyJobProfile: () => import(/* webpackChunkName: "job-profile" */ './MyJobProfile'),
         SearchJobProfiles: () => import(/* webpackChunkName: "search-job-profiles" */ './SearchJobProfiles'),
         ExploreJobProfiles: () => import(/* webpackChunkName: "explore-job-profiles" */ './ExploreJobProfiles'),
+        InterestingJobProfiles: () => import(/* webpackChunkName: "interesting-job-profiles" */ './InterestingJobProfiles'),
     }
 }
 </script>

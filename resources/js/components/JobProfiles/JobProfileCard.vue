@@ -6,11 +6,11 @@
                 <div class="w-full flex items-center justify-between px-4 py-3 space-x-6">
                     <div class="flex-1 truncate py-2">
                         <div class="items-center">
-                            <h3 class="-mb-2 text-gray-900 text-sm font-medium truncate">
-                                {{ jobProfile.user.firstName }}
-                            </h3>
+                            <h3 class="-mb-2 text-gray-900 text-sm font-medium truncate"
+                                v-text="jobProfile.user.fullName"
+                            ></h3>
                             <!--Skills-->
-                            <span class="flex-1 inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full"
+                            <span class="flex-1 mr-1 inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full"
                                   v-for="(skill, index) in jobProfile.skills"
                                   :key="index"
                                   v-if="index <= 2"
@@ -21,7 +21,17 @@
                            v-if="jobProfile.location && (jobProfile.location.city || jobProfile.location.state)"
                            v-text="jobProfile.location.city + ', ' + jobProfile.location.state.code">
                         </p>
+                        <div class="flex-wrap truncate">
+                        <span class="" @click.prevent>
+                                <interested-btn :model="jobProfile"
+                                                :id="jobProfile.uuid"
+                                                model-name="job-profiles"
+                                                endpoint="/job-profiles"
+                                ></interested-btn>
+                            </span>
+                        </div>
                     </div>
+
 <!--                    <img class="w-24 h-24 bg-gray-300 rounded-lg shadow-lg flex-shrink-0"
                          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60"
                          alt="">-->
@@ -40,7 +50,9 @@
                 <div>
                     <div class="-mt-px flex divide-x divide-gray-200">
                         <div class="w-0 flex-1 flex">
-                            <span class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+                            <!--Display Phone-->
+                            <span v-if="jobProfile.phone && ! jobProfile.email"
+                                  class="lg:relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
                                 <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                                 </svg>
@@ -51,13 +63,45 @@
                                 </span>
                                 <span class="ml-3 text-xs"
                                       v-show="showPhone"
-                                      v-text="jobProfile.phone"
+                                      v-text="formatPhone(jobProfile.phone)"
+                                ></span>
+                            </span>
+                            <!--Display Email-->
+                            <span v-if="jobProfile.email && ! jobProfile.phone"
+                                  class="lg:relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                                </svg>
+                                <span class="ml-3 text-xs cursor-pointer"
+                                      v-if="! showEmail"
+                                      @click="showEmail = true">
+                                    Ver Correo Electronico
+                                </span>
+                                <span class="ml-3 text-xs"
+                                      v-show="showEmail"
+                                      v-text="jobProfile.email"
+                                ></span>
+                            </span>
+                            <!--Display only Phone-->
+                            <span v-if="jobProfile.phone && jobProfile.email"
+                                  class="lg:relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+                                <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                </svg>
+                                <span class="ml-3 text-xs cursor-pointer"
+                                      v-if="! showPhone"
+                                      @click="showPhone = true">
+                                    Ver Teléfono
+                                </span>
+                                <span class="ml-3 text-xs"
+                                      v-show="showPhone"
+                                      v-text="formatPhone(jobProfile.phone)"
                                 ></span>
                             </span>
                         </div>
                         <div class="-ml-px w-0 flex-1 flex">
                             <a :href="jobProfile.meta.profile"
-                               class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
+                               class="lg:relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
                                 <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
@@ -84,7 +128,11 @@ export default {
     data() {
         return {
             showPhone: false,
+            showEmail: false,
         }
+    },
+    components: {
+        InterestedBtn: () => import(/* webpackChunkName: "interested-btn" */ '../InterestedBtn')
     }
 }
 </script>

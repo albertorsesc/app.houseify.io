@@ -12,9 +12,9 @@
                         </p>
                     </div>
 
-                    <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                    <div class="mt-6 grid grid-cols-1 gap-y-4 gap-x-4 sm:grid-cols-6">
 
-                        <div class="sm:col-span-4">
+                        <div class="col-span-4">
                             <div class="w-full">
                                 <label for="title" class="block text-sm font-medium text-gray-700">
                                     <strong class="required">*</strong>
@@ -33,8 +33,9 @@
                                 ></errors>
                             </div>
                         </div>
-                        <div class="sm:col-span-4 md:flex md:-mx-2">
-                            <div class="w-full md:w-1/2 md:mx-2">
+
+                        <div class="col-span-4 lg:flex lg:-mx-2">
+                            <div class="w-full lg:w-1/2 lg:mx-2">
                                 <label for="property_type" class="block text-sm font-medium text-gray-700">
                                     <strong class="required">*</strong>
                                     Tipo de Propiedad
@@ -59,7 +60,7 @@
                                         :options="{ noContainer: true }"
                                 ></errors>
                             </div>
-                            <div class="w-full md:w-1/2 md:mx-2 mt-6 md:mt-0">
+                            <div class="w-full lg:w-1/2 lg:mx-2 mt-6 lg:mt-0">
                                 <label for="property_category_id" class="block text-sm font-medium text-gray-700">
                                     <strong class="required">*</strong>
                                     Categoría de la Propiedad
@@ -89,8 +90,8 @@
                             </div>
                         </div>
 
-                        <div class="md:col-span-4 md:flex md:-mx-2">
-                            <div class="w-full md:w-1/2 md:mx-2">
+                        <div class="col-span-4 lg:flex lg:-mx-2">
+                            <div class="w-full lg:w-1/2 lg:mx-2">
                                 <label for="business_type" class="block text-sm font-medium text-gray-700">
                                     <strong class="required">*</strong>
                                     Tipo de Negocio
@@ -114,7 +115,7 @@
                                         :options="{ noContainer: true }"
                                 ></errors>
                             </div>
-                            <div class="w-full md:w-1/2 md:mx-2 mt-6 md:mt-0">
+                            <div class="w-full lg:w-1/2 lg:mx-2 mt-6 lg:mt-0">
                                 <label for="price" class="block text-sm font-medium text-gray-700">
                                     <strong class="required">*</strong>
                                     Precio
@@ -133,18 +134,20 @@
                             </div>
                         </div>
 
-                        <div class="sm:col-span-6">
-                            <label for="about" class="block text-sm font-medium text-gray-700">
-                                Comentarios adicionales
-                                <span class="text-gray-500 font-light text-xs">(opcional)</span>
-                            </label>
-                            <div class="mt-1">
-                                <textarea id="about" v-model="propertyForm.comments" rows="6" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
+                        <div class="col-span-4">
+                            <div class="w-full">
+                                <label for="about" class="block text-sm font-medium text-gray-700">
+                                    Comentarios adicionales
+                                    <span class="text-gray-500 font-light text-xs">(opcional)</span>
+                                </label>
+                                <div class="mt-1">
+                                    <textarea id="about" v-model="propertyForm.comments" rows="6" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
+                                </div>
+                                <errors :error="errors.comments"
+                                        :options="{ noContainer: true }"
+                                ></errors>
+                                <p class="mt-2 text-sm text-gray-500">Escribe comentarios adicionales sobre la propiedad.</p>
                             </div>
-                            <errors :error="errors.comments"
-                                    :options="{ noContainer: true }"
-                            ></errors>
-                            <p class="mt-2 text-sm text-gray-500">Escribe comentarios adicionales sobre la propiedad.</p>
                         </div>
 
                     </div>

@@ -1,5 +1,7 @@
 <template>
-    <div class="flex-wrap md:flex sm:justify-center mt-3">
+    <div>
+        <div v-if="businesses[0] && businesses[0].length !== 0"
+             class="flex-wrap md:flex sm:justify-center mt-3">
 
             <template v-for="businessesChunk in businesses">
 
@@ -10,6 +12,22 @@
 
             </template>
 
+        </div>
+
+        <div v-show="businesses[0] && businesses[0].length === 0"
+             class="flex-wrap md:flex sm:justify-center p-6 mt-3 items-center rounded-lg"
+             v-cloak>
+            <div class="container flex flex-col md:flex-row items-center justify-center px-5 text-gray-700">
+                <div class="max-w-md md:mr-20">
+                    <div class="text-3xl font-dark font-bold">Se el primero en publicar un Negocio relacionado con el sector de la Construcción..</div>
+                    <p class="mb-8 mt-4 text-2xl md:text-3xl">No hay Negocios o Empresas registradas por el momento..</p>
+                </div>
+                <div class="max-w-lg">
+                    <img src="/img/into-the-void.svg" class="h-72" alt="Houseify.io image">
+                </div>
+
+            </div>
+        </div>
     </div>
 </template>
 

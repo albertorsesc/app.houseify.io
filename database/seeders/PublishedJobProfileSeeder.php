@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\JobProfiles\JobProfile;
 use App\Models\Location;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class PublishedJobProfileSeeder extends Seeder
@@ -15,16 +16,28 @@ class PublishedJobProfileSeeder extends Seeder
      */
     public function run()
     {
+        foreach (User::all() as $user) {
+            \Auth::login($user);
+            $newJobProfile = JobProfile::factory()->create();
+
+            $newJobProfile->location()->create(
+                Location::factory()->make()->toArray()
+            );
+
+            $newJobProfile->update(['status' => true]);
+            \Auth::logout();
+        }
+
         \Auth::loginUsingId(1);
 
         $jobProfiles = [
             [
                 'title' => 'Electricista con mas de 10 anios de experiencia',
                 'skills' => ['Electricista', 'Herrero', 'Plomero'],
-                'birthdate_at' => now()->subDecades(rand(1, 5))->toDateTime(),
                 'email' => 'electricista@gmail.com',
                 'phone' => '(686)289.4998',
                 'facebook_profile' => 'https://www.facebook.com/electricista',
+                'linkedin_profile' => 'https://www.linkedin.com/electricista',
                 'site' => 'https://electricista.com',
                 'bio' => 'Se hacen trabajos a domicilio'
             ],
@@ -36,6 +49,8 @@ class PublishedJobProfileSeeder extends Seeder
             $newJobProfile->location()->create(
                 Location::factory()->make()->toArray()
             );
+
+            $newJobProfile->update(['status' => true]);
         }
     }
 }

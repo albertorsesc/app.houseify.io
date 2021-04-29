@@ -36,14 +36,14 @@ export default {
     methods: {
         update() {
             axios.put(`${this.endpoint}/${this.localJobProfile.uuid}`, {
-                title: this.jobProfileForm.title ? this.jobProfileForm.title : this.localJobProfile.title,
-                birthdate_at: this.jobProfileForm.birthdateAt ? this.jobProfileForm.birthdateAt : this.localJobProfile.birthdateAt,
-                skills: this.jobProfileForm.skills ? this.jobProfileForm.skills : this.localJobProfile.skills,
-                email: this.jobProfileForm.email ? this.jobProfileForm.email : this.localJobProfile.email,
-                phone: this.jobProfileForm.phone ? this.jobProfileForm.phone : this.localJobProfile.phone,
-                site: this.jobProfileForm.site ? this.jobProfileForm.site : this.localJobProfile.site,
-                facebook_profile: this.jobProfileForm.facebookProfile ? this.jobProfileForm.facebookProfile : this.localJobProfile.facebookProfile,
-                bio: this.jobProfileForm.bio,
+                title: this.jobProfileForm.title ? this.jobProfileForm.title : null,
+                skills: this.jobProfileForm.skills ? this.jobProfileForm.skills : null,
+                email: this.jobProfileForm.email ? this.jobProfileForm.email : null,
+                phone: this.jobProfileForm.phone ? this.jobProfileForm.phone : null,
+                site: this.jobProfileForm.site ? this.jobProfileForm.site : null,
+                facebook_profile: this.jobProfileForm.facebookProfile ? this.jobProfileForm.facebookProfile : null,
+                linkedin_profile: this.jobProfileForm.linkedinProfile ? this.jobProfileForm.linkedinProfile : null,
+                bio: this.jobProfileForm.bio ? this.jobProfileForm.bio : null,
             })
                 .then(response => {
                     this.closeModal()
@@ -118,6 +118,7 @@ export default {
         MyJobProfile: () => import(/* webpackChunkName: "job-profile" */ './MyJobProfile'),
         Divider: () => import(/* webpackChunkName: "divider" */ '../../components/Divider'),
         FormInput: () => import(/* webpackChunkName: "form-input" */ '../../components/FormInput'),
+        InterestedBtn: () => import(/* webpackChunkName: "interested-btn" */ '../../components/InterestedBtn'),
         JobProfileLocation: () => import(/* webpackChunkName: "job-profile-location" */ './JobProfileLocation'),
     }
 }

@@ -16,10 +16,11 @@ class BusinessController extends Controller
             Business::query()
                     ->isPublished()
                     ->with([
-                        'owner:id',
                         'interests',
                         'location.state',
+                        'owner:id,first_name,last_name',
                     ])
+                    ->latest()
                     ->paginate(10)
         );
     }

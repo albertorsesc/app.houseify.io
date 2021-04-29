@@ -17,6 +17,10 @@ export default {
             business: this.localBusiness
         }
     },
+    emits: [
+        'SweetAlert:destroy',
+        'businesses.location',
+    ],
     data() {
         return {
             endpoint: '/businesses/',
@@ -62,6 +66,15 @@ export default {
                     SweetAlert.success(`Tu Negocio ha sido actualizado exitosamente!`)
                 })
                 .catch(error => { this.errors = error.response.status === 422 ? error.response.data.errors : [] })
+        },
+        destroy() {
+            axios.delete(`${this.endpoint}${this.localBusiness.slug}`)
+                .then(() => {
+                    setTimeout( () => {
+                            window.location.href = `/directorio-de-negocios` },
+                        1500
+                    )
+                }).catch(error => { console.log(error) })
         },
         toggle() {
             axios
@@ -122,6 +135,12 @@ export default {
                 dd(response)
             }).catch(error => dd(error))*/
         },
+        onDelete() {
+            SweetAlert.danger(
+                `Eliminar el Negocio/Empresa: ${this.localBusiness.name}`,
+                'El Negocio/Empresa ha sido eliminado exitosamente!',
+            )
+        },
     },
     watch: {
         selectedConstructionCategories () {
@@ -138,6 +157,7 @@ export default {
         this.$store.dispatch('global/fetchConstructionCategories')
         this.$store.dispatch('global/fetchStates')
 
+        Event.$on('SweetAlert:destroy', () => { this.destroy() })
         Event.$on('businesses.location', location => {
             this.localBusiness.location = location
         })
@@ -152,6 +172,7 @@ export default {
         Divider: () => import(/* webpackChunkName: "divider" */ '../../components/Divider'),
         FormInput: () => import(/* webpackChunkName: "form-input" */ '../../components/FormInput'),
         BusinessLocation: () => import(/* webpackChunkName: "business-location" */ './BusinessLocation'),
+        InterestedBtn: () => import(/* webpackChunkName: "interested-btn" */ '../../components/InterestedBtn'),
     }
 }
 </script>

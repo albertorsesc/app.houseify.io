@@ -8,6 +8,7 @@ use App\Models\Properties\Concerns\BusinessType;
 use App\Models\Properties\Property;
 use App\Models\Properties\PropertyCategory;
 use App\Models\Properties\PropertyFeature;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class PublishedPropertySeeder extends Seeder
@@ -53,7 +54,7 @@ class PublishedPropertySeeder extends Seeder
             $newProperty = Property::create($property);
 
             $newProperty->location()->create(
-                Location::factory()->make()->toArray()
+                Location::withoutEvents(fn () => Location::factory()->make()->toArray())
             );
 
             $newProperty->propertyFeature()->create(
@@ -61,6 +62,8 @@ class PublishedPropertySeeder extends Seeder
                     'property_id' => null
                 ])->toArray()
             );
+
+            $newProperty->update(['status' => true]);
         }
     }
 }

@@ -95,6 +95,7 @@
                             <my-job-profile></my-job-profile>
                         </div>
                         <div v-show="activeTab === 'my-interests'" class="text-3xl block">
+                            <interesting-job-profiles></interesting-job-profiles>
                         </div>
                         <div v-show="activeTab === 'search-job-profiles'" class="text-3xl block">
                             <search-job-profiles></search-job-profiles>

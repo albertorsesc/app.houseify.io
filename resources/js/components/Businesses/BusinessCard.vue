@@ -38,7 +38,7 @@
 
                     <div class="flex">
                         <h2 class="text-gray-800 text-xl font-bold"
-                            v-text="business.name"
+                            v-text="limitString(business.name,25)"
                         ></h2>
                     </div>
 

@@ -178,6 +178,33 @@ class JobProfileRequestTest extends TestCase
      * @test
      * @throws \Throwable
      */
+    public function email_must_be_required_if_phone_is_empty()
+    {
+        $validatedField = 'email';
+        $brokenRule = null;
+
+        $this->postJson(
+            route($this->routePrefix . 'store'),
+            $this->make(JobProfile::class, [
+                $validatedField => $brokenRule,
+                'phone' => null
+            ])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+
+        $existingJobProfile = $this->create(JobProfile::class);
+        $this->putJson(
+            route($this->routePrefix . 'update', $existingJobProfile),
+            $this->make(JobProfile::class, [
+                $validatedField => $brokenRule,
+                'phone' => null
+            ])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
     public function phone_must_not_exceed_60_characters()
     {
         $validatedField = 'phone';

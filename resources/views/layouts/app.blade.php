@@ -49,19 +49,18 @@
 
         @livewireScripts
         <div class="min-h-screen w-full">
+            <div id="app" v-cloak>
 
-                <div id="app" v-cloak>
+                @include('layouts.nav')
 
-                    @include('layouts.nav')
+                @yield('content')
 
-                    @yield('content')
-
-                </div>
+            </div>
         </div>
 
-    <script src="{{ mix('/js/manifest.js') }}"></script>
-    <script src="{{ mix('/js/app.js') }}"></script>
-    <script src="{{ mix('/js/vendor.js') }}"></script>
+    <script src="{{ mix('js/manifest.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/vendor.js') }}"></script>
     @yield('scripts')
     </body>
 </html>

@@ -19,18 +19,21 @@ class GoogleLoginController extends Controller
     {
         $googleUser = Socialite::driver('google')->user();
 
-        $user = User::query()
-            ->firstOrCreate(
-                [
-                    'provider_id' => $googleUser->getId(),
-                    'email' => $googleUser->getEmail(),
-                ],
-                [
-                    'first_name' => $googleUser->getName(),
-                    'last_name' => 'G',
-                    'email_verified_at' => now()->toDateTimeString(),
-                ]
-            );
+        $user = User::
+                where(
+                    'provider_id',
+                    $googleUser->getId()
+                )->orWhere('email', $googleUser->getEmail())
+                 ->firstOrCreate(
+                     ['provider_id' => $googleUser->getId()],
+                     [
+                        'first_name' => $googleUser->getName(),
+                        'last_name' => 'G',
+                        'provider_id' => $googleUser->getId(),
+                        'email' => $googleUser->getEmail(),
+                        'email_verified_at' => now()->toDateTimeString(),
+                    ]
+                 );
 
         auth()->login($user, true);
 

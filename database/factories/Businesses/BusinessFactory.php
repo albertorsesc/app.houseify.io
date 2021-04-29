@@ -25,7 +25,7 @@ class BusinessFactory extends Factory
     {
         return [
             'uuid' => $this->faker->uuid,
-            'name' => $name = $this->faker->company,
+            'name' => $name = $this->faker->unique()->company,
             'slug' => Str::slug($name),
             'owner_id' => User::factory(),
             'categories' => $this->faker->randomElements(

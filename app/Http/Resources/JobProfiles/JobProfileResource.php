@@ -26,10 +26,12 @@ class JobProfileResource extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'facebookProfile' => $this->facebook_profile,
+            'linkedinProfile' => $this->linkedin_profile,
             'site' => $this->site,
             'bio' => $this->bio,
             'location' => new LocationResource($this->whenLoaded('location')),
             'likes' => $this->whenLoaded('likes'),
+            'interests' => $this->whenLoaded('interests'),
             'status' => $this->status,
             'photo' => $this->photo,
             'meta' => [

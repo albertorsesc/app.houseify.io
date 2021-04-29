@@ -1,13 +1,12 @@
 <?php
 
-    use App\Http\Controllers\Auth\FacebookLoginController;
-    use App\Http\Controllers\Auth\GoogleLoginController;
-    use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\FacebookLoginController;
+use App\Http\Controllers\Auth\GoogleLoginController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuggestionController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
-    Route::get('/', function () {
+Route::get('/', function () {
     return redirect('/inicio');
 });
 

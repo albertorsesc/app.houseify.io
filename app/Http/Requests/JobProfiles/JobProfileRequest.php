@@ -31,8 +31,8 @@ class JobProfileRequest extends FormRequest
                 'array',
                 'in:' . implode(',', collect(config('job-profiles.skills'))->toArray())
             ],
-            'email' => ['nullable', 'email', 'max:150'],
-            'phone' => ['max:60'],
+            'email' => ['required_without:phone', 'nullable', 'email', 'max:150'],
+            'phone' => ['required_without:email', 'nullable', 'max:60'],
             'facebook_profile' => ['nullable', 'url', 'max:255'],
             'site' => ['nullable', 'url', 'max:255'],
         ];

@@ -40,9 +40,9 @@ trait UsesGMaps
 
     public static function bootUsesGMaps()
     {
-        self::creating(function($model) {
+        /*self::creating(function($model) {
             $model->coordinates = $model->getCoordinates();
-        });
+        });*/
     }
 
 }

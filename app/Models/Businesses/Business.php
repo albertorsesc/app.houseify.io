@@ -2,7 +2,6 @@
 
 namespace App\Models\Businesses;
 
-use App\Models\Like;
 use App\Models\User;
 use Laravel\Scout\Searchable;
 use App\Models\Concerns\{CanBeReported, HasLocation, HasUuid, Interestable, Likeable, Publishable, SerializeTimestamps};

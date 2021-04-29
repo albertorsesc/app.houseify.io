@@ -23,10 +23,10 @@ class LocationResource extends JsonResource
             'state' => $this->whenLoaded('state'),
             'zipCode' => $this->zip_code,
             'fullAddress' => $this->getFullAddress(),
-            'coordinates' => [
+            'coordinates' => $this->coordinates ? [
                 'latitude' => $latitude = $this->coordinates['latitude'],
                 'longitude' => $longitude = $this->coordinates['longitude'],
-            ],
+            ] : [],
             'gmap' => $this->getGoogleMap(),
         ];
     }

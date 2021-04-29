@@ -31,7 +31,7 @@
                             <div class="absolute inset-y-0 left-0 w-1/2 bg-gray-50"></div>
                         </div>
                         <div class="relative max-w-7xl mx-auto lg:grid lg:grid-cols-5">
-                            <div class="bg-gray-50 py-16 px-4 sm:px-6 lg:col-span-2 lg:px-8 lg:py-24 xl:pr-12">
+                            <div class="bg-gray-50 lg:py-16 px-4 sm:px-6 lg:col-span-2 lg:px-8 lg:py-24 xl:pr-12">
                                 <div class="max-w-lg mx-auto">
                                     <h2 class="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
                                         Nos encantaria leer tus sugerencias
@@ -84,7 +84,7 @@
                                             ></textarea>
                                         </div>
                                         <div>
-                                            <button type="submit" class="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            <button type="submit" class="md:-mt-2 inline-flex justify-center py-3 px-6 border border-gray-300 shadow text-base font-medium rounded-md text-emerald-500 bg-white hover:text-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                                 Enviar
                                             </button>
                                         </div>

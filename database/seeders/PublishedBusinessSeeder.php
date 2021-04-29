@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Businesses\Business;
 use App\Models\Location;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class PublishedBusinessSeeder extends Seeder
@@ -43,6 +44,7 @@ class PublishedBusinessSeeder extends Seeder
                 'phone' => '(686)289.4998',
                 'site' => 'https://polaris-aire-acondicionado.com',
                 'facebook_profile' => 'https://www.facebook.com/polaris-aire-acondicionado',
+                'linkedin_profile' => 'https://www.linkedin.com/polaris-aire-acondicionado',
                 'comments' => 'Minisplits de 2 toneladas en especial'
             ],
         ];
@@ -53,6 +55,8 @@ class PublishedBusinessSeeder extends Seeder
             $newBusiness->location()->create(
                 Location::factory()->make()->toArray()
             );
+
+            $newBusiness->update(['status' => true]);
         }
     }
 }

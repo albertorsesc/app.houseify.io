@@ -12,35 +12,41 @@
                         </p>
                     </div>
 
-                    <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                    <div class="mt-6 grid grid-cols-1 gap-y-4 gap-x-4 sm:grid-cols-6">
                         <!--Title-->
-                        <div class="sm:col-span-4">
-                            <label for="title" class="block text-sm font-medium text-gray-700">
-                                <strong class="required">*</strong>
-                                Titulo del Perfil
-                                <span class="text-gray-500 font-light text-xs">(requerido)</span>
-                                <span class="text-gray-600 font-light text-xs">Escriba una breve presentación.</span>
-                            </label>
-                            <div class="my-1 flex rounded-md shadow-sm">
-                                <input type="text"
-                                       v-model="jobProfileForm.title"
-                                       id="title"
-                                       autocomplete="title"
-                                       autofocus
-                                       class="h-input flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
+                        <div class="col-span-4">
+                            <div class="w-full">
+                                <label for="title" class="block text-sm font-medium text-gray-700">
+                                    <strong class="required">*</strong>
+                                    Titulo del Perfil
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
+                                    <span class="text-gray-500 font-light text-xs">Escriba una breve presentación.</span>
+                                </label>
+                                <div class="my-1 flex rounded-md shadow-sm">
+                                    <input type="text"
+                                           v-model="jobProfileForm.title"
+                                           id="title"
+                                           autocomplete="title"
+                                           autofocus
+                                           class="h-input flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                </div>
+                                <errors :error="errors.title"
+                                        :options="{ noContainer: true }"
+                                ></errors>
                             </div>
-                            <errors :error="errors.title"
-                                    :options="{ noContainer: true }"
-                            ></errors>
                         </div>
 
                         <!--Skills-->
-                        <div class="sm:col-span-4">
+                        <div class="col-span-4">
                             <div class="w-full">
                                 <label for="skills" class="block text-sm font-medium text-gray-700">
                                     <strong class="required">*</strong>
                                     Habilidades
                                     <span class="text-gray-500 font-light text-xs">(requerido)</span>
+                                    <span class="text-gray-500 font-light text-xs">
+                                        Si no encuentras tu oficio o profesión deja tu sugerencia en nuestro buzón de
+                                        <a href="/sugerencias" class="h-link text-emerald-500 underline">Sugerencias</a>
+                                    </span>
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base ring-white">
                                     <vue-multiselect v-model="jobProfileForm.skills"
@@ -56,6 +62,7 @@
                                                      select-label=""
                                                      selected-label=""
                                                      deselect-label=""
+                                                     :tag-placeholder="''"
                                                      placeholder="Selecciona tus habilidades de Trabajo..."
                                     ></vue-multiselect>
                                 </div>
@@ -65,9 +72,9 @@
                             </div>
                         </div>
 
-                        <div class="sm:col-span-4 md:flex md:-mx-2">
+                        <div class="col-span-4 lg:flex -mx-0 lg:-mx-2">
                             <!--Email-->
-                            <div class="w-full md:w-1/2 md:mx-2">
+                            <div class="w-full lg:w-1/2 mx-0 lg:mx-2">
                                 <label for="email" class="block text-sm font-medium text-gray-700">
                                     Correo Electrónico
                                     <span class="text-gray-500 font-light text-xs">(opcional)</span>
@@ -84,7 +91,7 @@
                                 ></errors>
                             </div>
                             <!--Phone-->
-                            <div class="mt-4 md:mt-0 w-full md:w-1/2 md:mx-2">
+                            <div class="w-full lg:w-1/2 mx-0 lg:mx-2 mt-4 xl:mt-0">
                                 <label for="phone" class="block text-sm font-medium text-gray-700">
                                     Teléfono
                                     <span class="text-gray-500 font-light text-xs">(opcional)</span>
@@ -102,9 +109,9 @@
                             </div>
                         </div>
 
-                        <div class="sm:col-span-4 md:flex md:-mx-2">
+                        <div class="col-span-4 lg:flex lg:-mx-2">
                             <!--Facebook Profile-->
-                            <div class="w-full md:w-1/3 md:mx-2">
+                            <div class="w-full lg:w-1/3 lg:mx-2">
                                 <label for="facebook_profile" class="block text-sm font-medium text-gray-700">
                                     Perfil de Facebook
                                     <span class="text-gray-500 font-light text-xs">(opcional)</span>
@@ -121,7 +128,7 @@
                                 ></errors>
                             </div>
                             <!--LinkedIn Profile-->
-                            <div class="w-full md:w-1/3 md:mx-2">
+                            <div class="w-full lg:w-1/3 lg:mx-2 mt-4 lg:mt-0">
                                 <label for="facebook_profile" class="block text-sm font-medium text-gray-700">
                                     Perfil de LinkedIn
                                     <span class="text-gray-500 font-light text-xs">(opcional)</span>
@@ -138,7 +145,7 @@
                                 ></errors>
                             </div>
                             <!--Site-->
-                            <div class="w-full md:w-1/3 md:mx-2">
+                            <div class="w-full lg:w-1/3 lg:mx-2 mt-4 lg:mt-0">
                                 <label for="site" class="block text-sm font-medium text-gray-700">
                                     Sitio Web
                                     <span class="text-gray-500 font-light text-xs">(opcional)</span>
@@ -157,22 +164,24 @@
                         </div>
 
                         <!--Comments-->
-                        <div class="sm:col-span-4">
-                            <label for="bio" class="block text-sm font-medium text-gray-700">
-                                Comentarios adicionales
-                                <span class="text-gray-500 font-light text-xs">(opcional)</span>
-                            </label>
-                            <div class="mt-1">
-                                <textarea id="bio"
-                                          v-model="jobProfileForm.bio"
-                                          rows="6"
-                                          class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                ></textarea>
+                        <div class="col-span-4">
+                            <div class="w-full">
+                                <label for="bio" class="block text-sm font-medium text-gray-700">
+                                    Comentarios adicionales
+                                    <span class="text-gray-500 font-light text-xs">(opcional)</span>
+                                </label>
+                                <div class="mt-1">
+                            <textarea id="bio"
+                                      v-model="jobProfileForm.bio"
+                                      rows="6"
+                                      class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                            ></textarea>
+                                </div>
+                                <errors :error="errors.bio"
+                                        :options="{ noContainer: true }"
+                                ></errors>
+                                <p class="mt-2 text-sm text-gray-500">Escribe comentarios adicionales sobre ti.</p>
                             </div>
-                            <errors :error="errors.bio"
-                                    :options="{ noContainer: true }"
-                            ></errors>
-                            <p class="mt-2 text-sm text-gray-500">Escribe comentarios adicionales sobre ti.</p>
                         </div>
 
                     </div>

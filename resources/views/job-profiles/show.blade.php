@@ -12,14 +12,14 @@
         let map;
 
         function initMap() {
-            @if ($jobProfile->location)
+            @if ($jobProfile->location && $jobProfile->location->coordinates)
             const coordinates = {
                 lat: {{ $jobProfile->location->coordinates['latitude'] }},
                 lng: {{ $jobProfile->location->coordinates['longitude'] }}
             }
 
             let zoom = 15;
-            @if ($jobProfile->location->address)
+            @if ($jobProfile->location && $jobProfile->location->address)
                 zoom = 20
             @endif
 
@@ -104,7 +104,7 @@
                                         class="-mt-1 items-center shadow-sm w-full py-3 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                         title="Actualizar Datos del Perfil...">
                                     <span class="text-gray-300">Editar</span>
-{{--                                    <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>--}}
+                                    {{--                                    <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>--}}
                                 </button>
                             </div>
                         </div>
@@ -167,7 +167,7 @@
                                         <span v-if="! localJobProfile.status" class="text-green-300 hover:text-green-400">Publicar</span>
                                         <span v-if="localJobProfile.status" class="text-gray-300 hover:text-gray-400">Ocultar</span>
 {{--                                            <svg v-if="! localJobProfile.status" class="text-green-300 hover:text-green-400" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>--}}
-{{--                                            <svg v-if="localJobProfile.status" class="text-gray-300 hover:text-gray-400" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>--}}
+                                        {{--                                            <svg v-if="localJobProfile.status" class="text-gray-300 hover:text-gray-400" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>--}}
                                     </button>
                                 </span>
                             </div>
@@ -178,7 +178,7 @@
                                         type="button"
                                         class="-mt-1 items-center shadow-sm w-full py-3 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                         title="Actualizar Datos del Perfil...">
-{{--                                    <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>--}}
+                                    {{--                                    <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>--}}
                                     <span class="text-gray-300 hover:text-gray-400">Editar</span>
                                 </button>
                             </div>
@@ -197,13 +197,25 @@
                                         <h2 id="job-profile-information" class="text-lg leading-6 font-medium text-gray-900">
                                             Area de Expertiz/Habilidades
                                         </h2>
-                                        {{--Likes--}}
-                                        <likes
-                                            v-if="isAuthenticated && localJobProfile.user.id !== auth"
-                                            :endpoint="`/job-profiles/${localJobProfile.uuid}`"
-                                            :model="localJobProfile"
-                                            :model-id="localJobProfile.uuid"
-                                        ></likes>
+                                        <div v-if="isAuthenticated" {{--&& localJobProfile.user.id !== auth--}}
+                                             class="flex items-center align-middle">
+                                            {{--Likes--}}
+                                            <span class="mr-2">
+                                                <likes :endpoint="`/job-profiles/${localJobProfile.uuid}`"
+                                                       :model="localJobProfile"
+                                                       :model-id="localJobProfile.uuid"
+                                                ></likes>
+                                            </span>
+                                            <span class="-mt-4 -mr-6">
+                                                {{--InterestedBtn--}}
+                                                <interested-btn :model="localJobProfile"
+                                                                :id="localJobProfile.uuid"
+                                                                model-name="job-profiles"
+                                                                endpoint="/job-profiles"
+                                                                icon-size="h-8 w-8"
+                                                ></interested-btn>
+                                            </span>
+                                        </div>
                                     </div>
                                     <p class="flex max-w-2xl text-sm text-gray-500 align-middle items-center"
                                        :class="isAuthenticated && localJobProfile.user.id === auth ? 'mt-3' : 'mt-0'">
@@ -215,23 +227,36 @@
                                     </p>
                                 </div>
                                 <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
-                                    <dl class="flex-wrap md:flex sm:justify-between mt-3">
-                                        <div class="w-full md:w-1/2 py-1"
-                                             v-if="localJobProfile.phone">
+                                    <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+                                        <div class="sm:col-span-1">
+                                            <dt class="text-sm font-medium text-gray-500">
+                                                Estatus del Perfil
+                                            </dt>
+                                            <dd class="mt-1 flex text-sm text-gray-900">
+                                                <svg v-if="localJobProfile.status" class="h-5 w-5 text-green-500"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                                <svg v-else class="h-5 w-5 text-gray-500"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                                                <span class="px-2 inline-flex text-base leading-5 font-semibold rounded-full text-gray-500"
+                                                      v-text="localJobProfile.status ? 'Publicado' : 'No Publicado'"
+                                                ></span>
+                                            </dd>
+                                        </div>
+                                        <div v-if="localJobProfile.phone" class="sm:col-span-1">
                                             <dt class="text-sm font-medium text-gray-500">
                                                 Teléfono
                                             </dt>
-                                            <dd class="mt-1 text-sm text-gray-900" v-text="localJobProfile.phone"></dd>
+                                            <dd v-text="formatPhone(localJobProfile.phone)"
+                                                class="mt-1 text-sm text-gray-900"
+                                            ></dd>
                                         </div>
-                                        <div class="w-full md:w-1/2 py-1"
-                                             v-if="localJobProfile.email">
+                                        <div v-if="localJobProfile.email" class="sm:col-span-1">
                                             <dt class="text-sm font-medium text-gray-500">
                                                 Correo Electrónico
                                             </dt>
-                                            <dd class="mt-1 text-sm text-gray-900" v-text="localJobProfile.email"></dd>
+                                            <dd class="mt-1 text-sm text-gray-900"
+                                                v-text="localJobProfile.email"
+                                            ></dd>
                                         </div>
-                                        <div class="w-full md:w-1/2 py-4"
-                                             v-if="localJobProfile.facebookProfile">
+                                        <div v-if="localJobProfile.facebookProfile" class="sm:col-span-1">
                                             <dt class="text-sm font-medium text-gray-500">
                                                 Perfil de Facebook
                                             </dt>
@@ -243,7 +268,19 @@
                                                 ></a>
                                             </dd>
                                         </div>
-                                        <div class="w-full md:w-1/2 py-2" v-if="localJobProfile.site">
+                                        <div v-if="localJobProfile.linkedinProfile" class="sm:col-span-1">
+                                            <dt class="text-sm font-medium text-gray-500">
+                                                Perfil de LinkedIn
+                                            </dt>
+                                            <dd class="mt-1 text-sm text-gray-900">
+                                                <a :href="localJobProfile.linkedinProfile"
+                                                   class="h-link"
+                                                   target="_blank"
+                                                   v-text="localJobProfile.linkedinProfile"
+                                                ></a>
+                                            </dd>
+                                        </div>
+                                        <div v-if="localJobProfile.site" class="sm:col-span-1">
                                             <dt class="text-sm font-medium text-gray-500">
                                                 Sitio Web
                                             </dt>
@@ -423,6 +460,7 @@
                                                          select-label=""
                                                          selected-label=""
                                                          deselect-label=""
+                                                         :tag-placeholder="''"
                                                          placeholder="Selecciona tus Habilidades de Trabajo..."
                                         ></vue-multiselect>
                                     </div>
@@ -485,18 +523,18 @@
 
                             <div class="w-full my-6 md:mt-2">
                                 <div>
-                                    <label for="comments">
+                                    <label for="bio">
                                         Comentarios
                                         <span class="text-gray-500 font-light text-xs">(opcional)</span>
                                     </label>
                                     <div class="mt-1">
-                                        <textarea v-model="jobProfileForm.comments"
-                                                  id="comments"
+                                        <textarea v-model="jobProfileForm.bio"
+                                                  id="bio"
                                                   class="block rounded-md shadow-sm w-full outline-none border-emerald-200 bg-gray-50 focus:bg-white"
                                                   rows="5"
                                         ></textarea>
                                     </div>
-                                    <errors :error="errors.comments"
+                                    <errors :error="errors.bio"
                                             :options="{ noContainer: true }"
                                     ></errors>
                                 </div>

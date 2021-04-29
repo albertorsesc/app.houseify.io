@@ -13,7 +13,10 @@ use Illuminate\Database\Eloquent\{Builder,
     Relations\HasMany,
     Factories\HasFactory,
     Relations\HasOne};
-use Laravel\{Sanctum\HasApiTokens, Jetstream\HasProfilePhoto, Fortify\TwoFactorAuthenticatable};
+use Laravel\{Sanctum\HasApiTokens,
+    Jetstream\HasProfilePhoto,
+    Fortify\TwoFactorAuthenticatable,
+    Socialite\Facades\Socialite};
 
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -100,6 +103,15 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return Business::query()
                        ->with(['owner:id', 'interests', 'location.state'])
+                       ->whereHas('interests', function($query) {
+                           return $query->where('user_id', $this->id);
+                       });
+    }
+
+    public function scopeInterestedJobProfiles() : Builder
+    {
+        return JobProfile::query()
+                       ->with(['user:id,first_name,last_name', 'interests', 'location.state'])
                        ->whereHas('interests', function($query) {
                            return $query->where('user_id', $this->id);
                        });

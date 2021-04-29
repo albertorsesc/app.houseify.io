@@ -1,5 +1,5 @@
 <template>
-    <div class="my-4 w-full flex flex-col md:w-1/2 lg:w-1/3 px-3">
+    <div class="my-4 w-full md:w-1/2 lg:w-1/3 px-3 flex flex-col">
         <div class="card transition hover:transform">
             <custom-carousel :images="property.images" module-name="properties" :size="'small'"></custom-carousel>
         </div>

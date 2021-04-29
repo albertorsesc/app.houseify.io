@@ -1,5 +1,5 @@
 <nav-bar inline-template>
-    <nav class="bg-gradient-to-r from-emerald-400 to-cyan-400">
+    <nav class="bg-gradient-to-r from-emerald-400 to-cyan-400 sticky top-0 my-2 lg:my-0 absolute z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
@@ -120,7 +120,9 @@
 
                                         <x-jet-dropdown-link href="{{ route('logout') }}"
                                                              onclick="event.preventDefault();
-                                        this.closest('form').submit();">
+                                        this.closest('form').submit();
+                                        window.localStorage.removeItem('me');
+                                        window.localStorage.removeItem('app')">
                                             {{ __('Cerrar Sesión') }}
                                         </x-jet-dropdown-link>
                                     </form>

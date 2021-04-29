@@ -10,6 +10,7 @@ use App\Listeners\PersistLogActions;
 use App\Events\Reports\NewReportSubmitted;
 use App\Events\Properties\PropertyReported;
 use App\Listeners\Properties\PropertyHasBeenReported;
+use App\Listeners\Reports\ModelHasBeenReported;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Auth\{Events\Verified, Events\Registered, Listeners\SendEmailVerificationNotification};
 
@@ -24,9 +25,6 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        NewSocialMediaUserRegistration::class => [
-            SendPasswordToNewSocialUser::class,
-        ],
         Verified::class => [],
         /*SuggestionSubmitted::class => [
             NewSuggestion::class,
@@ -36,7 +34,7 @@ class EventServiceProvider extends ServiceProvider
         /* Properties */
 
         NewReportSubmitted::class => [
-            PropertyHasBeenReported::class,
+//            ModelHasBeenReported::class,
         ],
 
         /*NewPropertyCreated::class => [

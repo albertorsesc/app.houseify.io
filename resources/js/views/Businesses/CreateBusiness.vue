@@ -12,33 +12,39 @@
                         </p>
                     </div>
 
-                    <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-                        <div class="sm:col-span-4">
-                            <label for="name" class="block text-sm font-medium text-gray-700">
-                                <strong class="required">*</strong>
-                                Nombre del Negocio
-                                <span class="text-gray-500 font-light text-xs">(requerido)</span>
-                                <span class="ml-2 text-gray-700 font-light text-xs">
+                    <div class="mt-6 grid grid-cols-1 gap-y-4 gap-x-4 sm:grid-cols-6">
+                        <div class="col-span-4">
+                            <div class="w-full">
+                                <label for="name" class="block text-sm font-medium text-gray-700">
+                                    <strong class="required">*</strong>
+                                    Nombre del Negocio
+                                    <span class="text-gray-500 font-light text-xs">(requerido)</span>
+                                    <span class="ml-2 text-gray-700 font-light text-xs">
                                     Asegúrate de introducir el nombre correcto, una vez registrado no puede ser cambiado.
                                 </span>
-                            </label>
-                            <div class="my-1 flex rounded-md shadow-sm">
-                                <input type="text"
-                                       v-model="businessForm.name"
-                                       id="name"
-                                       autocomplete="name"
-                                       class="h-input flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                </label>
+                                <div class="my-1 flex rounded-md shadow-sm">
+                                    <input type="text"
+                                           v-model="businessForm.name"
+                                           id="name"
+                                           autocomplete="name"
+                                           class="h-input flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                </div>
+                                <errors :error="errors.name"
+                                        :options="{ noContainer: true }"
+                                ></errors>
                             </div>
-                            <errors :error="errors.name"
-                                    :options="{ noContainer: true }"
-                            ></errors>
                         </div>
 
-                        <div class="sm:col-span-4 md:-mx-2">
-                            <div class="w-full md:mx-2">
+                        <div class="col-span-4">
+                            <div class="w-full">
                                 <label for="categories" class="block text-sm font-medium text-gray-700">
                                     Categorías
                                     <span class="text-gray-500 font-light text-xs">(requerido)</span>
+                                    <span class="text-gray-500 font-light text-xs">
+                                        Si no encuentras tu categoría deja tu sugerencia en nuestro buzón de
+                                        <a href="/sugerencias" class="h-link text-emerald-500 underline">Sugerencias</a>
+                                    </span>
                                 </label>
                                 <div class="my-1 rounded-md shadow-sm text-base ring-white">
                                     <vue-multiselect v-model="businessForm.categories"
@@ -53,14 +59,15 @@
                                                      select-label=""
                                                      selected-label=""
                                                      deselect-label=""
-                                                     placeholder="Selecciona las Categorías de tu Negocio..."
+                                                     :tag-placeholder="''"
+                                                     placeholder="Categorías de tu Negocio..."
                                     ></vue-multiselect>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="sm:col-span-4 md:flex md:-mx-2">
-                            <div class="w-full md:w-1/2 md:mx-2">
+                        <div class="col-span-4 lg:flex md:-mx-2">
+                            <div class="w-full lg:w-1/2 md:mx-2">
                                 <label for="email" class="block text-sm font-medium text-gray-700">
                                     Correo Electrónico
                                     <span class="text-gray-500 font-light text-xs">(opcional)</span>
@@ -76,7 +83,7 @@
                                         :options="{ noContainer: true }"
                                 ></errors>
                             </div>
-                            <div class="mt-4 md:mt-0 w-full md:w-1/2 md:mx-2">
+                            <div class="w-full lg:w-1/2 md:mx-2 mt-4 md:mt-0">
                                 <label for="phone" class="block text-sm font-medium text-gray-700">
                                     Teléfono
                                     <span class="text-gray-500 font-light text-xs">(opcional)</span>
@@ -94,8 +101,8 @@
                             </div>
                         </div>
 
-                        <div class="sm:col-span-4 md:flex md:-mx-2">
-                            <div class="w-full md:mx-2">
+                        <div class="col-span-4 lg:flex md:-mx-2">
+                            <div class="w-full lg:w-1/3 md:mx-2">
                                 <label for="site" class="block text-sm font-medium text-gray-700">
                                     Perfil de Facebook
                                     <span class="text-gray-500 font-light text-xs">(opcional)</span>
@@ -110,7 +117,7 @@
                                         :options="{ noContainer: true }"
                                 ></errors>
                             </div>
-                            <div class="w-full md:mx-2">
+                            <div class="w-full lg:w-1/3 md:mx-2 mt-4 lg:mt-0">
                                 <label for="site" class="block text-sm font-medium text-gray-700">
                                     Perfil de LinkedIn
                                     <span class="text-gray-500 font-light text-xs">(opcional)</span>
@@ -125,7 +132,7 @@
                                         :options="{ noContainer: true }"
                                 ></errors>
                             </div>
-                            <div class="w-full md:mx-2">
+                            <div class="w-full lg:w-1/3 md:mx-2 mt-4 lg:mt-0">
                                 <label for="site" class="block text-sm font-medium text-gray-700">
                                     Sitio Web
                                     <span class="text-gray-500 font-light text-xs">(opcional)</span>
@@ -144,22 +151,24 @@
                         </div>
 
                         <!--Comments-->
-                        <div class="sm:col-span-4">
-                            <label for="about" class="block text-sm font-medium text-gray-700">
-                                Comentarios adicionales
-                                <span class="text-gray-500 font-light text-xs">(opcional)</span>
-                            </label>
-                            <div class="mt-1">
+                        <div class="col-span-4">
+                            <div class="w-full">
+                                <label for="about" class="block text-sm font-medium text-gray-700">
+                                    Comentarios adicionales
+                                    <span class="text-gray-500 font-light text-xs">(opcional)</span>
+                                </label>
+                                <div class="mt-1">
                                 <textarea id="about"
                                           v-model="businessForm.comments"
                                           rows="6"
                                           class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                 ></textarea>
+                                </div>
+                                <errors :error="errors.comments"
+                                        :options="{ noContainer: true }"
+                                ></errors>
+                                <p class="mt-2 text-sm text-gray-500">Escribe comentarios adicionales sobre tu negocio/empresa.</p>
                             </div>
-                            <errors :error="errors.comments"
-                                    :options="{ noContainer: true }"
-                            ></errors>
-                            <p class="mt-2 text-sm text-gray-500">Escribe comentarios adicionales sobre tu negocio/empresa.</p>
                         </div>
 
                     </div>

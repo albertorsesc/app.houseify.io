@@ -15,13 +15,22 @@
      * */
         'construction_categories' => [
             'A/C',
-            'Electricidad',
-            'Ferreteria',
+            'Carpintería',
+            'Cerrajería',
+            'Constructora',
+            'Decoración',
+            'Eléctrica',
+            'Electrodomésticos',
+            'Ferretería',
+            'Grúas',
+            'Herrería',
+            'Inmobiliaria',
             'Pintura',
-            'Plomeria',
-            'Jardineria',
-            'Vidrieria',
-
+            'Plomería',
+            'Jardinería',
+            'Tapicería',
+            'Vidriería',
+            'Material de Construcción'
         ],
 
         /*

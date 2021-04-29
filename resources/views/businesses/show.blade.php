@@ -12,14 +12,14 @@
         let map;
 
         function initMap() {
-            @if ($business->location)
+            @if ($business->location && $business->location->coordinates)
             const coordinates = {
                 lat: {{ $business->location->coordinates['latitude'] }},
                 lng: {{ $business->location->coordinates['longitude'] }}
             }
 
             let zoom = 15;
-            @if ($business->location->address)
+            @if ($business->location && $business->location->address)
                 zoom = 20
             @endif
 
@@ -65,10 +65,12 @@
                             v-text="localBusiness.name"
                         ></h2>
                         @auth
+                        {{--Desktop--}}
                         <div class="hidden md:flex md:justify-between">
+                            {{--Report--}}
                             <report :model-id="localBusiness.slug" model-name="businesses" inline-template>
                                 <div>
-                                    <button @click="openModal" class="h-link bg-white -mt-1 mr-1 shadow-sm rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                    <button @click="openModal" class="h-link bg-white -mt-1 mr-1 shadow-sm hover:shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                             title="Reportar Propiedad...">
                                         <svg class="text-yellow-500 hover:text-yellow-600" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                                     </button>
@@ -124,14 +126,19 @@
                                     </modal>
                                 </div>
                             </report>
-                            <button class="h-link bg-white border-emerald-900 -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
-                                    title="Eliminar Negocio">
-                                <svg class="text-red-500 hover:text-red-600" width="25" height="25"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                            </button>
+                            {{--Delete--}}
+                            @if($business->owner->id === auth()->id())
+                                <button @click="onDelete"
+                                        class="h-link bg-white -mt-1 mr-1 shadow-sm hover:shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                        title="Eliminar Negocio/Empresa">
+                                    <svg class="text-red-500 hover:text-red-600" width="25" height="25"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                </button>
+                            @endif
                         </div>
 
                         {{--Mobile Header--}}
                         <div class="w-full flex justify-end md:hidden mt-2">
+                            {{--Report--}}
                             <report :model-id="localBusiness.slug" model-name="businesses" inline-template>
                                 <div>
                                     <button @click="openModal" class="h-link bg-white -mt-1 mr-1 shadow-sm rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
@@ -190,6 +197,15 @@
                                     </modal>
                                 </div>
                             </report>
+
+                            {{--Delete--}}
+                            @if($business->owner->id === auth()->id())
+                                <button @click="onDelete"
+                                        class="h-link bg-white -mt-1 mr-1 shadow-sm hover:shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                        title="Eliminar Negocio/Empresa">
+                                    <svg class="text-red-500 hover:text-red-600" width="25" height="25"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                </button>
+                            @endif
                         </div>
                         @endauth
                     </div>
@@ -223,7 +239,6 @@
                                         class="-mt-1 items-center shadow-sm w-full py-3 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                         title="Actualizar Datos del Negocio...">
                                     <span class="text-gray-300">Editar</span>
-{{--                                    <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>--}}
                                 </button>
                             </span>
                         </div>
@@ -240,14 +255,26 @@
                                         </alert>
                                     </div>
 
-                                    {{--Likes--}}
                                     <div v-if="isAuthenticated && localBusiness.owner.id !== auth"
-                                         class="w-1/2 md:w-4/5 mb-2 items-end align-middle flex justify-end">
-                                        <div class="w-1/12 md:w-4/5 md:flex sm:justify-end ">
-                                            <likes
-                                                :endpoint="`/businesses/${localBusiness.slug}`"
-                                                :model="localBusiness"
-                                            ></likes>
+                                        class="w-1/2 w-4/5 mb-2 items-end align-middle flex justify-end">
+
+                                        <div class="mr-4 lg:mr-0 w-1/12 w-4/5 flex justify-end">
+                                            {{--Likes--}}
+                                            <span class="mr-3">
+                                                <likes :endpoint="`/businesses/${localBusiness.slug}`"
+                                                       :model="localBusiness"
+                                                       :model-id="localBusiness.slug"
+                                                ></likes>
+                                            </span>
+                                            {{--InterestedBtn--}}
+                                            <span>
+                                                <interested-btn :model="localBusiness"
+                                                                :id="localBusiness.slug"
+                                                                model-name="business"
+                                                                endpoint="/businesses"
+                                                                icon-size="h-8 w-8"
+                                                ></interested-btn>
+                                            </span>
                                         </div>
                                     </div>
 

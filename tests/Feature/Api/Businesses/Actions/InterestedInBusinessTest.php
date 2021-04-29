@@ -20,9 +20,9 @@ class InterestedInBusinessTest extends TestCase
     /**
      *   @test
      *   @throws \Throwable
-     *  @endpoint ['POST', '/api/businesses/{property}/interested']
+     *  @endpoint ['POST', '/api/businesses/{business}/interested']
      */
-    public function guests_cannot_interest_a_property()
+    public function guests_cannot_interest_a_business()
     {
         $this->signIn();
         $business = $this->create(Business::class);
@@ -39,9 +39,9 @@ class InterestedInBusinessTest extends TestCase
     /**
      *   @test
      *   @throws \Throwable
-     *  @endpoint ['POST', '/api/businesses/{property}/interested']
+     *  @endpoint ['POST', '/api/businesses/{business}/interested']
      */
-    public function authenticated_user_can_be_interested_in_a_property()
+    public function authenticated_user_can_be_interested_in_a_business()
     {
         $this->signIn();
 
@@ -62,9 +62,9 @@ class InterestedInBusinessTest extends TestCase
     /**
      *   @test
      *   @throws \Throwable
-     *  @endpoint ['DELETE', '/api/businesses/{property}/uninterested']
+     *  @endpoint ['DELETE', '/api/businesses/{business}/uninterested']
      */
-    public function authenticated_user_can_be_uninterested_in_a_property()
+    public function authenticated_user_can_be_uninterested_in_a_business()
     {
         $this->signIn();
 
@@ -88,7 +88,7 @@ class InterestedInBusinessTest extends TestCase
      *   @test
      *   @throws \Throwable
      */
-    public function authenticated_user_can_only_be_interested_in_a_property_once()
+    public function authenticated_user_can_only_be_interested_in_a_business_once()
     {
         $this->signIn();
         $business = $this->create(Business::class);

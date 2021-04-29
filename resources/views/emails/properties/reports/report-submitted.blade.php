@@ -1,5 +1,5 @@
 @component('mail::message')
-# Hola {{ $report->reportable->seller->first_name }}
+# Hola {{ $report->reportable->$relation->first_name }} <br>
 
 Una de tus Propiedades ha sido reportada: <br>
 
@@ -19,22 +19,22 @@ Comentarios Adicionales:
 <br>
 
 <div>
-Sera revisada cuidadosamente para asegurar que no haya violaciones de acuerdo a las <a href="#">reglas de publicaciones</a>
-y que el reporte sea legitimo.
+Será revisada cuidadosamente para asegurar que no haya violaciones de acuerdo a las <a href="#">reglas de publicaciones</a>
+y que el reporte sea legítimo.
 </div>
 <br>
 <div>
-Haz click en el siguiente enlace para verificar la identidad de la propiedad.
+Haz clic en el siguiente enlace para verificar la identidad de la propiedad.
 </div>
 <br>
 <div>
-El enlace expirara en un periodo de 5 dias habiles y la propiedad pasara a estatus "No Publico", para publicar de nuevo
-inicia sesion y haz click en Publicar propiedad.
+El enlace expirara en un periodo de 5 días hábiles y la propiedad pasara a estatus "No Público", para publicar de nuevo
+inicia sesión y haz clic en Publicar propiedad.
 </div>
 
-@component('mail::button', ['url' => ''])
+{{--@component('mail::button', ['url' => ''])
 Enlace de verificacion
-@endcomponent
+@endcomponent--}}
 
 Gracias por formar parte de Houseify.io,<br>
 {{ config('app.name') }}
