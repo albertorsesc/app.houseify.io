@@ -19,13 +19,13 @@ const actions = {
         let storage = window.localStorage
         if (
             storage.hasOwnProperty('app') &&
-            JSON.parse(storage.app).hasOwnProperty('global') &&
-            JSON.parse(storage.app).global.hasOwnProperty('categories') &&
-            JSON.parse(storage.app).global.categories.length > 0
+            JSON.parse(storage.app).hasOwnProperty('general') &&
+            JSON.parse(storage.app).general.hasOwnProperty('categories') &&
+            JSON.parse(storage.app).general.categories.length > 0
         ) {
             commit(
                 'SET_CONSTRUCTION_CATEGORIES',
-                JSON.parse(storage.app).global.categories
+                JSON.parse(storage.app).general.categories
             )
             // dd('constructionCategories from global.js')
         } else {
@@ -46,11 +46,11 @@ const actions = {
         let storage = window.localStorage
         if (
             storage.hasOwnProperty('app') &&
-            JSON.parse(storage.app).hasOwnProperty('global') &&
-            JSON.parse(storage.app).global.hasOwnProperty('states') &&
-            JSON.parse(storage.app).global.states.length > 0
+            JSON.parse(storage.app).hasOwnProperty('general') &&
+            JSON.parse(storage.app).general.hasOwnProperty('states') &&
+            JSON.parse(storage.app).general.states.length > 0
         ) {
-            commit('SET_STATES', JSON.parse(storage.app).global.states)
+            commit('SET_STATES', JSON.parse(storage.app).general.states)
             // dd('states from global.js')
         } else {
             return new Promise((resolve, reject) => {
