@@ -25,14 +25,6 @@ export default {
             }
         }
     },
-    computed: {
-        ...mapGetters({
-            getStates: 'general/getStates'
-        })
-    },
-    created() {
-        this.$store.dispatch('general/fetchStates')
-    },
     components: {
         MyJobProfile: () => import(/* webpackChunkName: "job-profile" */ './MyJobProfile'),
         SearchJobProfiles: () => import(/* webpackChunkName: "search-job-profiles" */ './SearchJobProfiles'),

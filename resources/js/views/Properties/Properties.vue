@@ -38,9 +38,6 @@ export default {
             }
         }
     },
-    created() {
-        this.$store.dispatch('general/fetchStates')
-    },
     components: {
         SearchProperties: () => import(/* webpackChunkName: "search-properties" */ './SearchProperties'),
         MyProperties: () => import(/* webpackChunkName: "my-properties" */ '../../views/Properties/MyProperties'),

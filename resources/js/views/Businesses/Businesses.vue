@@ -9,14 +9,6 @@ export default {
             headerTitle: 'Negocios',
         }
     },
-    computed: {
-        ...mapGetters({
-            getStates: 'general/getStates'
-        })
-    },
-    created() {
-        this.$store.dispatch('general/fetchStates')
-    },
     components: {
         MyBusinesses: () => import(/* webpackChunkName: "my-businesses" */ './MyBusinesses'),
         SearchBusinesses: () => import(/* webpackChunkName: "search-businesses" */ './SearchBusinesses'),
