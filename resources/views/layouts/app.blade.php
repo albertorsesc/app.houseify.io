@@ -24,6 +24,18 @@
 
         @yield('styles')
         @livewireStyles
+
+        @if(app()->environment('production'))
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0ZK70CFF51"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-0ZK70CFF51');
+        </script>
+        @endif
     </head>
     <body class="font-sans antialiased bg-gray-50 min-w-full">
 {{--        <x-jet-banner />--}}
