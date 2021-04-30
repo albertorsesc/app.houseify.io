@@ -21,7 +21,7 @@
                            v-if="jobProfile.location && (jobProfile.location.city || jobProfile.location.state)"
                            v-text="jobProfile.location.city + ', ' + jobProfile.location.state.code">
                         </p>
-                        <div v-if="isAuthenticated && jobProfile.user.id !== auth" class="flex-wrap truncate">
+                        <div v-if="isAuthenticated" class="flex-wrap truncate">
                             <span class="" @click.prevent>
                                 <interested-btn :model="jobProfile"
                                                 :id="jobProfile.uuid"

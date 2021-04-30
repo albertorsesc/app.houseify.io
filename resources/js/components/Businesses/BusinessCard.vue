@@ -7,7 +7,7 @@
                         <span class="text-xs text-gray-500 items-center"
                               v-text="business.meta.updatedAt"
                         ></span>
-                        <span v-if="isAuthenticated && business.owner.id !== auth"
+                        <span v-if="isAuthenticated"
                               class="-mt-3 ml-3"
                               @click.prevent>
                             <interested-btn :model="business"
