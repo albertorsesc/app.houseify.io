@@ -63,7 +63,7 @@
                         {{--{{ __('Iniciar sesión con Facebook') }}--}}
                     </a>
                 </div>-->
-                <div class="w-full md:w-full">
+                <div class="w-full md:w-1/2">
                     <a href="{{ route('google.redirect') }}"
                        class="flex align-middle items-center py-2 px-3 bg-white rounded-full shadow text-gray-700 text-sm md:text-xs">
                         <img src="/logos/google-icon.png" class="mr-2 object-contain h-3 w-3 rounded-full" alt="">
