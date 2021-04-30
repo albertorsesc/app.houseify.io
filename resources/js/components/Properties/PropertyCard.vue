@@ -47,7 +47,8 @@
                 <hr>
 
                 <div class="flex justify-center align-middle items-center">
-                    <interested-btn :model="property"
+                    <interested-btn v-if="isAuthenticated && property.seller.id !== auth"
+                                    :model="property"
                                     :id="property.slug"
                                     model-name="properties"
                                     endpoint="/properties"

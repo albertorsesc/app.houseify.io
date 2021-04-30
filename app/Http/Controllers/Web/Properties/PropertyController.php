@@ -11,11 +11,11 @@ class PropertyController extends Controller
 {
     public function show (Property $property)
     {
-        abort_unless(
+        /*abort_unless(
             $property->status ||
             $property->wasCreatedByAuth('seller_id'),
             404,
-        );
+        );*/
 
         return view('properties.show', [
             'property' => new PropertyResource(
@@ -26,6 +26,7 @@ class PropertyController extends Controller
                     'media:id,mediable_type,mediable_id,file_name',
                     'propertyCategory.propertyType:id,display_name',
                     'propertyCategory:id,display_name,property_type_id',
+                    'interests',
                 ])
             )
         ]);
@@ -33,11 +34,6 @@ class PropertyController extends Controller
 
     public function display(Property $property)
     {
-        abort_unless(
-            $property->isPublished(),
-            404,
-        );
-
         return view('properties.guests.show', [
             'property' => new PropertyResource(
                 $property->load([

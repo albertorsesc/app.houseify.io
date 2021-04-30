@@ -53,7 +53,7 @@ class InterestedInBusinessTest extends TestCase
         $this->assertCount(1, $business->fresh()->interests);
 
         $this->assertDatabaseHas('interests', [
-            'user_id' => auth()->id(),
+            'interested_by' => auth()->id(),
             'interestable_id' => $business->id,
             'interestable_type' => get_class($business)
         ]);
@@ -78,7 +78,7 @@ class InterestedInBusinessTest extends TestCase
         $this->assertCount(0, $business->fresh()->interests);
 
         $this->assertDatabaseMissing('interests', [
-            'user_id' => auth()->id(),
+            'interested_by' => auth()->id(),
             'interestable_id' => $business->id,
             'interestable_type' => get_class($business)
         ]);

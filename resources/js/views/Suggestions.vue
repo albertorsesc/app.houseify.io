@@ -15,7 +15,7 @@ export default {
             .then(() => {
 
             })
-            .catch(error => { dd(error) })
+            .catch(error => {})
         }
     }
 }

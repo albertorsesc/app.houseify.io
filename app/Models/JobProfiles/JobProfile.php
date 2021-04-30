@@ -51,6 +51,11 @@ class JobProfile extends Model
         return route('web.job-profiles.show', $this);
     }
 
+    public function publicProfile() : string
+    {
+        return route('web.public.job-profiles.show', $this);
+    }
+
     public static function getReportingCauses () : array
     {
         return array_merge([
@@ -100,6 +105,9 @@ class JobProfile extends Model
 
     public function shouldBeSearchable() : bool
     {
+        if (! app()->environment('production')) {
+            return false;
+        }
         return $this->status && $this->location;
     }
 }

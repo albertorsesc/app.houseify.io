@@ -51,8 +51,8 @@
     <meta property="og:url" content="{{ $business->publicProfile() }}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{ $business->name }}" />
-    <meta name="description" content="Propiedad en {{ $business->location ? $business->location->city . ' - ' . $business->location->state->code : null }}" />
-    <meta property="og:image" content="{{ $business->media ? $business->media->first()->getFullUrl() : '' }}" />
+    <meta name="description" content="Negocio/Empresa en {{ $business->location ? $business->location->city . ' - ' . $business->location->state->code : null }}" />
+    <meta property="og:image" content="{{ $business->logo ? str_replace('public', 'storage', $business->logo) : '' }}" />
 @endsection
 
 @section('content')
@@ -139,7 +139,9 @@
                         {{--Mobile Header--}}
                         <div class="w-full flex justify-end md:hidden mt-2">
                             {{--Report--}}
-                            <report :model-id="localBusiness.slug" model-name="businesses" inline-template>
+                            <report :model-id="localBusiness.slug"
+                                    model-name="businesses"
+                                    inline-template>
                                 <div>
                                     <button @click="openModal" class="h-link bg-white -mt-1 mr-1 shadow-sm rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                             title="Reportar Propiedad...">
@@ -215,6 +217,7 @@
             <div class="mt-4 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
                 <div class="space-y-6 lg:col-start-1"
                      :class="[isAuthenticated && localBusiness.owner.id === auth ? 'lg:col-span-2' : 'lg:col-span-12']">
+                    {{--Mobile--}}
                     <div class="flex justify-end md:hidden mx-2 md:-mx-3 mt-1 mb-2">
                         {{--Publish/UnPublish--}}
                         <div class="w-full md:w-1/3 mx-2 md:mx-3 mb-2 md:mb-0">
@@ -243,13 +246,15 @@
                             </span>
                         </div>
                     </div>
+
                     <!-- Description list-->
                     <section aria-labelledby="business-information">
 
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="py-2 md:py-0 sm:px-0">
                                 <div>
-                                    <div v-if="localBusiness.owner.id === auth && ! localBusiness.location" class="mb-4">
+                                    <div v-if="localBusiness.owner.id === auth && ! localBusiness.location"
+                                         class="mb-4">
                                         <alert :type="'warning'">
                                             Para Publicar el negocio es necesario registrar su Dirección
                                         </alert>
@@ -610,97 +615,115 @@
                             </div>
                         </div>
 
+                        {{--Activity--}}
                         <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
                             <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Actividad</h2>
 
-                            <!-- Activity Feed -->
                             <div class="mt-6 flow-root">
                                 <ul class="-mb-8 pb-12">
+                                    @if($likes['like_count'])
                                     <li>
-                                        <div class="relative pb-8">
+                                        <div class="relative pb-16">
                                             <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
                                             <div class="relative flex space-x-3">
                                                 <div>
-                                              <span class="h-8 w-8 rounded-full bg-white border border-yellow-300 flex items-center justify-center ring-8 ring-white">
-                                                  <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                                              <span class="h-8 w-8 rounded-full bg-white border border-emerald-300 flex items-center justify-center ring-8 ring-white">
+                                                  <svg class="h-5 w-5 text-emerald-300"
+                                                       fill="none"
+                                                       xmlns="http://www.w3.org/2000/svg"
+                                                       viewBox="0 0 24 24"
+                                                       stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                                                     </svg>
                                               </span>
                                                 </div>
+
                                                 <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
                                                     <div>
-                                                        <p class="text-sm text-gray-500">Dio una Calificacion de <a href="#" class="font-medium text-gray-900">9</a></p>
+                                                        <p class="text-sm text-gray-500">
+                                                            Tienes <span class="font-medium text-gray-900">1</span> nuevo Like.
+                                                        </p>
                                                     </div>
                                                     <div class="text-right text-sm whitespace-nowrap text-gray-500">
-                                                        <time datetime="2020-09-20">Sep 20</time>
+                                                        <time datetime="{{ $likes['last_like_at'] }}">
+                                                            {{ $likes['last_like_at'] }}
+                                                        </time>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </div>
+                                        <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
                                     </li>
+                                    @endif
 
+                                    <!--                                    <li>
+                                                                            <div class="relative pb-8">
+                                                                                <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                                                                                <div class="relative flex space-x-3">
+                                                                                    <div>
+                                                                                  <span class="h-8 w-8 rounded-full bg-white border border-blue-300 flex items-center justify-center ring-8 ring-white">
+                                                                                      <svg class="h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                                                        </svg>
+                                                                                  </span>
+                                                                                    </div>
+                                                                                    <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                                                                        <div>
+                                                                                            <p class="text-sm text-gray-500">Tuviste una nueva <a href="#" class="font-medium text-gray-900">visita</a></p>
+                                                                                        </div>
+                                                                                        <div class="text-right text-sm whitespace-nowrap text-gray-500">
+                                                                                            <time datetime="2020-09-22">Sep 22</time>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>-->
+
+                                    @if($interests['interest_count'])
                                     <li>
                                         <div class="relative pb-8">
-                                            <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
                                             <div class="relative flex space-x-3">
                                                 <div>
-                                              <span class="h-8 w-8 rounded-full bg-white border border-blue-300 flex items-center justify-center ring-8 ring-white">
-                                                  <svg class="h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                    </svg>
-                                              </span>
+                                          <span class="h-8 w-8 rounded-full bg-white border border-red-300 flex items-center justify-center ring-8 ring-white">
+                                              <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                            </svg>
+                                          </span>
                                                 </div>
                                                 <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
                                                     <div>
-                                                        <p class="text-sm text-gray-500">Tuviste una nueva <a href="#" class="font-medium text-gray-900">visita</a></p>
+                                                        <p class="text-sm text-gray-500">
+                                                            Hay <span class="font-medium text-gray-900">1</span> nuevo interesado.
+                                                        </p>
                                                     </div>
                                                     <div class="text-right text-sm whitespace-nowrap text-gray-500">
-                                                        <time datetime="2020-09-22">Sep 22</time>
+                                                        <time datetime="{{ $interests['last_interest_at'] }}">
+                                                            {{ $interests['last_interest_at'] }}
+                                                        </time>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
-
-                                    <li>
-                                        <div class="relative pb-8">
-                                            {{--                                    <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>--}}
-                                            <div class="relative flex space-x-3">
-                                                <div>
-                                              <span class="h-8 w-8 rounded-full bg-white border border-red-300 flex items-center justify-center ring-8 ring-white">
-                                                  <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                                </svg>
-                                              </span>
-                                                </div>
-                                                <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
-                                                    <div>
-                                                        <p class="text-sm text-gray-500">Completed phone screening with <a href="#" class="font-medium text-gray-900">Martha Gardner</a></p>
-                                                    </div>
-                                                    <div class="text-right text-sm whitespace-nowrap text-gray-500">
-                                                        <time datetime="2020-09-28">Sep 28</time>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    @endif
                                 </ul>
                             </div>
-                            <div class="mt-6 flex flex-col justify-stretch">
+                            <div class="flex flex-col justify-stretch">
                                 <div class="block bg-gray-50 px-4 py-4 hover:text-gray-700 sm:rounded-b-lg">
-                                    <div class="flex justify-center justify-between">
-                                        <div>
+                                    <div class="flex justify-evenly">
+<!--                                        <div>
                                             <span class="text-xs font-medium text-gray-500 text-center">Visitas</span>
                                             <span class="text-blue-500 text-sm">23</span>
-                                        </div>
-                                        <div>
-                                            <span class="text-xs font-medium text-gray-500 text-center">Calificacion</span>
-                                            <span class="text-blue-500 text-sm">15.3</span>
+                                        </div>-->
+                                        <div class="mr-2">
+                                            <span class="text-xs font-medium text-gray-500 text-center">Likes</span>
+                                            <span class="text-blue-500 text-sm">{{ $likes['like_count'] }}</span>
                                         </div>
                                         <div>
                                             <span class="text-xs font-medium text-gray-500 text-center">Interesados</span>
-                                            <span class="text-blue-500 text-sm">12</span>
+                                            <span class="text-blue-500 text-sm">{{ $interests['interest_count'] }}</span>
                                         </div>
                                     </div>
                                 </div>

@@ -76,7 +76,7 @@ export default {
                 this.isLiked = response.data.data.isLiked
                 this.check()
             })
-            .catch(error => dd(error))
+            .catch(error => {})
         },
         dislike() {
             axios.delete(this.endpoint + '/dislike')
@@ -85,7 +85,7 @@ export default {
                 this.isLiked = response.data.data.isLiked
                 this.check()
             })
-            .catch(error => dd(error))
+            .catch(error => {})
         },
         check() {
             this.redirectIfGuest()
@@ -120,7 +120,6 @@ export default {
     },
     created () {
         this.check()
-        dd(this.isLiked)
     },
 }
 </script>

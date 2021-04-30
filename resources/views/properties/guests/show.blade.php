@@ -102,6 +102,40 @@
                                                         </div>
                                                     </div>
                                                 </li>
+                                                <li v-if="localProperty.phone"
+                                                    class="mt-3">
+                                                    <div class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+                                                        <div class="px-4 py-3 sm:px-6">
+                                                            <div class="flex items-center justify-between">
+                                                                <div class="text-base leading-5 font-medium text-gray-600 truncate">
+                                                                    Teléfono
+                                                                </div>
+                                                                <div class="ml-2 flex-shrink-0 flex">
+                                                                  <span class="px-2 inline-flex text-base leading-5 font-semibold rounded-full text-gray-500"
+                                                                        v-text="localProperty.phone"
+                                                                  ></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li v-if="localProperty.email"
+                                                    class="mt-3">
+                                                    <div class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+                                                        <div class="px-4 py-3 sm:px-6">
+                                                            <div class="flex items-center justify-between">
+                                                                <div class="text-base leading-5 font-medium text-gray-600 truncate">
+                                                                    Correo Electrónico
+                                                                </div>
+                                                                <div class="ml-2 flex-shrink-0 flex">
+                                                                  <span class="px-2 inline-flex text-base leading-5 font-semibold rounded-full text-gray-500"
+                                                                        v-text="localProperty.email"
+                                                                  ></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
                                                 <li class="mt-3">
                                                     <div class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
                                                         <div class="px-4 py-4 sm:px-6">
@@ -125,11 +159,7 @@
 
                             </div>
 
-                            <divider title="Ubicación"></divider>
-
                             <property-location></property-location>
-
-                            <divider title="Características"></divider>
 
                             <property-features></property-features>
 

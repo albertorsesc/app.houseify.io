@@ -63,6 +63,9 @@
                                                      placeholder="Categorías de tu Negocio..."
                                     ></vue-multiselect>
                                 </div>
+                                <errors :error="errors.categories"
+                                        :options="{ noContainer: true }"
+                                ></errors>
                             </div>
                         </div>
 

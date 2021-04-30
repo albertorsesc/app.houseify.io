@@ -28,7 +28,9 @@ class PropertyRequest extends FormRequest
             'property_category_id' => ['required', 'exists:property_categories,id'],
             'business_type' => ['required', 'in:' . implode(',', BusinessType::all()->toArray())],
             'title' => ['required', 'max:50'],
-            'price' => ['required', 'integer', 'max:100000000', 'gt:' . 0]
+            'price' => ['required', 'integer', 'max:100000000', 'gt:' . 0],
+            'email' => ['nullable', 'required_without:phone', 'email', 'max:150'],
+            'phone' => ['nullable', 'required_without:email', 'max:50'],
         ];
     }
 }

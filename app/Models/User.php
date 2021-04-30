@@ -95,16 +95,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return Property::query()
                        ->with(['propertyCategory.propertyType', 'seller', 'interests', 'location.state', 'media'])
                        ->whereHas('interests', function($query) {
-                           return $query->where('user_id', $this->id);
+                           return $query->where('interested_by', $this->id);
                        });
     }
 
     public function scopeInterestedBusinesses() : Builder
     {
         return Business::query()
-                       ->with(['owner:id', 'interests', 'location.state'])
+                       ->with(['owner:id,first_name,last_name', 'interests', 'location.state'])
                        ->whereHas('interests', function($query) {
-                           return $query->where('user_id', $this->id);
+                           return $query->where('interested_by', $this->id);
                        });
     }
 
@@ -113,7 +113,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return JobProfile::query()
                        ->with(['user:id,first_name,last_name', 'interests', 'location.state'])
                        ->whereHas('interests', function($query) {
-                           return $query->where('user_id', $this->id);
+                           return $query->where('interested_by', $this->id);
                        });
     }
 

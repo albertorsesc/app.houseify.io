@@ -37,7 +37,7 @@ export default {
         update() {
             axios.put(`${this.endpoint}/${this.localJobProfile.uuid}`, {
                 title: this.jobProfileForm.title ? this.jobProfileForm.title : null,
-                skills: this.jobProfileForm.skills ? this.jobProfileForm.skills : null,
+                skills: this.selectedSkills ? this.selectedSkills : this.localJobProfile.skills,
                 email: this.jobProfileForm.email ? this.jobProfileForm.email : null,
                 phone: this.jobProfileForm.phone ? this.jobProfileForm.phone : null,
                 site: this.jobProfileForm.site ? this.jobProfileForm.site : null,
@@ -52,6 +52,15 @@ export default {
                 })
                 .catch(error => { this.errors = error.response.status === 422 ? error.response.data.errors : [] })
         },
+        destroy() {
+            axios.delete(`${this.endpoint}/${this.localJobProfile.uuid}`)
+                .then(() => {
+                    setTimeout( () => {
+                            window.location.href = `/tecnicos-y-profesionistas` },
+                        1500
+                    )
+                }).catch(error => { console.log(error) })
+        },
         toggle() {
             axios
                 .put(this.endpoint + `/${this.localJobProfile.uuid}/toggle`)
@@ -60,7 +69,7 @@ export default {
                     let status = this.jobProfile.status ? 'Publicado' : 'Ocultado'
                     SweetAlert.success(`El Perfil ha sido ${status} exitosamente!`)
                 })
-                .catch(error => { dd(error) })
+                .catch(error => {})
         },
         openModal(action) {
             this.modal = {}
@@ -73,7 +82,6 @@ export default {
                 this.jobProfileForm.skills = this.selectedSkills = this.localJobProfile.skills
                 this.jobProfileForm.title = this.localJobProfile.title
                 this.jobProfileForm.birthdateAt = this.localJobProfile.birthdateAt
-                this.jobProfileForm.skills = this.localJobProfile.skills
                 this.jobProfileForm.email = this.localJobProfile.email
                 this.jobProfileForm.phone = this.localJobProfile.phone
                 this.jobProfileForm.site = this.localJobProfile.site
@@ -96,6 +104,12 @@ export default {
             this.modal = {}
             this.jobProfileForm = {}
         },
+        onDelete() {
+            SweetAlert.danger(
+                `Eliminar tu Perfil de Trabajo: ${this.localJobProfile.title}`,
+                'Tu Perfil ha sido eliminado exitosamente!',
+            )
+        },
     },
     computed: {
         ...mapGetters({
@@ -104,6 +118,8 @@ export default {
     },
     created() {
         this.$store.dispatch('jobProfiles/fetchSkills')
+
+        Event.$on('SweetAlert:destroy', () => { this.destroy() })
 
         Event.$on('job-profiles.location', location => {
             this.localJobProfile.location = location

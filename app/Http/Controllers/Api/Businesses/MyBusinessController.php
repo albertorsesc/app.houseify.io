@@ -16,6 +16,7 @@ class MyBusinessController extends Controller
                     ->where('owner_id', auth()->id())
                     ->with([
                         'likes',
+                        'owner:id',
                         'interests',
                         'location.state',
                     ])

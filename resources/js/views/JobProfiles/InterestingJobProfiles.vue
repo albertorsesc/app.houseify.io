@@ -38,7 +38,7 @@ export default {
         getInterestingJobProfiles() {
             axios.get('/me/job-profiles/interested').then(response => {
                 this.interestedJobProfiles = response.data.data
-            }).catch(error => { dd(error) })
+            }).catch(error => {})
         },
         onToggleInterest() {
             Event.$on('interest-job-profiles', () => {

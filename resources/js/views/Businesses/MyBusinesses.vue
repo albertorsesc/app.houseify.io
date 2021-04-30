@@ -57,7 +57,7 @@ export default {
         index () {
             axios.get(this.endpoint).then(response => {
                 this.myBusinesses = response.data.data
-            }).catch(error => dd(error))
+            }).catch(error => {})
         },
         toggle() {
             this.menuTab = this.menuTab === 'my-businesses' ? 'new-business' : 'my-businesses'

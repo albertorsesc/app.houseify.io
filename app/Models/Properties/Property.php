@@ -27,7 +27,7 @@ class Property extends Model implements Locationable, DeletesRelations
         CanBeReported;
 
     protected $casts = ['price' => 'integer', 'status' => 'boolean', 'seller_id' => 'integer'];
-    protected $fillable = ['property_category_id', 'business_type', 'title', 'price', 'comments'];
+    protected $fillable = ['property_category_id', 'business_type', 'title', 'price', 'phone', 'email', 'comments'];
 
     public function getRouteKeyName() : string
     {
@@ -140,6 +140,9 @@ class Property extends Model implements Locationable, DeletesRelations
 
     public function shouldBeSearchable() : bool
     {
+        if (! app()->environment('production')) {
+            return false;
+        }
         return $this->isPublished() &&
             $this->location &&
             $this->propertyFeature;

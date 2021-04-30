@@ -7,7 +7,9 @@
                         <span class="text-xs text-gray-500 items-center"
                               v-text="business.meta.updatedAt"
                         ></span>
-                        <span class="-mt-3 ml-3" @click.prevent>
+                        <span v-if="isAuthenticated && business.owner.id !== auth"
+                              class="-mt-3 ml-3"
+                              @click.prevent>
                             <interested-btn :model="business"
                                             :id="business.slug"
                                             model-name="businesses"
@@ -36,7 +38,7 @@
 
                 <div class="px-8 pb-1 w-full mt-8 items-center">
 
-                    <div class="flex">
+                    <div class="flex mb-2">
                         <h2 class="text-gray-800 text-xl font-bold"
                             v-text="limitString(business.name,25)"
                         ></h2>
@@ -44,22 +46,38 @@
 
                     <div class="text-sm border-t border-gray-500 leading-relaxed font-medium py-2">
                         <div class="flex justify-start align-middle items-center text-gray-700">
-                            <span v-if="business.location && business.location.city"
-                                  :title="business.location.city"
-                                  class="mr-4">
-                                {{ limitString(business.location.city, 15) }},
-                            </span>
-                            <span v-if="business.location && business.location.state"
-                                  v-text="'  ' + business.location.state.code">
-                            </span>
+                            <div class="flex">
+                                <span v-if="business.location && business.location.city"
+                                      :title="business.location.city"
+                                      class="mr-2">
+                                    {{ limitString(business.location.city, 15) }},
+                                </span>
+                                <span v-if="business.location && business.location.state"
+                                      v-text="'  ' + business.location.state.code"
+                                      class="mr-2">
+                                </span>
+                            </div>
+                             &bullet;
+                            <span v-if="business.phone && ! business.email"
+                                  v-text="formatPhone(business.phone)"
+                                  class="ml-2"
+                            ></span>
+                            <span v-if="business.email && ! business.phone"
+                                  v-text="business.email"
+                                  class="ml-2"
+                            ></span>
+                            <span v-if="business.email && business.phone"
+                                  v-text="business.phone"
+                                  class="ml-2"
+                            ></span>
                         </div>
                     </div>
 
                 </div>
 
                 <!--Categories-->
-                <div class="flex justify-evenly text-left items-start align-middle">
-                    <div class="px-3 py-1 text-xs bg-emerald-100 font-medium leading-5 text-emerald-900 rounded-full shadow-sm"
+                <div class="flex justify-start px-8 text-left items-start align-middle">
+                    <div class="mr-1 px-3 py-1 text-xs bg-emerald-100 font-medium leading-5 text-emerald-900 rounded-full shadow-sm"
                          v-for="(category, index) in business.categories"
                          :key="index"
                          v-if="index <= 2"

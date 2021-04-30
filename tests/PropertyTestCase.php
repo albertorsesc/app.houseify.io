@@ -36,6 +36,8 @@ class PropertyTestCase extends TestCase
             'property_category_id' => PropertyCategory::query()->inRandomOrder()->first()->id,
             'business_type' => Arr::random(BusinessType::all()->toArray()),
             'price' => rand(1000, 100000000),
+            'phone' => '6862894998',
+            'email' => 'alberto@email.com',
             'comments' => 'Aditional Comments',
         ];
     }

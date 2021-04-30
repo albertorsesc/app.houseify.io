@@ -25,7 +25,7 @@ class InterestingPropertiesTest extends PropertyTestCase
         $response->assertOk();
         $this->assertEquals(
             auth()->id(),
-            $response->getOriginalContent()[0]->interests->first()->user_id
+            $response->getOriginalContent()[0]->interests->first()->interested_by
         );
     }
 }

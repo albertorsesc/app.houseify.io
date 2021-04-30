@@ -15,11 +15,12 @@ class CreateInterestsTable extends Migration
     {
         Schema::create('interests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('interested_by')->constrained('users')->cascadeOnDelete();
             $table->unsignedBigInteger('interestable_id');
             $table->string('interestable_type', 100);
+            $table->timestamps();
 
-            $table->unique(['user_id', 'interestable_id', 'interestable_type']);
+            $table->unique(['interested_by', 'interestable_id', 'interestable_type']);
         });
     }
 

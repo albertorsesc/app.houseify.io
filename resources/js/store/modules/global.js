@@ -27,7 +27,7 @@ const actions = {
                 'SET_CONSTRUCTION_CATEGORIES',
                 JSON.parse(storage.app).global.categories
             )
-            dd('constructionCategories from global.js')
+            // dd('constructionCategories from global.js')
         } else {
             return new Promise((resolve, reject) => {
                 axios.get("/construction-categories")
@@ -51,8 +51,8 @@ const actions = {
             JSON.parse(storage.app).global.states.length > 0
         ) {
             commit('SET_STATES', JSON.parse(storage.app).global.states)
-            dd('states from global.js')
-        } else {
+            // dd('states from global.js')
+        } else if (this.auth) {
             return new Promise((resolve, reject) => {
                 axios.get("/states")
                     .then(response => {

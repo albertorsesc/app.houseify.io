@@ -38,7 +38,7 @@ export default {
         getInterestingBusinesses() {
             axios.get('/me/businesses/interested').then(response => {
                 this.interestedBusinesses = response.data.data
-            }).catch(error => { dd(error) })
+            }).catch(error => {})
         },
         onToggleInterest() {
             Event.$on('interest-businesses', () => {

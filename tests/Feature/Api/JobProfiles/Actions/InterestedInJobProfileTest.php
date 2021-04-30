@@ -54,7 +54,7 @@ class InterestedInJobProfileTest extends TestCase
         $this->assertCount(1, $jobProfile->fresh()->interests);
 
         $this->assertDatabaseHas('interests', [
-            'user_id' => auth()->id(),
+            'interested_by' => auth()->id(),
             'interestable_id' => $jobProfile->id,
             'interestable_type' => get_class($jobProfile)
         ]);
@@ -79,7 +79,7 @@ class InterestedInJobProfileTest extends TestCase
         $this->assertCount(0, $jobProfile->fresh()->interests);
 
         $this->assertDatabaseMissing('interests', [
-            'user_id' => auth()->id(),
+            'interested_by' => auth()->id(),
             'interestable_id' => $jobProfile->id,
             'interestable_type' => get_class($jobProfile)
         ]);

@@ -32,6 +32,8 @@ class PropertyFactory extends Factory
             'property_category_id' => PropertyCategory::query()->inRandomOrder()->first(),
             'business_type' => $this->faker->randomElement(\App\Models\Properties\Concerns\BusinessType::all()->toArray()),
             'price' => $this->faker->randomNumber('8'),
+            'phone' => $this->faker->phoneNumber,
+            'email' => $this->faker->freeEmail,
             'comments' => $this->faker->paragraph,
             'status' => true,
         ];

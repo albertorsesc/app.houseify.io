@@ -134,6 +134,41 @@
                             </div>
                         </div>
 
+                        <div class="col-span-4 lg:flex lg:-mx-2">
+                            <div class="w-full lg:w-1/2 lg:mx-2">
+                                <label for="phone" class="block text-sm font-medium text-gray-700">
+                                    <strong class="required">*</strong>
+                                    Teléfono
+                                    <span class="text-gray-500 font-light text-xs">(opcional)</span>
+                                </label>
+                                <div class="my-1 rounded-md shadow-sm text-base">
+                                    <input type="text"
+                                           v-model="propertyForm.phone"
+                                           id="phone"
+                                           class="h-input flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                </div>
+                                <errors :error="errors.phone"
+                                        :options="{ noContainer: true }"
+                                ></errors>
+                            </div>
+                            <div class="w-full lg:w-1/2 lg:mx-2 mt-6 lg:mt-0">
+                                <label for="email" class="block text-sm font-medium text-gray-700">
+                                    <strong class="required">*</strong>
+                                    Correo Electrónico
+                                    <span class="text-gray-500 font-light text-xs">(opcional)</span>
+                                </label>
+                                <div class="my-1 flex rounded-md shadow-sm">
+                                    <input type="email"
+                                           v-model="propertyForm.email"
+                                           id="email"
+                                           class="h-input flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                </div>
+                                <errors :error="errors.email"
+                                        :options="{ noContainer: true }"
+                                ></errors>
+                            </div>
+                        </div>
+
                         <div class="col-span-4">
                             <div class="w-full">
                                 <label for="about" class="block text-sm font-medium text-gray-700">
@@ -192,6 +227,8 @@ export default {
                 },
                 businessType: '',
                 price: 0,
+                phone: '',
+                email: '',
                 comments: ''
             },
             propertyTypes: [],
@@ -213,6 +250,8 @@ export default {
                 property_category_id: this.propertyForm.propertyCategory ? this.propertyForm.propertyCategory.id : null,
                 business_type: this.propertyForm.businessType,
                 price: this.propertyForm.price,
+                phone: this.propertyForm.phone,
+                email: this.propertyForm.email,
                 comments: this.propertyForm.comments
             }).then(response => {
                 Event.$emit('properties.new-property', response.data.data)

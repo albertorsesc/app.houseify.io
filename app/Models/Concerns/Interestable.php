@@ -20,18 +20,18 @@ trait Interestable
 
     public function getIsInterestedAttribute() : bool
     {
-        return !! $this->interests()->where('user_id', auth()->id())->count();
+        return !! $this->interests()->where('interested_by', auth()->id())->count();
     }
 
     /** Helpers */
 
     public function interested()
     {
-        $this->interests()->firstOrCreate(['user_id' => auth()->id()]);
+        $this->interests()->firstOrCreate(['interested_by' => auth()->id()]);
     }
 
     public function uninterested()
     {
-        $this->interests()->where(['user_id' => auth()->id()])->delete();
+        $this->interests()->where(['interested_by' => auth()->id()])->delete();
     }
 }

@@ -18,8 +18,8 @@ const actions = {
             JSON.parse(storage.app).jobProfiles.skills.length > 0
         ) {
             commit('SET_SKILLS', JSON.parse(storage.app).jobProfiles.skills)
-            dd('skills from jobProfiles.js')
-        } else {
+            // dd('skills from jobProfiles.js')
+        } else if (this.auth) {
             return new Promise((resolve, reject) => {
                 axios.get("/skills")
                     .then(response => {

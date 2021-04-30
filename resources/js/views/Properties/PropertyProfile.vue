@@ -42,8 +42,10 @@ export default {
             axios.put(this.endpoint + this.localProperty.slug, {
                 property_category_id: this.selectedPropertyCategory.id,
                 business_type: this.propertyForm.businessType ? this.propertyForm.businessType : this.localProperty.businessType,
-                title: this.propertyForm.title ? this.propertyForm.title : this.localProperty.title,
-                price: this.propertyForm.price ? this.propertyForm.price : this.localProperty.price,
+                title: this.propertyForm.title,
+                price: this.propertyForm.price,
+                phone: this.propertyForm.phone,
+                email: this.propertyForm.email,
                 comments: this.propertyForm.comments,
             })
                 .then(response => {
@@ -105,6 +107,8 @@ export default {
                 this.propertyForm.businessType = this.localProperty.businessType
                 this.propertyForm.title = this.localProperty.title
                 this.propertyForm.price = this.localProperty.price
+                this.propertyForm.phone = this.localProperty.phone
+                this.propertyForm.email = this.localProperty.email
                 this.propertyForm.comments = this.localProperty.comments
             }
 
@@ -177,12 +181,13 @@ export default {
         VueMultiselect,
         Alert: () => import(/* webpackChunkName: "alert" */ '../../components/Alert'),
         Modal: () => import(/* webpackChunkName: "modal" */ '../../components/Modal'),
-        Errors: () => import(/* webpackChunkName: "errors" */ '../../components/Errors'),
         Report: () => import(/* webpackChunkName: "report" */ '../../components/Report'),
+        Errors: () => import(/* webpackChunkName: "errors" */ '../../components/Errors'),
         Divider: () => import(/* webpackChunkName: "divider" */ '../../components/Divider'),
         FormInput: () => import(/* webpackChunkName: "form-input" */ '../../components/FormInput'),
         PropertyLocation: () => import(/* webpackChunkName: "property-location" */ './PropertyLocation'),
         PropertyFeatures: () => import(/* webpackChunkName: "property-features" */ './PropertyFeatures'),
+        InterestedBtn: () => import(/* webpackChunkName: "interested-btn" */ '../../components/InterestedBtn'),
         ActionMessage: () => import(/* webpackChunkName: "action-message" */ '../../components/ActionMessage'),
         CustomCarousel: () => import(/* webpackChunkName: "custom-carousel" */ '../../components/CustomCarousel'),
         PropertyImages: () => import(/* webpackChunkName: "property-images" */ '../../components/Properties/PropertyImages')

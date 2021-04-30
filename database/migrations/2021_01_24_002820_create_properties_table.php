@@ -22,6 +22,8 @@ class CreatePropertiesTable extends Migration
             $table->foreignId('seller_id')->constrained('users')->cascadeOnDelete();
             $table->string('business_type', 15);
             $table->unsignedInteger('price');
+            $table->string('phone', 50)->nullable();
+            $table->string('email', 150)->nullable();
             $table->text('comments')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();

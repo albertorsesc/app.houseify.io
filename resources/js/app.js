@@ -9,8 +9,8 @@ import Vue from 'vue/dist/vue'
 // window.Vue = require('vue/dist/vue');
 // window.Vue = require('vue').default;
 import store from './store'
-window.dd = console.log
 window.baseURL = window.URL
+window.dd = console.log
 Vue.config.productionTip = false
 
 Vue.component('nav-bar', require('./components/NavBar').default);

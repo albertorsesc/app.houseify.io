@@ -27,17 +27,6 @@ class MyJobProfileController extends Controller
             )
         ]);
     }
-    public function display (JobProfile $jobProfile)
-    {
-        return view('job-profiles.guests.show', [
-            'jobProfile' => new JobProfileResource(
-                $jobProfile->load([
-                    'likes:id,likeable_type,likeable_id',
-                    'user:id,first_name,last_name',
-                    'location.state:id,name'
-                ])
-            )
-        ]);
-    }
+
 
 }

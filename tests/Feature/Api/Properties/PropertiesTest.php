@@ -38,6 +38,8 @@ class PropertiesTest extends PropertyTestCase
                     'slug' => $property->slug,
                     'price' => $property->price,
                     'formattedPrice' => $property->formattedPrice(),
+                    'phone' => $property->phone,
+                    'email' => $property->email,
                     'comments' => $property->comments,
                     'status' => $property->status,
                     'meta' => [
@@ -59,6 +61,7 @@ class PropertiesTest extends PropertyTestCase
      */
     public function authenticated_user_can_store_a_property()
     {
+        $this->withoutExceptionHandling();
         $property = $this->makeProperty();
 
         $response = $this->postJson(route($this->routePrefix . 'store'), $property);

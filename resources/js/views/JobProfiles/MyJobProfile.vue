@@ -63,7 +63,7 @@ export default {
         index () {
             axios.get(this.endpoint).then(response => {
                 this.myJobProfile = response.data.data
-            }).catch(error => dd(error))
+            }).catch(error => {})
         },
         toggle() {
             this.menuTab = this.menuTab === 'my-job-profile' ? 'new-job-profile' : 'my-job-profile'

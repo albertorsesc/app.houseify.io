@@ -66,23 +66,19 @@
                                 </div>
                                 <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
                                     <dl class="flex-wrap md:flex sm:justify-between mt-3">
-                                        <div class="w-full md:w-1/2 py-1" v-if="localJobProfile.phone">
+                                        <div class="w-full md:w-1/2 py-1"
+                                             v-if="localJobProfile.phone">
                                             <dt class="text-sm font-medium text-gray-500">
                                                 Teléfono
                                             </dt>
                                             <dd class="mt-1 text-sm text-gray-900" v-text="localJobProfile.phone"></dd>
                                         </div>
-                                        <div class="w-full md:w-1/2 py-1" v-if="localJobProfile.email">
+                                        <div class="w-full md:w-1/2 py-1"
+                                             v-if="localJobProfile.email">
                                             <dt class="text-sm font-medium text-gray-500">
                                                 Correo Electrónico
                                             </dt>
                                             <dd class="mt-1 text-sm text-gray-900" v-text="localJobProfile.email"></dd>
-                                        </div>
-                                        <div class="w-full md:w-1/2 py-4">
-                                            <dt class="text-sm font-medium text-gray-500">
-                                                Edad
-                                            </dt>
-                                            <dd class="mt-1 text-sm text-gray-900" v-text="localJobProfile.age"></dd>
                                         </div>
                                         <div class="w-full md:w-1/2 py-4" v-if="localJobProfile.facebookProfile">
                                             <dt class="text-sm font-medium text-gray-500">
@@ -93,6 +89,18 @@
                                                    class="h-link"
                                                    target="_blank"
                                                    v-text="localJobProfile.facebookProfile"
+                                                ></a>
+                                            </dd>
+                                        </div>
+                                        <div class="w-full md:w-1/2 py-4" v-if="localJobProfile.linkedinProfile">
+                                            <dt class="text-sm font-medium text-gray-500">
+                                                Perfil de LinkedIn
+                                            </dt>
+                                            <dd class="mt-1 text-sm text-gray-900">
+                                                <a :href="localJobProfile.linkedinProfile"
+                                                   class="h-link"
+                                                   target="_blank"
+                                                   v-text="localJobProfile.linkedinProfile"
                                                 ></a>
                                             </dd>
                                         </div>
@@ -109,7 +117,8 @@
                                             </dd>
                                         </div>
                                     </dl>
-                                    <div class="w-full mt-6">
+                                    <div v-if="localJobProfile.bio"
+                                         class="w-full mt-6">
                                         <dt class="text-sm font-medium text-gray-500">
                                             Acerca de mi
                                         </dt>

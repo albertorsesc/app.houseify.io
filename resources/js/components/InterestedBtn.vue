@@ -60,7 +60,7 @@
                 if (
                     this.interests &&
                     this.interests.length > 0 &&
-                    this.interests[0].user_id === this.auth
+                    this.interests[0].interested_by === this.auth
                 ) {
                     this.isInterested = true
                 } else {
@@ -84,10 +84,15 @@
         },
         computed: {
             endpointUrl() { return `${this.endpoint}/${this.modelId}` },
-            title() { return this.isInterested ? 'No me interesa' : 'Guardar en Mis Intereses!' }
+            title() { return this.isInterested ? 'No me interesa' : 'Guardar en Mis Intereses!' },
+            interestCount() {
+                return this.interests.length
+            },
         },
         created () {
             this.check()
+
+            Event.$emit('interests:count', () => this.interestCount)
         }
     }
 </script>

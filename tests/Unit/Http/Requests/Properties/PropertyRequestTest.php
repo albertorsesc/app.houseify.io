@@ -196,4 +196,121 @@ class PropertyRequestTest extends PropertyTestCase
             $this->make(Property::class, ['price' => -1])->toArray()
         )->assertJsonValidationErrors('price');
     }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function email_must_have_a_valid_format()
+    {
+        $validatedField = 'email';
+        $brokenRule = 'not-an-email';
+
+        $this->postJson(
+            route($this->routePrefix . 'store'),
+            $this->make(Property::class, [$validatedField => $brokenRule])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+
+        $existingAd = $this->create(Property::class);
+        $this->putJson(
+            route($this->routePrefix . 'update', $existingAd),
+            $this->make(Property::class, [$validatedField => $brokenRule])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function email_must_not_exceed_150_characters()
+    {
+        $validatedField = 'email';
+        $brokenRule = Str::random(141) . '@email.com';
+
+        $this->postJson(
+            route($this->routePrefix . 'store'),
+            $this->make(Property::class, [$validatedField => $brokenRule])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+
+        $existingAd = $this->create(Property::class);
+        $this->putJson(
+            route($this->routePrefix . 'update', $existingAd),
+            $this->make(Property::class, [$validatedField => $brokenRule])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function email_must_be_required_if_phone_is_empty()
+    {
+        $validatedField = 'email';
+        $brokenRule = null;
+
+        $this->postJson(
+            route($this->routePrefix . 'store'),
+            $this->make(Property::class, [
+                $validatedField => $brokenRule,
+                'phone' => null
+            ])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+
+        $existingProperty = $this->create(Property::class);
+        $this->putJson(
+            route($this->routePrefix . 'update', $existingProperty),
+            $this->make(Property::class, [
+                $validatedField => $brokenRule,
+                'phone' => null
+            ])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function phone_must_be_required_if_email_is_empty()
+    {
+        $validatedField = 'phone';
+        $brokenRule = null;
+
+        $this->postJson(
+            route($this->routePrefix . 'store'),
+            $this->make(Property::class, [
+                $validatedField => $brokenRule,
+                'email' => null
+            ])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+
+        $existingProperty = $this->create(Property::class);
+        $this->putJson(
+            route($this->routePrefix . 'update', $existingProperty),
+            $this->make(Property::class, [
+                $validatedField => $brokenRule,
+                'email' => null
+            ])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function phone_must_not_exceed_50_characters()
+    {
+        $validatedField = 'phone';
+        $brokenRule = Str::random(51);
+
+        $this->postJson(
+            route($this->routePrefix . 'store'),
+            $this->make(Property::class, [$validatedField => $brokenRule])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+
+        $existingAd = $this->create(Property::class);
+        $this->putJson(
+            route($this->routePrefix . 'update', $existingAd),
+            $this->make(Property::class, [$validatedField => $brokenRule])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+    }
 }

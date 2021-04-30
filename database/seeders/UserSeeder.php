@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -25,20 +24,8 @@ class UserSeeder extends Seeder
 //                'status' => true,
                 'created_at' => now()->toDateTimeString(),
             ],
-            [
-                'first_name' => 'Valeria',
-                'last_name' => 'Aguila',
-                'email' => 'valeria@gmail.com',
-//                'phone' => '6862894998',
-                'password' => bcrypt('password'),
-                'email_verified_at' => now()->toDateTimeString(),
-//                'status' => true,
-                'created_at' => now()->toDateTimeString(),
-            ],
         ];
 
         \App\Models\User::insert($users);
-
-        User::factory()->count(1000)->create();
     }
 }

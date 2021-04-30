@@ -20,6 +20,12 @@ class PublishedBusinessSeeder extends Seeder
 
         $businesses = [
             [
+                'name' => 'Escareño Ramos y Asociados',
+                'categories' => ['Constructora'],
+                'email' => 'escarenoramos1@hotmail.com',
+                'phone' => '6865822009',
+            ],
+           /* [
                 'name' => 'Electrica Rosas',
                 'categories' => ['Electricidad', 'Ferreteria', 'Plomeria'],
                 'email' => 'cotizaciones@electricarosas.com',
@@ -46,10 +52,20 @@ class PublishedBusinessSeeder extends Seeder
                 'facebook_profile' => 'https://www.facebook.com/polaris-aire-acondicionado',
                 'linkedin_profile' => 'https://www.linkedin.com/polaris-aire-acondicionado',
                 'comments' => 'Minisplits de 2 toneladas en especial'
-            ],
+            ],*/
         ];
+        $newBusiness = Business::create($businesses[0]);
+        $newBusiness->location()->create([
+            'address' => 'Columnistas #999',
+            'neighborhood' => 'Ignacio Allende',
+            'city' => 'Mexicali',
+            'state_id' => 2,
+            'zip_code' => '21390'
+        ]);
 
-        foreach ($businesses as $business) {
+        $newBusiness->update(['status' => true]);
+
+        /*foreach ($businesses as $business) {
             $newBusiness = Business::create($business);
 
             $newBusiness->location()->create(
@@ -57,6 +73,6 @@ class PublishedBusinessSeeder extends Seeder
             );
 
             $newBusiness->update(['status' => true]);
-        }
+        }*/
     }
 }

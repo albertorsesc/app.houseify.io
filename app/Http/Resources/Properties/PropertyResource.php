@@ -23,6 +23,8 @@ class PropertyResource extends JsonResource
             'price' => $this->price,
             'formattedPrice' => $this->formattedPrice(),
             'comments' => $this->comments,
+            'phone' => $this->phone,
+            'email' => $this->email,
             'status' => $this->status,
             'businessType' => $this->business_type,
             'propertyCategory' => new PropertyCategoryResource($this->whenLoaded('propertyCategory')),

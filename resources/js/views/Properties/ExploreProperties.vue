@@ -51,7 +51,7 @@ export default {
                     this.properties.push(data.data)
                     this.currentPage = data.meta.current_page
                     this.totalPages = data.meta.last_page
-            }).catch(error => dd(error))
+            }).catch(error => {})
         },
         onScroll() {
             document.addEventListener('wheel', (evt) => {

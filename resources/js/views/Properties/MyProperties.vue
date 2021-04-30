@@ -58,7 +58,7 @@ export default {
         index () {
             axios.get(this.endpoint).then(response => {
                 this.myProperties = response.data.data
-            }).catch(error => dd(error))
+            }).catch(error => {})
         },
         toggle() {
             this.menuTab = this.menuTab === 'my-properties' ? 'new-property' : 'my-properties'

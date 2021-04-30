@@ -14,6 +14,7 @@ class HouseifyConfigFileTest extends TestCase
     {
         $this->assertSame([
             'A/C',
+            'Arquitectura',
             'Carpintería',
             'Cerrajería',
             'Constructora',

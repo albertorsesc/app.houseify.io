@@ -29,7 +29,7 @@ const actions = {
                 'SET_PROPERTY_TYPES',
                 JSON.parse(storage.app).properties.propertyTypes
             )
-            dd('propertyTypes from properties.js')
+            // dd('propertyTypes from properties.js')
         } else {
             return new Promise((resolve, reject) => {
                 axios.get("/property-types")
@@ -55,7 +55,7 @@ const actions = {
                 'SET_PROPERTY_CATEGORIES',
                 JSON.parse(storage.app).properties.propertyCategories
             )
-            dd('propertyCategories from properties.js')
+            // dd('propertyCategories from properties.js')
         } else {
             return new Promise((resolve, reject) => {
                 axios.get("/property-categories")
@@ -82,7 +82,7 @@ const actions = {
                 'SET_BUSINESS_TYPES',
                 JSON.parse(storage.app).properties.businessTypes
             )
-            dd('businessTypes from properties.js')
+            // dd('businessTypes from properties.js')
         } else {
             return new Promise((resolve, reject) => {
                 axios.get("/business-types")

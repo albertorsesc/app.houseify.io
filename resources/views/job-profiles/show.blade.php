@@ -47,6 +47,14 @@
     ></script>
 @endsection
 
+@section('meta')
+    <meta property="og:url" content="{{ $jobProfile->publicProfile() }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ $jobProfile->title }}" />
+    <meta name="description" content="Profesional en {{ $jobProfile->location ? $jobProfile->location->city . ' - ' . $jobProfile->location->state->code : null }}" />
+    <meta property="og:image" content="{{ $jobProfile->photo ? str_replace('public', 'storage', $jobProfile->photo) : '' }}" />
+@endsection
+
 @section('content')
 
     <job-profile :job-profile="{{ json_encode($jobProfile) }}"
@@ -57,20 +65,154 @@
                     <div class="w-full md:flex md:justify-between items-center">
                         <h2 class="font-semibold text-2xl text-teal-400"></h2>
                         <div class="hidden md:flex md:justify-between">
-                            <button v-if="isAuthenticated" class="h-link bg-white -mt-1 mr-1 shadow rounded-md py-2 px-2 hover:text-gray-500 focus:outline-none focus:ring-blue-100 focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
-                                    title="Reportar Propiedad...">
-                                <svg class="text-yellow-500 hover:text-yellow-600" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                            </button>
-                            <button v-if="isAuthenticated && localJobProfile.user.id === auth" class="h-link bg-white -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                            {{--Report--}}
+                            <report v-if="isAuthenticated"
+                                    :model-id="localJobProfile.uuid"
+                                    model-name="job-profiles"
+                                    inline-template>
+                                <div>
+                                    <button @click="openModal"
+                                            class="h-link bg-white md:-mt-1 md:mr-1 shadow rounded-md py-2 px-2 md:float-left hover:text-gray-500 focus:outline-none active:text-gray-800"
+                                            title="Reportar Perfil...">
+                                        <svg class="text-yellow-500 hover:text-yellow-600" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                    </button>
+                                    <modal modal-id="reports" max-width="sm:max-w-md">
+                                        <template #title>Reportar Perfil</template>
+                                        <template #content>
+                                            <form @submit.prevent>
+                                                <div class="w-full">
+                                                    <div class="w-full">
+                                                        <label for="reporting_cause">
+                                                            <strong class="required">*</strong>
+                                                            Causa del Reporte
+                                                            <span class="text-gray-500 text-xs">(requerido)</span>
+                                                        </label>
+                                                        <div class="mt-1">
+                                                            <select v-model="report.reportingCause"
+                                                                    class="h-select"
+                                                                    id="reporting_cause">
+                                                                <option value="" selected disabled>Seleccione una Causa...</option>
+                                                                @foreach(\App\Models\JobProfiles\JobProfile::getReportingCauses() as $key => $reportingCause)
+                                                                    <option value="{{ $reportingCause }}">{{ $reportingCause }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <errors :error="errors.reporting_cause"
+                                                                    :options="{ noContainer: true }"
+                                                            ></errors>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-full mt-4">
+                                                        <div>
+                                                            <label for="report_comments">Comentarios</label>
+                                                            <textarea v-model="report.comments"
+                                                                      id="report_comments"
+                                                                      class="h-input form-input block w-full"
+                                                                      rows="5"
+                                                                      v-text="report.comments"
+                                                            ></textarea>
+                                                            <errors :error="errors.comments"
+                                                                    :options="{ noContainer: true }"
+                                                            ></errors>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </template>
+                                        <template #footer>
+                                            <button @click="closeModal()"
+                                                    type="button" class="h-btn">
+                                                Cancelar
+                                            </button>
+                                            <button @click="submitReport"
+                                                    class="h-btn-success">
+                                                Guardar
+                                            </button>
+                                        </template>
+                                    </modal>
+                                </div>
+                            </report>
+                            {{--Delete--}}
+                            <button v-if="isAuthenticated && localJobProfile.user.id === auth"
+                                    @click="onDelete"
+                                    class="ml-2 h-link bg-white -mt-1 shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                     title="Eliminar Propiedad">
                                 <svg class="text-red-500 hover:text-red-600" width="25" height="25"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                             </button>
                         </div>
 
-                        <div class="w-full md:hidden md:mt-2">
-                            <button class="h-link bg-white md:-mt-1 md:mr-1 shadow-sm rounded-md py-2 px-2 md:float-left hover:text-gray-500 focus:outline-none active:text-gray-800"
-                                    title="Reportar Propiedad...">
-                                <svg class="text-yellow-500 hover:text-yellow-600" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        <div class="w-full flex md:hidden md:mt-2">
+                            {{--Report--}}
+                            <report v-if="isAuthenticated"
+                                    :model-id="localJobProfile.uuid"
+                                    model-name="job-profiles"
+                                    inline-template>
+                                <div>
+                                    <button @click="openModal"
+                                            class="ml-2 h-link bg-white md:-mt-1 md:mr-1 shadow rounded-md py-2 px-2 md:float-left hover:text-gray-500 focus:outline-none active:text-gray-800"
+                                            title="Reportar Perfil...">
+                                        <svg class="text-yellow-500 hover:text-yellow-600" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                    </button>
+                                    <modal modal-id="reports" max-width="sm:max-w-md">
+                                        <template #title>Reportar Perfil</template>
+                                        <template #content>
+                                            <form @submit.prevent>
+                                                <div class="w-full">
+                                                    <div class="w-full">
+                                                        <label for="reporting_cause_mobile">
+                                                            <strong class="required">*</strong>
+                                                            Causa del Reporte
+                                                            <span class="text-gray-500 text-xs">(requerido)</span>
+                                                        </label>
+                                                        <div class="mt-1">
+                                                            <select v-model="report.reportingCause"
+                                                                    class="h-select"
+                                                                    id="reporting_cause_mobile">
+                                                                <option value="" selected disabled>Seleccione una Causa...</option>
+                                                                @foreach(\App\Models\JobProfiles\JobProfile::getReportingCauses() as $key => $reportingCause)
+                                                                    <option value="{{ $reportingCause }}">{{ $reportingCause }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <errors :error="errors.reporting_cause"
+                                                                    :options="{ noContainer: true }"
+                                                            ></errors>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-full mt-4">
+                                                        <div>
+                                                            <label for="report_comments_mobile">Comentarios</label>
+                                                            <textarea v-model="report.comments"
+                                                                      id="report_comments_mobile"
+                                                                      class="h-input form-input block w-full"
+                                                                      rows="5"
+                                                                      v-text="report.comments"
+                                                            ></textarea>
+                                                            <errors :error="errors.comments"
+                                                                    :options="{ noContainer: true }"
+                                                            ></errors>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </template>
+                                        <template #footer>
+                                            <button @click="closeModal()"
+                                                    type="button" class="h-btn">
+                                                Cancelar
+                                            </button>
+                                            <button @click="submitReport"
+                                                    class="h-btn-success">
+                                                Guardar
+                                            </button>
+                                        </template>
+                                    </modal>
+                                </div>
+                            </report>
+                            {{--Delete--}}
+                            <button v-if="isAuthenticated && localJobProfile.user.id === auth"
+                                    @click="onDelete"
+                                    class="ml-4 h-link bg-white shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                    title="Eliminar Propiedad">
+                                <svg class="text-red-500 hover:text-red-600" width="25" height="25"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                             </button>
                         </div>
                     </div>
@@ -197,7 +339,7 @@
                                         <h2 id="job-profile-information" class="text-lg leading-6 font-medium text-gray-900">
                                             Area de Expertiz/Habilidades
                                         </h2>
-                                        <div v-if="isAuthenticated" {{--&& localJobProfile.user.id !== auth--}}
+                                        <div v-if="isAuthenticated && localJobProfile.user.id !== auth"
                                              class="flex items-center align-middle">
                                             {{--Likes--}}
                                             <span class="mr-2">
@@ -219,7 +361,7 @@
                                     </div>
                                     <p class="flex max-w-2xl text-sm text-gray-500 align-middle items-center"
                                        :class="isAuthenticated && localJobProfile.user.id === auth ? 'mt-3' : 'mt-0'">
-                                        <span v-for="skill in jobProfile.skills"
+                                        <span v-for="skill in localJobProfile.skills"
                                               class="flex-shrink-0 shadow-xs mr-2 inline-block px-2 py-0.5 border border-green-200 text-green-800 text-sm font-medium bg-green-100 rounded-full"
                                               :class="isAuthenticated && localJobProfile.user.id === auth ? '-mt-0' : '-mt-3'"
                                               v-text="skill"
@@ -324,95 +466,116 @@
                     <section v-if="isAuthenticated && jobProfile.user.id === auth"
                              aria-labelledby="timeline-title"
                              class="lg:col-start-3 lg:col-span-1">
+
+                        {{--Activity--}}
                         <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
                             <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Actividad</h2>
+
                             <div class="mt-6 flow-root">
                                 <ul class="-mb-8 pb-12">
-                                    <li>
-                                        <div class="relative pb-8">
-                                            <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                                            <div class="relative flex space-x-3">
-                                                <div>
-                                              <span class="h-8 w-8 rounded-full bg-white border border-yellow-300 flex items-center justify-center ring-8 ring-white">
-                                                  <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                                    @if($likes['like_count'])
+                                        <li>
+                                            <div class="relative pb-16">
+                                                <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                                                <div class="relative flex space-x-3">
+                                                    <div>
+                                              <span class="h-8 w-8 rounded-full bg-white border border-emerald-300 flex items-center justify-center ring-8 ring-white">
+                                                  <svg class="h-5 w-5 text-emerald-300"
+                                                       fill="none"
+                                                       xmlns="http://www.w3.org/2000/svg"
+                                                       viewBox="0 0 24 24"
+                                                       stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                                                     </svg>
                                               </span>
-                                                </div>
-                                                <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
-                                                    <div>
-                                                        <p class="text-sm text-gray-500">Dio una Calificacion de <a href="#" class="font-medium text-gray-900">9</a></p>
                                                     </div>
-                                                    <div class="text-right text-sm whitespace-nowrap text-gray-500">
-                                                        <time datetime="2020-09-20">Sep 20</time>
+
+                                                    <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                                        <div>
+                                                            <p class="text-sm text-gray-500">
+                                                                Tienes <span class="font-medium text-gray-900">1</span> nuevo Like.
+                                                            </p>
+                                                        </div>
+                                                        <div class="text-right text-sm whitespace-nowrap text-gray-500">
+                                                            <time datetime="{{ $likes['last_like_at'] }}">
+                                                                {{ $likes['last_like_at'] }}
+                                                            </time>
+                                                        </div>
                                                     </div>
+
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="relative pb-8">
                                             <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                                            <div class="relative flex space-x-3">
-                                                <div>
-                                              <span class="h-8 w-8 rounded-full bg-white border border-blue-300 flex items-center justify-center ring-8 ring-white">
-                                                  <svg class="h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                    </svg>
-                                              </span>
-                                                </div>
-                                                <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
-                                                    <div>
-                                                        <p class="text-sm text-gray-500">Tuviste una nueva <a href="#" class="font-medium text-gray-900">visita</a></p>
-                                                    </div>
-                                                    <div class="text-right text-sm whitespace-nowrap text-gray-500">
-                                                        <time datetime="2020-09-22">Sep 22</time>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    @endif
 
-                                    <li>
-                                        <div class="relative pb-8">
-                                            {{--                                    <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>--}}
-                                            <div class="relative flex space-x-3">
-                                                <div>
-                                              <span class="h-8 w-8 rounded-full bg-white border border-red-300 flex items-center justify-center ring-8 ring-white">
-                                                  <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                                </svg>
-                                              </span>
-                                                </div>
-                                                <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                <!--                                    <li>
+                                                                            <div class="relative pb-8">
+                                                                                <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                                                                                <div class="relative flex space-x-3">
+                                                                                    <div>
+                                                                                  <span class="h-8 w-8 rounded-full bg-white border border-blue-300 flex items-center justify-center ring-8 ring-white">
+                                                                                      <svg class="h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                                                        </svg>
+                                                                                  </span>
+                                                                                    </div>
+                                                                                    <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                                                                        <div>
+                                                                                            <p class="text-sm text-gray-500">Tuviste una nueva <a href="#" class="font-medium text-gray-900">visita</a></p>
+                                                                                        </div>
+                                                                                        <div class="text-right text-sm whitespace-nowrap text-gray-500">
+                                                                                            <time datetime="2020-09-22">Sep 22</time>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>-->
+
+                                    @if($interests['interest_count'])
+                                        <li>
+                                            <div class="relative pb-8">
+                                                <div class="relative flex space-x-3">
                                                     <div>
-                                                        <p class="text-sm text-gray-500">Completed phone screening with <a href="#" class="font-medium text-gray-900">Martha Gardner</a></p>
+                                          <span class="h-8 w-8 rounded-full bg-white border border-red-300 flex items-center justify-center ring-8 ring-white">
+                                              <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                            </svg>
+                                          </span>
                                                     </div>
-                                                    <div class="text-right text-sm whitespace-nowrap text-gray-500">
-                                                        <time datetime="2020-09-28">Sep 28</time>
+                                                    <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                                        <div>
+                                                            <p class="text-sm text-gray-500">
+                                                                Hay <span class="font-medium text-gray-900">1</span> nuevo interesado.
+                                                            </p>
+                                                        </div>
+                                                        <div class="text-right text-sm whitespace-nowrap text-gray-500">
+                                                            <time datetime="{{ $interests['last_interest_at'] }}">
+                                                                {{ $interests['last_interest_at'] }}
+                                                            </time>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
-                            <div class="mt-6 flex flex-col justify-stretch">
+                            <div class="flex flex-col justify-stretch">
                                 <div class="block bg-gray-50 px-4 py-4 hover:text-gray-700 sm:rounded-b-lg">
-                                    <div class="flex justify-center justify-between">
-                                        <div>
-                                            <span class="text-xs font-medium text-gray-500 text-center">Visitas</span>
-                                            <span class="text-blue-500 text-sm">23</span>
-                                        </div>
-                                        <div>
-                                            <span class="text-xs font-medium text-gray-500 text-center">Calificacion</span>
-                                            <span class="text-blue-500 text-sm">15.3</span>
+                                    <div class="flex justify-evenly">
+                                        <!--                                        <div>
+                                                                                    <span class="text-xs font-medium text-gray-500 text-center">Visitas</span>
+                                                                                    <span class="text-blue-500 text-sm">23</span>
+                                                                                </div>-->
+                                        <div class="mr-2">
+                                            <span class="text-xs font-medium text-gray-500 text-center">Likes</span>
+                                            <span class="text-blue-500 text-sm">{{ $likes['like_count'] }}</span>
                                         </div>
                                         <div>
                                             <span class="text-xs font-medium text-gray-500 text-center">Interesados</span>
-                                            <span class="text-blue-500 text-sm">12</span>
+                                            <span class="text-blue-500 text-sm">{{ $interests['interest_count'] }}</span>
                                         </div>
                                     </div>
                                 </div>

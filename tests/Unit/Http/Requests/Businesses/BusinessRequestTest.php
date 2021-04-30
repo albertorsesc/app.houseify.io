@@ -201,7 +201,61 @@ class BusinessRequestTest extends BusinessTestCase
      * @test
      * @throws \Throwable
      */
-    public function phone_must_not_exceed_150_characters()
+    public function email_must_be_required_if_phone_is_empty()
+    {
+        $validatedField = 'email';
+        $brokenRule = null;
+
+        $this->postJson(
+            route($this->routePrefix . 'store'),
+            $this->make(Business::class, [
+                $validatedField => $brokenRule,
+                'phone' => null
+            ])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+
+        $existingBusiness = $this->create(Business::class);
+        $this->putJson(
+            route($this->routePrefix . 'update', $existingBusiness),
+            $this->make(Business::class, [
+                $validatedField => $brokenRule,
+                'phone' => null
+            ])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function phone_must_be_required_if_email_is_empty()
+    {
+        $validatedField = 'phone';
+        $brokenRule = null;
+
+        $this->postJson(
+            route($this->routePrefix . 'store'),
+            $this->make(Business::class, [
+                $validatedField => $brokenRule,
+                'email' => null
+            ])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+
+        $existingBusiness = $this->create(Business::class);
+        $this->putJson(
+            route($this->routePrefix . 'update', $existingBusiness),
+            $this->make(Business::class, [
+                $validatedField => $brokenRule,
+                'email' => null
+            ])->toArray()
+        )->assertJsonValidationErrors($validatedField);
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function phone_must_not_exceed_50_characters()
     {
         $validatedField = 'phone';
         $brokenRule = Str::random(51);

@@ -106,6 +106,9 @@ class Business extends Model
 
     public function shouldBeSearchable() : bool
     {
+        if (! app()->environment('production')) {
+            return false;
+        }
         return $this->isPublished() && $this->location;
     }
 }

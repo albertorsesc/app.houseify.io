@@ -66,10 +66,19 @@
                         ></h2>
                         @auth
                         <div class="hidden md:flex md:justify-between">
+                            <div v-if="property.seller.id !== auth"
+                                 class="flex-col">
+                                <interested-btn :model="property"
+                                                :id="property.slug"
+                                                model-name="properties"
+                                                endpoint="/properties"
+                                                icon-size="h-8 w-8"
+                                ></interested-btn>
+                            </div>
                             {{--Report--}}
                             <report :model-id="localProperty.slug" model-name="properties" inline-template>
                                 <div>
-                                    <button @click="openModal" class="h-link bg-white -mt-1 mr-1 shadow rounded-md py-2 px-2 float-left hover:text-gray-500 hover:shadow appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                    <button @click="openModal" class="h-link bg-white -mt-1 lg:-mt-0 mr-1 shadow rounded-md py-2 px-2 float-left hover:text-gray-500 hover:shadow appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                             title="Reportar Propiedad...">
                                         <svg class="text-yellow-500 hover:text-yellow-600" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                                     </button>
@@ -131,7 +140,7 @@
                             @if($property->seller->id === auth()->id())
                             {{--Delete--}}
                             <button @click="onDelete"
-                                    class="h-link bg-white border-emerald-900 -mt-1 shadow rounded-md py-2 px-2 float-left appearance-none hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                    class="h-link bg-white border-emerald-900 -mt-1 lg:-mt-0 shadow rounded-md px-2 float-left appearance-none hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                     title="Eliminar Propiedad">
                                 <svg class="text-red-500 hover:text-red-600" width="25" height="25"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                             </button>
@@ -140,9 +149,18 @@
 
                         {{--Mobile--}}
                         <div class="w-full md:hidden mt-3 flex justify-end">
+                            <div class="flex-col">
+                                <interested-btn v-if="property.seller.id !== auth"
+                                                :model="property"
+                                                :id="property.slug"
+                                                model-name="properties"
+                                                endpoint="/properties"
+                                                icon-size="h-8 w-8"
+                                ></interested-btn>
+                            </div>
                             <report :model-id="localProperty.slug" model-name="properties" inline-template>
                                 <div>
-                                    <button @click="openModal" class="h-link bg-white -mt-1 mr-1 shadow-sm rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                    <button @click="openModal" class="h-link bg-white mr-1 shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                             title="Reportar Propiedad...">
                                         <svg class="text-yellow-500 hover:text-yellow-600 hover:border-yellow-700 hover:border" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                                     </button>
@@ -202,7 +220,7 @@
                             @if($property->seller->id === auth()->id())
                                 {{--Delete--}}
                                 <button @click="onDelete"
-                                        class="h-link bg-white -mt-1 mr-1 shadow-sm rounded-md py-2 px-2 hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                        class="ml-1 h-link bg-white -mt-1 mr-2 shadow rounded-md -py-2 px-2 hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                         title="Eliminar Propiedad">
                                     <svg class="text-red-500 hover:text-red-600" width="25" height="25"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                 </button>
@@ -399,6 +417,40 @@
                                                         </div>
                                                     </div>
                                                 </li>
+                                                <li v-if="localProperty.phone"
+                                                    class="mt-3">
+                                                    <div class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+                                                        <div class="px-4 py-3 sm:px-6">
+                                                            <div class="flex items-center justify-between">
+                                                                <div class="text-base leading-5 font-medium text-gray-600 truncate">
+                                                                    Teléfono
+                                                                </div>
+                                                                <div class="ml-2 flex-shrink-0 flex">
+                                                                  <span class="px-2 inline-flex text-base leading-5 font-semibold rounded-full text-gray-500"
+                                                                        v-text="localProperty.phone"
+                                                                  ></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li v-if="localProperty.email"
+                                                    class="mt-3">
+                                                    <div class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+                                                        <div class="px-4 py-3 sm:px-6">
+                                                            <div class="flex items-center justify-between">
+                                                                <div class="text-base leading-5 font-medium text-gray-600 truncate">
+                                                                    Correo Electrónico
+                                                                </div>
+                                                                <div class="ml-2 flex-shrink-0 flex">
+                                                                  <span class="px-2 inline-flex text-base leading-5 font-semibold rounded-full text-gray-500"
+                                                                        v-text="localProperty.email"
+                                                                  ></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
                                                 <li class="mt-3">
                                                     <div class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
                                                         <div class="px-4 py-4 sm:px-6">
@@ -582,6 +634,27 @@
                                                                 :options="{ noContainer: true }"
                                                         ></errors>
                                                     </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="w-full md:flex md:-mx-2 mt-4">
+                                                <div class="w-full md:w-1/2 md:mx-2 mt-3 md:mt-0">
+                                                    <form-input
+                                                        title="Teléfono"
+                                                        v-model="propertyForm.phone"
+                                                        :data="propertyForm.phone"
+                                                        input-id="phone"
+                                                        :error="errors.phone"
+                                                    ></form-input>
+                                                </div>
+                                                <div class="w-full md:w-1/2 md:mx-2 mt-3 md:mt-0">
+                                                    <form-input
+                                                        title="Correo Electrónico"
+                                                        v-model="propertyForm.email"
+                                                        :data="propertyForm.email"
+                                                        input-id="email"
+                                                        :error="errors.email"
+                                                    ></form-input>
                                                 </div>
                                             </div>
 

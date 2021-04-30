@@ -50,7 +50,7 @@ class InterestedInPropertyTest extends PropertyTestCase
         $this->assertCount(1, $property->fresh()->interests);
 
         $this->assertDatabaseHas('interests', [
-            'user_id' => auth()->id(),
+            'interested_by' => auth()->id(),
             'interestable_id' => $property->id,
             'interestable_type' => get_class($property)
         ]);
@@ -75,7 +75,7 @@ class InterestedInPropertyTest extends PropertyTestCase
         $this->assertCount(0, $property->fresh()->interests);
 
         $this->assertDatabaseMissing('interests', [
-            'user_id' => auth()->id(),
+            'interested_by' => auth()->id(),
             'interestable_id' => $property->id,
             'interestable_type' => get_class($property)
         ]);
