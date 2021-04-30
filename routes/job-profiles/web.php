@@ -5,8 +5,6 @@
     use App\Http\Controllers\Web\JobProfiles\MyJobProfileController;
 
     Route::middleware(['auth:sanctum', 'prevent-back-history'])->group(function () {
-        Route::get('tecnicos-y-profesionistas/{jobProfile}', [MyJobProfileController::class, 'show'])->name('web.job-profiles.show');
-
         Route::put(
             'job-profiles/{jobProfile:uuid}/image',
             UploadPhotoController::class
