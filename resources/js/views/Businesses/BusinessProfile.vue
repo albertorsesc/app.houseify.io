@@ -78,7 +78,7 @@ export default {
         },
         toggle() {
             axios
-                .put(this.endpoint + `/${this.localBusiness.slug}/toggle`)
+                .put(this.endpoint + `${this.localBusiness.slug}/toggle`)
                 .then(() => {
                     this.localBusiness.status = ! this.localBusiness.status
                     let status = this.business.status ? 'Publicado' : 'Ocultado'
