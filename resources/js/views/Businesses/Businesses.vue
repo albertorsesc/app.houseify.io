@@ -1,4 +1,6 @@
 <script>
+import {mapGetters} from "vuex";
+
 export default {
     name: "Businesses",
     data() {
@@ -6,6 +8,14 @@ export default {
             activeTab: 'explore-businesses',
             headerTitle: 'Negocios',
         }
+    },
+    computed: {
+        ...mapGetters({
+            getStates: 'global/getStates'
+        })
+    },
+    created() {
+        this.$store.dispatch('global/fetchStates')
     },
     components: {
         MyBusinesses: () => import(/* webpackChunkName: "my-businesses" */ './MyBusinesses'),

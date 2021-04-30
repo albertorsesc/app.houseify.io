@@ -1,16 +1,18 @@
 <script>
+import {mapGetters} from "vuex";
+
 export default {
     name: "JobProfiles",
     data() {
         return {
             activeTab: 'explore-job-profiles',
-            headerTitle: 'Tecnicos y Profesionistas',
+            headerTitle: 'Técnicos y Profesionistas',
         }
     },
     watch: {
         activeTab() {
             if (this.activeTab === 'explore-job-profiles') {
-                this.headerTitle = 'Tecnicos y Profesionistas'
+                this.headerTitle = 'Técnicos y Profesionistas'
             }
             if (this.activeTab === 'my-job-profile') {
                 this.headerTitle = 'Mi Perfil de Trabajo'
@@ -22,6 +24,14 @@ export default {
                 this.headerTitle = 'Búsqueda Avanzada de Profesionales'
             }
         }
+    },
+    computed: {
+        ...mapGetters({
+            getStates: 'global/getStates'
+        })
+    },
+    created() {
+        this.$store.dispatch('global/fetchStates')
     },
     components: {
         MyJobProfile: () => import(/* webpackChunkName: "job-profile" */ './MyJobProfile'),

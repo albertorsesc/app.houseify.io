@@ -38,7 +38,8 @@ export default {
             }
         }
     },
-    mounted() {
+    created() {
+        this.$store.dispatch('global/fetchStates')
     },
     components: {
         SearchProperties: () => import(/* webpackChunkName: "search-properties" */ './SearchProperties'),

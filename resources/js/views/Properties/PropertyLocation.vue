@@ -348,9 +348,7 @@ export default {
         })
     },
     created() {
-        if (this.auth === this.property.seller.id) {
-            this.$store.dispatch('global/fetchStates')
-        }
+        this.$store.dispatch('global/fetchStates')
     },
     components: {
         VueMultiselect,

@@ -7,14 +7,14 @@
                     <div class="bg-white rounded-lg shadow-md px-8 py-4 w-full mb-4">
                         <div class="align-middle mb-4">
                             <h3 class="text-lg leading-6 font-medium text-cyan-500">
-                                Filtrar por Datos del Tecnico/Profesional
+                                Filtrar por Datos del Técnico/Profesional
                             </h3>
                         </div>
                         <div class="md:flex md:justify-between mt-4 md:mt-6">
                             <!--Business Categories-->
                             <div class="w-full md:w-1/3">
                                 <label class="block text-sm font-medium text-gray-700">
-                                    Habilidades del Tecnico
+                                    Habilidades del Técnico
                                 </label>
                                 <div class="mt-1">
                                     <ais-refinement-list
