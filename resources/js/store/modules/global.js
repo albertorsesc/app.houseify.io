@@ -52,7 +52,7 @@ const actions = {
         ) {
             commit('SET_STATES', JSON.parse(storage.app).global.states)
             // dd('states from global.js')
-        } else if (this.auth) {
+        } else {
             return new Promise((resolve, reject) => {
                 axios.get("/states")
                     .then(response => {
