@@ -344,11 +344,11 @@ export default {
     },
     computed: {
         ...mapGetters({
-            getStates: 'global/getStates'
+            getStates: 'general/getStates'
         })
     },
     created() {
-        this.$store.dispatch('global/fetchStates')
+        this.$store.dispatch('general/fetchStates')
     },
     components: {
         VueMultiselect,

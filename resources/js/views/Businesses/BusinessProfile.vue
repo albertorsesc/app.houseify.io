@@ -149,13 +149,13 @@ export default {
     },
     computed: {
         ...mapGetters({
-            getConstructionCategories: 'global/getConstructionCategories',
-            getStates: 'global/getStates'
+            getConstructionCategories: 'general/getConstructionCategories',
+            getStates: 'general/getStates'
         })
     },
     created() {
-        this.$store.dispatch('global/fetchConstructionCategories')
-        this.$store.dispatch('global/fetchStates')
+        this.$store.dispatch('general/fetchConstructionCategories')
+        this.$store.dispatch('general/fetchStates')
 
         Event.$on('SweetAlert:destroy', () => { this.destroy() })
         Event.$on('businesses.location', location => {

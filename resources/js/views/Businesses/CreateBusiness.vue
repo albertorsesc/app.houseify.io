@@ -243,13 +243,13 @@ export default {
     },
     computed: {
         ...mapGetters({
-            getConstructionCategories: 'global/getConstructionCategories'
+            getConstructionCategories: 'general/getConstructionCategories'
         })
     },
     created() {
         window.currentTab = 'createBusiness'
 
-        this.$store.dispatch('global/fetchConstructionCategories')
+        this.$store.dispatch('general/fetchConstructionCategories')
     },
     components: {
         VueMultiselect,

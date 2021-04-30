@@ -105,7 +105,7 @@ export default {
         }
     },
     mounted() {
-        /*this.$store.dispatch('global/fetchStates')
+        /*this.$store.dispatch('general/fetchStates')
         this.$store.dispatch('businesses/fetchPropertyTypes')
         this.$store.dispatch('businesses/fetchBusinessTypes')*/
     },

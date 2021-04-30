@@ -39,7 +39,7 @@ export default {
         }
     },
     created() {
-        this.$store.dispatch('global/fetchStates')
+        this.$store.dispatch('general/fetchStates')
     },
     components: {
         SearchProperties: () => import(/* webpackChunkName: "search-properties" */ './SearchProperties'),

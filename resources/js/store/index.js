@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import createPersistedState from "vuex-persistedstate";
 
 
-import global from './modules/global'
+import general from './modules/general'
 import properties from './modules/properties'
 import jobProfiles from './modules/job-profiles'
 
@@ -11,9 +11,9 @@ import jobProfiles from './modules/job-profiles'
 const appState = createPersistedState({
     key: 'app',
     paths: [
-        // global.js
-        'global.states',
-        'global.categories',
+        // general.js
+        'general.states',
+        'general.categories',
         // properties.js
         'properties.propertyTypes',
         'properties.propertyCategories',
@@ -27,7 +27,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     modules: {
-        global,
+        general,
         properties,
         jobProfiles,
     },
