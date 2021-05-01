@@ -1,6 +1,12 @@
 require('./bootstrap');
 require('alpinejs');
 import Vue from 'vue/dist/vue'
+if (process.env.MIX_APP_URL === 'production') {
+    Vue.config.devtools = false;
+    Vue.config.debug = false;
+    Vue.config.silent = true;
+    Vue.config.productionTip = true
+}
 // import Vue from 'vue/dist/vue'
 // import Vue from 'vue/dist/vue.runtime.esm.js'
 // window.Vue = require('vue/dist/vue.runtime.esm.js')
@@ -9,16 +15,9 @@ import Vue from 'vue/dist/vue'
 // window.Vue = require('vue/dist/vue');
 // window.Vue = require('vue').default;
 import store from './store'
-window.baseURL = window.URL
+window.baseURL = process.env.MIX_APP_URL
 window.dd = console.log
 Vue.config.productionTip = false
-
-if (process.env.MIX_ENV_MODE === 'production') {
-    Vue.config.devtools = false;
-    Vue.config.debug = false;
-    Vue.config.silent = true;
-    Vue.config.productionTip = true
-}
 
 Vue.component('nav-bar', require('./components/NavBar').default);
 Vue.component('properties', require('./views/Properties/Properties').default);

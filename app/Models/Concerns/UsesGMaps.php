@@ -40,12 +40,14 @@ trait UsesGMaps
 
     public static function bootUsesGMaps()
     {
-        self::creating(function($model) {
-            $model->coordinates = $model->getCoordinates();
-        });
-        self::updating(function($model) {
-            $model->coordinates = $model->getCoordinates();
-        });
+        if (app()->environment('production')) {
+            self::creating(function($model) {
+                $model->coordinates = $model->getCoordinates();
+            });
+            self::updating(function($model) {
+                $model->coordinates = $model->getCoordinates();
+            });
+        }
     }
 
 }
