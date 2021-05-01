@@ -7,14 +7,6 @@ if (process.env.MIX_APP_URL === 'production') {
     Vue.config.silent = true;
     Vue.config.productionTip = true
 }
-// import Vue from 'vue/dist/vue'
-// import Vue from 'vue/dist/vue.runtime.esm.js'
-// window.Vue = require('vue/dist/vue.runtime.esm.js')
-// window.Vue = require('vue/dist/vue.js')
-// import Vue from 'vue/dist/vue'
-// window.Vue = require('vue/dist/vue');
-// window.Vue = require('vue').default;
-import store from './store'
 window.baseURL = process.env.MIX_APP_URL
 window.dd = console.log
 Vue.config.productionTip = false
@@ -56,6 +48,42 @@ Vue.use(VueInstantSearch);
  * Vuex
  * https://vuex.vuejs.org/
  */
+import Vuex from 'vuex'
+Vue.use(Vuex)
+
+/**
+ * Vuex Persisted State
+ * https://github.com/robinvdvleuten/vuex-persistedstate
+ */
+import createPersistedState from "vuex-persistedstate";
+/* Vuex Config */
+import general from './store/modules/general'
+import properties from './store/modules/properties'
+import jobProfiles from './store/modules/job-profiles'
+const appState = createPersistedState({
+    key: 'app',
+    paths: [
+        // general.js
+        'general.states',
+        'general.categories',
+        // properties.js
+        'properties.propertyTypes',
+        'properties.propertyCategories',
+        'properties.businessTypes',
+        // job-profiles.js
+        'jobProfiles.skills',
+    ]
+})
+let store = new Vuex.Store({
+    modules: {
+        general,
+        properties,
+        jobProfiles,
+    },
+    plugins: [
+        appState,
+    ]
+})
 
 /*
 * Vue-Multiselect
@@ -72,10 +100,14 @@ Vue.use(VueInstantSearch);
  * https://diegoazh.github.io/gmap-vue/#about-gmapvue
  */
 
-/**
- * Vuex Persisted State
- * https://github.com/robinvdvleuten/vuex-persistedstate
- */
+window.addEventListener("load", function(event) {
+    const app = new Vue({
+        el: '#app',
+        store,
+    });
+});
+
+/* Window variables/functions */
 
 /** Events */
 window.Event = new Vue()
@@ -107,7 +139,3 @@ window.showLocation = function (position) {
 };
 window.currentLocation()
 
-const app = new Vue({
-    el: '#app',
-    store,
-});
