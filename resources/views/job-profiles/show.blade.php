@@ -258,8 +258,10 @@
                             <div class="rounded-full border border-emerald-200 hover:border hover:border-emerald-300 hover:shadow-md bg-white z-20 px-1 py-1 inline-block">
                                 <div class="flex">
                                     <label for="file-upload"
-                                           class="relative cursor-pointer">
-                                        <form action="{{ route('job-profiles.photo.store', $jobProfile) }}"
+                                           class="relative"
+                                           :class="isAuthenticated && localJobProfile.user.id === auth ? 'cursor-pointer' : ''">
+                                        <form v-if="isAuthenticated && localJobProfile.user.id === auth"
+                                              action="{{ route('job-profiles.photo.store', $jobProfile) }}"
                                               method="POST"
                                               id="photo-form"
                                               enctype="multipart/form-data">

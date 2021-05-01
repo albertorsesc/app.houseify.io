@@ -43,6 +43,9 @@ trait UsesGMaps
         self::creating(function($model) {
             $model->coordinates = $model->getCoordinates();
         });
+        self::updating(function($model) {
+            $model->coordinates = $model->getCoordinates();
+        });
     }
 
 }
