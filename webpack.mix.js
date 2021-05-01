@@ -63,16 +63,18 @@ mix.webpackConfig({
     },
 })
 
-mix.browserSync({
-    proxy: 'http://localhost:8000',
-    open: false,
-    snippetOptions: {
-        rule: {
-            match: /<\/body>/i,
-            fn: function (snippet, match) {
-                return snippet + match;
+if (! mix.inProduction()) {
+    mix.browserSync({
+        proxy: 'http://localhost:8000',
+        open: false,
+        snippetOptions: {
+            rule: {
+                match: /<\/body>/i,
+                fn: function (snippet, match) {
+                    return snippet + match;
+                }
             }
         }
-    }
-});
+    });
+}
 

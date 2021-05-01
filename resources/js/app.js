@@ -11,7 +11,14 @@ import Vue from 'vue/dist/vue'
 import store from './store'
 window.baseURL = window.URL
 window.dd = console.log
-Vue.config.productionTip = true
+Vue.config.productionTip = false
+
+if (process.env.MIX_ENV_MODE === 'production') {
+    Vue.config.devtools = false;
+    Vue.config.debug = false;
+    Vue.config.silent = true;
+    Vue.config.productionTip = true
+}
 
 Vue.component('nav-bar', require('./components/NavBar').default);
 Vue.component('properties', require('./views/Properties/Properties').default);
