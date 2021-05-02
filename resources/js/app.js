@@ -91,15 +91,20 @@ let store = new Vuex.Store({
 *  */
 
 /**
+ * Livewire/Vue CDN
+ * https://github.com/livewire/vue
+ * <script src="https://cdn.jsdelivr.net/gh/livewire/vue@v0.3.x/dist/livewire-vue.js"></script>
+ * Not required for now
+ */
+
+/**
  * SweetAlert2
  * https://sweetalert2.github.io
  */
 
-window.addEventListener("load", function(event) {
-    const app = new Vue({
-        el: '#app',
-        store,
-    });
+const app = new Vue({
+    el: '#app',
+    store,
 });
 
 /* Window variables/functions */
