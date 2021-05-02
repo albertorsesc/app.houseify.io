@@ -1,7 +1,7 @@
 require('./bootstrap');
 require('alpinejs');
 import Vue from 'vue/dist/vue'
-if (process.env.MIX_APP_URL === 'production') {
+if (process.env.MIX_NODE_ENV === 'production') {
     Vue.config.devtools = false;
     Vue.config.debug = false;
     Vue.config.silent = true;
