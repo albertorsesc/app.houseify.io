@@ -23,17 +23,17 @@
                             </a>
                             <a href="{{ route('web.properties.index') }}"
                                class="h-link border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl"
-                               :class="{{ request()->routeIs('web.properties.index') ? '"border-white border-b-2"' : '' }}">
+                               :class="{{ request()->routeIs('web.properties.index') || request()->segment(1) === 'propiedades' ? '"border-white border-b-2"' : '' }}">
                                 Propiedades
                             </a>
                             <a href="{{ route('web.businesses.index') }}"
                                class="h-link border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl"
-                               :class="{{ request()->routeIs('web.businesses.index') ? '"border-white border-b-2"' : '' }}">
+                               :class="{{ request()->routeIs('web.businesses.index') || request()->segment(1) === 'directorio-de-negocios' ? '"border-white border-b-2"' : '' }}">
                                 Negocios
                             </a>
                             <a href="{{ route('web.job-profiles.index') }}"
                                class="h-link border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl"
-                               :class="{{ request()->routeIs('web.job-profiles.index') ? '"border-white border-b-2"' : '' }}">
+                               :class="{{ request()->routeIs('web.job-profiles.index') || request()->segment(1) === 'tecnicos-y-profesionales' ? '"border-white border-b-2"' : '' }}">
                                 Profesionales
                             </a>
                         </div>
