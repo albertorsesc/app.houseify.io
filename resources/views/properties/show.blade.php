@@ -394,7 +394,7 @@
                                                                 </div>
                                                                 <div class="ml-2 flex-shrink-0 flex">
                                                                   <span class="px-2 inline-flex text-base leading-5 font-semibold rounded-full text-gray-500"
-                                                                        v-text="localProperty.phone"
+                                                                        v-text="formatPhone(localProperty.phone)"
                                                                   ></span>
                                                                 </div>
                                                             </div>
