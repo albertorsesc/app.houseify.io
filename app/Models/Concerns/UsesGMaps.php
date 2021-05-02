@@ -12,6 +12,7 @@ trait UsesGMaps
                 "longitude" => -94.70188999999999
             ];
         }
+
         $googleMapsUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' .
             urlencode($this->getFullAddress(true)) .
             '&key=' .
@@ -21,10 +22,21 @@ trait UsesGMaps
 
         $googleMapsArray = json_decode($googleMapsJson, true);
 
-        $latitude = $googleMapsArray['results'][0]['geometry']['location']['lat'];
-        $longitude = $googleMapsArray['results'][0]['geometry']['location']['lng'];
+        if (count($googleMapsArray['results']) > 0) {
+            $latitude = $googleMapsArray['results'][0]['geometry']['location']['lat'];
+            $longitude = $googleMapsArray['results'][0]['geometry']['location']['lng'];
+            return ['latitude' => $latitude, 'longitude' => $longitude];
+        }
+        return [];
+    }
 
-        return ['latitude' => $latitude, 'longitude' => $longitude];
+    public static function bootUsesGMaps()
+    {
+        if (env('GOOGLE_MAPS_ON') || app()->environment('production')) {
+            self::creating(function($model) {
+                $model->coordinates = $model->getCoordinates();
+            });
+        }
     }
 
     public function getGoogleMap() : ?string
@@ -36,18 +48,6 @@ trait UsesGMaps
             return $this->google_map_url;
         }
         return null;
-    }
-
-    public static function bootUsesGMaps()
-    {
-        if (app()->environment('production')) {
-            self::creating(function($model) {
-                $model->coordinates = $model->getCoordinates();
-            });
-            self::updating(function($model) {
-                $model->coordinates = $model->getCoordinates();
-            });
-        }
     }
 
 }

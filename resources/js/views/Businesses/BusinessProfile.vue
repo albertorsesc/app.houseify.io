@@ -160,6 +160,9 @@ export default {
         Event.$on('SweetAlert:destroy', () => { this.destroy() })
         Event.$on('businesses.location', location => {
             this.localBusiness.location = location
+            setTimeout(() => {
+                window.location.reload()
+            }, 1300)
         })
     },
     components: {
@@ -170,6 +173,7 @@ export default {
         Report: () => import(/* webpackChunkName: "report" */ '../../components/Report'),
         Errors: () => import(/* webpackChunkName: "errors" */ '../../components/Errors'),
         Divider: () => import(/* webpackChunkName: "divider" */ '../../components/Divider'),
+        GoogleMap: () => import(/* webpackChunkName: "google-map" */ '../../components/GoogleMap'),
         FormInput: () => import(/* webpackChunkName: "form-input" */ '../../components/FormInput'),
         BusinessLocation: () => import(/* webpackChunkName: "business-location" */ './BusinessLocation'),
         InterestedBtn: () => import(/* webpackChunkName: "interested-btn" */ '../../components/InterestedBtn'),

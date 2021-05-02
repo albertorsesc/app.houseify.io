@@ -95,11 +95,6 @@ let store = new Vuex.Store({
  * https://sweetalert2.github.io
  */
 
-/**
- * Gmap Vue
- * https://diegoazh.github.io/gmap-vue/#about-gmapvue
- */
-
 window.addEventListener("load", function(event) {
     const app = new Vue({
         el: '#app',

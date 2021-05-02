@@ -4,45 +4,12 @@
 
 @section('styles')
     <link rel="stylesheet" href="/css/vue-multiselect.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 @endsection
 
 @section('scripts')
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script>
-        let map;
-
-        function initMap() {
-            @if ($jobProfile->location && $jobProfile->location->coordinates)
-            const coordinates = {
-                lat: {{ $jobProfile->location->coordinates['latitude'] }},
-                lng: {{ $jobProfile->location->coordinates['longitude'] }}
-            }
-
-            let zoom = 15;
-            @if ($jobProfile->location && $jobProfile->location->address)
-                zoom = 20
-            @endif
-
-                map = new google.maps.Map(document.getElementById("map"), {
-                center: coordinates,
-                zoom: zoom,
-            });
-
-            map.addListener('click', function(e) {
-                window.location.href = '{{ $jobProfile->location->getGoogleMap() }}'
-            });
-
-            new google.maps.Marker({
-                position: coordinates,
-                map,
-                title: "{{ $jobProfile->location->getFullAddress() }}",
-            });
-            @endif
-        }
-    </script>
-
     <script
-        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.gmaps_api') }}&callback=initMap&libraries=&v=weekly"
+        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.gmaps_api') }}&libraries=&v=weekly"
         async
     ></script>
 @endsection
@@ -451,15 +418,13 @@
 
                             <job-profile-location></job-profile-location>
 
-                            @if ($jobProfile->location && $jobProfile->location->coordinates)
-                                <divider title="Mapa"></divider>
+                            @if ($jobProfile->location && ! is_null($jobProfile->location->coordinates['latitude']))
 
-                                {{--Mapa--}}
-                                <div class="flex">
-                                    <div class="w-full bg-white rounded-lg shadow p-3">
-                                        <div id="map" class="rounded-lg border-gray-300 h-80"></div>
-                                    </div>
-                                </div>
+                                <google-map :location="{{ json_encode($jobProfile->location) }}"
+                                            :redirect-to="{{ json_encode($jobProfile->location->getGoogleMap()) }}"
+                                            :map-class="'rounded-lg border-gray-300 h-80 min-w-full relative'"
+                                ></google-map>
+
                             @endif
                         </section>
                     </div>

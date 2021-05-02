@@ -123,6 +123,9 @@ export default {
 
         Event.$on('job-profiles.location', location => {
             this.localJobProfile.location = location
+            setTimeout(() => {
+                window.location.reload()
+            }, 1300)
         })
     },
     components: {
@@ -133,6 +136,7 @@ export default {
         Report: () => import(/* webpackChunkName: "report" */ '../../components/Report'),
         MyJobProfile: () => import(/* webpackChunkName: "job-profile" */ './MyJobProfile'),
         Divider: () => import(/* webpackChunkName: "divider" */ '../../components/Divider'),
+        GoogleMap: () => import(/* webpackChunkName: "google-map" */ '../../components/GoogleMap'),
         FormInput: () => import(/* webpackChunkName: "form-input" */ '../../components/FormInput'),
         InterestedBtn: () => import(/* webpackChunkName: "interested-btn" */ '../../components/InterestedBtn'),
         JobProfileLocation: () => import(/* webpackChunkName: "job-profile-location" */ './JobProfileLocation'),

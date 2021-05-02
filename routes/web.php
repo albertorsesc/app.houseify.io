@@ -10,8 +10,8 @@ Route::get('/', function () {
     return redirect('/inicio');
 });
 
-Route::get('/auth/login/facebook/redirect', [FacebookLoginController::class, 'redirectToProvider'])->name('facebook.redirect');
-Route::get('/auth/login/facebook/callback', [FacebookLoginController::class, 'handleProviderCallback'])->name('facebook.callback');
+//Route::get('/auth/login/facebook/redirect', [FacebookLoginController::class, 'redirectToProvider'])->name('facebook.redirect');
+//Route::get('/auth/login/facebook/callback', [FacebookLoginController::class, 'handleProviderCallback'])->name('facebook.callback');
 
 Route::get('/auth/login/google/redirect', [GoogleLoginController::class, 'redirectToProvider'])->name('google.redirect');
 Route::get('/auth/login/google/callback', [GoogleLoginController::class, 'handleProviderCallback'])->name('google.callback');

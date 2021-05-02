@@ -24,7 +24,10 @@ class LocationController extends Controller
 
     public function update(LocationRequest $request, JobProfile $jobProfile) : LocationResource
     {
-        $jobProfile->location()->update($request->all());
+        $jobProfile->location()->update(
+            $request->all() +
+            ['coordinates' => $jobProfile->location->getCoordinates()]
+        );
 
         $jobProfile->load('location.state');
 
