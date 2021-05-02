@@ -12,6 +12,7 @@
                             Mi Perfil
                         </h2>
 
+                        {{--
                         <div class="hidden md:flex md:justify-between">
                             <a @click="activeTab = 'profile'"
                                role="button"
@@ -41,7 +42,7 @@
                                :class="[activeTab === 'payment-methods' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
                                 Metodos de Pago
                             </a>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
             </header>
