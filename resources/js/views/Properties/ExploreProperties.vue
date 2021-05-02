@@ -54,14 +54,14 @@ export default {
             }).catch(error => {})
         },
         onScroll() {
-            document.addEventListener('wheel', (evt) => {
+            document.addwindow.EventListener('wheel', (evt) => {
                 let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight >= document.body.scrollHeight
                 if (bottomOfWindow && this.currentPage <= this.totalPages) {
                     this.currentPage++
                     this.index()
                 }
             }, { capture: false, passive: true})
-            /*document.addEventListener('scroll', function (e) {
+            /*document.addwindow.EventListener('scroll', function (e) {
 
                 let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight >= document.body.scrollHeight
                 dd(bottomOfWindow && this.currentPage <= this.totalPages)
@@ -83,7 +83,7 @@ export default {
         this.index()
         this.onScroll()
 
-        Event.$on('interest-properties', property => {
+        window.Event.$on('interest-properties', property => {
             // dd('from Explore: ' + property.status)
             let interestedProperty = {}
             // this.properties.forEach(function (propertyChunk) {

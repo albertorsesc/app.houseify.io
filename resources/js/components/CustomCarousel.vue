@@ -47,7 +47,7 @@
         mounted() {
             this.displayImages()
 
-            Event.$on('properties-images-destroy', images => {
+            window.Event.$on('properties-images-destroy', images => {
                 this.localImages = images
                 this.data = []
                 this.displayImages()

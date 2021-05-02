@@ -41,13 +41,13 @@ export default {
             this.errors = []
             this.modalId = 'reports'
 
-            Event.$emit(`${this.modalId}:open`)
+            window.Event.$emit(`${this.modalId}:open`)
         },
         closeModal() {
             this.errors = []
             this.report = {}
 
-            Event.$emit(`${this.modalId}:close`)
+            window.Event.$emit(`${this.modalId}:close`)
             this.modalId = ''
         },
     },

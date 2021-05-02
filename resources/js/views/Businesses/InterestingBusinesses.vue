@@ -41,7 +41,7 @@ export default {
             }).catch(error => {})
         },
         onToggleInterest() {
-            Event.$on('interest-businesses', () => {
+            window.Event.$on('interest-businesses', () => {
                this.getInterestingBusinesses()
             })
         }

@@ -111,10 +111,10 @@ export default {
                 }
             }
 
-            Event.$emit(`${this.modal.id}:open`)
+            window.Event.$emit(`${this.modal.id}:open`)
         },
         closeModal() {
-            Event.$emit(`${this.modal.id}:close`)
+            window.Event.$emit(`${this.modal.id}:close`)
             this.errors = []
             this.actionType = ''
             this.modal = {}
@@ -154,16 +154,15 @@ export default {
         })
     },
     created() {
-        this.$store.dispatch('general/fetchConstructionCategories')
-        this.$store.dispatch('general/fetchStates')
-
-        Event.$on('SweetAlert:destroy', () => { this.destroy() })
-        Event.$on('businesses.location', location => {
+        window.Event.$on('SweetAlert:destroy', () => { this.destroy() })
+        window.Event.$on('businesses.location', location => {
             this.localBusiness.location = location
             setTimeout(() => {
                 window.location.reload()
             }, 1300)
         })
+        this.$store.dispatch('general/fetchConstructionCategories')
+        this.$store.dispatch('general/fetchStates')
     },
     components: {
         VueMultiselect,

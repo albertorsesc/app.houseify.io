@@ -53,13 +53,13 @@ export default {
     },
     methods: {
         onUploadSuccess(file, response) {
-            Event.$emit('dropzone.success', response)
+            window.Event.$emit('dropzone.success', response)
             let wasSuccessful = false
             /*if (file.upload.progress === 100) {
                 wasSuccessful = true
             }
             if (wasSuccessful) {
-                Event.$emit('dropzone.success', response)
+                window.Event.$emit('dropzone.success', response)
             }*/
         },
         onUploadError(some, errorMessage, xMLHttpRequestError) {
@@ -70,7 +70,7 @@ export default {
         },
     },
     mounted() {
-        Event.$on('vdropzone-success-multiple', (file, response) => {
+        window.Event.$on('vdropzone-success-multiple', (file, response) => {
 
         })
     },

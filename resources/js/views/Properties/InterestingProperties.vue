@@ -43,7 +43,7 @@ export default {
             .catch(error => { dd(error) })
         },
         onToggleInterest() {
-            Event.$on('interest-properties', () => {
+            window.Event.$on('interest-properties', () => {
                this.getInterestingProperties()
             })
         }

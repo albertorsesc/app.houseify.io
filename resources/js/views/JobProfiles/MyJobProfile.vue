@@ -71,7 +71,7 @@ export default {
     },
     mounted() {
         this.index()
-        Event.$on('job-profiles.new-job-profile', jobProfile => {
+        window.Event.$on('job-profiles.new-job-profile', jobProfile => {
             this.myJobProfile.unshift(jobProfile)
             this.menuTab = 'my-job-profile'
         })

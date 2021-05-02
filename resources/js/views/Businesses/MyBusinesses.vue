@@ -65,7 +65,7 @@ export default {
     },
     mounted() {
         this.index()
-        Event.$on('businesses.new-business', (business) => {
+        window.Event.$on('businesses.new-business', (business) => {
             this.myBusinesses.unshift(business)
             this.menuTab = 'my-businesses'
         })

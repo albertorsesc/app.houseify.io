@@ -228,7 +228,7 @@ export default {
                 site: this.businessForm.site,
                 comments: this.businessForm.comments
             }).then(response => {
-                Event.$emit('businesses.new-business', response.data.data)
+                window.Event.$emit('businesses.new-business', response.data.data)
                 this.businessForm = {}
                 SweetAlert.success('Tu Negocio ha sido creado exitosamente!')
             }).catch(error => this.errors = error.response.status === 422 ?

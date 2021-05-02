@@ -118,10 +118,10 @@ export default {
                 }
             }
 
-            Event.$emit(`${this.modal.id}:open`)
+            window.Event.$emit(`${this.modal.id}:open`)
         },
         closeModal() {
-            Event.$emit(`${this.modal.id}:close`)
+            window.Event.$emit(`${this.modal.id}:close`)
             this.errors = []
             this.actionType = ''
             this.modal = {}
@@ -143,7 +143,7 @@ export default {
         copy() {
             let publicProfile = this.localProperty.meta.links.publicProfile
             navigator.clipboard.writeText(publicProfile)
-            Event.$emit('copied')
+            window.Event.$emit('copied')
             // publicProfile.select()
             // document.execCommand('copy')
         },
@@ -160,15 +160,15 @@ export default {
         this.$store.dispatch('properties/fetchPropertyCategories')
         this.$store.dispatch('properties/fetchBusinessTypes')
 
-        Event.$on('SweetAlert:destroy', () => { this.destroy() })
+        window.Event.$on('SweetAlert:destroy', () => { this.destroy() })
 
-        Event.$on('properties.location', location => {
+        window.Event.$on('properties.location', location => {
             this.localProperty.location = location
             setTimeout(() => {
                 window.location.reload()
             }, 1300)
         })
-        Event.$on('properties.features', features => {
+        window.Event.$on('properties.features', features => {
             this.localProperty.propertyFeature = features
         })
     },

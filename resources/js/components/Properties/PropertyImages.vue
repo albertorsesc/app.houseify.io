@@ -70,10 +70,10 @@ export default {
             this.errors = []
             this.modal.id = 'manage-property-images'
 
-            Event.$emit(`${this.modal.id}:open`)
+            window.Event.$emit(`${this.modal.id}:open`)
         },
         closeModal() {
-            Event.$emit(`${this.modal.id}:close`)
+            window.Event.$emit(`${this.modal.id}:close`)
             this.modal = {}
         },
         deleteMedia(imageId) {
@@ -81,7 +81,7 @@ export default {
             .then(() => {
                 this.images = this.images.filter(image => image.id !== imageId)
                 SweetAlert.toast('La Imagen ha sido eliminada exitosamente!')
-                Event.$emit('properties-images-destroy', this.images)
+                window.Event.$emit('properties-images-destroy', this.images)
             })
             .catch(error => dd(error))
         },
@@ -92,7 +92,7 @@ export default {
         }
     },
     mounted() {
-        Event.$on('dropzone.success', response => {
+        window.Event.$on('dropzone.success', response => {
             SweetAlert.success('Las imágenes han sido guardadas exitosamente!')
             setTimeout(() => {
                 window.location.reload()

@@ -244,7 +244,7 @@ export default {
             }).then(response => {
                 this.closeModal()
                 this.propertyFeatures = response.data
-                Event.$emit('properties.features', this.propertyFeatures)
+                window.Event.$emit('properties.features', this.propertyFeatures)
                 SweetAlert.success(`La Ubicación ha sido registrada exitosamente!`)
             }).catch(error => {
                 this.errors = error.response.status === 422 ?
@@ -291,10 +291,10 @@ export default {
                 }
             }
 
-            Event.$emit(`${this.modal.id}:open`)
+            window.Event.$emit(`${this.modal.id}:open`)
         },
         closeModal() {
-            Event.$emit(`${this.modal.id}:close`)
+            window.Event.$emit(`${this.modal.id}:close`)
             this.errors = []
             this.actionType = ''
             this.modal = {}

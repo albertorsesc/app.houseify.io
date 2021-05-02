@@ -263,7 +263,7 @@ export default {
             }).then(response => {
                 this.closeModal()
                 this.location = response.data.data
-                Event.$emit('businesses.location', this.location)
+                window.Event.$emit('businesses.location', this.location)
                 SweetAlert.success(`La Ubicación ha sido registrada exitosamente!`)
             }).catch(error => {
                 this.errors = error.response.status === 422 ?
@@ -281,7 +281,7 @@ export default {
             }).then(response => {
                 this.closeModal()
                 this.location = response.data.data
-                Event.$emit('businesses.location', this.location)
+                window.Event.$emit('businesses.location', this.location)
                 SweetAlert.success(`La Ubicación ha sido actualizada exitosamente!`)
             }).catch(error => {
                 this.errors = error.response.status === 422 ?
@@ -319,10 +319,10 @@ export default {
                 this.getNeighborhoods(this.businessLocationForm.city)
             }
 
-            Event.$emit(`${this.modal.id}:open`)
+            window.Event.$emit(`${this.modal.id}:open`)
         },
         closeModal() {
-            Event.$emit(`${this.modal.id}:close`)
+            window.Event.$emit(`${this.modal.id}:close`)
             this.errors = []
             this.actionType = ''
             this.modal = {}

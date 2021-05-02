@@ -232,8 +232,8 @@
                                                             :class="[status.btnClass, ! localProperty.location ? 'bg-gray-200' : '']"
                                                             class="-mt-1 flex shadow-sm justify-center w-full py-3 border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                                             :title="localProperty.status ? 'Ocultar esta Propiedad del publico...' : 'Hacer publico esta Propiedad...'">
-                                                        <svg v-if="! localProperty.status" class="text-green-300 hover:text-green-400 hover:border-green-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                                                        <svg v-if="localProperty.status" class="text-gray-300 hover:text-gray-400 hover:border-gray-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                                                        <span v-if="! localProperty.status" class="text-green-300 hover:text-green-400">Publicar</span>
+                                                        <span v-if="localProperty.status" class="text-gray-300 hover:text-gray-400">Ocultar</span>
                                                     </button>
                                                 </span>
                                             </div>
@@ -245,7 +245,7 @@
                                                             type="button"
                                                             class="-mt-1 items-center shadow-sm w-full py-3 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
                                                             title="Actualizar Datos de la Propiedad...">
-                                                        <svg class="text-yellow-300 hover:text-yellow-400 hover:border-yellow-100" width="25" height="25" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                                        <span class="text-gray-300">Editar</span>
                                                     </button>
                                                 </span>
                                             </div>
@@ -479,7 +479,7 @@
 
                             <property-location></property-location>
 
-                            @if ($property->location && ! is_null($property->location->coordinates['latitude']))
+                            @if ($property->location && ! is_null($property->location->coordinates))
 
                                 <google-map :location="{{ json_encode($property->location) }}"
                                             :redirect-to="{{ json_encode($property->location->getGoogleMap()) }}"
