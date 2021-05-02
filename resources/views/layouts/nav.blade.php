@@ -109,11 +109,12 @@
                                        role="menuitem">
                                         Sugerencias
                                     </a>
+                                    {{--
                                     <a href="/docs"
                                        class="h-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                        role="menuitem">
                                         Ayuda
-                                    </a>
+                                    </a>--}}
 
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
@@ -219,12 +220,13 @@
                            role="menuitem">
                             Sugerencias
                         </a>
+                        {{--
                         <a href="/docs"
                            class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
                            :class="{{ request()->routeIs('/docs') ? '"bg-gray-100 border-white border-b-2"' : '' }}"
                            role="menuitem">
                             Ayuda
-                        </a>
+                        </a>--}}
 
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
