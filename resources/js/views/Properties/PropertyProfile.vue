@@ -164,6 +164,9 @@ export default {
 
         Event.$on('properties.location', location => {
             this.localProperty.location = location
+            setTimeout(() => {
+                window.location.reload()
+            }, 1300)
         })
         Event.$on('properties.features', features => {
             this.localProperty.propertyFeature = features
@@ -184,6 +187,7 @@ export default {
         Report: () => import(/* webpackChunkName: "report" */ '../../components/Report'),
         Errors: () => import(/* webpackChunkName: "errors" */ '../../components/Errors'),
         Divider: () => import(/* webpackChunkName: "divider" */ '../../components/Divider'),
+        GoogleMap: () => import(/* webpackChunkName: "google-map" */ '../../components/GoogleMap'),
         FormInput: () => import(/* webpackChunkName: "form-input" */ '../../components/FormInput'),
         PropertyLocation: () => import(/* webpackChunkName: "property-location" */ './PropertyLocation'),
         PropertyFeatures: () => import(/* webpackChunkName: "property-features" */ './PropertyFeatures'),

@@ -1,5 +1,5 @@
 <nav-bar inline-template>
-    <nav class="bg-gradient-to-r from-emerald-400 to-cyan-400 sticky top-0 lg:my-0 absolute z-50">
+    <nav class="bg-gradient-to-r from-emerald-400 to-cyan-400 sticky top-0 lg:my-0 absolute z-50" v-cloak>
         <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">

@@ -2,51 +2,6 @@
 
 @section('title', e($business->name))
 
-@section('styles')
-    <link rel="stylesheet" href="/css/vue-multiselect.min.css">
-@endsection
-
-@section('scripts')
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script>
-        let map;
-
-        function initMap() {
-            @if ($business->location && $business->location->coordinates)
-            const coordinates = {
-                lat: {{ $business->location->coordinates['latitude'] }},
-                lng: {{ $business->location->coordinates['longitude'] }}
-            }
-
-            let zoom = 15;
-            @if ($business->location && $business->location->address)
-                zoom = 20
-            @endif
-
-                map = new google.maps.Map(document.getElementById("map"), {
-                center: coordinates,
-                zoom: zoom,
-            });
-
-            map.addListener('click', function(e) {
-                window.location.href = '{{ $business->location->getGoogleMap() }}'
-            });
-
-            new google.maps.Marker({
-                position: coordinates,
-                map,
-                title: "{{ $business->location->getFullAddress() }}",
-            });
-            @endif
-        }
-    </script>
-
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.gmaps_api') }}&callback=initMap&libraries=&v=weekly"
-        async
-    ></script>
-@endsection
-
 @section('meta')
     <meta property="og:url" content="{{ $business->publicProfile() }}" />
     <meta property="og:type" content="website" />
@@ -55,10 +10,22 @@
     <meta property="og:image" content="{{ $business->logo ? str_replace('public', 'storage', $business->logo) : '' }}" />
 @endsection
 
+@section('styles')
+    <link rel="stylesheet" href="/css/vue-multiselect.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+@endsection
+
+@section('scripts')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.gmaps_api') }}&region=MX&libraries=places&v=weekly"
+        async
+    ></script>
+@endsection
+
 @section('content')
     <business-profile :business="{{ json_encode($business) }}" inline-template>
         <div>
-            <header class="bg-white shadow">
+            <header class="bg-white shadow" v-cloak>
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <div class="w-full md:flex md:justify-between items-center">
                         <h2 class="font-semibold text-2xl text-teal-400"
@@ -218,7 +185,7 @@
                 <div class="space-y-6 lg:col-start-1"
                      :class="[isAuthenticated && localBusiness.owner.id === auth ? 'lg:col-span-2' : 'lg:col-span-12']">
                     {{--Mobile--}}
-                    <div class="flex justify-end md:hidden mx-2 md:-mx-3 mt-1 mb-2">
+                    <div class="flex justify-end md:hidden mx-2 md:-mx-3 mt-1 mb-2" v-cloak>
                         {{--Publish/UnPublish--}}
                         <div class="w-full md:w-1/3 mx-2 md:mx-3 mb-2 md:mb-0">
                             <span class="rounded-md shadow-sm">
@@ -284,7 +251,7 @@
                                     </div>
 
                                     {{--Business Details--}}
-                                    <div :class="isAuthenticated ? '' : 'mt-6'">
+                                    <div :class="isAuthenticated ? '' : 'mt-6'" v-cloak>
                                         <div class="bg-white shadow overflow-hidden sm:rounded-lg">
                                             <div class="px-4 py-5 sm:px-6">
                                                 <h3 class="text-lg leading-6 font-medium text-gray-600">
@@ -294,7 +261,8 @@
                                                     <div class="rounded-full border border-emerald-200 hover:border hover:border-emerald-300 hover:ml-2 hover:shadow-md bg-white z-20 p-1 inline-block absolute -mt-24">
                                                         <div class="flex">
                                                             <label for="file-upload"
-                                                                   class="relative cursor-pointer">
+                                                                   class="relative"
+                                                                   :class="isAuthenticated && localBusiness.owner.id === auth ? 'cursor-pointer' : ''">
                                                                 <form v-if="isAuthenticated && localBusiness.owner.id === auth"
                                                                       action="{{ route('businesses.logo.store', $business) }}"
                                                                       method="POST"
@@ -425,20 +393,18 @@
 
                                     <divider title="Dirección"></divider>
 
-                                    <business-location></business-location>
+                                    <business-location v-cloak></business-location>
 
-                                    @if ($business->location && $business->location->coordinates)
-                                        <divider title="Mapa"></divider>
+                                    @if ($business->location && ! is_null($business->location->coordinates['latitude']))
 
-                                        {{--Mapa--}}
-                                        <div class="flex">
-                                            <div class="w-full bg-white rounded-lg shadow p-3">
-                                                <div id="map" class="rounded-lg border-gray-300 h-80"></div>
-                                            </div>
-                                        </div>
+                                        <google-map :location="{{ json_encode($business->location) }}"
+                                                    :redirect-to="{{ json_encode($business->location->getGoogleMap()) }}"
+                                                    :map-class="'rounded-lg border-gray-300 h-80 min-w-full relative'"
+                                        ></google-map>
+
                                     @endif
 
-                                    <modal v-if="localBusiness.owner.id === auth" modal-id="update-business" max-width="sm:max-w-5xl">
+                                    <modal v-if="localBusiness.owner.id === auth" modal-id="update-business" max-width="sm:max-w-5xl" v-cloak>
                                         <template #title>Actualizar Datos de tu Negocio</template>
                                         <template #content>
                                             <form @submit.prevent>

@@ -4,45 +4,12 @@
 
 @section('styles')
     <link rel="stylesheet" href="/css/vue-multiselect.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 @endsection
 
 @section('scripts')
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script>
-        let map;
-
-        function initMap() {
-            @if ($property->location && $property->location->coordinates)
-                const coordinates = {
-                    lat: {{ $property->location->coordinates['latitude'] }},
-                    lng: {{ $property->location->coordinates['longitude'] }}
-                }
-
-                let zoom = 15;
-                @if ($property->location->address)
-                    zoom = 20
-                @endif
-
-                map = new google.maps.Map(document.getElementById("map"), {
-                    center: coordinates,
-                    zoom: zoom,
-                });
-
-                map.addListener('click', function(e) {
-                    window.location.href = '{{ $property->location->getGoogleMap() }}'
-                });
-
-                new google.maps.Marker({
-                    position: coordinates,
-                    map,
-                    title: "{{ $property->location->getFullAddress() }}",
-                });
-            @endif
-        }
-    </script>
-
     <script
-        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.gmaps_api') }}&callback=initMap&libraries=&v=weekly"
+        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.gmaps_api') }}&region=MX&libraries=places&v=weekly"
         async
     ></script>
 @endsection
@@ -512,15 +479,13 @@
 
                             <property-location></property-location>
 
-                            @if ($property->location && $property->location->coordinates)
-                            <divider title="Mapa"></divider>
+                            @if ($property->location && ! is_null($property->location->coordinates['latitude']))
 
-                            {{--Mapa--}}
-                            <div class="flex">
-                                <div class="w-full bg-white rounded-lg shadow p-3">
-                                    <div id="map" class="rounded-lg border-gray-300 h-80"></div>
-                                </div>
-                            </div>
+                                <google-map :location="{{ json_encode($property->location) }}"
+                                            :redirect-to="{{ json_encode($property->location->getGoogleMap()) }}"
+                                            :map-class="'rounded-lg border-gray-300 h-80 min-w-full relative'"
+                                ></google-map>
+
                             @endif
 
                             <property-features></property-features>
