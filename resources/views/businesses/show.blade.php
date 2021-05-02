@@ -185,7 +185,8 @@
                 <div class="space-y-6 lg:col-start-1"
                      :class="[isAuthenticated && localBusiness.owner.id === auth ? 'lg:col-span-2' : 'lg:col-span-12']">
                     {{--Mobile--}}
-                    <div class="flex justify-end md:hidden mx-2 md:-mx-3 mt-1 mb-2" v-cloak>
+                    <div v-if="isAuthenticated && localBusiness.owner.id === auth"
+                         class="flex justify-end md:hidden mx-2 md:-mx-3 mt-1 mb-2" v-cloak>
                         {{--Publish/UnPublish--}}
                         <div class="w-full md:w-1/3 mx-2 md:mx-3 mb-2 md:mb-0">
                             <span class="rounded-md shadow-sm">
