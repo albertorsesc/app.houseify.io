@@ -66,7 +66,7 @@ export default {
     },
     created() {
         this.index()
-        Event.$on('properties.new-property', (property) => {
+        window.Event.$on('properties.new-property', (property) => {
             this.myProperties.unshift(property)
             this.menuTab = 'my-properties'
         })

@@ -84,12 +84,12 @@ export default {
     }),
     methods: {
         open() {
-            Event.$on(`${this.modalId}:open`, () => {
+            window.Event.$on(`${this.modalId}:open`, () => {
                 this.showModal = true
             })
         },
         close() {
-            Event.$on(`${this.modalId}:close`, () => {
+            window.Event.$on(`${this.modalId}:close`, () => {
                 this.showModal = false
             })
         }

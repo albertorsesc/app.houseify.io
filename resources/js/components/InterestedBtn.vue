@@ -53,7 +53,7 @@
         methods: {
             toggle() {
                 this.isInterested ? this.uninterested() : this.interested()
-                Event.$emit(`interest-${this.modelName}`, this.model)
+                window.Event.$emit(`interest-${this.modelName}`, this.model)
             },
             check() {
                 this.redirectIfGuest()
@@ -92,7 +92,7 @@
         created () {
             this.check()
 
-            Event.$emit('interests:count', () => this.interestCount)
+            window.Event.$emit('interests:count', () => this.interestCount)
         }
     }
 </script>

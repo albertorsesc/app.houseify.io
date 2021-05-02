@@ -254,7 +254,7 @@ export default {
                 email: this.propertyForm.email,
                 comments: this.propertyForm.comments
             }).then(response => {
-                Event.$emit('properties.new-property', response.data.data)
+                window.Event.$emit('properties.new-property', response.data.data)
                 this.propertyForm = {}
                 SweetAlert.success('Tu Propiedad ha sido creada exitosamente!')
             }).catch(error => this.errors = error.response.status === 422 ?

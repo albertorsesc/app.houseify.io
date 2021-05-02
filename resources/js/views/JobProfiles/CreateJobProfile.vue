@@ -240,7 +240,7 @@ export default {
                 linkedin_profile: this.jobProfileForm.linkedinProfile,
                 bio: this.jobProfileForm.bio
             }).then(response => {
-                Event.$emit('job-profiles.new-job-profile', response.data.data)
+                window.Event.$emit('job-profiles.new-job-profile', response.data.data)
                 this.jobProfileForm = {}
                 SweetAlert.success('Tu Perfil ha sido creado exitosamente!')
             }).catch(error => this.errors = error.response.status === 422 ?

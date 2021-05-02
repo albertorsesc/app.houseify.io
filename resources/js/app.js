@@ -9,6 +9,8 @@ if (process.env.MIX_NODE_ENV === 'production') {
 }
 window.baseURL = process.env.MIX_APP_URL
 window.dd = console.log
+/** Events */
+window.Event = new Vue()
 Vue.config.productionTip = false
 
 Vue.component('nav-bar', require('./components/NavBar').default);
@@ -108,9 +110,6 @@ const app = new Vue({
 });
 
 /* Window variables/functions */
-
-/** Events */
-window.Event = new Vue()
 
 window.isMobile = function() {
     var check = false;

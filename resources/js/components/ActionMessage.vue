@@ -27,7 +27,7 @@ export default {
         }
     },
     mounted() {
-        Event.$on('copied', () => {
+        window.Event.$on('copied', () => {
             clearTimeout(this.timeout);
             this.shown = true;
 

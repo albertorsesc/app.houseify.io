@@ -396,7 +396,7 @@
 
                                     <business-location v-cloak></business-location>
 
-                                    @if ($business->location && ! is_null($business->location->coordinates['latitude']))
+                                    @if ($business->location && ! is_null($business->location->coordinates))
 
                                         <google-map :location="{{ json_encode($business->location) }}"
                                                     :redirect-to="{{ json_encode($business->location->getGoogleMap()) }}"

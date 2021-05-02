@@ -41,7 +41,7 @@ export default {
             }).catch(error => {})
         },
         onToggleInterest() {
-            Event.$on('interest-job-profiles', () => {
+            window.Event.$on('interest-job-profiles', () => {
                this.getInterestingJobProfiles()
             })
         }

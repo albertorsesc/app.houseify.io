@@ -95,10 +95,10 @@ export default {
                 }
             }
 
-            Event.$emit(`${this.modal.id}:open`)
+            window.Event.$emit(`${this.modal.id}:open`)
         },
         closeModal() {
-            Event.$emit(`${this.modal.id}:close`)
+            window.Event.$emit(`${this.modal.id}:close`)
             this.errors = []
             this.actionType = ''
             this.modal = {}
@@ -119,9 +119,9 @@ export default {
     created() {
         this.$store.dispatch('jobProfiles/fetchSkills')
 
-        Event.$on('SweetAlert:destroy', () => { this.destroy() })
+        window.Event.$on('SweetAlert:destroy', () => { this.destroy() })
 
-        Event.$on('job-profiles.location', location => {
+        window.Event.$on('job-profiles.location', location => {
             this.localJobProfile.location = location
             setTimeout(() => {
                 window.location.reload()
