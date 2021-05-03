@@ -26,6 +26,7 @@ class UserResource extends JsonResource
             //            'phone' => $this->phone,
             'status' => $this->status,
             'properties' => PropertyResource::collection($this->whenLoaded('properties')),
+            'photo' => $this->defaultProfilePhotoUrl(),
 //            'businesses' => BusinessResource::collection($this->whenLoaded('businesses')),
 //            'ads' => AdResource::collection($this->whenLoaded('ads')),
             //            'propertyTargets' => PropertyTargetResource::collection($this->whenLoaded('propertyTargets')),

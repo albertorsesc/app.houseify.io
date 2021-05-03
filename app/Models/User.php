@@ -139,10 +139,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return (int) $this->id === (int) $model->{$as} || $this->isRoot();
     }
 
-    public function rate($model)
-    {
-    }
-
     /**
      * Route notifications for the Slack channel.
      *
@@ -159,8 +155,11 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return string
      */
-    protected function defaultProfilePhotoUrl() : string
+    public function defaultProfilePhotoUrl() : string
     {
+        if ($this->profile_photo_path) {
+            return $this->profile_photo_path;
+        }
         $gravatarUrl = 'https://www.gravatar.com/avatar/';
         $email = md5(strtolower(trim($this->email)));
 

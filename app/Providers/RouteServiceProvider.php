@@ -47,15 +47,21 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
 
+            /* Sections */
             $this->mapPropertiesApiRoutes();
             $this->mapPropertiesWebRoutes();
             $this->mapBusinessesApiRoutes();
             $this->mapBusinessesWebRoutes();
             $this->mapJobProfilesApiRoutes();
             $this->mapJobProfilesWebRoutes();
+            /* Forum */
+            $this->mapThreadsApiRoutes();
+            $this->mapForumWebRoutes();
 
         });
     }
+
+    /* Sections */
 
     public function mapPropertiesApiRoutes ()
     {
@@ -103,6 +109,24 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware(['web'])
              ->namespace($this->namespace)
              ->group(base_path('routes/job-profiles/web.php'));
+    }
+
+    /* Modules */
+
+    public function mapThreadsApiRoutes ()
+    {
+        Route::middleware(['api'])
+             ->name('api.')
+             ->prefix('api')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/forum/threads/api.php'));
+    }
+
+    public function mapForumWebRoutes()
+    {
+        Route::middleware(['web'])
+             ->namespace($this->namespace)
+             ->group(base_path('routes/forum/web.php'));
     }
 
     /**

@@ -1,18 +1,19 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Forum;
 
-use App\Models\Reaction;
+use App\Models\Forum\Thread;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ReactionFactory extends Factory
+class ThreadFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Reaction::class;
+    protected $model = Thread::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +23,9 @@ class ReactionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'author_id' => User::factory(),
+            'title' => $this->faker->text(255),
+            'body' => $this->faker->paragraph(),
         ];
     }
 }

@@ -26,6 +26,11 @@ Vue.component('job-profiles', require('./views/JobProfiles/JobProfiles').default
 Vue.component('job-profile', require('./views/JobProfiles/JobProfile').default);
 Vue.component('display-job-profile', require('./views/JobProfiles/Guests/DisplayJobProfile').default);
 
+/* Forum */
+
+Vue.component('threads', require('./views/Forum/Threads/Threads').default);
+Vue.component('thread-profile', require('./views/Forum/Threads/ThreadProfile').default);
+
 Vue.component('profile', require('./views/User/Profile').default);
 
 /** Auth mixin */
