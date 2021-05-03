@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div v-if="isPropertyFeatureNotEmpty(propertyFeatures) || property.comments" class="border-t border-gray-200 mx-4 py-5 sm:px-6">
-                <dl v-if="isPropertyFeatureNotEmpty" class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-3">
+                <dl v-if="isPropertyFeatureNotEmpty(propertyFeatures)" class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-3">
                     <div v-if="isNotEmpty(propertyFeatures.features.property_size)"
                          class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500 flex">
