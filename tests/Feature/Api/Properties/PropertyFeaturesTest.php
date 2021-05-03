@@ -83,10 +83,29 @@ class PropertyFeaturesTest extends PropertyTestCase
             $propertyFeatureData->toArray()
         );
         $response->assertOk();
-
         $this->assertEquals(
             $propertyFeature->fresh()->features,
             $propertyFeatureData->features
+        );
+
+        $emptyFeatures = [
+            'features' => [
+                'property_size' => 0,
+                'construction_size' => 0,
+                'level_count' => 0,
+                'room_count' => 0,
+                'bathroom_count' => 0,
+                'half_bathroom_count' => 0,
+            ]
+        ];
+        $response2 = $this->putJson(
+            route($this->routePrefix . 'update', $propertyFeature->property),
+            $emptyFeatures
+        );
+        $response2->assertOk();
+        $this->assertEquals(
+            $propertyFeature->fresh()->features,
+            $emptyFeatures['features']
         );
     }
 

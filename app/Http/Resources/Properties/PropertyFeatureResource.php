@@ -17,12 +17,12 @@ class PropertyFeatureResource extends JsonResource
         return [
             'id' => $this->id,
             'features' => [
-                'property_size' => $this->features['property_size'],
-                'construction_size' => $this->features['construction_size'],
-                'level_count' => $this->features['level_count'],
-                'room_count' => $this->features['room_count'],
-                'bathroom_count' => $this->features['bathroom_count'],
-                'half_bathroom_count' => $this->features['half_bathroom_count'],
+                'property_size' => (int) $this->features['property_size'],
+                'construction_size' => (int) $this->features['construction_size'],
+                'level_count' => (int) $this->features['level_count'],
+                'room_count' => (int) $this->features['room_count'],
+                'bathroom_count' => (int) $this->features['bathroom_count'],
+                'half_bathroom_count' => (int) $this->features['half_bathroom_count'],
             ]
         ];
     }
