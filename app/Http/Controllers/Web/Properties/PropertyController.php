@@ -21,12 +21,12 @@ class PropertyController extends Controller
             'property' => new PropertyResource(
                 $property->load([
                     'seller:id',
+                    'interests',
                     'location.state',
                     'propertyFeature:id,features,property_id',
                     'media:id,mediable_type,mediable_id,file_name',
                     'propertyCategory.propertyType:id,display_name',
                     'propertyCategory:id,display_name,property_type_id',
-                    'interests',
                 ])
             )
         ]);
