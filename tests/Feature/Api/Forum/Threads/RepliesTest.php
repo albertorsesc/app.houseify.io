@@ -75,11 +75,12 @@ class RepliesTest extends TestCase
             $newReply->toArray()
         );
         $response->assertCreated();
+        $reply = Reply::first();
         $response->assertJson([
             'data' => [
-                'thread' => ['id' => $newReply->thread->id],
+                'thread' => ['id' => $reply->thread->id],
                 'author' => ['id' => auth()->id()],
-                'body' => $newReply->body
+                'body' => $reply->body
             ]
         ]);
 

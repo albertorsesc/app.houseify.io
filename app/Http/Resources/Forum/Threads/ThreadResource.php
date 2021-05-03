@@ -22,7 +22,7 @@ class ThreadResource extends JsonResource
             'body' => $this->body,
             'replies' => ReplyResource::collection($this->whenLoaded('replies')),
             'meta' => [
-                'createdAt' => $this->created_at->diffForHumans()
+                'createdAt' => optional($this->created_at)->diffForHumans()
             ]
         ];
     }
