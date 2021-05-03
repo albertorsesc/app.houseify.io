@@ -210,7 +210,7 @@ export default {
         return {
             endpoint: `/properties/${this.property.slug}/features`,
 
-            propertyFeatures: this.property.propertyFeature,
+            propertyFeatures: this.property.propertyFeature ? this.property.propertyFeature : {},
 
             propertyFeaturesForm: {
                 features: {
@@ -243,6 +243,7 @@ export default {
                 }
             }).then(response => {
                 this.closeModal()
+                console.log(response.data)
                 this.propertyFeatures = response.data
                 window.Event.$emit('properties.features', this.propertyFeatures)
                 SweetAlert.success(`La Ubicación ha sido registrada exitosamente!`)
