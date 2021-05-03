@@ -10,7 +10,7 @@ class PropertyFeature extends Model
 
     public $timestamps = false;
     protected $casts = ['features' => 'array'];
-    protected $fillable = ['property_id', 'features'];
+    protected $fillable = ['features'];
 
     /* Relations */
 

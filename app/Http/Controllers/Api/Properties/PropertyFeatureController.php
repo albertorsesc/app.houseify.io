@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Properties;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
-use App\Models\Properties\{Property};
+use App\Models\Properties\{Property, PropertyFeature};
 use App\Http\Requests\Properties\PropertyFeatureRequest;
 use App\Http\Resources\Properties\PropertyFeatureResource;
 
@@ -23,8 +23,10 @@ class PropertyFeatureController extends Controller
     {
         $property->propertyFeature()->update($request->only('features'));
 
-        $property->load('propertyFeature');
+        $property->fresh()->load('propertyFeature');
 
-        return new PropertyFeatureResource($property->propertyFeature);
+        return new PropertyFeatureResource(
+            $property->propertyFeature
+        );
     }
 }

@@ -210,7 +210,7 @@ export default {
         return {
             endpoint: `/properties/${this.property.slug}/features`,
 
-            propertyFeatures: this.property.propertyFeature ? this.property.propertyFeature : {},
+            propertyFeatures: this.property.propertyFeature,
 
             propertyFeaturesForm: {
                 features: {
