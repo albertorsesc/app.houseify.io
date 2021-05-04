@@ -12,6 +12,9 @@
                         <h2 class="font-semibold text-2xl text-teal-400">
                             Foro
                         </h2>
+                        <a href="{{ route('web.forum.threads.index') }}" class="h-link text-emerald-500 font-light">
+                            Regresar a Temas
+                        </a>
                     </div>
                 </div>
             </header>
@@ -21,29 +24,43 @@
                     {{--Thread--}}
                     <div class="w-full mb-4">
                         <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200">
-                            <div class="px-4 py-5 sm:px-6">
-                                {{ $thread->title }} -
-                                <a href="#" class="h-link text-emerald-500">
-                                    {{ $thread->author->fullName() }}
-                                </a>
+                            <div class="px-4 py-5 sm:px-6 flex items-center align-middle">
+                                <div class="w-full">
+                                    <div class="w-full my-1">
+                                        {{--Header--}}
+                                        <div class="flex justify-between">
+                                            <div class="flex w-full">
+                                                <div class="flex-shrink-0 mr-3">
+                                                    <img class="h-10 w-10 rounded-lg" :src="thread.author.photo" :alt="thread.author.fullName" />
+                                                </div>
+                                                <div>
+                                                    <div>
+                                                        <span v-text="thread.author.fullName" class="text-base text-emerald-500 font-medium"></span>
+                                                    </div>
+                                                    <div class="-mt-1">
+                                                <span class="text-xs text-gray-600 font-light">
+                                                    Fue publicado <span v-text="thread.meta.createdAt"></span>
+                                                </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="h-btn">Electricidad</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-full mt-6 mb-4 text-gray-700 font-medium text-xl bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-100">
+                                        {{ $thread->title }}
+                                    </div>
+                                </div>
                             </div>
                             <div class="px-4 py-5 sm:p-6">
-                                {{ $thread->body }}
-                            </div>
-                        </div>
-                    </div>
+                                <div class="-mt-3 text-xs text-gray-500 text-light items-start">Descripcion de la consulta</div>
 
-                    {{--Replies--}}
-                    <div class="w-full">
-                        <div v-for="reply in localThread.replies"
-                             :key="reply.id"
-                             class="my-4 bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200">
-                            <div class="px-4 py-5 sm:px-6 flex">
-                                <a href="#" class="mr-3 h-link text-emerald-500">
-                                    @{{ reply.author.fullName }}</a> contesto hace
-                                @{{ reply.meta.createdAt }}...
+                                <div class="mt-4 text-gray-600 text-base leading-4">
+                                    {{ $thread->body }}
+                                </div>
                             </div>
-                            <div class="px-4 py-5 sm:p-6" v-text="reply.body"></div>
                         </div>
                     </div>
 
@@ -81,6 +98,32 @@
                             Debes <a href="/login" class="h-link text-gray-600">Iniciar sesion</a> para participar en esta discusion.
                         </p>
                     @endguest
+
+                    {{--Replies--}}
+                    <div class="w-full">
+                        <div v-for="reply in localThread.replies"
+                             :key="reply.id"
+                             class="my-4 bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200">
+                            <div class="px-4 py-5 sm:px-6 flex">
+                                <div class="flex w-full">
+                                    <div class="flex-shrink-0 mr-3">
+                                        <img class="h-10 w-10 rounded-lg" :src="thread.author.photo" :alt="thread.author.fullName" />
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <span v-text="thread.author.fullName" class="text-base text-emerald-500 font-medium"></span>
+                                        </div>
+                                        <div class="-mt-1">
+                                                <span class="text-xs text-gray-600 font-light">
+                                                    Fue publicado <span v-text="thread.meta.createdAt"></span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-4 py-5 sm:p-6" v-text="reply.body"></div>
+                        </div>
+                    </div>
                 </div>
             </main>
 

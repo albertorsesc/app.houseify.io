@@ -12,6 +12,9 @@
                         <h2 class="font-semibold text-2xl text-teal-400">
                             Foro
                         </h2>
+                        <a v-show="threadsTab === 'create-thread'" href="{{ route('web.forum.threads.index') }}" class="h-link text-emerald-500 font-light">
+                            Regresar a Temas
+                        </a>
                     </div>
                 </div>
             </header>
@@ -36,11 +39,11 @@
                                     <div class="flex items-center px-4 py-4 sm:px-6">
                                         <div class="min-w-0 flex-1 flex items-center">
                                             <div class="flex-shrink-0">
-                                                <img class="h-12 w-12 rounded-full" :src="thread.author.photo" :alt="thread.author.fullName" />
+                                                <img class="h-18 w-18 rounded-lg" :src="thread.author.photo" :alt="thread.author.fullName" />
                                             </div>
-                                            <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                                            <div class="-mt-8 min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                                                 <div>
-                                                    <p class="text-sm font-medium text-indigo-600 truncate"
+                                                    <p class="text-sm font-medium text-emerald-500 truncate"
                                                        v-text="thread.author.fullName"
                                                     ></p>
                                                     <p class="mt-2 flex items-center text-sm text-gray-500">

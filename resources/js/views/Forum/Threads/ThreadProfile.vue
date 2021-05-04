@@ -25,7 +25,7 @@ export default {
             this.isLoading = true
             axios.post(this.endpoint, this.replyForm)
             .then(response => {
-                this.localThread.replies.push(response.data.data)
+                this.localThread.replies.unshift(response.data.data)
                 this.isLoading = false
                 this.replyForm = {}
             })

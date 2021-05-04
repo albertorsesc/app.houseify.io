@@ -19,7 +19,10 @@ class ThreadController extends Controller
     {
         return view('forum.threads.show', [
             'thread' => new ThreadResource(
-                $thread->load('replies.author:id,first_name,last_name')
+                $thread->load([
+                    'replies.author:id,first_name,last_name',
+                    'author:id,first_name,last_name,email,profile_photo_path',
+                ])
             )
         ]);
     }
