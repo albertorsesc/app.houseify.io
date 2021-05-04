@@ -80,6 +80,7 @@ class JobProfile extends Model
                 'phone' => $this->phone,
                 'sitio' => $this->sitio,
                 'facebookProfile' => $this->facebook_profile,
+                'linkedinProfile' => $this->linkedin_profile,
                 'bio' => $this->bio,
                 'status' => $this->status,
                 'location' => [
@@ -105,9 +106,9 @@ class JobProfile extends Model
 
     public function shouldBeSearchable() : bool
     {
-        if (! app()->environment('production')) {
+        if (app()->environment('testing') || ! env('ALGOLIA_ON')) {
             return false;
         }
-        return $this->status && $this->location;
+        return !! $this->status && $this->location;
     }
 }

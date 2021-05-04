@@ -22,7 +22,9 @@ trait Publishable
 
     public function toggle()
     {
-        tap($this, fn($model) => $model->status = ! $model->status)->update();
+//        tap($this, fn($model) => $model->status = ! $model->status)->update();
+        $this->status = ! $this->status;
+        $this->save();
     }
 
     /*
