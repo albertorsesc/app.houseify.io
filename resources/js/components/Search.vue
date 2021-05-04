@@ -19,8 +19,8 @@ export default {
     data() {
         return {
             searchClient: algoliasearch(
-                'LC62QI1NJT',
-                '5b6eaf701b123679d0ac645b8d53d811',
+                'NF2LQQSO9Y',
+                'c9449e46573cb073d99941bb75cbf778',
             )
         }
     },

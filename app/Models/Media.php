@@ -9,6 +9,7 @@ class Media extends Model
 {
     use HasFactory;
 
+    protected $touches = ['mediable'];
     protected $fillable = ['file_name', 'mediable_id', 'mediable_type'];
 
     public function mediable() : \Illuminate\Database\Eloquent\Relations\MorphTo

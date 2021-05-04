@@ -18,6 +18,7 @@ export default {
     },
     components: {
         Divider: () => import(/* webpackChunkName: "divider" */ '../../../components/Divider'),
+        GoogleMap: () => import(/* webpackChunkName: "google-map" */ '../../../components/GoogleMap'),
         PropertyLocation: () => import(/* webpackChunkName: "property-location" */ '../PropertyLocation'),
         PropertyFeatures: () => import(/* webpackChunkName: "property-features" */ '../PropertyFeatures'),
         CustomCarousel: () => import(/* webpackChunkName: "custom-carousel" */ '../../../components/CustomCarousel'),

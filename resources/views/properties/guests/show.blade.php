@@ -2,6 +2,25 @@
 
 @section('title', e($property->title))
 
+@section('meta')
+    <meta property="og:url" content="{{ $property->publicProfile() }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ $property->title }}" />
+    <meta name="description" content="Propiedad en {{ $property->location ? $property->location->city . ' - ' . $property->location->state->code : null }}" />
+    <meta property="og:image" content="{{ $property->media ? optional($property->media->first())->getFullUrl() : '' }}" />
+@endsection
+
+@section('styles')
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+@endsection
+
+@section('scripts')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.gmaps_api') }}&region=MX&libraries=places&v=weekly"
+        async
+    ></script>
+@endsection
+
 @section('content')
     <display-property :property="{{ json_encode($property) }}" inline-template>
         <div>
@@ -165,12 +184,14 @@
 
                             <divider title="Mapa de Ubicación"></divider>
 
-                            {{--Mapa--}}
-                            <div class="mt-2 flex">
-                                <div class="w-full">
-                                    <div class="border-gray-300 h-auto"></div>
-                                </div>
-                            </div>
+                            @if ($property->location && ! is_null($property->location->coordinates))
+
+                                <google-map :location="{{ json_encode($property->location) }}"
+                                            :redirect-to="{{ json_encode($property->location->getGoogleMap()) }}"
+                                            :map-class="'rounded-lg border-gray-300 h-80 min-w-full relative'"
+                                ></google-map>
+
+                            @endif
 
                         </div>
                     </div>

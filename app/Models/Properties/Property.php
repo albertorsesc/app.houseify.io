@@ -140,10 +140,10 @@ class Property extends Model implements Locationable, DeletesRelations
 
     public function shouldBeSearchable() : bool
     {
-        if (! app()->environment('production')) {
+        if (app()->environment('testing') || ! env('ALGOLIA_ON')) {
             return false;
         }
-        return $this->isPublished() &&
+        return $this->status &&
             $this->location &&
             $this->propertyFeature;
     }
