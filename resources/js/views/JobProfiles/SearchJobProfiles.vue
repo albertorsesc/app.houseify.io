@@ -27,27 +27,27 @@
                                 <label class="block text-sm font-medium text-gray-700">
                                     Estado
                                 </label>
-<!--                                <ais-refinement-list
+                                <ais-refinement-list
                                     attribute="location.state.name"
-                                ></ais-refinement-list>-->
+                                ></ais-refinement-list>
                             </div>
                             <!--City-->
                             <div class="w-full md:w-1/3">
                                 <label class="block text-sm font-medium text-gray-700">
                                     Ciudad
                                 </label>
-<!--                                <ais-refinement-list
+                                <ais-refinement-list
                                     attribute="location.city"
-                                ></ais-refinement-list>-->
+                                ></ais-refinement-list>
                             </div>
                             <!--Neighborhood-->
                             <div class="w-full md:w-1/3">
                                 <label class="block text-sm font-medium text-gray-700">
                                     Fraccionamiento/Colonia
                                 </label>
-<!--                                <ais-refinement-list
+                                <ais-refinement-list
                                     attribute="location.neighborhood"
-                                ></ais-refinement-list>-->
+                                ></ais-refinement-list>
                             </div>
                         </div>
 
@@ -58,7 +58,7 @@
                                     Busca por Nombre del Negocio o Informacion adicional
                                 </label>
                                 <div class="mt-1">
-<!--                                    <ais-search-box :placeholder="''"></ais-search-box>-->
+                                    <ais-search-box :placeholder="''"></ais-search-box>
                                 </div>
                             </div>
                         </div>

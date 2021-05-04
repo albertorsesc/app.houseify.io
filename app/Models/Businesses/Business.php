@@ -106,9 +106,9 @@ class Business extends Model
 
     public function shouldBeSearchable() : bool
     {
-        if (! app()->environment('production')) {
+        if (app()->environment('testing') || ! env('ALGOLIA_ON')) {
             return false;
         }
-        return $this->isPublished() && $this->location;
+        return !! $this->status && $this->location;
     }
 }
