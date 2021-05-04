@@ -143,7 +143,7 @@ class Property extends Model implements Locationable, DeletesRelations
         if (app()->environment('testing') || ! env('ALGOLIA_ON')) {
             return false;
         }
-        return $this->status &&
+        return !! $this->status &&
             $this->location &&
             $this->propertyFeature;
     }
