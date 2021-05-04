@@ -2,7 +2,7 @@ module.exports = {
     methods: {
         // Property Features
         isPropertyFeatureNotEmpty(propertyFeature) {
-            if (propertyFeature && Object.keys(propertyFeature.features).length > 0) {
+            if (propertyFeature && propertyFeature.hasOwnProperty('features')) {
                 return this.isNotEmpty(propertyFeature.features.property_size) ||
                     this.isNotEmpty(propertyFeature.features.construction_size) ||
                     this.isNotEmpty(propertyFeature.features.level_count) ||

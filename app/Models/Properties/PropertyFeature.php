@@ -9,8 +9,9 @@ class PropertyFeature extends Model
     use HasFactory;
 
     public $timestamps = false;
+    protected $touches = ['property'];
+    protected $fillable = ['features'];
     protected $casts = ['features' => 'array'];
-    protected $fillable = ['property_id', 'features'];
 
     /* Relations */
 
