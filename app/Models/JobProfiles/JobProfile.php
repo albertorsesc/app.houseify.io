@@ -84,11 +84,8 @@ class JobProfile extends Model
                 'email' => $this->email,
                 'phone' => $this->phone,
                 'user' => ['fullName' => $this->user->fullName()],
-                'sitio' => $this->sitio,
-                'facebookProfile' => $this->facebook_profile,
-                'linkedinProfile' => $this->linkedin_profile,
-                'bio' => $this->bio,
                 'status' => $this->status,
+                'bio' => $this->bio,
                 'photo' => $this->photo,
                 'location' => [
                     'neighborhood' => $location ? $location->neighborhood : null,

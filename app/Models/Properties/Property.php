@@ -104,6 +104,7 @@ class Property extends Model implements Locationable, DeletesRelations
         if ($this->shouldBeSearchable()) {
             $location = $this->location->fresh();
             $interests = $this->interests->fresh();
+            $propertyFeature = $this->propertyFeature->fresh();
 
             return [
                 'id' => $this->id,
@@ -130,12 +131,12 @@ class Property extends Model implements Locationable, DeletesRelations
                     'fullAddress' => $location->getFullAddress()
                 ] ,
                 'propertyFeature' => [
-                    'propertySize' => $this->propertyFeature ? (int) $this->propertyFeature->features['property_size'] : null,
-                    'constructionSize' => $this->propertyFeature ? (int) $this->propertyFeature->features['construction_size'] : null,
-                    'levelCount' => $this->propertyFeature ? (int) $this->propertyFeature->features['level_count'] > 0 ? (int) $this->propertyFeature->features['level_count'] : '' : null,
-                    'roomCount' => $this->propertyFeature ? (int) $this->propertyFeature->features['room_count']  > 0 ? (int) $this->propertyFeature->features['room_count'] : '' : null,
-                    'bathroomCount' => $this->propertyFeature ? (int) $this->propertyFeature->features['bathroom_count'] > 0 ? (int) $this->propertyFeature->features['bathroom_count'] : '' : null,
-                    'halfBathroomCount' => $this->propertyFeature ? (int) $this->propertyFeature->features['half_bathroom_count'] > 0 ? (int) $this->propertyFeature->features['half_bathroom_count'] : '' : null,
+                    'propertySize' => $propertyFeature ? (int) $propertyFeature->features['property_size'] : null,
+                    'constructionSize' => $propertyFeature ? (int) $propertyFeature->features['construction_size'] : null,
+                    'levelCount' => $propertyFeature ? (int) $propertyFeature->features['level_count'] > 0 ? (int) $propertyFeature->features['level_count'] : '' : null,
+                    'roomCount' => $propertyFeature ? (int) $propertyFeature->features['room_count']  > 0 ? (int) $propertyFeature->features['room_count'] : '' : null,
+                    'bathroomCount' => $propertyFeature ? (int) $propertyFeature->features['bathroom_count'] > 0 ? (int) $propertyFeature->features['bathroom_count'] : '' : null,
+                    'halfBathroomCount' => $propertyFeature ? (int) $propertyFeature->features['half_bathroom_count'] > 0 ? (int) $propertyFeature->features['half_bathroom_count'] : '' : null,
                 ],
                 'images' => $this->getMedia(),
                 'interests' => $interests,
