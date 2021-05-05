@@ -2,11 +2,28 @@
 
 namespace App\Models\Businesses;
 
+use App\Models\Location;
 use App\Models\User;
 use Laravel\Scout\Searchable;
 use App\Models\Concerns\{CanBeReported, HasLocation, HasUuid, Interestable, Likeable, Publishable, SerializeTimestamps};
 use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo, Factories\HasFactory, Relations\MorphMany};
 
+/**
+ * @property string status
+ * @property string phone
+ * @property string email
+ * @property string name
+ * @property string slug
+ * @property string comments
+ * @property string logo
+ * @property array categories
+ * @property string site
+ * @property string facebook_profile
+ * @property string linkedin_profile
+ * @property integer id
+ * @property string uuid
+ * @property Location location
+ */
 class Business extends Model
 {
     use HasUuid,
@@ -74,6 +91,8 @@ class Business extends Model
     public function toSearchableArray() : array
     {
         if ($this->shouldBeSearchable()) {
+            $location = $this->location->fresh();
+            $interests = $this->interests->fresh();
             return [
                 'id' => $this->id,
                 'uuid' => $this->uuid,
@@ -81,23 +100,22 @@ class Business extends Model
                 'slug' => $this->slug,
                 'categories' => $this->categories,
                 'phone' => $this->phone,
+                'email' => $this->email,
                 'comments' => $this->comments,
                 'status' => $this->status,
                 'location' => [
-                    'neighborhood' => $this->location ? $this->location->neighborhood : null,
-                    'city' => $this->location ? $this->location->city : null,
+                    'neighborhood' => $location ? $location->neighborhood : null,
+                    'city' => $location ? $location->city : null,
                     'state' => [
-                        'name' => $this->location ? $this->location->state->name : null,
-                        'code' => $this->location ? $this->location->state->code : null,
+                        'name' => $location ? $location->state->name : null,
+                        'code' => $location ? $location->state->code : null,
                     ],
-                    'fullAddress' => $this->location->getFullAddress()
+                    'fullAddress' => $location->getFullAddress()
                 ] ,
                 'logo' => $this->logo,
-//                'interests' => $this->interests,
+                'interests' => $interests,
                 'meta' => [
-                    'links' => [
-                        'profile' => $this->profile()
-                    ],
+                    'profile' => $this->profile()
                 ]
             ];
         }

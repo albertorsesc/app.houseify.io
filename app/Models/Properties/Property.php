@@ -15,6 +15,17 @@ use App\Models\Concerns\{CanBeReported,
     UsesGMaps};
 use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, Relations\BelongsTo, Relations\HasOne};
 
+/**
+ * @property boolean status
+ * @property integer id
+ * @property string title
+ * @property string slug
+ * @property integer price
+ * @property string comments
+ * @property string business_type
+ * @property string phone
+ * @property string email
+ */
 class Property extends Model implements Locationable, DeletesRelations
 {
     use HasUuid,
@@ -91,13 +102,17 @@ class Property extends Model implements Locationable, DeletesRelations
     public function toSearchableArray() : array
     {
         if ($this->shouldBeSearchable()) {
+            $location = $this->location->fresh();
+            $interests = $this->interests->fresh();
+
             return [
                 'id' => $this->id,
-                'uuid' => $this->uuid,
                 'title' => $this->title,
                 'slug' => $this->slug,
-                'price' => (int) $this->price,
+                'price' => $this->price,
                 'formattedPrice' => $this->formattedPrice(),
+                'phone' => $this->phone,
+                'email' => $this->email,
                 'comments' => $this->comments,
                 'status' => $this->status,
                 'businessType' => $this->business_type,
@@ -106,12 +121,13 @@ class Property extends Model implements Locationable, DeletesRelations
                     'propertyType' => $this->propertyCategory->propertyType->display_name,
                 ],
                 'location' => [
-                    'neighborhood' => $this->location ? $this->location->neighborhood : null,
-                    'city' => $this->location ? $this->location->city : null,
+                    'neighborhood' => $location ? $location->neighborhood : null,
+                    'city' => $location ? $location->city : null,
                     'state' => [
-                        'name' => $this->location ? $this->location->state->name : null
+                        'name' => $location ? $location->state->name : null,
+                        'code' => $location ? $location->state->code : null,
                     ],
-                    'fullAddress' => $this->location->getFullAddress()
+                    'fullAddress' => $location->getFullAddress()
                 ] ,
                 'propertyFeature' => [
                     'propertySize' => $this->propertyFeature ? (int) $this->propertyFeature->features['property_size'] : null,
@@ -122,16 +138,12 @@ class Property extends Model implements Locationable, DeletesRelations
                     'halfBathroomCount' => $this->propertyFeature ? (int) $this->propertyFeature->features['half_bathroom_count'] > 0 ? (int) $this->propertyFeature->features['half_bathroom_count'] : '' : null,
                 ],
                 'images' => $this->getMedia(),
-                'interests' => $this->interests,
-                'seller' => [
-                    'meta' => [
-                        'profile' => $this->profile()
-                    ]
-                ],
+                'interests' => $interests,
                 'meta' => [
                     'links' => [
-                        'profile' => $this->profile()
+                        'profile' => $this->profile(),
                     ],
+                    'updatedAt' => $this->updated_at->diffForHumans()
                 ]
             ];
         }
@@ -144,7 +156,7 @@ class Property extends Model implements Locationable, DeletesRelations
             return false;
         }
         return !! $this->status &&
-            $this->location &&
-            $this->propertyFeature;
+            $this->location()->exists() &&
+            $this->propertyFeature()->exists();
     }
 }
