@@ -21,6 +21,7 @@ class PropertyImageController extends Controller
         foreach ($request->images as $image) {
             $property->uploadImage($image, $property->slug);
         }
+        $property->touch();
         return response()->json($property->media, 201);
     }
 

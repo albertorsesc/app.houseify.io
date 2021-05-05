@@ -80,11 +80,11 @@
 
                     <div
                          class="w-full md:flex sm:justify-center md:align-middle mt-6" v-cloak>
-                            <business-card v-for="item in items"
+                            <job-profile-card v-for="item in items"
                                            :key="item.objectID"
                                            v-if="item.status"
-                                           :business="item"
-                            ></business-card>
+                                           :job-profile="item"
+                            ></job-profile-card>
                     </div>
                 </div>
             </ais-hits>
@@ -98,7 +98,6 @@ export default {
     name: "SearchBusinesses",
     data() {
         return {
-            endpoint: '/businesses/search',
             results: [],
 
             filtersTab: 'basic-details',
@@ -111,7 +110,7 @@ export default {
     },
     components: {
         Search: () => import(/* webpackChunkName: "search" */ '../../components/Search'),
-        BusinessCard: () => import(/* webpackChunkName: "business-card" */ '../../components/Businesses/BusinessCard'),
+        JobProfileCard: () => import(/* webpackChunkName: "job-profile-card" */ '../../components/JobProfiles/JobProfileCard'),
     }
 }
 </script>

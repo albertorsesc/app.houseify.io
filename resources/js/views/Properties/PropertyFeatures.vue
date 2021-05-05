@@ -245,7 +245,7 @@ export default {
                 this.closeModal()
                 this.propertyFeatures = response.data
                 window.Event.$emit('properties.features', this.propertyFeatures)
-                SweetAlert.success(`La Ubicación ha sido registrada exitosamente!`)
+                SweetAlert.success(`Las Características han sido registradas exitosamente!`)
             }).catch(error => {
                 this.errors = error.response.status === 422 ?
                     error.response.data.errors :
@@ -265,7 +265,7 @@ export default {
             }).then(response => {
                 this.closeModal()
                 this.propertyFeatures = response.data.data
-                SweetAlert.success(`La Ubicación ha sido actualizada exitosamente!`)
+                SweetAlert.success(`Las Características han sido actualizadas exitosamente!`)
             }).catch(error => {
                 this.errors = error.response.status === 422 ?
                     error.response.data.errors :

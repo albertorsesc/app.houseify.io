@@ -7,6 +7,9 @@ use Laravel\Scout\Searchable;
 use App\Models\Concerns\{HasLocation, Interestable, Likeable, Publishable, CanBeReported, SerializeTimestamps};
 use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, Relations\BelongsTo};
 
+/**
+ * @property boolean status
+ */
 class JobProfile extends Model
 {
     use Likeable,
@@ -70,6 +73,8 @@ class JobProfile extends Model
     public function toSearchableArray() : array
     {
         if ($this->shouldBeSearchable()) {
+            $location = $this->location->fresh();
+            $interests = $this->interests->fresh();
             return [
                 'id' => $this->id,
                 'uuid' => $this->uuid,
@@ -78,26 +83,25 @@ class JobProfile extends Model
                 'skills' => $this->skills,
                 'email' => $this->email,
                 'phone' => $this->phone,
+                'user' => ['fullName' => $this->user->fullName()],
                 'sitio' => $this->sitio,
                 'facebookProfile' => $this->facebook_profile,
                 'linkedinProfile' => $this->linkedin_profile,
                 'bio' => $this->bio,
                 'status' => $this->status,
+                'photo' => $this->photo,
                 'location' => [
-                    'neighborhood' => $this->location ? $this->location->neighborhood : null,
-                    'city' => $this->location ? $this->location->city : null,
+                    'neighborhood' => $location ? $location->neighborhood : null,
+                    'city' => $location ? $location->city : null,
                     'state' => [
-                        'name' => $this->location ? $this->location->state->name : null,
-                        'code' => $this->location ? $this->location->state->code : null,
+                        'name' => $location ? $location->state->name : null,
+                        'code' => $location ? $location->state->code : null,
                     ],
-                    'fullAddress' => $this->location->getFullAddress()
+                    'fullAddress' => $location->getFullAddress()
                 ] ,
-                //                'images' => $this->images,
-                //                'interests' => $this->interests,
+                'interests' => $interests,
                 'meta' => [
-                    'links' => [
-                        'profile' => $this->profile()
-                    ],
+                    'profile' => $this->profile()
                 ]
             ];
         }
