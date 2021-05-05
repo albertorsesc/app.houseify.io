@@ -115,4 +115,14 @@ class JobProfile extends Model
         }
         return !! $this->status && $this->location;
     }
+
+    /**
+     * Get the name of the index associated with the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'job_profiles';
+    }
 }

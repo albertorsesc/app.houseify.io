@@ -13,7 +13,7 @@ use App\Models\Concerns\{CanBeReported,
     Locationable,
     Publishable,
     UsesGMaps};
-use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, Relations\BelongsTo, Relations\HasOne};
+use Illuminate\Database\Eloquent\{Builder, Factories\HasFactory, Model, Relations\BelongsTo, Relations\HasOne};
 
 /**
  * @property boolean status
@@ -156,7 +156,17 @@ class Property extends Model implements Locationable, DeletesRelations
             return false;
         }
         return !! $this->status &&
-            $this->location()->exists() &&
-            $this->propertyFeature()->exists();
+            $this->location &&
+            $this->propertyFeature;
+    }
+
+    /**
+     * Get the name of the index associated with the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'properties';
     }
 }

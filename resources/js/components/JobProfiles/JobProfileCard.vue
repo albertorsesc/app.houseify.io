@@ -39,7 +39,7 @@
                          :src="jobProfile.photo.replace('public', 'storage')"
                          class="w-24 h-24 bg-white rounded-lg shadow-lg flex-shrink-0 object-cover"
                          loading="lazy"
-                         :alt="jobProfile.user.firstName + ' ' + jobProfile.user.lastName">
+                         :alt="jobProfile.user.fullName">
                     <span v-else class="h-24 w-24 bg-white rounded-lg shadow-md flex-shrink-0">
                         <svg class="w-full h-full font-light text-gray-200"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
