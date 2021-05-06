@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\Forum\Threads;
 
-use Illuminate\Http\Request;
 use App\Models\Forum\Thread;
-use App\Http\Controllers\Controller;
 use App\Models\Forum\Threads\Reply;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Forum\Threads\ReplyRequest;
 use App\Http\Resources\Forum\Threads\ReplyResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -21,7 +21,7 @@ class ReplyController extends Controller
         );
     }
 
-    public function store(Thread $thread, Request $request) : ReplyResource
+    public function store(Thread $thread, ReplyRequest $request) : ReplyResource
     {
         return new ReplyResource(
             $thread->replies()
