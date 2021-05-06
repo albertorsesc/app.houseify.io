@@ -90,36 +90,34 @@ class Business extends Model
 
     public function toSearchableArray() : array
     {
-        if ($this->shouldBeSearchable()) {
-            $location = $this->location->fresh();
-            $interests = $this->interests->fresh();
-            return [
-                'id' => $this->id,
-                'uuid' => $this->uuid,
-                'name' => $this->name,
-                'slug' => $this->slug,
-                'categories' => $this->categories,
-                'phone' => $this->phone,
-                'email' => $this->email,
-                'comments' => $this->comments,
-                'status' => $this->status,
-                'location' => [
-                    'neighborhood' => $location ? $location->neighborhood : null,
-                    'city' => $location ? $location->city : null,
-                    'state' => [
-                        'name' => $location ? $location->state->name : null,
-                        'code' => $location ? $location->state->code : null,
-                    ],
-                    'fullAddress' => $location->getFullAddress()
-                ] ,
-                'logo' => $this->logo,
-                'interests' => $interests,
-                'meta' => [
-                    'profile' => $this->profile()
-                ]
-            ];
-        }
-        return [];
+        $location = $this->location->fresh();
+        $interests = $this->interests->fresh();
+
+        return [
+            'id' => $this->id,
+            'uuid' => $this->uuid,
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'categories' => $this->categories,
+            'phone' => $this->phone,
+            'email' => $this->email,
+            'comments' => $this->comments,
+            'status' => $this->status,
+            'location' => [
+                'neighborhood' => $location ? $location->neighborhood : null,
+                'city' => $location ? $location->city : null,
+                'state' => [
+                    'name' => $location ? $location->state->name : null,
+                    'code' => $location ? $location->state->code : null,
+                ],
+                'fullAddress' => $location->getFullAddress()
+            ] ,
+            'logo' => $this->logo,
+            'interests' => $interests,
+            'meta' => [
+                'profile' => $this->profile()
+            ]
+        ];
     }
 
     public function shouldBeSearchable() : bool

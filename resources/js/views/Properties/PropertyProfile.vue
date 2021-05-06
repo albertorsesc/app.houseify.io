@@ -23,6 +23,7 @@ export default {
             propertyForm: {},
             localProperty: this.property,
             selectedPropertyType: {},
+            selectedBusinessType: {},
             selectedPropertyCategory: {},
             propertyCategoriesByPropertyType: [],
             sellerId: this.property.seller.uuid,
@@ -41,7 +42,7 @@ export default {
         update() {
             axios.put(this.endpoint + this.localProperty.slug, {
                 property_category_id: this.selectedPropertyCategory.id,
-                business_type: this.propertyForm.businessType ? this.propertyForm.businessType : this.localProperty.businessType,
+                business_type: this.selectedBusinessType,
                 title: this.propertyForm.title,
                 price: this.propertyForm.price,
                 phone: this.propertyForm.phone,
@@ -104,7 +105,7 @@ export default {
                 this.selectedPropertyType = this.localProperty.propertyCategory.propertyType
                 this.lookupPropertyCategories(this.selectedPropertyType)
                 this.propertyForm.propertyCategory = this.selectedPropertyCategory = this.localProperty.propertyCategory
-                this.propertyForm.businessType = this.localProperty.businessType
+                this.selectedBusinessType = this.propertyForm.businessType = this.localProperty.businessType
                 this.propertyForm.title = this.localProperty.title
                 this.propertyForm.price = this.localProperty.price
                 this.propertyForm.phone = this.localProperty.phone
