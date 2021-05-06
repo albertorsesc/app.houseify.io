@@ -72,37 +72,34 @@ class JobProfile extends Model
 
     public function toSearchableArray() : array
     {
-        if ($this->shouldBeSearchable()) {
-            $location = $this->location->fresh();
-            $interests = $this->interests->fresh();
-            return [
-                'id' => $this->id,
-                'uuid' => $this->uuid,
-                'title' => $this->title,
-                'slug' => $this->slug,
-                'skills' => $this->skills,
-                'email' => $this->email,
-                'phone' => $this->phone,
-                'user' => ['fullName' => $this->user->fullName()],
-                'status' => $this->status,
-                'bio' => $this->bio,
-                'photo' => $this->photo,
-                'location' => [
-                    'neighborhood' => $location ? $location->neighborhood : null,
-                    'city' => $location ? $location->city : null,
-                    'state' => [
-                        'name' => $location ? $location->state->name : null,
-                        'code' => $location ? $location->state->code : null,
-                    ],
-                    'fullAddress' => $location->getFullAddress()
-                ] ,
-                'interests' => $interests,
-                'meta' => [
-                    'profile' => $this->profile()
-                ]
-            ];
-        }
-        return [];
+        $location = $this->location->fresh();
+        $interests = $this->interests->fresh();
+        return [
+            'id' => $this->id,
+            'uuid' => $this->uuid,
+            'title' => $this->title,
+            'slug' => $this->slug,
+            'skills' => $this->skills,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'user' => ['fullName' => $this->user->fullName()],
+            'status' => $this->status,
+            'bio' => $this->bio,
+            'photo' => $this->photo,
+            'location' => [
+                'neighborhood' => $location ? $location->neighborhood : null,
+                'city' => $location ? $location->city : null,
+                'state' => [
+                    'name' => $location ? $location->state->name : null,
+                    'code' => $location ? $location->state->code : null,
+                ],
+                'fullAddress' => $location->getFullAddress()
+            ] ,
+            'interests' => $interests,
+            'meta' => [
+                'profile' => $this->profile()
+            ]
+        ];
     }
 
     public function shouldBeSearchable() : bool

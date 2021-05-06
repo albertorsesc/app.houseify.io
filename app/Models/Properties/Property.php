@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\{Builder, Factories\HasFactory, Model, Relation
  * @property string business_type
  * @property string phone
  * @property string email
+ * @property string updated_at
  */
 class Property extends Model implements Locationable, DeletesRelations
 {
@@ -101,54 +102,51 @@ class Property extends Model implements Locationable, DeletesRelations
      */
     public function toSearchableArray() : array
     {
-        if ($this->shouldBeSearchable()) {
-            $location = $this->location->fresh();
-            $interests = $this->interests->fresh();
-            $propertyFeature = $this->propertyFeature->fresh();
+        $location = $this->location->fresh();
+        $interests = $this->interests->fresh();
+        $propertyFeature = $this->propertyFeature->fresh();
 
-            return [
-                'id' => $this->id,
-                'title' => $this->title,
-                'slug' => $this->slug,
-                'price' => $this->price,
-                'formattedPrice' => $this->formattedPrice(),
-                'phone' => $this->phone,
-                'email' => $this->email,
-                'comments' => $this->comments,
-                'status' => $this->status,
-                'businessType' => $this->business_type,
-                'propertyCategory' => [
-                    'displayName' => $this->propertyCategory->display_name,
-                    'propertyType' => $this->propertyCategory->propertyType->display_name,
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'slug' => $this->slug,
+            'price' => $this->price,
+            'formattedPrice' => $this->formattedPrice(),
+            'phone' => $this->phone,
+            'email' => $this->email,
+            'comments' => $this->comments,
+            'status' => $this->status,
+            'businessType' => $this->business_type,
+            'propertyCategory' => [
+                'displayName' => $this->propertyCategory->display_name,
+                'propertyType' => $this->propertyCategory->propertyType->display_name,
+            ],
+            'location' => [
+                'neighborhood' => $location ? $location->neighborhood : null,
+                'city' => $location ? $location->city : null,
+                'state' => [
+                    'name' => $location ? $location->state->name : null,
+                    'code' => $location ? $location->state->code : null,
                 ],
-                'location' => [
-                    'neighborhood' => $location ? $location->neighborhood : null,
-                    'city' => $location ? $location->city : null,
-                    'state' => [
-                        'name' => $location ? $location->state->name : null,
-                        'code' => $location ? $location->state->code : null,
-                    ],
-                    'fullAddress' => $location->getFullAddress()
-                ] ,
-                'propertyFeature' => [
-                    'propertySize' => $propertyFeature ? (int) $propertyFeature->features['property_size'] : null,
-                    'constructionSize' => $propertyFeature ? (int) $propertyFeature->features['construction_size'] : null,
-                    'levelCount' => $propertyFeature ? (int) $propertyFeature->features['level_count'] > 0 ? (int) $propertyFeature->features['level_count'] : '' : null,
-                    'roomCount' => $propertyFeature ? (int) $propertyFeature->features['room_count']  > 0 ? (int) $propertyFeature->features['room_count'] : '' : null,
-                    'bathroomCount' => $propertyFeature ? (int) $propertyFeature->features['bathroom_count'] > 0 ? (int) $propertyFeature->features['bathroom_count'] : '' : null,
-                    'halfBathroomCount' => $propertyFeature ? (int) $propertyFeature->features['half_bathroom_count'] > 0 ? (int) $propertyFeature->features['half_bathroom_count'] : '' : null,
+                'fullAddress' => $location->getFullAddress()
+            ] ,
+            'propertyFeature' => [
+                'propertySize' => $propertyFeature ? (int) $propertyFeature->features['property_size'] : null,
+                'constructionSize' => $propertyFeature ? (int) $propertyFeature->features['construction_size'] : null,
+                'levelCount' => $propertyFeature ? (int) $propertyFeature->features['level_count'] > 0 ? (int) $propertyFeature->features['level_count'] : '' : null,
+                'roomCount' => $propertyFeature ? (int) $propertyFeature->features['room_count']  > 0 ? (int) $propertyFeature->features['room_count'] : '' : null,
+                'bathroomCount' => $propertyFeature ? (int) $propertyFeature->features['bathroom_count'] > 0 ? (int) $propertyFeature->features['bathroom_count'] : '' : null,
+                'halfBathroomCount' => $propertyFeature ? (int) $propertyFeature->features['half_bathroom_count'] > 0 ? (int) $propertyFeature->features['half_bathroom_count'] : '' : null,
+            ],
+            'images' => $this->getMedia(),
+            'interests' => $interests,
+            'meta' => [
+                'links' => [
+                    'profile' => $this->profile(),
                 ],
-                'images' => $this->getMedia(),
-                'interests' => $interests,
-                'meta' => [
-                    'links' => [
-                        'profile' => $this->profile(),
-                    ],
-                    'updatedAt' => $this->updated_at->diffForHumans()
-                ]
-            ];
-        }
-        return [];
+                'updatedAt' => $this->updated_at->diffForHumans()
+            ]
+        ];
     }
 
     public function shouldBeSearchable() : bool
