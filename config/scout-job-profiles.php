@@ -16,18 +16,7 @@ return [
     |
     */
 
-    'searchableAttributes' => [
-        'unordered(title)',
-        'unordered(price)',
-        'unordered(comments)',
-        'unordered(businessType)',
-        'unordered(propertyFeature.bathroomCount)',
-        'unordered(propertyFeature.constructionSize)',
-        'unordered(propertyFeature.halfBathroomCount)',
-        'unordered(propertyFeature.levelCount)',
-        'unordered(propertyFeature.propertySize)',
-        'unordered(propertyFeature.roomCount)',
-    ],
+    'searchableAttributes' => ['title', 'bio'],
 
     /*
     |--------------------------------------------------------------------------
@@ -43,7 +32,7 @@ return [
     |
     */
 
-    'customRanking' => ['asc(price)'],
+    'customRanking' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -90,20 +79,7 @@ return [
     |
     */
 
-    'attributesForFaceting' => [
-        'businessType',
-        'location.city',
-        'location.neighborhood',
-        'location.state.name',
-        'propertyCategory.displayName',
-        'propertyCategory.propertyType',
-        'propertyFeature.bathroomCount',
-        'propertyFeature.constructionSize',
-        'propertyFeature.halfBathroomCount',
-        'propertyFeature.levelCount',
-        'propertyFeature.propertySize',
-        'propertyFeature.roomCount',
-    ],
+    'attributesForFaceting' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -179,13 +155,4 @@ return [
     | configuration, just use the command `scout:sync` to get remote settings in this file.
     |
     */
-    'hitsPerPage' => 30,
-    'maxValuesPerFacet' => 1000,
-    'attributesToHighlight' => [],
-    'exactOnSingleWordQuery' => 'word',
-    'ranking' => ['custom'],
-    'removeWordsIfNoResults' => 'lastWords',
-    'highlightPreTag' => '<strong>',
-    'highlightPostTag' => '</strong>',
-    'alternativesAsExact' => ['ignorePlurals', 'singleWordSynonym', 'multiWordsSynonym'],
 ];

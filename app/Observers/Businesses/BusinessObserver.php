@@ -52,6 +52,7 @@ class BusinessObserver
      */
     public function updated(Business $business)
     {
+        $business->searchable();
         LogActions::dispatch('UPDATE', $business, auth()->user());
     }
 
