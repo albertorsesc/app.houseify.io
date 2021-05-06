@@ -36,13 +36,6 @@ class PropertyObserver
         LogActions::dispatch('STORE', $property, auth()->user());
     }
 
-    public function saved(Property $property)
-    {
-//        $property->location->filter(function ($location) {
-//                return $location->shouldBeSearchable();
-//        })->searchable();
-    }
-
     /**
      * Handle the property "updating" event.
      *
@@ -63,6 +56,7 @@ class PropertyObserver
      */
     public function updated(Property $property)
     {
+        $property->searchable();
         LogActions::dispatch('UPDATE', $property, auth()->user());
     }
 

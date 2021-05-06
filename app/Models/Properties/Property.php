@@ -3,6 +3,7 @@
 namespace App\Models\Properties;
 
 use App\Models\User;
+use Illuminate\Support\Carbon;
 use Laravel\Scout\Searchable;
 use App\Models\Concerns\HandlesMedia;
 use App\Models\Concerns\{CanBeReported,
@@ -25,7 +26,7 @@ use Illuminate\Database\Eloquent\{Builder, Factories\HasFactory, Model, Relation
  * @property string business_type
  * @property string phone
  * @property string email
- * @property string updated_at
+ * @property Carbon updated_at
  */
 class Property extends Model implements Locationable, DeletesRelations
 {
@@ -131,12 +132,12 @@ class Property extends Model implements Locationable, DeletesRelations
                 'fullAddress' => $location->getFullAddress()
             ] ,
             'propertyFeature' => [
-                'propertySize' => $propertyFeature ? (int) $propertyFeature->features['property_size'] : null,
-                'constructionSize' => $propertyFeature ? (int) $propertyFeature->features['construction_size'] : null,
-                'levelCount' => $propertyFeature ? (int) $propertyFeature->features['level_count'] > 0 ? (int) $propertyFeature->features['level_count'] : '' : null,
-                'roomCount' => $propertyFeature ? (int) $propertyFeature->features['room_count']  > 0 ? (int) $propertyFeature->features['room_count'] : '' : null,
-                'bathroomCount' => $propertyFeature ? (int) $propertyFeature->features['bathroom_count'] > 0 ? (int) $propertyFeature->features['bathroom_count'] : '' : null,
-                'halfBathroomCount' => $propertyFeature ? (int) $propertyFeature->features['half_bathroom_count'] > 0 ? (int) $propertyFeature->features['half_bathroom_count'] : '' : null,
+                'propertySize' => $propertyFeature && $propertyFeature->features['property_size'] > 0 ? (int) $propertyFeature->features['property_size'] : 0,
+                'constructionSize' => $propertyFeature && $propertyFeature->features['construction_size'] > 0 ? (int) $propertyFeature->features['construction_size'] : 0,
+                'levelCount' => $propertyFeature && $propertyFeature->features['level_count'] > 0 ? (int) $propertyFeature->features['level_count'] : 0,
+                'roomCount' => $propertyFeature && $propertyFeature->features['room_count']  > 0 ? (int) $propertyFeature->features['room_count'] : 0,
+                'bathroomCount' => $propertyFeature && $propertyFeature->features['bathroom_count'] > 0 ? (int) $propertyFeature->features['bathroom_count'] : 0,
+                'halfBathroomCount' => $propertyFeature && $propertyFeature->features['half_bathroom_count'] > 0 ? (int) $propertyFeature->features['half_bathroom_count'] : 0,
             ],
             'images' => $this->getMedia(),
             'interests' => $interests,

@@ -93,18 +93,18 @@ class ResetCommand extends Command
         $this->newLine();
 
         $this->line('<green>-- Scout Flush --</green>');
-        exec('php artisan scout:flush');
+//        exec('php artisan scout:flush');
 
         $this->newLine();
 
         $this->line('<green>-- Refreshing Migrations + Seeds --</green>');
-        $this->call('migrate:refresh');
-        $this->call('db:seed');
+//        $this->call('migrate:refresh');
+//        $this->call('db:seed');
 
         $this->newLine();
 
         $this->line('<green>-- Scout Import --</green>');
-        exec('php artisan scout:import');
+//        exec('php artisan scout:import');
 
         $this->newLine();
 

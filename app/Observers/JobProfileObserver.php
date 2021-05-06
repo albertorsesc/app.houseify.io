@@ -41,6 +41,7 @@ class JobProfileObserver
      */
     public function updated(JobProfile $jobProfile)
     {
+        $jobProfile->searchable();
         LogActions::dispatch('UPDATE', $jobProfile, auth()->user());
     }
 
