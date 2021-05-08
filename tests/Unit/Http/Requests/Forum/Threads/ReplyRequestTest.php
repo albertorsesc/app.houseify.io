@@ -63,4 +63,5 @@ class ReplyRequestTest extends TestCase
             $this->make(Thread::class, [$validatedField => $brokenRule])->toArray()
         )->assertJsonValidationErrors($validatedField);*/
     }
+
 }

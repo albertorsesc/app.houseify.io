@@ -79,7 +79,9 @@
                                                       placeholder="Contestar Pregunta..."
                                             ></textarea>
                                             </div>
-                                            {{--                                    <p class="mt-2 text-sm text-gray-500">Write a few sentences about yourself.</p>--}}
+                                            <errors :error="errors.body"
+                                                    :options="{ noContainer: true }"
+                                            ></errors>
                                         </div>
                                         <div class="w-full my-4">
                                             <button @click="reply"
@@ -107,15 +109,15 @@
                             <div class="px-4 py-5 sm:px-6 flex">
                                 <div class="flex w-full">
                                     <div class="flex-shrink-0 mr-3">
-                                        <img class="h-10 w-10 rounded-lg" :src="thread.author.photo" :alt="thread.author.fullName" />
+                                        <img class="h-10 w-10 rounded-lg" :src="reply.author.photo" :alt="reply.author.fullName" />
                                     </div>
                                     <div>
                                         <div>
-                                            <span v-text="thread.author.fullName" class="text-base text-emerald-500 font-medium"></span>
+                                            <span v-text="reply.author.fullName" class="text-base text-emerald-500 font-medium"></span>
                                         </div>
                                         <div class="-mt-1">
                                                 <span class="text-xs text-gray-600 font-light">
-                                                    Fue publicado <span v-text="thread.meta.createdAt"></span>
+                                                    Fue publicado <span v-text="reply.meta.createdAt"></span>
                                                 </span>
                                         </div>
                                     </div>

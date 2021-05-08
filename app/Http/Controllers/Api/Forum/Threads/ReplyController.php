@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Forum\Threads;
 
+use App\Inspections\Spam;
 use App\Models\Forum\Thread;
 use App\Models\Forum\Threads\Reply;
 use App\Http\Controllers\Controller;
@@ -28,7 +29,7 @@ class ReplyController extends Controller
                    ->create($request->all())
                    ->load([
                        'thread:id',
-                       'author:id,first_name,last_name'
+                       'author:id,first_name,last_name,email,profile_photo_path'
                    ])
         );
     }

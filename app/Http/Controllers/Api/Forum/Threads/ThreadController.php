@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Forum\Threads;
 
 use App\Http\Requests\Forum\Threads\ThreadRequest;
+use App\Inspections\Spam;
 use App\Models\Forum\Thread;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Forum\Threads\ThreadResource;

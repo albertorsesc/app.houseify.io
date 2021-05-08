@@ -3,8 +3,12 @@
 namespace App\Http\Resources\Forum\Threads;
 
 use App\Http\Resources\UserResource;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property Carbon created_at
+ */
 class ReplyResource extends JsonResource
 {
     /**

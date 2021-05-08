@@ -2,14 +2,13 @@
 
 namespace App\Http\Requests\Forum\Threads;
 
-use App\Models\Concerns\SpamDetection\Spam;
+use App\Rules\DetectSpamRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ReplyRequest extends FormRequest
 {
-    public function __construct (Spam $spam) {
+    public function __construct () {
         parent::__construct();
-        $spam->detect($this->body);
     }
 
     /**
@@ -30,7 +29,7 @@ class ReplyRequest extends FormRequest
     public function rules()
     {
         return [
-            'body' => ['required',],
+            'body' => ['required', new DetectSpamRule()],
         ];
     }
 }

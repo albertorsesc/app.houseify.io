@@ -16,11 +16,11 @@ export default {
             },
 
 
+            errors: [],
             isLoading: false,
         }
     },
     methods: {
-        store() {},
         reply() {
             this.isLoading = true
             axios.post(this.endpoint, this.replyForm)
@@ -29,8 +29,15 @@ export default {
                 this.isLoading = false
                 this.replyForm = {}
             })
-            .catch(error => dd(error))
+            .catch(
+                error => this.errors = error.response.status === 422 ?
+                error.response.data.errors :
+                []
+            )
         }
+    },
+    components: {
+        Errors: () => import(/* webpackChunkName: "errors" */ '../../../components/Errors'),
     }
 }
 </script>

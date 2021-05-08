@@ -34,6 +34,7 @@ class ThreadsTest extends TestCase
     */
     public function guest_can_visit_a_thread()
     {
+        $this->withoutExceptionHandling();
         $thread = $this->create(Thread::class);
 
         $response = $this->get(route('web.forum.threads.show', $thread));

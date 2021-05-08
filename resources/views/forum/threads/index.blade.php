@@ -30,48 +30,39 @@
                         >Crear nueva Consulta</button>
                     </div>
                     <div v-if="threadsTab === 'show-threads'"
-                         class="bg-white shadow overflow-hidden sm:rounded-md">
+                         class="overflow-hidden">
 
                         <ul class="divide-y divide-gray-200">
-                            <li v-for="thread in threads" :key="thread.id">
+                            <li v-for="thread in threads" :key="thread.id" class="my-4">
                                 <a :href="`/forum/temas/${thread.id}`"
-                                   class="block hover:bg-gray-50">
+                                   class="block hover:bg-gray-50 card transition hover:transform">
                                     <div class="flex items-center px-4 py-4 sm:px-6">
-                                        <div class="min-w-0 flex-1 flex items-center">
+                                        <div class="min-w-0 flex-1 flex items-center align-middle">
                                             <div class="flex-shrink-0">
-                                                <img class="h-18 w-18 rounded-lg" :src="thread.author.photo" :alt="thread.author.fullName" />
+                                                <img class="h-16 w-16 rounded-lg" :src="thread.author.photo" :alt="thread.author.fullName" />
                                             </div>
-                                            <div class="-mt-8 min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
-                                                <div>
-                                                    <p class="text-sm font-medium text-emerald-500 truncate"
-                                                       v-text="thread.author.fullName"
-                                                    ></p>
-                                                    <p class="mt-2 flex items-center text-sm text-gray-500">
-                                                        <!-- Heroicon name: solid/mail -->
-                                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                                                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                                                        </svg>
-                                                        <span class="truncate" v-text="thread.author.email"></span>
-                                                    </p>
-                                                </div>
+                                            <div class="md:-mt-8 px-4 w-full md:w-2/3">
                                                 <div class="hidden md:block">
-                                                    <div>
-                                                        <p class="text-sm text-gray-900">
-                                                            Creado hace
-                                                            <span v-text="thread.meta.createdAt"></span>
-                                                        </p>
-                                                        <p class="mt-2 flex items-center text-sm text-gray-500" v-text="limitString(thread.title, 70) + '..'">
-<!--                                                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                                            </svg>
-                                                            Completed phone screening-->
-                                                        </p>
+                                                    <div class="w-full flex justify-start">
+                                                        <p class="flex items-start text-xl text-gray-500"
+                                                           v-text="limitString(thread.title, 65) + '..'"
+                                                        ></p>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="md:-mt-8 w-full md:w-1/3 flex justify-end mr-4">
+                                                <span class="flex align-middle items-center text-xs">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1 text-gray-600 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                                                    </svg>
+                                                    3
+                                                </span>
+                                                <span class="uppercase ml-4 px-6 align-middle items-center text-xs text-blue-500 border border-blue-700 bg-white shadow-sm rounded-full p-2">
+                                                    General
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div>
+                                        <div class="">
                                             <!-- Heroicon name: solid/chevron-right -->
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
