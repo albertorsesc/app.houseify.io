@@ -2,6 +2,7 @@
 
 namespace Feature\Api\Properties;
 
+use Illuminate\Support\Facades\Http;
 use Tests\PropertyTestCase;
 use App\Models\Properties\Property;
 use Illuminate\Foundation\Testing\RefreshDatabase;
