@@ -13,6 +13,7 @@ use App\Models\Concerns\{CanBeReported,
     Interestable,
     Locationable,
     Publishable,
+    SerializeTimestamps,
     UsesGMaps};
 use Illuminate\Database\Eloquent\{Builder, Factories\HasFactory, Model, Relations\BelongsTo, Relations\HasOne};
 
@@ -37,7 +38,8 @@ class Property extends Model implements Locationable, DeletesRelations
         HasLocation,
         HandlesMedia,
         Interestable,
-        CanBeReported;
+        CanBeReported,
+        SerializeTimestamps;
 
     protected $casts = ['price' => 'integer', 'status' => 'boolean', 'seller_id' => 'integer'];
     protected $fillable = ['property_category_id', 'business_type', 'title', 'price', 'phone', 'email', 'comments'];
@@ -97,16 +99,18 @@ class Property extends Model implements Locationable, DeletesRelations
         $this->interests()->each(fn ($interest) => $interest->delete());
     }
 
+    public function propertyFeatureExists(string $propertyFeature)
+    {
+        return $this->propertyFeature && $this->propertyFeature->features[$propertyFeature] > 0 ?
+            (int) $this->propertyFeature->features[$propertyFeature] : 0;
+    }
+
     /**
      * Algolia Instant Search
      * Index Construct
      */
     public function toSearchableArray() : array
     {
-        $location = $this->location->fresh();
-        $interests = $this->interests->fresh();
-        $propertyFeature = $this->propertyFeature->fresh();
-
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -123,24 +127,24 @@ class Property extends Model implements Locationable, DeletesRelations
                 'propertyType' => $this->propertyCategory->propertyType->display_name,
             ],
             'location' => [
-                'neighborhood' => $location ? $location->neighborhood : null,
-                'city' => $location ? $location->city : null,
+                'neighborhood' => $this->location ? $this->location->neighborhood : null,
+                'city' => $this->location ? $this->location->city : null,
                 'state' => [
-                    'name' => $location ? $location->state->name : null,
-                    'code' => $location ? $location->state->code : null,
+                    'name' => $this->location ? $this->location->state->name : null,
+                    'code' => $this->location ? $this->location->state->code : null,
                 ],
-                'fullAddress' => $location->getFullAddress()
+                'fullAddress' => $this->location ? $this->location->getFullAddress() : null
             ] ,
             'propertyFeature' => [
-                'propertySize' => $propertyFeature && $propertyFeature->features['property_size'] > 0 ? (int) $propertyFeature->features['property_size'] : 0,
-                'constructionSize' => $propertyFeature && $propertyFeature->features['construction_size'] > 0 ? (int) $propertyFeature->features['construction_size'] : 0,
-                'levelCount' => $propertyFeature && $propertyFeature->features['level_count'] > 0 ? (int) $propertyFeature->features['level_count'] : 0,
-                'roomCount' => $propertyFeature && $propertyFeature->features['room_count']  > 0 ? (int) $propertyFeature->features['room_count'] : 0,
-                'bathroomCount' => $propertyFeature && $propertyFeature->features['bathroom_count'] > 0 ? (int) $propertyFeature->features['bathroom_count'] : 0,
-                'halfBathroomCount' => $propertyFeature && $propertyFeature->features['half_bathroom_count'] > 0 ? (int) $propertyFeature->features['half_bathroom_count'] : 0,
+                'propertySize' => $this->propertyFeatureExists('property_size'),
+                'constructionSize' => $this->propertyFeatureExists('construction_size'),
+                'levelCount' => $this->propertyFeatureExists('level_count'),
+                'roomCount' => $this->propertyFeatureExists('room_count'),
+                'bathroomCount' => $this->propertyFeatureExists('bathroom_count'),
+                'halfBathroomCount' => $this->propertyFeatureExists('half_bathroom_count'),
             ],
             'images' => $this->getMedia(),
-            'interests' => $interests,
+            'interests' => $this->interests,
             'meta' => [
                 'links' => [
                     'profile' => $this->profile(),

@@ -56,7 +56,6 @@ class PropertyObserver
      */
     public function updated(Property $property)
     {
-        $property->searchable();
         LogActions::dispatch('UPDATE', $property, auth()->user());
     }
 
