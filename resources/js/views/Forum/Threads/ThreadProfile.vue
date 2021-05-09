@@ -66,6 +66,10 @@ export default {
             } else {
                 this.update()
             }
+        },
+        cancelUpdate() {
+            this.showThreadForm = false
+            this.threadForm = {}
         }
     },
     components: {
