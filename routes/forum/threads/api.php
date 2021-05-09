@@ -6,6 +6,7 @@
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('threads/{thread}/replies', [ReplyController::class, 'store'])->name('threads.replies.store');
         Route::post('threads', [ThreadController::class, 'store'])->name('threads.store');
+        Route::put('threads/{thread}', [ThreadController::class, 'update'])->name('threads.update');
     });
 
     Route::get('threads', [ThreadController::class, 'index'])->name('threads.index');

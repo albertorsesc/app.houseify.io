@@ -12,7 +12,7 @@ class Thread extends Model
 
     const PUBLISHED_STATUS = true;
 
-    protected $fillable = ['title', 'body', 'author_id'];
+    protected $fillable = ['title', 'body'];
 
     protected static function boot ()
     {

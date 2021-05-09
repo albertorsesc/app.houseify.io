@@ -30,4 +30,13 @@ class ThreadController extends Controller
             ])->load('author:id,first_name,last_name,email,profile_photo_path')
         );
     }
+
+    public function update(ThreadRequest $request, Thread $thread) : ThreadResource
+    {
+        return new ThreadResource(
+            tap($thread)
+                ->update($request->all())
+                ->load('author:id,first_name,last_name,email,profile_photo_path')
+        );
+    }
 }

@@ -49,8 +49,36 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="w-full mt-6 mb-4 text-gray-700 font-medium text-xl bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-100">
-                                        {{ $thread->title }}
+                                    <div v-if="! showThreadForm"
+                                         class="w-full mt-6 mb-4 text-gray-700 font-medium text-xl bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-100"
+                                         v-text="localThread.title"
+                                    ></div>
+                                    <div v-if="showThreadForm" class="w-full mt-6 mb-4 text-gray-700 font-medium text-xl bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-100">
+                                        <textarea v-model="threadForm.title"
+                                                  id="title"
+                                                  rows="5"
+                                                  class="h-input block w-full sm:text-sm"
+                                                  placeholder="Nuevo titulo de la Consulta..."
+                                                  v-text="threadForm.title"
+                                        ></textarea>
+                                    </div>
+                                    <div v-if="isAuthenticated && localThread.author.id === auth"
+                                         class="w-full flex justify-end">
+                                        <span class="w-1/12 rounded-md shadow-sm mr-2">
+                                            <button @click="showUpdateForm()"
+                                                    type="button"
+                                                    class="items-center px-4 shadow-sm w-full py-1 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus:shadow-outline-emerald focus:border-emerald-300 active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out"
+                                                    title="Actualizar Datos de la Propiedad...">
+                                                <span class="text-gray-300">Editar</span>
+                                            </button>
+                                        </span>
+                                        <span class="w-1/12 rounded-md shadow-sm">
+                                            <button type="button"
+                                                    class="items-center px-4 shadow-sm w-full py-1 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-md text-red-700 bg-white hover:bg-red-500 hover:text-red-900 focus:outline-none focus:shadow-outline-red focus:border-red-300 active:text-red-800 transition duration-150 ease-in-out"
+                                                    title="Eliminar Consulta...">
+                                                <span class="text-gray-300">Eliminar</span>
+                                            </button>
+                                        </span>
                                     </div>
                                 </div>
                             </div>

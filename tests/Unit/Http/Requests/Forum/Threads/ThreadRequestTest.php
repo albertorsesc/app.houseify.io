@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Http\Requests\Forum\Threads;
 
-use App\Models\Forum\Thread;
-use Illuminate\Support\Str;
 use Tests\TestCase;
+use Illuminate\Support\Str;
+use App\Models\Forum\Thread;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ThreadRequestTest extends TestCase
@@ -33,11 +33,11 @@ class ThreadRequestTest extends TestCase
             [$validatedField => $brokenRule]
         )->assertJsonValidationErrors($validatedField);
 
-        /*$existingThread = $this->create(Thread::class);
+        $existingThread = $this->create(Thread::class);
         $this->putJson(
             route($this->routePrefix . 'update', $existingThread),
             $this->make(Thread::class, [$validatedField => $brokenRule])->toArray()
-        )->assertJsonValidationErrors($validatedField);*/
+        )->assertJsonValidationErrors($validatedField);
     }
 
     /**
@@ -54,11 +54,11 @@ class ThreadRequestTest extends TestCase
             [$validatedField => $brokenRule]
         )->assertJsonValidationErrors($validatedField);
 
-        /*$existingThread = $this->create(Thread::class);
+        $existingThread = $this->create(Thread::class);
         $this->putJson(
             route($this->routePrefix . 'update', $existingThread),
             $this->make(Thread::class, [$validatedField => $brokenRule])->toArray()
-        )->assertJsonValidationErrors($validatedField);*/
+        )->assertJsonValidationErrors($validatedField);
     }
 
     /**
@@ -75,10 +75,10 @@ class ThreadRequestTest extends TestCase
             [$validatedField => $brokenRule]
         )->assertJsonValidationErrors($validatedField);
 
-        /*$existingThread = $this->create(Thread::class);
+        $existingThread = $this->create(Thread::class);
         $this->putJson(
             route($this->routePrefix . 'update', $existingThread),
             $this->make(Thread::class, [$validatedField => $brokenRule])->toArray()
-        )->assertJsonValidationErrors($validatedField);*/
+        )->assertJsonValidationErrors($validatedField);
     }
 }
