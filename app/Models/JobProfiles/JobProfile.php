@@ -24,6 +24,12 @@ class JobProfile extends Model
     protected $casts = ['skills' => 'array', 'status' => 'boolean',];
     protected $fillable = ['title', 'skills', 'email', 'phone', 'facebook_profile', 'linkedin_profile', 'site', 'bio', 'photo'];
 
+    protected static function boot ()
+    {
+        parent::boot();
+        static::saved(fn ($jobProfile) => $jobProfile->searchable());
+    }
+
     public function getRouteKeyName() : string
     {
         return 'uuid';
@@ -102,9 +108,9 @@ class JobProfile extends Model
 
     public function shouldBeSearchable() : bool
     {
-        if (app()->environment('testing') || ! env('ALGOLIA_ON')) {
+        /*if (app()->environment('testing') || ! config('scout.algolia.is_active')) {
             return false;
-        }
+        }*/
         return !! $this->status && $this->location;
     }
 

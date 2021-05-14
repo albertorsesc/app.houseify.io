@@ -44,6 +44,12 @@ class Property extends Model implements Locationable, DeletesRelations
     protected $casts = ['price' => 'integer', 'status' => 'boolean', 'seller_id' => 'integer'];
     protected $fillable = ['property_category_id', 'business_type', 'title', 'price', 'phone', 'email', 'comments'];
 
+    protected static function boot ()
+    {
+        parent::boot();
+        static::saved(fn ($property) => $property->searchable());
+    }
+
     public function getRouteKeyName() : string
     {
         return 'slug';
@@ -99,7 +105,7 @@ class Property extends Model implements Locationable, DeletesRelations
         $this->interests()->each(fn ($interest) => $interest->delete());
     }
 
-    public function propertyFeatureExists(string $propertyFeature)
+    public function propertyFeatureExists(string $propertyFeature) : int
     {
         return $this->propertyFeature && $this->propertyFeature->features[$propertyFeature] > 0 ?
             (int) $this->propertyFeature->features[$propertyFeature] : 0;
@@ -156,9 +162,9 @@ class Property extends Model implements Locationable, DeletesRelations
 
     public function shouldBeSearchable() : bool
     {
-        if (app()->environment('testing') || ! env('ALGOLIA_ON')) {
+        /*if (app()->environment('testing') || ! config('scout.algolia.is_active')) {
             return false;
-        }
+        }*/
         return !! $this->status &&
             $this->location &&
             $this->propertyFeature;
@@ -169,7 +175,7 @@ class Property extends Model implements Locationable, DeletesRelations
      *
      * @return string
      */
-    public function searchableAs()
+    public function searchableAs() : string
     {
         return 'properties';
     }
