@@ -39,6 +39,12 @@ class Business extends Model
     protected $casts = ['status' => 'boolean', 'categories' => 'array'];
     protected $fillable = ['name', 'categories', 'email', 'phone', 'site', 'facebook_profile', 'linkedin_profile', 'logo', 'comments'];
 
+    protected static function boot ()
+    {
+        parent::boot();
+        static::saved(fn ($business) => $business->searchable());
+    }
+
     public function getRouteKeyName() : string
     {
         return 'slug';
@@ -119,9 +125,9 @@ class Business extends Model
 
     public function shouldBeSearchable() : bool
     {
-        if (app()->environment('testing') || ! env('ALGOLIA_ON')) {
+        /*if (app()->environment('testing') || ! config('scout.algolia.is_active')) {
             return false;
-        }
+        }*/
         return !! $this->status && $this->location;
     }
 
