@@ -36,7 +36,7 @@ Route::middleware(['auth:sanctum', 'verified', 'prevent-back-history'])->group(f
 });
 
 //    Route::get('resize', function () {
-//        \Intervention\Image\Facades\Image::make('img/undraw_location_review_dmxd.png')
+//        \Intervention\Image\Facades\Image::make('img/forum.png')
 //                                         ->filter(new \App\Models\Concerns\InterventionImage\Filters\MediumFilter())
-//                                         ->save('img/business_location_1.png');
+//                                         ->save('img/forum1.png');
 //    });

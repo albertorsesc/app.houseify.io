@@ -18,9 +18,12 @@ class ThreadResource extends JsonResource
         return [
             'id' => $this->id,
             'author' => new UserResource($this->whenLoaded('author')),
+            'category' => $this->category,
             'title' => $this->title,
             'body' => $this->body,
             'replies' => ReplyResource::collection($this->whenLoaded('replies')),
+            'bestReply' => $this->best_reply_id,
+            'repliesCount' => $this->replies_count ?? 0,
             'meta' => [
                 'createdAt' => optional($this->created_at)->diffForHumans()
             ]

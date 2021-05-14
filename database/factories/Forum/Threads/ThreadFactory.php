@@ -1,9 +1,9 @@
 <?php
 
-namespace Database\Factories\Forum;
+namespace Database\Factories\Forum\Threads;
 
-use App\Models\Forum\Thread;
 use App\Models\User;
+use App\Models\Forum\Threads\Thread;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ThreadFactory extends Factory
@@ -26,6 +26,7 @@ class ThreadFactory extends Factory
             'author_id' => User::factory(),
             'title' => $this->faker->text(255),
             'body' => $this->faker->paragraph(),
+            'category' => $this->faker->randomElement(config('houseify.construction_categories')),
         ];
     }
 }

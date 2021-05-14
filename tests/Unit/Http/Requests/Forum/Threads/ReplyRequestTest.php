@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Http\Requests\Forum\Threads;
 
-use App\Models\Forum\Thread;
 use Tests\TestCase;
+use App\Models\Forum\Threads\Thread;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ReplyRequestTest extends TestCase

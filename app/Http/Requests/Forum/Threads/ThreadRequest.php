@@ -27,6 +27,7 @@ class ThreadRequest extends FormRequest
         return [
             'title' => ['required', 'max:255', new DetectSpamRule()],
             'body' => ['required', new DetectSpamRule()],
+            'category' => ['required', 'in:' . implode(',', config('houseify.construction_categories'))]
         ];
     }
 }

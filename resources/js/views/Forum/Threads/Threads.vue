@@ -1,4 +1,7 @@
 <script>
+import { mapGetters } from 'vuex'
+import VueMultiselect from 'vue-multiselect'
+
 export default {
     name: "Threads",
     data() {
@@ -23,6 +26,7 @@ export default {
             axios.post(this.endpoint, {
                 title: this.threadForm.title,
                 body: this.threadForm.body,
+                category: this.threadForm.category,
             })
             .then(response => {
                 this.threadsTab = 'show-threads'
@@ -31,12 +35,20 @@ export default {
             .catch(error => this.errors = error.response.status === 422 ?
                 error.response.data.errors :
                 [])
-        }
+        },
+    },
+    computed: {
+        ...mapGetters({
+            getConstructionCategories: 'general/getConstructionCategories'
+        })
     },
     created() {
         this.index()
+
+        this.$store.dispatch('general/fetchConstructionCategories')
     },
     components: {
+        VueMultiselect,
         Errors: () => import(/* webpackChunkName: "errors" */ '../../../components/Errors'),
     }
 }

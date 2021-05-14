@@ -1,11 +1,10 @@
 <?php
 
-namespace Tests\Unit\Models\Forum;
+namespace Tests\Unit\Models\Forum\Threads;
 
-use App\Models\Forum\Threads\Reply;
-use App\Models\User;
 use Tests\TestCase;
-use App\Models\Forum\Thread;
+use App\Models\User;
+use App\Models\Forum\Threads\{Reply, Thread};
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ThreadTest extends TestCase

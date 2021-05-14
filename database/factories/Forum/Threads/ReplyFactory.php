@@ -2,9 +2,9 @@
 
 namespace Database\Factories\Forum\Threads;
 
-use App\Models\Forum\Thread;
-use App\Models\Forum\Threads\Reply;
 use App\Models\User;
+use App\Models\Forum\Threads\Reply;
+use App\Models\Forum\Threads\Thread;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ReplyFactory extends Factory

@@ -24,6 +24,7 @@ class ReplyResource extends JsonResource
             'thread' => new ThreadResource($this->whenLoaded('thread')),
             'author' => new UserResource($this->whenLoaded('author')),
             'body' => $this->body,
+            'isBest' => $this->isBest(),
             'meta' => [
                 'createdAt' => $this->created_at->diffForHumans(),
             ]

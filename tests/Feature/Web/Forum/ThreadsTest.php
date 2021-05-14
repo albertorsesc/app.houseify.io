@@ -2,10 +2,9 @@
 
 namespace Tests\Feature\Web\Forum;
 
-use App\Models\Forum\Thread;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Forum\Threads\Thread;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ThreadsTest extends TestCase
 {

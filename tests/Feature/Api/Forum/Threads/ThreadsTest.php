@@ -2,9 +2,8 @@
 
 namespace Tests\Feature\Api\Forum\Threads;
 
-use App\Models\User;
 use Tests\TestCase;
-use App\Models\Forum\Thread;
+use App\Models\Forum\Threads\Thread;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ThreadsTest extends TestCase
@@ -30,6 +29,7 @@ class ThreadsTest extends TestCase
                 [
                     'id' => $thread->id,
                     'author' => ['id' => $thread->author->id],
+                    'category' => $thread->category,
                     'title' => $thread->title,
                     'body' => $thread->body,
                 ]
@@ -52,13 +52,15 @@ class ThreadsTest extends TestCase
         $response->assertJson([
             'data' => [
                 'title' => $thread->title,
-                'body' => $thread->body
+                'body' => $thread->body,
+                'category' => $thread->category,
             ]
         ]);
 
         $this->assertDatabaseHas('threads', [
             'title' => $thread->title,
-            'body' => $thread->body
+            'body' => $thread->body,
+            'category' => $thread->category,
         ]);
     }
 
@@ -66,7 +68,7 @@ class ThreadsTest extends TestCase
      * @test
      * @throws \Throwable
     */
-    public function authenticated_user_can_update_a_thread()
+    public function authorized_user_can_update_a_thread()
     {
         $this->signIn();
 
@@ -86,6 +88,22 @@ class ThreadsTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('threads', $newThread->toArray());
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+    */
+    public function authorized_user_can_delete_own_thread()
+    {
+        $this->signIn();
+
+        $thread = $this->create(Thread::class);
+
+        $response = $this->deleteJson(route($this->routePrefix . 'destroy', $thread));
+        $response->assertStatus(204);
+
+        $this->assertDatabaseMissing('threads', $thread->toArray());
     }
 
 }

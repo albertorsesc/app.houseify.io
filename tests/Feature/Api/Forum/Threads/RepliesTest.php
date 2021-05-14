@@ -2,11 +2,9 @@
 
 namespace Tests\Feature\Api\Forum\Threads;
 
-use App\Models\Forum\Thread;
+use Tests\TestCase;
 use App\Models\Forum\Threads\Reply;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 
 class RepliesTest extends TestCase
 {
@@ -90,5 +88,54 @@ class RepliesTest extends TestCase
             'author_id' => auth()->id(),
             'body' => $newReply->body
         ]);
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+    */
+    public function authorized_user_can_updated_own_reply()
+    {
+        $this->signIn();
+
+        $reply = $this->create(Reply::class);
+        $newReply = $this->make(Reply::class, ['thread_id' => $reply->thread_id]);
+
+        $response = $this->putJson(
+            route($this->routePrefix . 'update', [$reply->thread, $reply]),
+            $newReply->toArray()
+        );
+        $response->assertOk();
+        $response->assertJson([
+            'data' => [
+                'thread' => ['id' => $reply->thread->id],
+                'author' => ['id' => auth()->id()],
+                'body' => $newReply->body
+            ]
+        ]);
+
+        $this->assertTrue(Reply::first()->author->id === auth()->id());
+        $this->assertDatabaseHas('replies', [
+            'thread_id' => $newReply->thread->id,
+            'author_id' => auth()->id(),
+            'body' => $newReply->body
+        ]);
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+    */
+    public function authorized_user_can_delete_own_reply()
+    {
+        $this->signIn();
+
+        $reply = $this->create(Reply::class);
+
+        $response = $this->deleteJson(
+            route($this->routePrefix . 'destroy', [$reply->thread, $reply]),
+        );
+        $response->assertStatus(204);
+        $this->assertDatabaseMissing('replies', $reply->toArray());
     }
 }

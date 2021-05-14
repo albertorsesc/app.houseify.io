@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Api\Forum\Threads;
 
-use App\Inspections\Spam;
-use App\Models\Forum\Thread;
 use App\Models\Forum\Threads\Reply;
+use App\Models\Forum\Threads\Thread;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Forum\Threads\ReplyRequest;
 use App\Http\Resources\Forum\Threads\ReplyResource;
@@ -32,5 +31,24 @@ class ReplyController extends Controller
                        'author:id,first_name,last_name,email,profile_photo_path'
                    ])
         );
+    }
+
+    public function update(ReplyRequest $request, Thread $thread, Reply $reply) : ReplyResource
+    {
+        return new ReplyResource(
+            tap($reply)
+                ->update($request->all())
+                ->load([
+                    'thread:id',
+                    'author:id,first_name,last_name,email,profile_photo_path'
+                ])
+        );
+    }
+
+    public function destroy(Thread $thread, Reply $reply)
+    {
+        $reply->delete();
+
+        return response([], 204);
     }
 }

@@ -15,6 +15,7 @@
      * */
         'construction_categories' => [
             'A/C',
+            'Albañilería',
             'Arquitectura',
             'Carpintería',
             'Cerrajería',

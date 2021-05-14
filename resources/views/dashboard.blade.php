@@ -86,6 +86,24 @@
                             </a>
                         </div>
 
+                        {{--Forum--}}
+                        <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/3 mt-4 md:mt-6 px-3">
+                            <a href="{{ route('web.forum.threads.index') }}">
+                                <div class="card transition hover:transform text-center items-center">
+                                    <img src="/img/forum.png" class="object-cover px-4 py-2" alt="Foro de Construcción" loading="lazy">
+                                    <div class="px-4 py-1">
+                                        <div class="font-bold text-gray-900 text-xl">
+                                            Foro de Construcción
+                                        </div>
+                                        <p class="text-gray-700 text-base pb-1">
+                                            Publica tus consultas técnicas y entre todos encontraremos la respuesta.
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        {{--Job Posts--}}
                         <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/3 px-3 mt-4 md:mt-6">
                             <div class="bg-white border-4 border-dashed border-gray-200 rounded-lg text-center items-center">
                                 <img src="/img/professionals.png" class="object-fill" alt="Bolsa de Trabajo">
@@ -99,12 +117,13 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="hidden xl:block w-full md:w-1/2 lg:w-1/2 xl:w-1/3 px-3 mt-4 md:mt-6">
                             <div class="bg-white border-4 border-dashed border-gray-200 rounded-lg text-center items-center h-full"></div>
                         </div>
-                        <div class="hidden xl:block w-full md:w-1/2 lg:w-1/2 xl:w-1/3 px-3 mt-4 md:mt-6">
+<!--                        <div class="hidden xl:block w-full md:w-1/2 lg:w-1/2 xl:w-1/3 px-3 mt-4 md:mt-6">
                             <div class="bg-white border-4 border-dashed border-gray-200 rounded-lg text-center items-center h-full"></div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
 

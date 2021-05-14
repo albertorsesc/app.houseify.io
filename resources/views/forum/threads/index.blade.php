@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Foro: Publica tus dudas sobre un area de la industria y entre todos encontraremos la respuesta')
+@section('title', 'Foro: Publica o Aclara tus dudas técnicas sobre la industria constructora.')
+
+@section('styles')
+    <link rel="stylesheet" href="/css/vue-multiselect.min.css">
+@endsection
 
 @section('content')
 
@@ -41,11 +45,16 @@
                                             <div class="flex-shrink-0">
                                                 <img class="h-16 w-16 rounded-lg" :src="thread.author.photo" :alt="thread.author.fullName" />
                                             </div>
-                                            <div class="md:-mt-8 px-4 w-full md:w-2/3">
+                                            <div class="px-4 w-full md:w-2/3">
                                                 <div class="hidden md:block">
-                                                    <div class="w-full flex justify-start">
+                                                    <div class="w-full py-2">
                                                         <p class="flex items-start text-xl text-gray-500"
                                                            v-text="limitString(thread.title, 65) + '..'"
+                                                        ></p>
+                                                    </div>
+                                                    <div class="w-full py-1">
+                                                        <p class="flex items-start text-sm text-gray-500"
+                                                           v-text="limitString(thread.body, 65) + '..'"
                                                         ></p>
                                                     </div>
                                                 </div>
@@ -55,11 +64,11 @@
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="mr-1 text-gray-600 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                                                     </svg>
-                                                    3
+                                                    @{{ thread.repliesCount }}
                                                 </span>
-                                                <span class="uppercase ml-4 px-6 align-middle items-center text-xs text-blue-500 border border-blue-700 bg-white shadow-sm rounded-full p-2">
-                                                    General
-                                                </span>
+                                                <span class="uppercase ml-4 px-6 align-middle items-center text-xs text-blue-500 border border-blue-700 bg-white shadow-sm rounded-full p-2"
+                                                      v-text="thread.category"
+                                                ></span>
                                             </div>
                                         </div>
                                         <div class="">
@@ -75,8 +84,10 @@
                     </div>
 
 
+                    {{--Create Thread--}}
                     <div v-if="threadsTab === 'create-thread'"
                          class="bg-white shadow overflow-hidden sm:rounded-md">
+                        {{--New Thread--}}
                         <div v-if="isAuthenticated" class="w-full px-10 py-6">
                             <form @submit.prevent
                                   class="space-y-8 divide-y divide-gray-200">
@@ -92,6 +103,32 @@
                                         </div>
 
                                         <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
+                                            <div class="sm:grid sm:grid-cols-3 sm:gap-3 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                                                <label for="category" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                                    Categoría
+                                                </label>
+                                                <div class="mt-1 sm:mt-0 sm:col-span-2">
+                                                    <vue-multiselect v-model="threadForm.category"
+                                                                     value="Object"
+                                                                     :placeholder="''"
+                                                                     :options="getConstructionCategories"
+                                                                     :hide-selected="true"
+                                                                     id="category"
+                                                                     :searchable="true"
+                                                                     :close-on-select="true"
+                                                                     select-label=""
+                                                                     selected-label=""
+                                                                     deselect-label=""
+                                                                     :tag-placeholder="''"
+                                                                     placeholder="Selecciona la Categoría de la Consulta...">
+                                                        <span slot="noResult">Los sentimos, no se encontraron resultados.</span>
+                                                    </vue-multiselect>
+                                                    <errors :error="errors.category"
+                                                            :options="{ noContainer: true }"
+                                                    ></errors>
+                                                </div>
+                                            </div>
+
                                             <div class="sm:grid sm:grid-cols-3 sm:gap-3 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                                                 <label for="username" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                                     Asunto
@@ -141,13 +178,14 @@
                             </form>
                         </div>
                         <div v-if="! isAuthenticated" class="text-center">
-                            <div class="my-3">
+                            <div class="my-4">
                                 <button @click="threadsTab = 'show-threads'"
-                                        class="h-btn"
-                                >Regresar a Consultas</button>
+                                        class="h-btn">
+                                    Regresar a Consultas
+                                </button>
                             </div>
-                            <p class="px-10 py-6">
-                                <a href="/login" class="h-link text-teal-500">Inicia Sesion</a> para participar en esta consulta
+                            <p class="px-10 py-6 text-base text-center text-gray-500">
+                                Debes <a href="/login" class="h-link text-teal-600">Iniciar sesión</a> para publicar tu consulta.
                             </p>
                         </div>
                     </div>
