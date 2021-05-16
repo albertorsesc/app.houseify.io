@@ -1,7 +1,7 @@
 <template>
     <div>
         <!--Store Reply-->
-        <div v-if="isAuthenticated" class="w-full my-6">
+        <div v-if="isAuthenticated" class="w-full my-6" v-cloak>
             <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200">
                 <div class="px-4 py-2">
                     <form @submit.prevent>
@@ -34,11 +34,11 @@
                     :key="reply.id"
                     :reply="reply"
                     :thread="thread"
+                    v-cloak
         ></reply-card>
     </div>
 </template>
 <script>
-import SweetAlert from "../../../models/SweetAlert";
 
 export default {
     props: {

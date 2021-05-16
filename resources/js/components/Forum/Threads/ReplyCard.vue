@@ -43,16 +43,16 @@
                             Eliminar
                     </button>
                 </span>
-                    <span v-if="isAuthenticated && thread.author.id === auth && ! isBest"
-                          @click="toggleBestReply"
-                          class="ml-2">
+                </div>
+                <span v-if="isAuthenticated && canUpdateThread(thread) && ! isBest"
+                      @click="toggleBestReply"
+                      class="ml-2">
                         <button type="button"
                                 class="items-center shadow-sm px-4 py-1 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-lg text-blue-400 bg-white hover:bg-blue-500 hover:text-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out"
                                 title="La respuesta soluciono tu consulta?">
                             Mejor Respuesta
                         </button>
                     </span>
-                </div>
             </div>
         </div>
         <div class="px-4 py-5 sm:p-6"
@@ -100,10 +100,11 @@
 <script>
 import SweetAlert from "../../../models/SweetAlert";
 import replyPolicy from '../../../mixins/authorizations/reply-policy'
+import threadPolicy from '../../../mixins/authorizations/thread-policy'
 
 export default {
     name: "ReplyCard",
-    mixins: [replyPolicy],
+    mixins: [replyPolicy, threadPolicy],
     props: {
         reply: {
             type: Object,
