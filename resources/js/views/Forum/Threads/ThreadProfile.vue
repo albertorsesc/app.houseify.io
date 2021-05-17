@@ -18,6 +18,7 @@ export default {
             threadForm: {
                 title: '',
                 body: '',
+                channel: '',
             },
 
             showThreadForm: false,
@@ -46,7 +47,6 @@ export default {
         destroy() {
             axios.delete(`threads/${this.localThread.id}`)
                 .then(() => {
-                    console.log('injkl')
                     setTimeout( () => {
                             window.location.href = `/forum/temas`
                     }, 1300)
@@ -58,7 +58,7 @@ export default {
             if (! this.showThreadForm) {
                 this.threadForm.title = this.localThread.title
                 this.threadForm.body = this.localThread.body
-                this.threadForm.category = this.localThread.category
+                this.threadForm.channel = this.localThread.channel
                 this.showThreadForm = true
             } else {
                 this.update()

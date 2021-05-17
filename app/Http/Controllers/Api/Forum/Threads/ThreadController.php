@@ -7,18 +7,23 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Forum\Threads\ThreadRequest;
 use App\Http\Resources\Forum\Threads\ThreadResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Arr;
 
 
 class ThreadController extends Controller
 {
     public function index() : AnonymousResourceCollection
     {
-        return ThreadResource::collection(
-            Thread::with(['author'])
-                  ->withCount('replies')
-                  ->latest()
-                  ->get()
-        );
+        $threads = Thread::query()->with('author')->withCount('replies')->latest();
+
+        if (
+            request()->has('channel') &&
+            in_array(request()->channel, config('houseify.construction_categories'))
+        ) {
+            $threads->where('channel', request()->channel);
+        }
+
+        return ThreadResource::collection($threads->get());
     }
 
     public function store(ThreadRequest $request) : ThreadResource
@@ -26,11 +31,9 @@ class ThreadController extends Controller
         $this->authorize('create', Thread::class);
 
         return new ThreadResource(
-            Thread::create([
-                'title' => $request->title,
-                'body' => $request->body,
-                'category' => $request->category
-            ])->load('author:id,first_name,last_name,email,profile_photo_path')
+            Thread::create(
+                $request->all()
+            )->load('author:id,first_name,last_name,email,profile_photo_path')
         );
     }
 

@@ -29,7 +29,7 @@ class ThreadsTest extends TestCase
                 [
                     'id' => $thread->id,
                     'author' => ['id' => $thread->author->id],
-                    'category' => $thread->category,
+                    'channel' => $thread->channel,
                     'title' => $thread->title,
                     'body' => $thread->body,
                 ]
@@ -53,14 +53,14 @@ class ThreadsTest extends TestCase
             'data' => [
                 'title' => $thread->title,
                 'body' => $thread->body,
-                'category' => $thread->category,
+                'channel' => $thread->channel,
             ]
         ]);
 
         $this->assertDatabaseHas('threads', [
             'title' => $thread->title,
             'body' => $thread->body,
-            'category' => $thread->category,
+            'channel' => $thread->channel,
         ]);
     }
 
@@ -106,4 +106,19 @@ class ThreadsTest extends TestCase
         $this->assertDatabaseMissing('threads', $thread->toArray());
     }
 
+    /**
+     * @test
+     * @throws \Throwable
+    */
+    public function threads_can_be_filtered_by_channel()
+    {
+        $this->signIn();
+
+        $channels = config('houseify.construction_categories');
+        $thread = $this->create(Thread::class, ['channel' => $channels[1]]);
+        $thread2 = $this->create(Thread::class, ['channel' => $channels[4]]);
+
+        $response = $this->getJson(route($this->routePrefix . 'index', ['channel' => $thread->channel]));
+        $this->assertCount(1, $response->getOriginalContent());
+    }
 }

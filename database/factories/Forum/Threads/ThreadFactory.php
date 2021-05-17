@@ -26,7 +26,7 @@ class ThreadFactory extends Factory
             'author_id' => User::factory(),
             'title' => $this->faker->text(255),
             'body' => $this->faker->paragraph(),
-            'category' => $this->faker->randomElement(config('houseify.construction_categories')),
+            'channel' => $this->faker->randomElement(config('houseify.construction_categories')),
         ];
     }
 }

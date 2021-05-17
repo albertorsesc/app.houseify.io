@@ -86,9 +86,9 @@ class ThreadRequestTest extends TestCase
      * @test
      * @throws \Throwable
      */
-    public function category_is_required()
+    public function channel_is_required()
     {
-        $validatedField = 'category';
+        $validatedField = 'channel';
         $brokenRule = null;
 
         $this->postJson(
@@ -107,9 +107,9 @@ class ThreadRequestTest extends TestCase
      * @test
      * @throws \Throwable
      */
-    public function category_must_exist_in_config_file()
+    public function channel_must_exist_in_config_file()
     {
-        $validatedField = 'category';
+        $validatedField = 'channel';
         $brokenRule = 'Otra Categoría';
 
         $this->postJson(

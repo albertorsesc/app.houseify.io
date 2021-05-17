@@ -26,12 +26,32 @@
             <main class="my-6">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div v-if="threadsTab === 'show-threads'" class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6 flex justify-between">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        <h3 class="mr-4 text-lg leading-6 font-medium text-gray-900">
                             Temas
                         </h3>
-                        <button @click="threadsTab = 'create-thread'"
-                                class="h-btn-success"
-                        >Crear nueva Consulta</button>
+                        <div class="flex items-center">
+                            <div class="flex py-1">
+                                <vue-multiselect v-model="selectedChannel"
+                                                 value="Object"
+                                                 :placeholder="''"
+                                                 :options="getConstructionCategories"
+                                                 :hide-selected="true"
+                                                 id="channel"
+                                                 :searchable="true"
+                                                 :close-on-select="true"
+                                                 select-label=""
+                                                 selected-label=""
+                                                 deselect-label=""
+                                                 :tag-placeholder="''"
+                                                 placeholder="Buscar por Categoria..."
+                                                 @select="threadsByChannel">
+                                    <span slot="noResult">Los sentimos, no se encontraron resultados.</span>
+                                </vue-multiselect>
+                            </div>
+                            <button @click="threadsTab = 'create-thread'"
+                                    class="h-btn-success ml-2"
+                            >Crear nueva Consulta</button>
+                        </div>
                     </div>
                     <div v-if="threadsTab === 'show-threads'"
                          class="overflow-hidden">
@@ -67,7 +87,7 @@
                                                     @{{ thread.repliesCount }}
                                                 </span>
                                                 <span class="uppercase ml-4 px-6 align-middle items-center text-xs text-blue-500 border border-blue-700 bg-white shadow-sm rounded-full p-2"
-                                                      v-text="thread.category"
+                                                      v-text="thread.channel"
                                                 ></span>
                                             </div>
                                         </div>
@@ -83,7 +103,6 @@
                         </ul>
                     </div>
 
-
                     {{--Create Thread--}}
                     <div v-if="threadsTab === 'create-thread'"
                          class="bg-white shadow overflow-hidden sm:rounded-md">
@@ -98,22 +117,22 @@
                                                 Crea una nueva Consulta
                                             </h3>
                                             <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                                                Consulta tus dudas con otros tecnicos en tu rama laboral.
+                                                Consulta tus dudas con otros técnicos en tu rama laboral.
                                             </p>
                                         </div>
 
                                         <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:gap-3 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                                <label for="category" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                                <label for="channel" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                                     Categoría
                                                 </label>
                                                 <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                                    <vue-multiselect v-model="threadForm.category"
+                                                    <vue-multiselect v-model="threadForm.channel"
                                                                      value="Object"
                                                                      :placeholder="''"
                                                                      :options="getConstructionCategories"
                                                                      :hide-selected="true"
-                                                                     id="category"
+                                                                     id="channel"
                                                                      :searchable="true"
                                                                      :close-on-select="true"
                                                                      select-label=""
@@ -123,7 +142,7 @@
                                                                      placeholder="Selecciona la Categoría de la Consulta...">
                                                         <span slot="noResult">Los sentimos, no se encontraron resultados.</span>
                                                     </vue-multiselect>
-                                                    <errors :error="errors.category"
+                                                    <errors :error="errors.channel"
                                                             :options="{ noContainer: true }"
                                                     ></errors>
                                                 </div>
@@ -156,7 +175,7 @@
                                                     <errors :error="errors.body"
                                                             :options="{ noContainer: true }"
                                                     ></errors>
-                                                    <p class="mt-2 text-sm text-gray-500">Describe tu pregunta lo mas elaborada posible para que otros tecnicos entiendan mejor tu situacion.</p>
+                                                    <p class="mt-2 text-sm text-gray-500">Describe tu pregunta lo mas elaborada posible para que otros técnicos entiendan mejor tu situacion.</p>
                                                 </div>
                                             </div>
                                         </div>

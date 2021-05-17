@@ -18,7 +18,7 @@ class ThreadResource extends JsonResource
         return [
             'id' => $this->id,
             'author' => new UserResource($this->whenLoaded('author')),
-            'category' => $this->category,
+            'channel' => $this->channel,
             'title' => $this->title,
             'body' => $this->body,
             'replies' => ReplyResource::collection($this->whenLoaded('replies')),

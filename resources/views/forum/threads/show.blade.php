@@ -51,7 +51,7 @@
                                             <div class="-mt-0 md:-mt-2">
                                                 <a href="#"
                                                    class="bg-white rounded-lg px-3 py-1 text-xs text-teal-400 border border-gray-300 uppercase"
-                                                   v-text="localThread.category"
+                                                   v-text="localThread.channel"
                                                 ></a>
                                             </div>
                                         </div>
@@ -69,16 +69,16 @@
                                                 <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                                                     <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
                                                         <div class="sm:grid sm:grid-cols-3 sm:gap-3 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                                            <label for="category" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                                            <label for="channel" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                                                 Categoría
                                                             </label>
                                                             <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                                                <vue-multiselect v-model="threadForm.category"
+                                                                <vue-multiselect v-model="threadForm.channel"
                                                                                  value="Object"
                                                                                  :placeholder="''"
                                                                                  :options="getConstructionCategories"
                                                                                  :hide-selected="true"
-                                                                                 id="category"
+                                                                                 id="channel"
                                                                                  :searchable="true"
                                                                                  :close-on-select="true"
                                                                                  select-label=""
@@ -88,7 +88,7 @@
                                                                                  placeholder="Selecciona la Categoría de la Consulta...">
                                                                     <span slot="noResult">Los sentimos, no se encontraron resultados.</span>
                                                                 </vue-multiselect>
-                                                                <errors :error="errors.category"
+                                                                <errors :error="errors.channel"
                                                                         :options="{ noContainer: true }"
                                                                 ></errors>
                                                             </div>

@@ -51,5 +51,6 @@
         'modules' => [
             'properties' => 'Propiedades',
             'businesses' => 'Directorio de Negocios',
+            'job_profiles' => 'Directorio de Técnicos',
         ],
     ];

@@ -1,5 +1,6 @@
 <?php
 
+    use App\Http\Controllers\Api\Forum\Threads\Actions\ThreadsByChannelController;
     use App\Http\Controllers\Api\Forum\Threads\ThreadController;
     use App\Http\Controllers\Api\Forum\Threads\ReplyController;
     use App\Http\Controllers\Api\Forum\Threads\Replies\Actions\BestReplyController;

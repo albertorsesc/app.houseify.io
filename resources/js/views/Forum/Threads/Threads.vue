@@ -9,6 +9,7 @@ export default {
             threads: [],
             endpoint: 'threads',
             threadForm: {},
+            selectedChannel: '',
             threadsTab: 'show-threads',
 
             errors: [],
@@ -26,7 +27,7 @@ export default {
             axios.post(this.endpoint, {
                 title: this.threadForm.title,
                 body: this.threadForm.body,
-                category: this.threadForm.category,
+                channel: this.threadForm.channel,
             })
             .then(response => {
                 this.threadsTab = 'show-threads'
@@ -36,6 +37,11 @@ export default {
                 error.response.data.errors :
                 [])
         },
+        threadsByChannel(channel) {
+            axios.get(`${this.endpoint}?channel=${channel}`)
+            .then(response => this.threads = response.data.data)
+            .catch(error => dd(error))
+        }
     },
     computed: {
         ...mapGetters({
