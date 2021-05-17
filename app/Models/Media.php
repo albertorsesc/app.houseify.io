@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\InterventionImage\Filters\MediumFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Media extends Model
 {
