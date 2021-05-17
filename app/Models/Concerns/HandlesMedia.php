@@ -2,7 +2,10 @@
 
 namespace App\Models\Concerns;
 
+use App\Models\Concerns\InterventionImage\Filters\MediumFilter;
 use App\Models\Media;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
@@ -50,20 +53,30 @@ trait HandlesMedia
      */
     public function uploadImage(UploadedFile $file, string $modelDirectory)
     {
-        self::attachImage(
-            $img = $file->storePublicly('public')
-        );
+        if (app()->environment('production')) {
+            $path = Str::slug(class_basename($this)) . '/' . Str::random(40)  . '.' . $file->extension();
+            $img = Image::make($file)->filter(new MediumFilter)->stream()->__toString();
+            Storage::disk('s3')->put($path, $img, 'public');
+            self::attachImage(
+                Storage::disk('s3')->url($path)
+           );
+         } else {
+            self::attachImage(
+                $file->storePublicly('public')
+            );
+        }
 
-//        'public/' .
-//        $this->seller->getUsername() . '/' .
-//        static::getPluralModelName($this) . '/' .
-//        Str::limit(base64_encode($modelDirectory), 20, '')
     }
 
     public function deleteMedia ($mediaId)
     {
         $media = $this->media()->find($mediaId);
-        \Storage::delete($media->file_name);
+
+        if (app()->environment('production')) {
+            Storage::disk('s3')->delete($media->file_name);
+        } else {
+            Storage::delete($media->file_name);
+        }
         $media->delete();
     }
 

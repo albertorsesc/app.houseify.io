@@ -31,7 +31,7 @@ return [
     */
 
     'paths' => [
-        public_path('storage')
+        public_path('storage'),
     ],
 
     /*
