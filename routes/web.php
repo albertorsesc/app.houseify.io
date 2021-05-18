@@ -33,6 +33,8 @@ Route::middleware(['auth:sanctum', 'verified', 'prevent-back-history'])->group(f
 
     Route::view('sugerencias', 'suggestions')->name('web.suggestions.index');
     Route::post('suggestions', [SuggestionController::class, 'store'])->name('suggestions.store');
+
+    Route::view('novedades', 'updates.roadmap')->name('web.roadmap.index');
 });
 
 //    Route::get('resize', function () {

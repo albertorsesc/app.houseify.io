@@ -109,6 +109,13 @@
                                        role="menuitem">
                                         Sugerencias
                                     </a>
+
+                                    <a href="{{ route('web.roadmap.index') }}"
+                                       class="h-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                       :class="{{ request()->routeIs('web.roadmap.index') ? '"border-white border-b-2"' : '' }}"
+                                       role="menuitem">
+                                        Novedades
+                                    </a>
                                     {{--
                                     <a href="/docs"
                                        class="h-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -219,6 +226,13 @@
                            :class="{{ request()->routeIs('web.suggestions.index') || request()->segment(1) === 'sugerencias' ? '"bg-gray-100 border-white border-b-2"' : '' }}"
                            role="menuitem">
                             Sugerencias
+                        </a>
+
+                        <a href="{{ route('web.roadmap.index') }}"
+                           class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
+                           :class="{{ request()->routeIs('web.roadmap.index') || request()->segment(1) === 'novedades' ? '"bg-gray-100 border-white border-b-2"' : '' }}"
+                           role="menuitem">
+                            Novedades
                         </a>
                         {{--
                         <a href="/docs"
