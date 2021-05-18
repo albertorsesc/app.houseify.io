@@ -34,12 +34,12 @@
                             <div class="bg-gray-50 lg:py-16 px-4 sm:px-6 lg:col-span-2 lg:px-8 lg:py-24 xl:pr-12">
                                 <div class="max-w-lg mx-auto">
                                     <h2 class="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
-                                        Nos encantaria leer tus sugerencias
+                                        Nos encantaría leer tus sugerencias
                                     </h2>
                                     <p class="mt-3 text-lg leading-6 text-gray-500 text-justify">
                                         El equipo de Houseify trabaja incansablemente para desarrollar nuevas funcionalidades y solucionar
-                                        errores ocacionales que naturalmente se descubren, sin embargo tus sugerencias nos
-                                        ayudarian muchisimo para anadir lo que es mas importante para ti.
+                                        errores ocasionales que naturalmente se descubren, sin embargo tus sugerencias nos
+                                        ayudarían muchísimo para añadir lo que es más importante para ti.
                                     </p>
                                     <dl class="mt-8 text-base text-gray-500">
                                         <div class="mt-3">
