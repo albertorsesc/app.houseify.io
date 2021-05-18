@@ -21,6 +21,7 @@ class HouseifyConfigFileTest extends TestCase
             'Decoración',
             'Eléctrica',
             'Electrodomésticos',
+            'Energías Renovables',
             'Ferretería',
             'Grúas',
             'Herrería',
@@ -30,6 +31,7 @@ class HouseifyConfigFileTest extends TestCase
             'Jardinería',
             'Tapicería',
             'Vidriería',
+            'Maquinaria de Construcción',
             'Material de Construcción'
         ], config('houseify.construction_categories'));
     }
