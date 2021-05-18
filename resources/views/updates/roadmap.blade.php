@@ -24,6 +24,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
                 <div class="px-4 py-6 sm:px-0">
+                    {{--Features--}}
                     <div class="bg-white rounded-lg shadow">
                         <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8">
                             <div class="max-w-3xl mx-auto text-center">
@@ -118,6 +119,63 @@
                             </dl>
                         </div>
                     </div>
+
+                    {{--Minor Changes--}}
+                    <div class="relative my-6">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center">
+                            <span class="px-2 bg-white text-sm text-gray-500">
+                                Actualizaciones menores
+                            </span>
+                        </div>
+                    </div>
+                    <div class="my-8 bg-white rounded-lg shadow p-4">
+
+                        <div class="flex flex-col">
+                            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                        <table class="min-w-full divide-y divide-gray-200">
+                                            <thead class="bg-gray-50">
+                                            <tr>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Actualizacion
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Descripcion
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Fecha
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="bg-white divide-y divide-gray-200">
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">
+                                                    <span class="mr-2 bg-green-100 text-xs text-green-500 border border-green-400 rounded-full px-3 py-1">
+                                                        Nuevo
+                                                    </span>
+                                                    <span class="text-gray-700 font-medium text-sm">Seccion</span> : Novedades
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    Seccion que en lista nuevas caracteristicas y actualizaciones.
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    17 Mayo 2021
+                                                </td>
+                                            </tr>
+
+                                            <!-- More people... -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </main>
