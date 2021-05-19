@@ -169,7 +169,6 @@ class User extends Authenticatable implements MustVerifyEmail
             urlencode($this->first_name . '+' . $this->last_name) .
             '%26background=EBF4FF%26color=7F9CF5';
         return $gravatar . '?d=' . $fallback;
-
 //        return 'https://ui-avatars.com/api/?name='.urlencode($this->first_name. ' ' . $this->last_name).'&color=7F9CF5&background=EBF4FF';
     }
 

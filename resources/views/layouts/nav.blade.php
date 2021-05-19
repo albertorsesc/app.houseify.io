@@ -69,7 +69,8 @@
                             <div>
                                 <button @click="open = ! open" class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-emerald-400 focus:ring-white" id="user-menu" aria-haspopup="true">
                                     <span class="sr-only">Open user menu</span>
-                                    <img class="h-8 w-8 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="" />
+                                    <img class="h-8 w-8 rounded-full"
+                                         src="{{ Auth::user()->profile_photo_url }}" alt="" />
                                 </button>
                             </div>
                             <transition name="fade" appear>
