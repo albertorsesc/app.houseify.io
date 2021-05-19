@@ -45,7 +45,7 @@
                                         <p class="ml-9 text-lg leading-6 font-medium text-gray-400">
                                             Foro de Consultas
                                             <span class="bg-gray-50 rounded-full border border-gray-200 text-gray-400 text-sm p-2">
-                                                75%
+                                                85%
                                             </span>
                                         </p>
                                     </dt>
@@ -53,7 +53,7 @@
                                         Foro en donde Técnicos y Profesionistas puedan realizar consultas técnicas y entre todos podamos resolverlas.
                                         <p class="text-xs mt-2">
                                             Fecha estimada de lanzamiento: <br>
-                                            <span class="text-gray-600 font-light">{{ \Carbon\Carbon::make(now())->addDays(20)->diffForHumans() }}</span>
+                                            <span class="text-gray-600 font-light">{{ \Carbon\Carbon::createFromDate('2021-05-19')->addDays(10)->diffForHumans() }}</span>
                                         </p>
                                     </dd>
                                 </div>
@@ -72,7 +72,7 @@
                                         Espacio para la publicación de Ofertas de Trabajo, Oportunidades de Comercio y Relaciones Laborales.
                                         <p class="text-xs mt-2">
                                             Fecha estimada de lanzamiento: <br>
-                                            <span class="text-gray-600 font-light">{{ \Carbon\Carbon::make(now())->addDays(25)->diffForHumans() }}</span>
+                                            <span class="text-gray-600 font-light">{{ \Carbon\Carbon::createFromDate('2021-05-19')->addDays(25)->diffForHumans() }}</span>
                                         </p>
                                     </dd>
                                 </div>
@@ -113,7 +113,7 @@
                                         <p class="ml-9 text-lg leading-6 font-medium text-gray-900">Propiedades</p>
                                     </dt>
                                     <dd class="mt-2 ml-9 text-base text-gray-500">
-                                        Habilidad del Usuario de Publicar y Explorar propiedades en México.
+                                        Publica y Explora Propiedades en México.
                                     </dd>
                                 </div>
                             </dl>
