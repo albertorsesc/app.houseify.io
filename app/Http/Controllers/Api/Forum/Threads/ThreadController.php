@@ -14,7 +14,7 @@ class ThreadController extends Controller
 {
     public function index() : AnonymousResourceCollection
     {
-        $threads = Thread::query()->with('author')->withCount('replies')->latest();
+        $threads = Thread::query()->with('author')->withCount('replies');
 
         if (
             request()->has('channel') &&
@@ -23,7 +23,19 @@ class ThreadController extends Controller
             $threads->where('channel', request()->channel);
         }
 
-        return ThreadResource::collection($threads->get());
+        if (request()->has('search')) {
+            $threads->where(
+                'title',
+                'LIKE',
+                '%' . request()->search . '%'
+            )->orWhere(
+                'body',
+                'LIKE',
+                '%' . request()->search . '%'
+            );
+        }
+
+        return ThreadResource::collection($threads->latest()->get());
     }
 
     public function store(ThreadRequest $request) : ThreadResource

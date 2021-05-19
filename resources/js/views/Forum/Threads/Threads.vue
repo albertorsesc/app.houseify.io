@@ -10,6 +10,7 @@ export default {
             endpoint: 'threads',
             threadForm: {},
             selectedChannel: '',
+            query: '',
             threadsTab: 'show-threads',
 
             errors: [],
@@ -41,6 +42,14 @@ export default {
             axios.get(`${this.endpoint}?channel=${channel}`)
             .then(response => this.threads = response.data.data)
             .catch(error => dd(error))
+        },
+        search() {
+            axios.get(`${this.endpoint}?search=${this.query}`)
+                .then(response => this.threads = response.data.data)
+                .catch(error => dd(error))
+        },
+        onSearch() {
+            this.search()
         }
     },
     computed: {

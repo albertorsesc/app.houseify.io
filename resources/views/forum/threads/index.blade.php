@@ -30,68 +30,92 @@
                             Temas
                         </h3>
                         <div class="flex items-center">
-                            <div class="flex py-1">
-                                <vue-multiselect v-model="selectedChannel"
-                                                 value="Object"
-                                                 :placeholder="''"
-                                                 :options="getConstructionCategories"
-                                                 :hide-selected="true"
-                                                 id="channel"
-                                                 :searchable="true"
-                                                 :close-on-select="true"
-                                                 select-label=""
-                                                 selected-label=""
-                                                 deselect-label=""
-                                                 :tag-placeholder="''"
-                                                 placeholder="Buscar por Categoria..."
-                                                 @select="threadsByChannel">
-                                    <span slot="noResult">Los sentimos, no se encontraron resultados.</span>
-                                </vue-multiselect>
-                            </div>
                             <button @click="threadsTab = 'create-thread'"
                                     class="h-btn-success ml-2"
                             >Crear nueva Consulta</button>
                         </div>
                     </div>
+                    <div class="mx-4 md:mx-0 md:flex md:justify-end items-center align-middle py-4">
+                        <div class="w-full md:w-1/3 md:mr-4 mt-2">
+                            <vue-multiselect v-model="selectedChannel"
+                                             value="Object"
+                                             :placeholder="''"
+                                             :options="getConstructionCategories"
+                                             :hide-selected="true"
+                                             id="search-channel"
+                                             :searchable="true"
+                                             :close-on-select="true"
+                                             select-label=""
+                                             selected-label=""
+                                             deselect-label=""
+                                             :tag-placeholder="''"
+                                             placeholder="Buscar por Categoria..."
+                                             @select="threadsByChannel">
+                                <span slot="noResult">Los sentimos, no se encontraron resultados.</span>
+                            </vue-multiselect>
+                        </div>
+                        <div class="w-full md:w-1/3 md:mr-3 mt-2">
+                            <input v-show="! isMobile" type="text" v-model="query" @keydown.enter="onSearch" class="h-input" placeholder="Buscar por Consulta o Descripción...">
+                            <div v-show="isMobile" class="flex">
+                                <input type="text" v-model="query" class="rounded-r-none h-input" placeholder="Buscar por Consulta o Descripción...">
+                                <button @click="onSearch" class="p-2 bg-white border-l-0 border border-gray-300 text-sm rounded-l-none rounded-lg shadow">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-400 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <svg @click="index" xmlns="http://www.w3.org/2000/svg" class="mt-4 -mb-1 md:mt-2 rounded-full shadow-md hover:shadow-inner border p-1 cursor-pointer border-gray-300 mx-auto md:mx-0 text-gray-300 h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                    </div>
                     <div v-if="threadsTab === 'show-threads'"
                          class="overflow-hidden">
 
-                        <ul class="divide-y divide-gray-200">
+                        <ul class="md:divide-y md:divide-gray-200">
                             <li v-for="thread in threads" :key="thread.id" class="my-4">
                                 <a :href="`/forum/temas/${thread.id}`"
-                                   class="block hover:bg-gray-50 card transition hover:transform">
+                                   class="mx-4 md:mx-0 block hover:bg-gray-50 card transition hover:transform">
                                     <div class="flex items-center px-4 py-4 sm:px-6">
                                         <div class="min-w-0 flex-1 flex items-center align-middle">
                                             <div class="flex-shrink-0">
-                                                <img class="h-16 w-16 rounded-lg" :src="thread.author.photo" :alt="thread.author.fullName" />
+                                                <img class="h-8 w-8 md:h-16 md:w-16 rounded-lg" :src="thread.author.photo" :alt="thread.author.fullName" />
                                             </div>
                                             <div class="px-4 w-full md:w-2/3">
-                                                <div class="hidden md:block">
+                                                <div class="block">
                                                     <div class="w-full py-2">
-                                                        <p class="flex items-start text-xl text-gray-500"
+                                                        <p class="flex items-start text-sm md:text-xl text-gray-500"
                                                            v-text="limitString(thread.title, 65) + '..'"
                                                         ></p>
                                                     </div>
-                                                    <div class="w-full py-1">
+                                                    <div class="hidden md:block w-full py-1">
                                                         <p class="flex items-start text-sm text-gray-500"
                                                            v-text="limitString(thread.body, 65) + '..'"
                                                         ></p>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="md:-mt-8 w-full md:w-1/3 flex justify-end mr-4">
+                                            <div class="hidden md:-mt-8 w-full md:w-1/3 md:flex justify-end align-middle items-center mr-4">
                                                 <span class="flex align-middle items-center text-xs">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="mr-1 text-gray-600 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                                                     </svg>
                                                     @{{ thread.repliesCount }}
                                                 </span>
-                                                <span class="uppercase ml-4 px-6 align-middle items-center text-xs text-blue-500 border border-blue-700 bg-white shadow-sm rounded-full p-2"
+                                                <span class="uppercase mx-4 px-6 align-middle items-center text-xs text-blue-500 border border-blue-700 bg-white shadow-sm rounded-full p-2"
                                                       v-text="thread.channel"
                                                 ></span>
+                                                <span v-if="thread.bestReply" class="text-xs uppercase flex justify-end align-middle items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1 text-green-400 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                    </svg> Resuelto
+                                                </span>
                                             </div>
                                         </div>
-                                        <div class="">
+                                        <div class="flex">
+                                            <svg v-if="thread.bestReply" xmlns="http://www.w3.org/2000/svg" class="block md:hidden mr-1 text-green-400 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
                                             <!-- Heroicon name: solid/chevron-right -->
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />

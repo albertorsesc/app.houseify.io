@@ -121,4 +121,22 @@ class ThreadsTest extends TestCase
         $response = $this->getJson(route($this->routePrefix . 'index', ['channel' => $thread->channel]));
         $this->assertCount(1, $response->getOriginalContent());
     }
+
+    /**
+     * @test
+     * @throws \Throwable
+    */
+    public function threads_can_be_queried_by_title_or_body()
+    {
+        $this->signIn();
+
+        $thread1 = $this->create(Thread::class, ['title' => 'foo']);
+        $thread2 = $this->create(Thread::class, ['body' => 'foobar']);
+        $thread3 = $this->create(Thread::class, ['body' => 'something else']);
+
+        $response = $this->getJson(route($this->routePrefix . 'index', ['search' => 'foo']));
+        $response->assertOk();
+
+        $this->assertCount(2, $response->getOriginalContent());
+    }
 }

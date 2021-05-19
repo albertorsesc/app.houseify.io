@@ -8,7 +8,12 @@ use Exception;
 class InvalidKeywords
 {
     protected array $keywords = [
-        'yahoo customer support',
+        'jaja',
+        'pendejo',
+        'chinga',
+        'puta',
+        'puto',
+        'verga',
     ];
 
     public function detect($body)

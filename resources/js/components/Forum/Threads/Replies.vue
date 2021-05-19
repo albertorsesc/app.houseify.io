@@ -6,7 +6,7 @@
                 <div class="px-4 py-2">
                     <form @submit.prevent>
                         <div class="w-full">
-                            <div class="mt-1">
+                            <div class="my-1">
                                 <textarea v-model="replyForm.body"
                                           id="body"
                                           rows="5"

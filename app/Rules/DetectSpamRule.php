@@ -40,6 +40,6 @@ class DetectSpamRule implements Rule
      */
     public function message()
     {
-        return ':attribute contiene caracteres considerados como spam.';
+        return ':attribute contiene caracteres considerados como spam, intentemos mantener un ambiente amigable en Houseify.';
     }
 }

@@ -30,6 +30,6 @@ class SpamTest extends TestCase
 
         $this->expectException(\Exception::class);
 
-        $spam->detect('yahoo customer support');
+        $spam->detect('jaja');
     }
 }
