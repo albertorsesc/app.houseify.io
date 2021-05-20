@@ -37,6 +37,12 @@ Route::middleware(['auth:sanctum', 'verified', 'prevent-back-history'])->group(f
     Route::view('novedades', 'updates.roadmap')->name('web.roadmap.index');
 });
 
+
+
+
+
+
+
 //    Route::get('resize', function () {
 //        \Intervention\Image\Facades\Image::make('img/undraw_location_review_dmxd.png')
 //                                         ->filter(new \App\Models\Concerns\InterventionImage\Filters\MediumFilter())
