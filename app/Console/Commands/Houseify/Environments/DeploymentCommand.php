@@ -8,7 +8,7 @@ use Illuminate\Console\Command;
 class DeploymentCommand extends Command
 {
     use CommandTrait;
-    
+
     /**
      * The name and signature of the console command.
      *

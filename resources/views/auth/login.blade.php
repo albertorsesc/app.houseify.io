@@ -69,13 +69,13 @@
             </div>
 
             <div class="w-full mx-auto md:flex md:justify-end items-end align-middle mt-4">
-<!--                <div class="w-full md:w-1/2">
+                <div class="w-full md:w-1/2">
                     <a href="{{ route('facebook.redirect') }}"
                        class="py-2 px-3 bg-blue-500 rounded-full shadow text-white text-sm md:text-xs">
                         <i class="fab fa-facebook h-5 w-5 rounded-full"></i>
                         {{ __('Iniciar sesión con Facebook') }}
                     </a>
-                </div>-->
+                </div>
                 <div class="w-full md:w-1/2">
                     <a href="{{ route('google.redirect') }}"
                        class="flex align-middle items-center py-2 px-3 bg-white rounded-full shadow text-gray-700 text-sm md:text-xs">
