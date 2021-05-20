@@ -68,12 +68,12 @@
 
             </div>
 
-            <div class="w-full mx-auto flex justify-end items-end align-middle mt-4">
+            <div class="w-full mx-auto md:flex md:justify-end items-end align-middle mt-4">
 <!--                <div class="w-full md:w-1/2">
-                    <a href=""route(facebook.redirect')
+                    <a href="{{ route('facebook.redirect') }}"
                        class="py-2 px-3 bg-blue-500 rounded-full shadow text-white text-sm md:text-xs">
                         <i class="fab fa-facebook h-5 w-5 rounded-full"></i>
-                        {{--{{ __('Iniciar sesión con Facebook') }}--}}
+                        {{ __('Iniciar sesión con Facebook') }}
                     </a>
                 </div>-->
                 <div class="w-full md:w-1/2">

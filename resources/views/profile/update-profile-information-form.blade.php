@@ -29,7 +29,7 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
-                    <img src="{{ $this->user->profile_photo_url }}"
+                    <img src="{{ $this->user->getAvatar() }}"
                          alt="{{ $this->user->first_name . ' ' . $this->user->last_name }}"
                          class="rounded-full h-20 w-20 object-cover">
                 </div>

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Events\Auth\NewSocialMediaUserRegistration;
 use App\Models\User;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -33,6 +32,7 @@ class GoogleLoginController extends Controller
                             'provider_id' => $googleUser->getId(),
                             'email' => $googleUser->getEmail(),
                             'email_verified_at' => now()->toDateTimeString(),
+                            'profile_photo_path' => $googleUser->getAvatar()
                         ]);
 
             auth()->login($user, true);

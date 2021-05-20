@@ -18,13 +18,14 @@ class FacebookLoginController extends Controller
     public function handleProviderCallback()
     {
         $facebookUser = Socialite::driver('facebook')->user();
+        $fullName = explode(' ', $facebookUser->getName());
 
         $user = User::firstOrCreate(
             ['provider_id' => $facebookUser->getId()],
             [
                 'email' => $facebookUser->getEmail(),
-                'first_name' => $facebookUser->getName(),
-                'last_name' => 'FB',
+                'first_name' => $fullName[0],
+                'last_name' => $fullName[1] ?? '-',
                 'email_verified_at' => now()->toDateTimeString(),
             ]
         );
