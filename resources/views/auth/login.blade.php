@@ -57,30 +57,37 @@
                     </a>
                 @endif
 
-                <a class="mt-2 block md:hidden underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                <a class="mt-2 hidden underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
                     {{ __('Crear una cuenta') }}
                 </a>
 
-                <button class="ml-4 mt-4 h-btn-success"
+                <button class="w-full md:w-auto md:ml-4 mt-4 py-4 h-btn-success"
                         onclick="login">
                     {{ __('Iniciar sesión') }}
                 </button>
 
+                <button class="block md:hidden w-full md:ml-4 mt-4 py-4 h-btn-success"
+                        onclick="login">
+                    {{ __('Crear una cuenta') }}
+                </button>
+
             </div>
 
-            <div class="w-full mx-auto md:flex md:justify-end items-end align-middle mt-4">
-                <div class="w-full md:w-1/2">
+            <div class="w-full mx-auto flex justify-center md:justify-end items-center align-middle mt-4">
+                <div class="w-auto items-center align-middle mr-4">
                     <a href="{{ route('facebook.redirect') }}"
-                       class="py-2 px-3 bg-blue-500 rounded-full shadow text-white text-sm md:text-xs">
-                        <i class="fab fa-facebook h-5 w-5 rounded-full"></i>
-                        {{ __('Iniciar sesión con Facebook') }}
+                       class="flex align-middle items-center py-2 px-3 bg-blue-500 rounded-full shadow text-white text-sm"
+                       title="Inicia Sesión con Facebook">
+                        <i class="fab fa-facebook -mb-1 h-5 w-5 rounded-full"></i>
+                        {{ __('Facebook') }}
                     </a>
                 </div>
-                <div class="w-full md:w-1/2">
+                <div class="w-auto items-center">
                     <a href="{{ route('google.redirect') }}"
-                       class="flex align-middle items-center py-2 px-3 bg-white rounded-full shadow text-gray-700 text-sm md:text-xs">
+                       class="flex align-middle items-center py-2 px-3 bg-white rounded-full shadow text-gray-700 text-sm"
+                       title="Inicia Sesión con Google">
                         <img src="/logos/google-icon.png" class="mr-2 object-contain h-3 w-3 rounded-full" alt="">
-                        {{ __('Iniciar sesión con Google') }}
+                        {{ __('Google') }}
                     </a>
                 </div>
             </div>

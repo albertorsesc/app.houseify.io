@@ -45,7 +45,7 @@
                                         <p class="ml-9 text-lg leading-6 font-medium text-gray-400">
                                             Foro de Consultas
                                             <span class="bg-gray-50 rounded-full border border-gray-200 text-gray-400 text-sm p-2">
-                                                85%
+                                                90%
                                             </span>
                                         </p>
                                     </dt>
@@ -152,22 +152,36 @@
                                             </tr>
                                             </thead>
                                             <tbody class="bg-white divide-y divide-gray-200">
+
                                             <tr>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">
                                                     <span class="mr-2 bg-green-100 text-xs text-green-500 border border-green-400 rounded-full px-3 py-1">
                                                         Nuevo
                                                     </span>
-                                                    <span class="text-gray-700 font-medium text-sm">Seccion</span> : Novedades
+                                                    Inicio de Sesión con Facebook
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                    Seccion que en lista nuevas caracteristicas y actualizaciones.
+                                                    Inicio de sesión seguro a través de Facebook.
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    21 Mayo 2021
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">
+                                                    <span class="mr-2 bg-green-100 text-xs text-green-500 border border-green-400 rounded-full px-3 py-1">
+                                                        Nuevo
+                                                    </span>
+                                                    <span class="text-gray-700 font-medium text-sm">Sección</span> : Novedades
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    Sección que en lista nuevas características y actualizaciones.
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     17 Mayo 2021
                                                 </td>
                                             </tr>
 
-                                            <!-- More people... -->
                                             </tbody>
                                         </table>
                                     </div>
