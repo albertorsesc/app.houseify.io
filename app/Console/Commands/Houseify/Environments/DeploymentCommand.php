@@ -50,8 +50,8 @@ class DeploymentCommand extends Command
         $this->newLine();
 
         $this->line('<green>-- Installing Composer Dependencies --</green>');
-        exec('composer install --no-interaction --prefer-dist --optimize-autoloader');
-        exec('composer dump-autoload');
+//        exec('composer install --no-interaction --prefer-dist --optimize-autoloader');
+//        exec('composer dump-autoload');
 
         $this->line('<green>-- Installing NPM Dependencies --</green>');
         exec('npm install');
