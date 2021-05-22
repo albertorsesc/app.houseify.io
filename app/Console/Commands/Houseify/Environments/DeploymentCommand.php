@@ -54,7 +54,7 @@ class DeploymentCommand extends Command
         exec('composer dump-autoload');
 
         $this->line('<green>-- Installing NPM Dependencies --</green>');
-        exec('npm install --production');
+        exec('npm install');
         exec('npm run prod');
 
         $this->line('<green>-- Cleaning Cache --</green>');
