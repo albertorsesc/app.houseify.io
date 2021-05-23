@@ -1,9 +1,15 @@
 public/images
-/storage/ssl
-/node_modules
 /public/hot
 /public/storage
+public/js/app.js
+public/css/app.css
+public/mix-manifest.json
+public/vendor
+/node_modules
 /storage/*.key
+storage/debugbar
+/storage/ssl
+/storage/app
 /vendor
 .env
 .env.backup
@@ -13,9 +19,4 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.logpublic/css/app.css
-public/js/app.js
-public/css/app.css
-public/mix-manifest.json
-storage/debugbar
-public/vendor
 .idea
