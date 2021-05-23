@@ -66,14 +66,24 @@
                     {{ __('Iniciar sesión') }}
                 </button>
 
-                <button class="block md:hidden w-full md:ml-4 mt-4 py-4 h-btn-success"
-                        onclick="login">
+                <a href="{{ route('register') }}" class="block md:hidden w-full md:ml-4 mt-4 py-4 h-btn-success">
                     {{ __('Crear una cuenta') }}
-                </button>
+                </a>
 
             </div>
 
-            <div class="w-full mx-auto flex justify-center md:justify-end items-center align-middle mt-4">
+            <div class="relative my-6">
+                <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                    <div class="w-full border-t border-gray-300"></div>
+                </div>
+                <div class="relative flex justify-center">
+            <span class="px-2 bg-white text-sm text-gray-500">
+                Iniciar sesión por medio de
+            </span>
+                </div>
+            </div>
+
+            <div class="w-full mx-auto flex justify-center items-center align-middle mt-4">
                 <div class="w-auto items-center align-middle mr-4">
                     <a href="{{ route('facebook.redirect') }}"
                        class="flex align-middle items-center py-2 px-3 bg-blue-500 rounded-full shadow text-white text-sm"
