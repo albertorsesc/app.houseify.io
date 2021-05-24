@@ -180,6 +180,10 @@
             /* Reports */
             'reporting_cause' => 'Causas del Reporte',
 
+            /* Forum */
+
+            'channel' => 'Categoría',
+
         ],
 
     ];

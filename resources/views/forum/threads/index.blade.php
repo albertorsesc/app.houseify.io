@@ -16,7 +16,7 @@
                         <h2 class="font-semibold text-2xl text-teal-400">
                             Foro
                         </h2>
-                        <a v-show="threadsTab === 'create-thread'" href="{{ route('web.forum.threads.index') }}" class="h-link text-emerald-500 font-light">
+                        <a v-show="threadsTab === 'create-thread'" href="{{ route('web.threads.index') }}" class="h-link text-emerald-500 font-light">
                             Regresar a Temas
                         </a>
                     </div>
@@ -30,9 +30,9 @@
                             Temas
                         </h3>
                         <div class="flex items-center">
-                            <button @click="threadsTab = 'create-thread'"
+                            <a href="{{ route('web.threads.create') }}"
                                     class="h-btn-success ml-2"
-                            >Crear nueva Consulta</button>
+                            >Crear nueva Consulta</a>
                         </div>
                     </div>
                     <div class="mx-4 md:mx-0 md:flex md:justify-end items-center align-middle py-4">
@@ -74,7 +74,7 @@
 
                         <ul class="md:divide-y md:divide-gray-200">
                             <li v-for="thread in threads" :key="thread.id" class="my-4">
-                                <a :href="`/forum/temas/${thread.id}`"
+                                <a :href="`/forum/${thread.id}`"
                                    class="mx-4 md:mx-0 block hover:bg-gray-50 card transition hover:transform">
                                     <div class="flex items-center px-4 py-4 sm:px-6">
                                         <div class="min-w-0 flex-1 flex items-center align-middle">

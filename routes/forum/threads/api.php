@@ -11,8 +11,6 @@
         Route::post('threads/{thread}/replies', [ReplyController::class, 'store'])->name('threads.replies.store');
         Route::put('threads/{thread}/replies/{reply}/best', BestReplyController::class)->name('threads.replies.best.store');
 
-
-        Route::post('threads', [ThreadController::class, 'store'])->name('threads.store');
         Route::put('threads/{thread}', [ThreadController::class, 'update'])->name('threads.update');
         Route::delete('threads/{thread}', [ThreadController::class, 'destroy'])->name('threads.destroy');
     });

@@ -11,7 +11,8 @@ class ThreadRequestTest extends TestCase
 {
     use RefreshDatabase;
 
-    private string $routePrefix = 'api.threads.';
+    private string $apiRoutePrefix = 'api.threads.';
+    private string $webRoutePrefix = 'web.threads.';
 
     protected function setUp () : void
     {
@@ -28,14 +29,14 @@ class ThreadRequestTest extends TestCase
         $validatedField = 'title';
         $brokenRule = null;
 
-        $this->postJson(
-            route($this->routePrefix . 'store'),
+        $this->post(
+            route($this->webRoutePrefix . 'store'),
             [$validatedField => $brokenRule]
-        )->assertJsonValidationErrors($validatedField);
+        )->assertSessionHasErrorsIn($validatedField);
 
         $existingThread = $this->create(Thread::class);
         $this->putJson(
-            route($this->routePrefix . 'update', $existingThread),
+            route($this->apiRoutePrefix . 'update', $existingThread),
             $this->make(Thread::class, [$validatedField => $brokenRule])->toArray()
         )->assertJsonValidationErrors($validatedField);
     }
@@ -49,14 +50,14 @@ class ThreadRequestTest extends TestCase
         $validatedField = 'title';
         $brokenRule = Str::random(256);
 
-        $this->postJson(
-            route($this->routePrefix . 'store'),
+        $this->post(
+            route($this->webRoutePrefix . 'store'),
             [$validatedField => $brokenRule]
-        )->assertJsonValidationErrors($validatedField);
+        )->assertSessionHasErrorsIn($validatedField);
 
         $existingThread = $this->create(Thread::class);
         $this->putJson(
-            route($this->routePrefix . 'update', $existingThread),
+            route($this->apiRoutePrefix . 'update', $existingThread),
             $this->make(Thread::class, [$validatedField => $brokenRule])->toArray()
         )->assertJsonValidationErrors($validatedField);
     }
@@ -70,14 +71,14 @@ class ThreadRequestTest extends TestCase
         $validatedField = 'body';
         $brokenRule = null;
 
-        $this->postJson(
-            route($this->routePrefix . 'store'),
+        $this->post(
+            route($this->webRoutePrefix . 'store'),
             [$validatedField => $brokenRule]
-        )->assertJsonValidationErrors($validatedField);
+        )->assertSessionHasErrorsIn($validatedField);
 
         $existingThread = $this->create(Thread::class);
         $this->putJson(
-            route($this->routePrefix . 'update', $existingThread),
+            route($this->apiRoutePrefix . 'update', $existingThread),
             $this->make(Thread::class, [$validatedField => $brokenRule])->toArray()
         )->assertJsonValidationErrors($validatedField);
     }
@@ -91,14 +92,14 @@ class ThreadRequestTest extends TestCase
         $validatedField = 'channel';
         $brokenRule = null;
 
-        $this->postJson(
-            route($this->routePrefix . 'store'),
+        $this->post(
+            route($this->webRoutePrefix . 'store'),
             [$validatedField => $brokenRule]
-        )->assertJsonValidationErrors($validatedField);
+        )->assertSessionHasErrorsIn($validatedField);
 
         $existingThread = $this->create(Thread::class);
         $this->putJson(
-            route($this->routePrefix . 'update', $existingThread),
+            route($this->apiRoutePrefix . 'update', $existingThread),
             $this->make(Thread::class, [$validatedField => $brokenRule])->toArray()
         )->assertJsonValidationErrors($validatedField);
     }
@@ -112,14 +113,14 @@ class ThreadRequestTest extends TestCase
         $validatedField = 'channel';
         $brokenRule = 'Otra Categoría';
 
-        $this->postJson(
-            route($this->routePrefix . 'store'),
+        $this->post(
+            route($this->webRoutePrefix . 'store'),
             [$validatedField => $brokenRule]
-        )->assertJsonValidationErrors($validatedField);
+        )->assertSessionHasErrorsIn($validatedField);
 
         $existingThread = $this->create(Thread::class);
         $this->putJson(
-            route($this->routePrefix . 'update', $existingThread),
+            route($this->apiRoutePrefix . 'update', $existingThread),
             $this->make(Thread::class, [$validatedField => $brokenRule])->toArray()
         )->assertJsonValidationErrors($validatedField);
     }

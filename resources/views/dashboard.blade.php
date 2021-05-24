@@ -88,7 +88,7 @@
 
                         {{--Forum--}}
                         <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/3 mt-4 md:mt-6 px-3">
-                            <a href="{{ route('web.forum.threads.index') }}">
+                            <a href="{{ route('web.threads.index') }}">
                                 <div class="card transition hover:transform text-center items-center">
                                     <img src="/img/forum.png" class="object-cover px-4 py-2" alt="Foro de Construcción" loading="lazy">
                                     <div class="px-4 py-1">

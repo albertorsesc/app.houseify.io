@@ -16,7 +16,7 @@
                         <h2 class="font-semibold text-2xl text-teal-400">
                             Foro
                         </h2>
-                        <a href="{{ route('web.forum.threads.index') }}" class="h-link text-emerald-500 font-light">
+                        <a href="{{ route('web.threads.index') }}" class="h-link text-emerald-500 font-light">
                             Regresar a Temas
                         </a>
                     </div>

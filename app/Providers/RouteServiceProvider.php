@@ -56,6 +56,7 @@ class RouteServiceProvider extends ServiceProvider
             $this->mapJobProfilesWebRoutes();
             /* Forum */
             $this->mapThreadsApiRoutes();
+            $this->mapThreadsWebRoutes();
             $this->mapForumWebRoutes();
 
         });
@@ -120,6 +121,13 @@ class RouteServiceProvider extends ServiceProvider
              ->prefix('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/forum/threads/api.php'));
+    }
+
+    public function mapThreadsWebRoutes()
+    {
+        Route::middleware(['web'])
+             ->namespace($this->namespace)
+             ->group(base_path('routes/forum/threads/web.php'));
     }
 
     public function mapForumWebRoutes()

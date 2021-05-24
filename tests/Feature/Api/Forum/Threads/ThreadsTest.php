@@ -41,33 +41,6 @@ class ThreadsTest extends TestCase
      * @test
      * @throws \Throwable
     */
-    public function authenticated_user_can_create_a_thread()
-    {
-        $this->signIn();
-
-        $thread = $this->make(Thread::class);
-
-        $response = $this->postJson(route($this->routePrefix . 'store'), $thread->toArray());
-        $response->assertCreated();
-        $response->assertJson([
-            'data' => [
-                'title' => $thread->title,
-                'body' => $thread->body,
-                'channel' => $thread->channel,
-            ]
-        ]);
-
-        $this->assertDatabaseHas('threads', [
-            'title' => $thread->title,
-            'body' => $thread->body,
-            'channel' => $thread->channel,
-        ]);
-    }
-
-    /**
-     * @test
-     * @throws \Throwable
-    */
     public function authorized_user_can_update_a_thread()
     {
         $this->signIn();
