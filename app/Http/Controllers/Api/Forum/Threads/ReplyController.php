@@ -27,7 +27,7 @@ class ReplyController extends Controller
             $thread->replies()
                    ->create($request->all())
                    ->load([
-                       'thread:id',
+                       'thread:id,slug',
                        'author:id,first_name,last_name,email,profile_photo_path'
                    ])
         );

@@ -22,6 +22,7 @@ class ThreadsTest extends TestCase
 
         $response = $this->get(route($this->routePrefix . 'index'));
         $response->assertViewIs('forum.threads.index');
+        $response->assertViewHas('threads');
     }
 
     /**
@@ -46,7 +47,7 @@ class ThreadsTest extends TestCase
 
         $thread = $this->create(Thread::class);
 
-        $response = $this->get(route($this->routePrefix . 'show', $thread));
+        $response = $this->get(route($this->routePrefix . 'show', [$thread->channel, $thread]));
         $response->assertViewIs('forum.threads.show');
     }
 
@@ -66,8 +67,23 @@ class ThreadsTest extends TestCase
         $this->assertDatabaseHas('threads', [
             'title' => $newThread->title,
             'body' => $newThread->body,
-            'channel' => $newThread->channel,
+            'channel_id' => $newThread->channel->id,
             'author_id' => auth()->id(),
         ]);
+    }
+
+    /**
+     * @test
+     * @throws \Throwable
+    */
+    public function threads_can_be_filtered_by_channel()
+    {
+        $this->fakeEvent();
+        $thread1 = $this->create(Thread::class);
+        $thread2 = $this->create(Thread::class);
+
+        $response = $this->get(route('web.threads.channels.index', $thread1->channel->slug));
+        $response->assertViewIs('forum.threads.index');
+        $response->assertViewHas('threads');
     }
 }

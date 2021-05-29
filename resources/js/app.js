@@ -28,7 +28,6 @@ Vue.component('display-job-profile', require('./views/JobProfiles/Guests/Display
 
 /* Forum */
 
-Vue.component('threads', require('./views/Forum/Threads/Threads').default);
 Vue.component('thread-profile', require('./views/Forum/Threads/ThreadProfile').default);
 
 Vue.component('profile', require('./views/User/Profile').default);

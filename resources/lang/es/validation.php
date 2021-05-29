@@ -182,7 +182,7 @@
 
             /* Forum */
 
-            'channel' => 'Categoría',
+            'channel_id' => 'Categoría',
 
         ],
 

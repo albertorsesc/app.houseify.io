@@ -16,31 +16,6 @@ class ThreadsTest extends TestCase
      * @test
      * @throws \Throwable
     */
-    public function guest_can_get_all_threads()
-    {
-        $this->signIn();
-        $thread = $this->create(Thread::class);
-        $this->signOut();
-
-        $response = $this->getJson(route($this->routePrefix . 'index'));
-        $response->assertOk();
-        $response->assertJson([
-            'data' => [
-                [
-                    'id' => $thread->id,
-                    'author' => ['id' => $thread->author->id],
-                    'channel' => $thread->channel,
-                    'title' => $thread->title,
-                    'body' => $thread->body,
-                ]
-            ]
-        ]);
-    }
-
-    /**
-     * @test
-     * @throws \Throwable
-    */
     public function authorized_user_can_update_a_thread()
     {
         $this->signIn();
@@ -55,6 +30,8 @@ class ThreadsTest extends TestCase
         $response->assertOk();
         $response->assertJson([
             'data' => [
+                'id' => $thread->id,
+                'slug' => $newThread->slug,
                 'title' => $newThread->title,
                 'body' => $newThread->body
             ]
@@ -77,39 +54,5 @@ class ThreadsTest extends TestCase
         $response->assertStatus(204);
 
         $this->assertDatabaseMissing('threads', $thread->toArray());
-    }
-
-    /**
-     * @test
-     * @throws \Throwable
-    */
-    public function threads_can_be_filtered_by_channel()
-    {
-        $this->signIn();
-
-        $channels = config('houseify.construction_categories');
-        $thread = $this->create(Thread::class, ['channel' => $channels[1]]);
-        $thread2 = $this->create(Thread::class, ['channel' => $channels[4]]);
-
-        $response = $this->getJson(route($this->routePrefix . 'index', ['channel' => $thread->channel]));
-        $this->assertCount(1, $response->getOriginalContent());
-    }
-
-    /**
-     * @test
-     * @throws \Throwable
-    */
-    public function threads_can_be_queried_by_title_or_body()
-    {
-        $this->signIn();
-
-        $thread1 = $this->create(Thread::class, ['title' => 'foo']);
-        $thread2 = $this->create(Thread::class, ['body' => 'foobar']);
-        $thread3 = $this->create(Thread::class, ['body' => 'something else']);
-
-        $response = $this->getJson(route($this->routePrefix . 'index', ['search' => 'foo']));
-        $response->assertOk();
-
-        $this->assertCount(2, $response->getOriginalContent());
     }
 }

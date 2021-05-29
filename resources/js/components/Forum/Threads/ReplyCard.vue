@@ -45,7 +45,7 @@
                 </span>
                 </div>
                 <span v-if="isAuthenticated && canUpdateThread(thread) && ! isBest"
-                      @click="toggleBestReply"
+                      @click="markBestReply"
                       class="ml-2">
                         <button type="button"
                                 class="items-center shadow-sm px-4 py-1 flex justify-center border border-gray-100 text-sm leading-5 font-medium rounded-lg text-blue-400 bg-white hover:bg-blue-500 hover:text-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out"
@@ -117,7 +117,7 @@ export default {
     },
     data() {
         return {
-            endpoint: `threads/${this.reply.thread.id}/replies`,
+            endpoint: `threads/${this.reply.thread.slug}/replies`,
             localReply: this.reply,
             bestReply: this.thread.bestReply,
             isBest: (this.thread.bestReply === this.reply.id),
@@ -156,8 +156,8 @@ export default {
             })
             .catch(error => { console.log(error) })
         },
-        toggleBestReply() {
-            axios.put(`threads/${this.reply.thread.id}/replies/${this.localReply.id}/best`)
+        markBestReply() {
+            axios.put(`threads/${this.reply.thread.slug}/replies/${this.localReply.id}/best`)
                 .then(() => {
                     window.Event.$emit(
                         'best-reply-selected',

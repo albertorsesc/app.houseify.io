@@ -2,6 +2,10 @@
 
 @section('title', 'Inicio')
 
+@section('meta')
+<meta name="description" content="Houseify es una plataforma especialmente dedicada al sector de Construcción. Publica, Ofrece y Encuentra Propiedades, Negocios o Empresas del área y más...">
+@endsection
+
 @section('content')
 
     <div>

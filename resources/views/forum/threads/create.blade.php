@@ -40,17 +40,17 @@
 
                                         <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:gap-3 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                                <label for="channel" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                                <label for="channel_id" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                                     Categoría
                                                 </label>
                                                 <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                                    <select name="channel" id="channel" class="h-select">
+                                                    <select name="channel_id" id="channel_id" class="h-select">
                                                         <option value="">Selecciona una Categoria</option>
-                                                        @foreach(config('houseify.construction_categories') as $channel)
-                                                            <option value="{{ $channel }}">{{ $channel }}</option>
+                                                        @foreach($channels as $channel)
+                                                            <option value="{{ $channel->id }}">{{ $channel->name }}</option>
                                                         @endforeach
                                                     </select>
-                                                    @error('channel')
+                                                    @error('channel_id')
                                                     <div class="flex justify-start items-center rounded-md text-sm text-red-700 p-2" role="alert">
                                                         <p>{{ $message }}</p>
                                                     </div>

@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Http\Requests\Forum\Threads;
 
+use App\Models\Forum\Threads\Reply;
 use Tests\TestCase;
 use App\Models\Forum\Threads\Thread;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -47,13 +48,13 @@ class ReplyRequestTest extends TestCase
     public function replies_that_contain_spam_may_not_be_created()
     {
         $validatedField = 'body';
-        $brokenRule = 'Yahoo Customer Support';
-        $thread = $this->make(Thread::class);
+        $brokenRule = 'jaja';
+        $reply = $this->make(Reply::class);
 
         $this->expectException(\Exception::class);
 
         $this->postJson(
-            route($this->routePrefix . 'store', $thread),
+            route($this->routePrefix . 'store', $reply),
             [$validatedField => $brokenRule]
         );
 

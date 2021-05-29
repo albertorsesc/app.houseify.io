@@ -13,13 +13,14 @@ export default {
     data() {
         return {
             localThread: this.thread,
-            endpoint: `threads/${this.thread.id}`,
+            endpoint: `threads/${this.thread.slug}`,
 
             threadForm: {
                 title: '',
                 body: '',
-                channel: '',
+                channel: {},
             },
+            channels: [],
 
             showThreadForm: false,
 
@@ -30,7 +31,11 @@ export default {
     methods: {
         update() {
             this.isLoading = true
-            axios.put(`${this.endpoint}`, this.threadForm)
+            axios.put(`${this.endpoint}`, {
+                title: this.threadForm.title,
+                body: this.threadForm.body,
+                channel_id: this.threadForm.channel ? this.threadForm.channel.id : this.localThread.channel.id,
+            })
             .then(response => {
                 this.localThread = response.data.data
                 this.showThreadForm = false
@@ -45,15 +50,21 @@ export default {
             })
         },
         destroy() {
-            axios.delete(`threads/${this.localThread.id}`)
+            axios.delete(`threads/${this.localThread.slug}`)
                 .then(() => {
                     setTimeout( () => {
                             window.location.href = `/forum/temas`
                     }, 1300)
                 }).catch(error => { console.log(error) })
         },
+        getThreadChannels() {
+            axios.get('/thread-channels')
+            .then(response => this.channels = response.data.data)
+            .catch(error => dd(error))
+        },
         showUpdateForm() {
             this.redirectIfGuest()
+            this.getThreadChannels()
 
             if (! this.showThreadForm) {
                 this.threadForm.title = this.localThread.title

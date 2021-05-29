@@ -3,7 +3,7 @@
 namespace App\Models\Forum\Threads;
 
 use App\Models\User;
-use App\Models\Forum\Threads\Reply;
+use Illuminate\Support\Str;
 use App\Models\Concerns\SerializeTimestamps;
 use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo, Factories\HasFactory, Relations\HasMany};
 
@@ -13,15 +13,30 @@ class Thread extends Model
 
     const PUBLISHED_STATUS = true;
 
-    protected $fillable = ['title', 'body', 'channel', 'best_reply_id'];
+    protected $fillable = ['slug', 'title', 'body', 'channel_id', 'best_reply_id', 'author_id'];
 
     protected static function boot ()
     {
         parent::boot();
-        self::creating(fn ($thread) => $thread->author_id = auth()->id());
+        self::creating(function ($thread) {
+            $thread->author_id = auth()->id();
+        });
+        self::created(function ($thread) {
+            $thread->update(['slug' => $thread->title]);
+        });
+    }
+
+    public function getRouteKeyName () : string
+    {
+        return 'slug';
     }
 
     /* Relations */
+
+    public function channel() : BelongsTo
+    {
+        return $this->belongsTo(ThreadChannel::class);
+    }
 
     public function author() : BelongsTo
     {
@@ -33,7 +48,23 @@ class Thread extends Model
         return $this->hasMany(Reply::class)->latest('updated_at');
     }
 
+    /* Mutators */
+
+    public function setSlugAttribute($value)
+    {
+        $slug = Str::slug($value);
+        if (static::whereSlug($slug)->exists()) {
+            $slug = "$slug-$this->id";
+        }
+        $this->attributes['slug'] = $slug;
+    }
+
     /* Helpers */
+
+    public function profile() : string
+    {
+        return route('web.threads.show', [$this->channel, $this]);
+    }
 
     public function toggleBestReply(Reply $reply)
     {

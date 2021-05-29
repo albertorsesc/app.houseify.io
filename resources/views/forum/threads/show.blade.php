@@ -2,6 +2,10 @@
 
 @section('title', e($thread->title))
 
+@section('meta')
+    <meta name="description" content="{{ $thread->body }}">
+@endsection
+
 @section('styles')
     <link rel="stylesheet" href="/css/vue-multiselect.min.css">
 @endsection
@@ -33,7 +37,7 @@
                                     {{--Thread Header--}}
                                     <div class="w-full my-1">
                                         <div class="md:flex md:justify-between">
-                                            <div class="flex w-full">
+                                            <div class="flex w-full md:w-2/3">
                                                 <div class="flex-shrink-0 mr-3">
                                                     <img class="h-10 w-10 rounded-lg" :src="thread.author.photo" :alt="thread.author.fullName" />
                                                 </div>
@@ -54,9 +58,11 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                     </svg> Resuelto
                                                 </span>
-                                                <span class="bg-white rounded-lg px-3 py-1 text-xs text-teal-400 border border-gray-300 uppercase"
-                                                   v-text="localThread.channel"
-                                                ></span>
+                                                <a :href="`/forum/${localThread.channel.slug}`">
+                                                    <span class="bg-white rounded-lg px-3 py-1 text-xs text-teal-400 border border-gray-300 uppercase"
+                                                          v-text="localThread.channel.name"
+                                                    ></span>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -78,9 +84,10 @@
                                                             </label>
                                                             <div class="mt-1 sm:mt-0 sm:col-span-2">
                                                                 <vue-multiselect v-model="threadForm.channel"
-                                                                                 value="Object"
+                                                                                 value="Array"
+                                                                                 label="name"
                                                                                  :placeholder="''"
-                                                                                 :options="getConstructionCategories"
+                                                                                 :options="channels"
                                                                                  :hide-selected="true"
                                                                                  id="channel"
                                                                                  :searchable="true"

@@ -15,8 +15,9 @@ class CreateThreadsTable extends Migration
     {
         Schema::create('threads', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique()->nullable();
             $table->foreignId('author_id')->constrained('users');
-            $table->string('channel')->index();
+            $table->foreignId('channel_id')->constrained('thread_channels');
             $table->string('title', 255)->index();
             $table->text('body');
             $table->foreignId('best_reply_id')->nullable();
