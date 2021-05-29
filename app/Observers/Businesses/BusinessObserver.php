@@ -52,7 +52,7 @@ class BusinessObserver
      */
     public function updated(Business $business)
     {
-        LogActions::dispatch('UPDATE', $business, auth()->user());
+        $business->searchable();
     }
 
     /**
@@ -65,7 +65,6 @@ class BusinessObserver
     public function deleting(Business $business)
     {
         $business->onDelete();
-        LogActions::dispatch('DELETE', $business, auth()->user());
     }
 
     /**

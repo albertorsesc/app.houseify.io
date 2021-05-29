@@ -31,10 +31,14 @@
             displayImages() {
                 if (this.localImages && this.localImages.length > 0) {
                     for (let i = 0; i < this.localImages.length; i++) {
-                        let img = window.location.origin + `/img/${this.size}/${this.localImages[i].file_name.split('public/').pop()}`
-                        // let img = window.location.origin + `/images/${this.images[i].id}/${this.images[i].file_name}`
+                        let img
+                        if (process.env.MIX_NODE_ENV !== 'production') {
+                            img = window.location.origin + `/img/${this.size}/${this.localImages[i].file_name.split('public/').pop()}`
+                        } else {
+                            img = `${this.localImages[i].file_name}`
+                        }
 
-                        this.data.push('<img class="d-block h-full w-full object-cover rounded-lg" src="' + img + '" loading="lazy">')
+                        this.data.push('<img class="d-block h-full w-full object-fit rounded-lg" src="' + img + '" loading="lazy">')
                     }
                 } else {
                     this.data.push('<img class="d-block h-full w-full object-cover rounded-lg" src="/img/' + this.moduleName + '.png" loading="lazy">')

@@ -11,6 +11,8 @@ window.baseURL = process.env.MIX_APP_URL
 window.dd = console.log
 /** Events */
 window.Event = new Vue()
+window.ALGOLIA_APP_ID = process.env.MIX_ALGOLIA_APP_ID
+window.ALGOLIA_SEARCH_ONLY_KEY = process.env.MIX_ALGOLIA_SEARCH_ONLY_KEY
 Vue.config.productionTip = false
 
 Vue.component('nav-bar', require('./components/NavBar').default);

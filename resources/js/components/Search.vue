@@ -19,8 +19,8 @@ export default {
     data() {
         return {
             searchClient: algoliasearch(
-                'NF2LQQSO9Y',
-                'c9449e46573cb073d99941bb75cbf778',
+                window.ALGOLIA_APP_ID,
+                window.ALGOLIA_SEARCH_ONLY_KEY,
             )
         }
     },

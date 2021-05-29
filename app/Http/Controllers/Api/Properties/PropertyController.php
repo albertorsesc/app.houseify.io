@@ -43,9 +43,9 @@ class PropertyController extends Controller
         $this->authorize('update', $property);
 
         return new PropertyResource(
-            tap($property)
-                ->update($request->all())
-                ->load([
+            tap($property, fn ($model) =>
+                $model->update($request->all())
+            )->load([
                     'propertyCategory.propertyType',
                     'location.state',
                     'interests',

@@ -27,27 +27,27 @@
                                 <label class="block text-sm font-medium text-gray-700">
                                     Estado
                                 </label>
-<!--                                <ais-refinement-list
+                                <ais-refinement-list
                                     attribute="location.state.name"
-                                ></ais-refinement-list>-->
+                                ></ais-refinement-list>
                             </div>
                             <!--City-->
                             <div class="w-full md:w-1/3">
                                 <label class="block text-sm font-medium text-gray-700">
                                     Ciudad
                                 </label>
-<!--                                <ais-refinement-list
+                                <ais-refinement-list
                                     attribute="location.city"
-                                ></ais-refinement-list>-->
+                                ></ais-refinement-list>
                             </div>
                             <!--Neighborhood-->
                             <div class="w-full md:w-1/3">
                                 <label class="block text-sm font-medium text-gray-700">
                                     Fraccionamiento/Colonia
                                 </label>
-<!--                                <ais-refinement-list
+                                <ais-refinement-list
                                     attribute="location.neighborhood"
-                                ></ais-refinement-list>-->
+                                ></ais-refinement-list>
                             </div>
                         </div>
 
@@ -58,7 +58,7 @@
                                     Busca por Nombre del Negocio o Informacion adicional
                                 </label>
                                 <div class="mt-1">
-<!--                                    <ais-search-box :placeholder="''"></ais-search-box>-->
+                                    <ais-search-box :placeholder="''"></ais-search-box>
                                 </div>
                             </div>
                         </div>
@@ -80,11 +80,11 @@
 
                     <div
                          class="w-full md:flex sm:justify-center md:align-middle mt-6" v-cloak>
-                            <business-card v-for="item in items"
+                            <job-profile-card v-for="item in items"
                                            :key="item.objectID"
                                            v-if="item.status"
-                                           :business="item"
-                            ></business-card>
+                                           :job-profile="item"
+                            ></job-profile-card>
                     </div>
                 </div>
             </ais-hits>
@@ -98,7 +98,6 @@ export default {
     name: "SearchBusinesses",
     data() {
         return {
-            endpoint: '/businesses/search',
             results: [],
 
             filtersTab: 'basic-details',
@@ -111,7 +110,7 @@ export default {
     },
     components: {
         Search: () => import(/* webpackChunkName: "search" */ '../../components/Search'),
-        BusinessCard: () => import(/* webpackChunkName: "business-card" */ '../../components/Businesses/BusinessCard'),
+        JobProfileCard: () => import(/* webpackChunkName: "job-profile-card" */ '../../components/JobProfiles/JobProfileCard'),
     }
 }
 </script>

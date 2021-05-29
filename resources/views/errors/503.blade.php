@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>503 | Recurso no disponible | Houseify.io</title>
+    <title>503 | En Mantenimiento | Houseify.io</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <style>
@@ -456,7 +456,7 @@
             <div class="text-black text-5xl md:text-15xl font-black">503</div>
             <div class="w-16 h-1 bg-blue-dark my-3 md:my-6"></div>
             <p class="text-grey-darker text-2xl md:text-3xl font-light mb-8 leading-normal">
-                Lo Sentimos, la página a la que intenta acceder no está disponible por el momento, intente en unos momentos más.
+                ¡Hola! Houseify se encuentra en mantenimiento pero solo tomará unos minutos, toma una taza de café e intenta acceder en unos momentos más.
             </p>
             <button onclick="window.location.href = '/'" class="bg-transparent no-underline outline-none text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
                 Regresar al inicio

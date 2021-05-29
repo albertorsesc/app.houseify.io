@@ -27,6 +27,7 @@ class LocationController extends Controller
             $request->all() +
             ['coordinates' => $business->location->getCoordinates()]
         );
+        $business->touch();
 
         $business->load('location.state');
 

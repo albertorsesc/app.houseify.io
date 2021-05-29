@@ -517,7 +517,7 @@
                                                             <span class="text-gray-500 font-light text-xs">(requerido)</span>
                                                         </label>
                                                         <div class="mt-2">
-                                                            <vue-multiselect v-model="propertyForm.businessType"
+                                                            <vue-multiselect v-model="selectedBusinessType"
                                                                              :options="getBusinessTypes"
                                                                              :searchable="false"
                                                                              :close-on-select="true"

@@ -4,19 +4,21 @@ namespace App\Models;
 
 use App\Models\Concerns\UsesGMaps;
 use App\Models\Concerns\SerializeTimestamps;
-use Illuminate\Database\{Eloquent\Model, Eloquent\Factories\HasFactory, Eloquent\Relations\BelongsTo};
+use Illuminate\Database\{Eloquent\Model,
+    Eloquent\Factories\HasFactory,
+    Eloquent\Relations\BelongsTo,
+    Eloquent\Relations\MorphTo};
 
 class Location extends Model
 {
     use HasFactory, SerializeTimestamps, UsesGMaps;
 
-    protected $touches = ['locationable'];
     protected $casts = ['coordinates' => 'array'];
     protected $fillable = ['locationable_id', 'locationable_type', 'address', 'neighborhood', 'city', 'state_id', 'zip_code', 'coordinates', 'google_map_url'];
 
     /* Relations */
 
-    public function locationable()
+    public function locationable() : MorphTo
     {
         return $this->morphTo();
     }

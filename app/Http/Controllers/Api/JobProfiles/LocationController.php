@@ -28,6 +28,7 @@ class LocationController extends Controller
             $request->all() +
             ['coordinates' => $jobProfile->location->getCoordinates()]
         );
+        $jobProfile->touch();
 
         $jobProfile->load('location.state');
 

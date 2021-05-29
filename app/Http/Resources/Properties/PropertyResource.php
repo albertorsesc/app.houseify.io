@@ -3,7 +3,10 @@
 namespace App\Http\Resources\Properties;
 
 use App\Http\Resources\LocationResource;
+use App\Models\Concerns\InterventionImage\Filters\MediumFilter;
+use App\Models\Media;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Intervention\Image\Image;
 
 class PropertyResource extends JsonResource
 {

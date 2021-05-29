@@ -6,7 +6,7 @@
         <meta property="og:site_name" content="Houseify">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="google-site-verification" content="SCtMxv5igpA_geVlWon_J8b0PmgBTkb81jATbcpYYS8" />
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏡</text></svg>">
+        <link rel="icon" href="/logos/favicon.png">
         @yield('meta')
 
         <title>@yield('title') | {{ config('app.name') }}</title>
@@ -52,6 +52,10 @@
                 @include('layouts.nav')
 
                 @yield('content')
+
+                <!-- This example requires Tailwind CSS v2.0+ -->
+
+
 
             </div>
         </div>

@@ -20,8 +20,6 @@ class PropertyObserver
         $property->uuid = (string) Str::uuid();
         $property->slug = (string) Str::slug($property->title) . '-' . $property->uuid;
         $property->seller_id = auth()->id();
-
-        NewPropertyCreated::dispatch();
     }
 
     /**
@@ -33,7 +31,7 @@ class PropertyObserver
      */
     public function created(Property $property)
     {
-        LogActions::dispatch('STORE', $property, auth()->user());
+//        LogActions::dispatch('STORE', $property, auth()->user());
     }
 
     /**
@@ -56,7 +54,8 @@ class PropertyObserver
      */
     public function updated(Property $property)
     {
-        LogActions::dispatch('UPDATE', $property, auth()->user());
+        $property->searchable();
+//        LogActions::dispatch('UPDATE', $property, auth()->user());
     }
 
     /**
@@ -80,7 +79,6 @@ class PropertyObserver
      */
     public function deleted(Property $property)
     {
-        LogActions::dispatch('DELETE', $property, auth()->user());
     }
 
     /**

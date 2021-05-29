@@ -7,6 +7,9 @@ use Laravel\Scout\Searchable;
 use App\Models\Concerns\{HasLocation, Interestable, Likeable, Publishable, CanBeReported, SerializeTimestamps};
 use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, Relations\BelongsTo};
 
+/**
+ * @property boolean status
+ */
 class JobProfile extends Model
 {
     use Likeable,
@@ -20,6 +23,12 @@ class JobProfile extends Model
 
     protected $casts = ['skills' => 'array', 'status' => 'boolean',];
     protected $fillable = ['title', 'skills', 'email', 'phone', 'facebook_profile', 'linkedin_profile', 'site', 'bio', 'photo'];
+
+    protected static function boot ()
+    {
+        parent::boot();
+        static::saved(fn ($jobProfile) => $jobProfile->searchable());
+    }
 
     public function getRouteKeyName() : string
     {
@@ -69,45 +78,49 @@ class JobProfile extends Model
 
     public function toSearchableArray() : array
     {
-        if ($this->shouldBeSearchable()) {
-            return [
-                'id' => $this->id,
-                'uuid' => $this->uuid,
-                'title' => $this->title,
-                'slug' => $this->slug,
-                'skills' => $this->skills,
-                'email' => $this->email,
-                'phone' => $this->phone,
-                'sitio' => $this->sitio,
-                'facebookProfile' => $this->facebook_profile,
-                'bio' => $this->bio,
-                'status' => $this->status,
-                'location' => [
-                    'neighborhood' => $this->location ? $this->location->neighborhood : null,
-                    'city' => $this->location ? $this->location->city : null,
-                    'state' => [
-                        'name' => $this->location ? $this->location->state->name : null,
-                        'code' => $this->location ? $this->location->state->code : null,
-                    ],
-                    'fullAddress' => $this->location->getFullAddress()
-                ] ,
-                //                'images' => $this->images,
-                //                'interests' => $this->interests,
-                'meta' => [
-                    'links' => [
-                        'profile' => $this->profile()
-                    ],
-                ]
-            ];
-        }
-        return [];
+        return [
+            'id' => $this->id,
+            'uuid' => $this->uuid,
+            'title' => $this->title,
+            'slug' => $this->slug,
+            'skills' => $this->skills,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'user' => ['fullName' => $this->user->fullName()],
+            'status' => $this->status,
+            'bio' => $this->bio,
+            'photo' => $this->photo,
+            'location' => [
+                'neighborhood' => $this->location ? $this->location->neighborhood : null,
+                'city' => $this->location ? $this->location->city : null,
+                'state' => [
+                    'name' => $this->location ? $this->location->state->name : null,
+                    'code' => $this->location ? $this->location->state->code : null,
+                ],
+                'fullAddress' => $this->location ? $this->location->getFullAddress() : null,
+            ] ,
+            'interests' => $this->interests,
+            'meta' => [
+                'profile' => $this->profile()
+            ]
+        ];
     }
 
     public function shouldBeSearchable() : bool
     {
-        if (! app()->environment('production')) {
+        /*if (app()->environment('testing') || ! config('scout.algolia.is_active')) {
             return false;
-        }
-        return $this->status && $this->location;
+        }*/
+        return !! $this->status && $this->location;
+    }
+
+    /**
+     * Get the name of the index associated with the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'job_profiles';
     }
 }

@@ -1,17 +1,17 @@
 <?php
 
-use App\Http\Controllers\Auth\FacebookLoginController;
-use App\Http\Controllers\Auth\GoogleLoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuggestionController;
+use App\Http\Controllers\Auth\GoogleLoginController;
+use App\Http\Controllers\Auth\FacebookLoginController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/', function () {
     return redirect('/inicio');
 });
 
-//Route::get('/auth/login/facebook/redirect', [FacebookLoginController::class, 'redirectToProvider'])->name('facebook.redirect');
-//Route::get('/auth/login/facebook/callback', [FacebookLoginController::class, 'handleProviderCallback'])->name('facebook.callback');
+Route::get('/auth/login/facebook/redirect', [FacebookLoginController::class, 'redirectToProvider'])->name('facebook.redirect');
+Route::get('/auth/login/facebook/callback', [FacebookLoginController::class, 'handleProviderCallback'])->name('facebook.callback');
 
 Route::get('/auth/login/google/redirect', [GoogleLoginController::class, 'redirectToProvider'])->name('google.redirect');
 Route::get('/auth/login/google/callback', [GoogleLoginController::class, 'handleProviderCallback'])->name('google.callback');
@@ -33,7 +33,15 @@ Route::middleware(['auth:sanctum', 'verified', 'prevent-back-history'])->group(f
 
     Route::view('sugerencias', 'suggestions')->name('web.suggestions.index');
     Route::post('suggestions', [SuggestionController::class, 'store'])->name('suggestions.store');
+
+    Route::view('novedades', 'updates.roadmap')->name('web.roadmap.index');
 });
+
+
+
+
+
+
 
 //    Route::get('resize', function () {
 //        \Intervention\Image\Facades\Image::make('img/forum.png')

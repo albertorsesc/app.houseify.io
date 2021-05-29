@@ -29,7 +29,6 @@ class JobProfileObserver
      */
     public function created(JobProfile $jobProfile)
     {
-        LogActions::dispatch('STORE', $jobProfile, auth()->user());
     }
 
     /**
@@ -41,13 +40,12 @@ class JobProfileObserver
      */
     public function updated(JobProfile $jobProfile)
     {
-        LogActions::dispatch('UPDATE', $jobProfile, auth()->user());
+        $jobProfile->searchable();
     }
 
     public function deleting(JobProfile $jobProfile)
     {
         $jobProfile->location()->delete();
-        LogActions::dispatch('DELETE', $jobProfile, auth()->user());
     }
 
     /**

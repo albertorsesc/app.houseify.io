@@ -23,6 +23,7 @@
             'Decoración',
             'Eléctrica',
             'Electrodomésticos',
+            'Energías Renovables',
             'Ferretería',
             'Grúas',
             'Herrería',
@@ -32,6 +33,7 @@
             'Jardinería',
             'Tapicería',
             'Vidriería',
+            'Maquinaria de Construcción',
             'Material de Construcción'
         ],
 
