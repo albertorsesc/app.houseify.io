@@ -42,6 +42,7 @@ abstract class TestCase extends BaseTestCase
 
             return $class::factory()->$state()->create();
         }
+
         return $class::factory()->create($attributes);
     }
 

@@ -104,6 +104,12 @@
                                         Perfil
                                     </a>
 
+                                    <a href="{{ route('web.threads.index') }}"
+                                       class="h-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                       :class="{{ request()->routeIs('web.threads.index') ? '"border-white border-b-2"' : '' }}"
+                                       role="menuitem">
+                                        Foro
+                                    </a>
                                     <a href="{{ route('web.suggestions.index') }}"
                                        class="h-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                        :class="{{ request()->routeIs('web.suggestions.index') ? '"border-white border-b-2"' : '' }}"

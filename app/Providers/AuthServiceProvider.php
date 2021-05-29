@@ -19,6 +19,8 @@ class AuthServiceProvider extends ServiceProvider
         \App\Models\Properties\Property::class => \App\Policies\PropertyPolicy::class,
         \App\Models\Businesses\Business::class => \App\Policies\BusinessPolicy::class,
         \App\Models\JobProfiles\JobProfile::class => \App\Policies\JobProfilePolicy::class,
+
+        \App\Models\Forum\Threads\Thread::class => \App\Policies\Forum\Threads\ThreadPolicy::class,
     ];
 
     /**

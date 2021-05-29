@@ -17,7 +17,7 @@ class CitiesByStateTest extends TestCase
      */
     public function get_cities_by_state()
     {
-        $this->markTestSkipped();
+        $this->markTestSkipped('avoiding API calls');
         $this->loadSeeders([
             CountrySeeder::class,
             StateSeeder::class
