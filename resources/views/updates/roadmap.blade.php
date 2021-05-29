@@ -165,6 +165,20 @@
                                                     <span class="mr-2 bg-green-100 text-xs text-green-500 border border-green-400 rounded-full px-3 py-1">
                                                         Nuevo
                                                     </span>
+                                                    Foro Oficial de Houseify
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    Publica o Aclara tus dudas técnicas sobre la industria constructora.
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    28 Mayo 2021
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">
+                                                    <span class="mr-2 bg-green-100 text-xs text-green-500 border border-green-400 rounded-full px-3 py-1">
+                                                        Nuevo
+                                                    </span>
                                                     Inicio de Sesión con Facebook
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
