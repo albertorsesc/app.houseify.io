@@ -43,37 +43,44 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                                         </svg>
                                         <p class="ml-9 text-lg leading-6 font-medium text-gray-400">
-                                            Foro de Consultas
-                                            <span class="bg-gray-50 rounded-full border border-gray-200 text-gray-400 text-sm p-2">
-                                                90%
-                                            </span>
-                                        </p>
-                                    </dt>
-                                    <dd class="mt-2 ml-9 text-base text-gray-400">
-                                        Foro en donde Técnicos y Profesionistas puedan realizar consultas técnicas y entre todos podamos resolverlas.
-                                        <p class="text-xs mt-2">
-                                            Fecha estimada de lanzamiento: <br>
-                                            <span class="text-gray-600 font-light">{{ \Carbon\Carbon::createFromDate('2021-05-19')->addDays(10)->diffForHumans() }}</span>
-                                        </p>
-                                    </dd>
-                                </div>
-
-                                <div class="relative">
-                                    <dt>
-                                        <!-- Heroicon name: outline/check -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="absolute h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                        </svg>
-                                        <p class="ml-9 text-lg leading-6 font-medium text-gray-400">
                                             Bolsa de Trabajo
+                                            <span class="bg-gray-50 rounded-full border border-gray-200 text-gray-400 text-sm p-2">
+                                                10%
+                                            </span>
                                         </p>
                                     </dt>
                                     <dd class="mt-2 ml-9 text-base text-gray-400">
                                         Espacio para la publicación de Ofertas de Trabajo, Oportunidades de Comercio y Relaciones Laborales.
                                         <p class="text-xs mt-2">
                                             Fecha estimada de lanzamiento: <br>
-                                            <span class="text-gray-600 font-light">{{ \Carbon\Carbon::createFromDate('2021-05-19')->addDays(25)->diffForHumans() }}</span>
+                                            <span class="text-gray-600 font-light">{{ \Carbon\Carbon::createFromDate('2021-05-30')->addDays(25)->diffForHumans() }}</span>
                                         </p>
+                                    </dd>
+                                </div>
+
+                                <div class="relative">
+                                    <dt>
+                                        <svg class="absolute h-6 w-6 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                        <p class="ml-9 text-lg leading-6 font-medium text-gray-900">Foro de Consultas</p>
+                                    </dt>
+                                    <dd class="mt-2 ml-9 text-base text-gray-500">
+                                        Foro en donde Técnicos y Profesionistas puedan realizar consultas técnicas y entre todos podamos resolverlas.
+                                    </dd>
+                                </div>
+
+                                <div class="relative">
+                                    <dt>
+                                        <!-- Heroicon name: outline/check -->
+                                        <svg class="absolute h-6 w-6 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                        <p class="ml-9 text-lg leading-6 font-medium text-gray-900">Técnicos y Profesionistas</p>
+                                    </dt>
+                                    <dd class="mt-2 ml-9 text-base text-gray-500">
+                                        Espacio para que Técnicos y Profesionistas puedan crear su perfil de Trabajo con el fin de
+                                        ofrecer sus servicios y permitir a sus clientes encontrarlos en un solo lugar.
                                     </dd>
                                 </div>
 
@@ -153,6 +160,20 @@
                                             </thead>
                                             <tbody class="bg-white divide-y divide-gray-200">
 
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">
+                                                    <span class="mr-2 bg-green-100 text-xs text-green-500 border border-green-400 rounded-full px-3 py-1">
+                                                        Nuevo
+                                                    </span>
+                                                    Foro Oficial de Houseify
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    Publica o Aclara tus dudas técnicas sobre la industria constructora.
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    28 Mayo 2021
+                                                </td>
+                                            </tr>
                                             <tr>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">
                                                     <span class="mr-2 bg-green-100 text-xs text-green-500 border border-green-400 rounded-full px-3 py-1">
