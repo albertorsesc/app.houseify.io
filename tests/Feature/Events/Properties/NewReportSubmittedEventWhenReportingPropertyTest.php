@@ -40,7 +40,7 @@ class NewReportSubmittedEventWhenReportingPropertyTest extends PropertyTestCase
     */
     public function property_has_been_reported_notification_sent_when_new_report_submitted_is_dispatched()
     {
-        $this->markTestIncomplete();
+        $this->markTestIncomplete('standby');
         \Notification::fake();
 
         $this->signIn();

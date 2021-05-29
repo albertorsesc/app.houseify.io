@@ -35,10 +35,10 @@ class SweetAlert {
         })
     }
 
-    static toast(title) {
+    static toast(title, position = 'bottom-start') {
         const Toast = Swal.mixin({
             toast: true,
-            position: 'bottom-start',
+            position: position,
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,

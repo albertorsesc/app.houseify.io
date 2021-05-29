@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
         PropertyCategorySeeder::class,
         CountrySeeder::class,
         StateSeeder::class,
+        ThreadChannelSeeder::class,
 //        PublishedPropertySeeder::class,
 //        PublishedBusinessSeeder::class,
 //        PublishedJobProfileSeeder::class,

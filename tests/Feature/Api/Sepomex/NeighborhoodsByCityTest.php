@@ -16,7 +16,7 @@ class NeighborhoodsByCityTest extends TestCase
      */
     public function get_neighborhoods_by_city()
     {
-        $this->markTestSkipped();
+        $this->markTestSkipped('avoiding API calls');
         $this->signIn();
 
         $cities = (new SepomexApi())->getCitiesByState('Baja California');

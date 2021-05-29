@@ -15,6 +15,7 @@
      * */
         'construction_categories' => [
             'A/C',
+            'Albañilería',
             'Arquitectura',
             'Carpintería',
             'Cerrajería',
@@ -52,5 +53,6 @@
         'modules' => [
             'properties' => 'Propiedades',
             'businesses' => 'Directorio de Negocios',
+            'job_profiles' => 'Directorio de Técnicos',
         ],
     ];
