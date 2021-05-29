@@ -65,7 +65,6 @@ export default {
             this.isLoading = true
             axios.post(this.endpoint, this.replyForm)
                 .then(response => {
-                    dd(response.data)
                     this.replies.unshift(response.data.data)
                     this.isLoading = false
                     this.replyForm = {}
