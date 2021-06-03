@@ -89,7 +89,7 @@
                                         <div class="min-w-0 flex-1 flex items-center align-middle">
                                             <div class="flex-shrink-0">
                                                 <img class="h-10 w-10 md:h-16 md:w-16 rounded-lg"
-                                                     src="{{ $thread->author->defaultProfilePhotoUrl() }}"
+                                                     src="{{ $thread->author->getAvatar() }}"
                                                      alt="{{ $thread->author->fullName() }}" />
                                             </div>
                                             <div class="px-4 w-full md:w-2/3">

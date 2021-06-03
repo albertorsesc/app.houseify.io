@@ -10,11 +10,8 @@ Route::get('/', function () {
     return redirect('/inicio');
 });
 
-Route::get('/auth/login/facebook/redirect', [FacebookLoginController::class, 'redirectToProvider'])->name('facebook.redirect');
-Route::get('/auth/login/facebook/callback', [FacebookLoginController::class, 'handleProviderCallback'])->name('facebook.callback');
-
-Route::get('/auth/login/google/redirect', [GoogleLoginController::class, 'redirectToProvider'])->name('google.redirect');
-Route::get('/auth/login/google/callback', [GoogleLoginController::class, 'handleProviderCallback'])->name('google.callback');
+Route::get('/auth/login/{driver}/redirect', [\App\Http\Controllers\Auth\SocialLoginController::class, 'redirectToProvider'])->name('social-login.redirect');
+Route::get('/auth/login/{driver}/callback', [\App\Http\Controllers\Auth\SocialLoginController::class, 'handleProviderCallback'])->name('social-login.callback');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();

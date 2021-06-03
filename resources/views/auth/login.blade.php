@@ -85,7 +85,7 @@
 
             <div class="w-full mx-auto flex justify-center items-center align-middle mt-4">
                 <div class="w-auto items-center align-middle mr-4">
-                    <a href="{{ route('facebook.redirect') }}"
+                    <a href="{{ route('social-login.redirect', ['driver' => 'facebook']) }}"
                        class="flex align-middle items-center py-2 px-3 bg-blue-500 rounded-full shadow text-white text-sm"
                        title="Inicia Sesión con Facebook">
                         <i class="fab fa-facebook -mb-1 h-5 w-5 rounded-full"></i>
@@ -93,7 +93,7 @@
                     </a>
                 </div>
                 <div class="w-auto items-center">
-                    <a href="{{ route('google.redirect') }}"
+                    <a href="{{ route('social-login.redirect', ['driver' => 'google']) }}"
                        class="flex align-middle items-center py-2 px-3 bg-white rounded-full shadow text-gray-700 text-sm"
                        title="Inicia Sesión con Google">
                         <img src="/logos/google-icon.png" class="mr-2 object-contain h-3 w-3 rounded-full" alt="">
