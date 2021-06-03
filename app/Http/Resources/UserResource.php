@@ -18,19 +18,13 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            //            'uuid' => $this->uuid,
             'firstName' => $this->first_name,
             'lastName' => $this->last_name,
             'fullName' => $this->fullName(),
             'email' => $this->email,
-            //            'phone' => $this->phone,
             'status' => $this->status,
             'properties' => PropertyResource::collection($this->whenLoaded('properties')),
-            'photo' => $this->defaultProfilePhotoUrl(),
-//            'businesses' => BusinessResource::collection($this->whenLoaded('businesses')),
-//            'ads' => AdResource::collection($this->whenLoaded('ads')),
-            //            'propertyTargets' => PropertyTargetResource::collection($this->whenLoaded('propertyTargets')),
-            //            'propertiesCount' => $this->properties->count(),
+            'photo' => $this->getAvatar(),
             /*'meta' => [
                 'links' => [
                     'profile' => $this->profile(),

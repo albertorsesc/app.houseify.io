@@ -91,6 +91,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(JobProfile::class);
     }
 
+    public function socialAccounts() : HasMany
+    {
+        return $this->hasMany(SocialAccount::class);
+    }
+
     /* Scopes */
 
     public function scopeInterestedProperties() : Builder
