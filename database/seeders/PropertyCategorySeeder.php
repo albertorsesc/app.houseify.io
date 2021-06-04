@@ -106,6 +106,7 @@ class PropertyCategorySeeder extends Seeder
                 'name' => 'agriculture_land',
                 'display_name' => 'Terreno Agricola'
             ],
+
         ];
 
         \App\Models\Properties\PropertyCategory::insert($propertyCategories);

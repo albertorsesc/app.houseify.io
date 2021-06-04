@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', e($thread->title))
+@section('title', e($thread->title) . ' | Forum')
 
 @section('meta')
     <meta name="description" content="{{ $thread->body }}">

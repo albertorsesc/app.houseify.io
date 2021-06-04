@@ -10,12 +10,10 @@ class DatabaseSeeder extends Seeder
         UserSeeder::class,
         PropertyTypeSeeder::class,
         PropertyCategorySeeder::class,
+        AddGardenPropertyTypeAndCategoriesSeeder::class,
         CountrySeeder::class,
         StateSeeder::class,
         ThreadChannelSeeder::class,
-//        PublishedPropertySeeder::class,
-//        PublishedBusinessSeeder::class,
-//        PublishedJobProfileSeeder::class,
     ];
     /**
      * Seed the application's database.
