@@ -24,9 +24,42 @@
             </div>
         </header>
 
+        <div class="mt-4 top-0 inset-x-0">
+            <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+                <div class="p-2 rounded-lg bg-white shadow-lg sm:p-3">
+                    <div class="flex items-center justify-between flex-wrap">
+                        <div class="w-0 flex-1 flex items-center">
+          <span class="flex p-2 rounded-lg bg-white">
+            <!-- Heroicon name: outline/speakerphone -->
+            <svg class="h-6 w-6 text-emerald-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+            </svg>
+          </span>
+                            <p class="ml-3 font-medium text-emerald-400 truncate">
+                                <a href="{{ route('web.roadmap.index') }}">
+                                    <span class="md:hidden">
+                                      Explora, Registra y Publica!
+                                    </span>
+                                </a>
+                                <span class="hidden md:inline">
+                                    Asegúrate de explorar las distintas secciones dedicadas a cada área de nuestra industria!
+                                </span>
+                            </p>
+                        </div>
+                        <div class="hidden md:inline order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
+                            <a href="{{ route('web.roadmap.index') }}"
+                               class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-400 bg-white hover:bg-emerald-50">
+                                Novedades
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <main>
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="sm:px-4 py-6 sm:px-0">
+                <div class="sm:px-4 sm:px-0">
                     <div class="sm:flex sm:flex-wrap lg:justify-between lg:justify-center">
                         {{--Properties--}}
                         <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/3 px-3 mt-4 xl:mt-6">

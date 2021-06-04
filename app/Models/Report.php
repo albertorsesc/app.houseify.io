@@ -12,8 +12,6 @@ use Illuminate\Database\Eloquent\{
 
 class Report extends Model
 {
-    use HasFactory;
-
     protected $fillable = ['user_id', 'reportable_id', 'reportable_type', 'reporting_cause', 'comments'];
 
     protected static function booted ()

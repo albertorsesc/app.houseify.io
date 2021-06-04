@@ -44,16 +44,16 @@
                                         </svg>
                                         <p class="ml-9 text-lg leading-6 font-medium text-gray-400">
                                             Bolsa de Trabajo
-                                            <span class="bg-gray-50 rounded-full border border-gray-200 text-gray-400 text-sm p-2">
-                                                10%
-                                            </span>
+                                            {{--<span class="my-2 bg-gray-50 rounded-full border border-gray-200 text-gray-400 text-sm p-2">
+                                                %
+                                            </span>--}}
                                         </p>
                                     </dt>
                                     <dd class="mt-2 ml-9 text-base text-gray-400">
                                         Espacio para la publicación de Ofertas de Trabajo, Oportunidades de Comercio y Relaciones Laborales.
-                                        <p class="text-xs mt-2">
-                                            Fecha estimada de lanzamiento: <br>
-                                            <span class="text-gray-600 font-light">{{ \Carbon\Carbon::createFromDate('2021-05-30')->addDays(25)->diffForHumans() }}</span>
+                                        <p class="text-sm mt-2">
+                                            Próximamente {{--<br>
+                                            <span class="text-gray-600 font-light">{{ \Carbon\Carbon::createFromDate('2021-05-30')->addDays(25)->diffForHumans() }}</span>--}}
                                         </p>
                                     </dd>
                                 </div>
