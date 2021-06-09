@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\Api\Properties\Concerns;
+namespace Tests\Feature\Api\Properties\Concerns;
 
 use Tests\TestCase;
 use App\Models\Properties\Concerns\BusinessType;
