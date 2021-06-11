@@ -32,7 +32,9 @@ class PropertyObserver
      */
     public function created(Property $property)
     {
-        $rootUsers = User::query()->whereIn('email', config('houseify.roles.root'))->get();
+        $rootUsers = User::query()
+                         ->whereIn('email', config('houseify.roles.root'))
+                         ->get();
         Notification::send($rootUsers, new NotifyNewProperty($property));
 //        LogActions::dispatch('STORE', $property, auth()->user());
     }

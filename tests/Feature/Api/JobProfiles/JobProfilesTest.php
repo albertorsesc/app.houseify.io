@@ -3,8 +3,10 @@
 namespace Tests\Feature\Api\JobProfiles;
 
 use App\Models\JobProfiles\JobProfile;
+use App\Notifications\NotifyNewJobProfile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 class JobProfilesTest extends TestCase
@@ -106,5 +108,30 @@ class JobProfilesTest extends TestCase
         $this->assertDatabaseMissing('job_profiles', $existingJobProfile->toArray());
     }
 
+    /* Notifications */
 
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function notification_sent_to_root_users_when_business_is_created()
+    {
+        Notification::fake();
+        $this->signIn([
+            'email' => config('houseify.roles.root')[0]
+        ]);
+        $jobProfile = $this->make(JobProfile::class);
+
+        $response = $this->postJson(route($this->routePrefix . 'store'), $jobProfile->toArray());
+        $response->assertCreated();
+
+        $this->assertTrue(in_array(auth()->user()->email, config('houseify.roles.root')));
+        $newJobProfile = JobProfile::latest()->first();
+        Notification::assertSentTo(
+            auth()->user(),
+            function (NotifyNewJobProfile $notification, $channels) use ($newJobProfile) {
+                return $notification->jobProfile->id === $newJobProfile->id;
+            }
+        );
+    }
 }
