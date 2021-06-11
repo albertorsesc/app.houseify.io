@@ -1,10 +1,11 @@
 <?php
 
-namespace Feature\Api\Properties;
+namespace Tests\Feature\Api\Properties;
 
-use Illuminate\Support\Facades\Http;
 use Tests\PropertyTestCase;
 use App\Models\Properties\Property;
+use App\Notifications\NotifyNewProperty;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PropertiesTest extends PropertyTestCase
@@ -62,11 +63,10 @@ class PropertiesTest extends PropertyTestCase
      */
     public function authenticated_user_can_store_a_property()
     {
-        $this->withoutExceptionHandling();
         $property = $this->makeProperty();
 
         $response = $this->postJson(route($this->routePrefix . 'store'), $property);
-        $response->assertStatus(201);
+        $response->assertCreated();
         $response->assertJson(['data' => ['title' => $property['title']]]);
 
         $this->assertDatabaseHas('properties', $property);
@@ -119,6 +119,33 @@ class PropertiesTest extends PropertyTestCase
         $this->assertDatabaseMissing(
             'properties',
             $property->toArray()
+        );
+    }
+
+    /* Notifications */
+
+    /**
+     * @test
+     * @throws \Throwable
+    */
+    public function notification_sent_to_root_users_when_property_is_created()
+    {
+        Notification::fake();
+        $this->signIn([
+            'email' => config('houseify.roles.root')[0]
+        ]);
+        $property = $this->makeProperty();
+
+        $response = $this->postJson(route($this->routePrefix . 'store'), $property);
+        $response->assertCreated();
+
+        $this->assertTrue(in_array(auth()->user()->email, config('houseify.roles.root')));
+        $newProperty = Property::latest()->first();
+        Notification::assertSentTo(
+            auth()->user(),
+            function (NotifyNewProperty $notification, $channels) use ($newProperty) {
+                return $notification->property->id === $newProperty->id;
+            }
         );
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Observers\Businesses;
 
+use App\Models\User;
 use Illuminate\Support\Str;
-use App\Events\Logs\LogActions;
 use App\Models\Businesses\Business;
+use App\Notifications\NotifyNewBusiness;
+use Illuminate\Support\Facades\Notification;
 
 class BusinessObserver
 {
@@ -17,7 +19,7 @@ class BusinessObserver
     public function creating(Business $business)
     {
         $business->uuid = (string) Str::uuid();
-        $business->slug = (string) Str::slug($business->name);
+        $business->slug = Str::slug($business->name);
         $business->owner_id = auth()->id();
     }
 
@@ -30,6 +32,10 @@ class BusinessObserver
      */
     public function created(Business $business)
     {
+        $rootUsers = User::query()
+                         ->whereIn('email', config('houseify.roles.root'))
+                         ->get();
+        Notification::send($rootUsers, new NotifyNewBusiness($business));
 //        LogActions::dispatch('STORE', $business, auth()->user());
     }
 

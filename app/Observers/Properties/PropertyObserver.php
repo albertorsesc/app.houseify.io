@@ -2,9 +2,10 @@
 
 namespace App\Observers\Properties;
 
-use App\Events\Properties\NewPropertyCreated;
+use App\Models\User;
+use App\Notifications\NotifyNewProperty;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
-use App\Events\Logs\LogActions;
 use App\Models\Properties\Property;
 
 class PropertyObserver
@@ -31,6 +32,10 @@ class PropertyObserver
      */
     public function created(Property $property)
     {
+        $rootUsers = User::query()
+                         ->whereIn('email', config('houseify.roles.root'))
+                         ->get();
+        Notification::send($rootUsers, new NotifyNewProperty($property));
 //        LogActions::dispatch('STORE', $property, auth()->user());
     }
 

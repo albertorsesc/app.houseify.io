@@ -2,9 +2,11 @@
 
 namespace App\Observers;
 
-use App\Events\Logs\LogActions;
-use App\Models\JobProfiles\JobProfile;
+use App\Models\User;
 use Illuminate\Support\Str;
+use App\Models\JobProfiles\JobProfile;
+use App\Notifications\NotifyNewJobProfile;
+use Illuminate\Support\Facades\Notification;
 
 class JobProfileObserver
 {
@@ -29,6 +31,10 @@ class JobProfileObserver
      */
     public function created(JobProfile $jobProfile)
     {
+        $rootUsers = User::query()
+                         ->whereIn('email', config('houseify.roles.root'))
+                         ->get();
+        Notification::send($rootUsers, new NotifyNewJobProfile($jobProfile));
     }
 
     /**

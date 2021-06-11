@@ -2,7 +2,9 @@
 
 namespace Tests\Feature\Api\Businesses;
 
+use App\Notifications\NotifyNewBusiness;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Notification;
 use Tests\BusinessTestCase;
 use Illuminate\Support\Str;
 use App\Models\Businesses\Business;
@@ -129,5 +131,32 @@ class BusinessesTest extends BusinessTestCase
         $response->assertStatus(204);
 
         $this->assertDatabaseMissing('businesses', $existingBusiness->toArray());
+    }
+
+    /* Notifications */
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function notification_sent_to_root_users_when_business_is_created()
+    {
+        Notification::fake();
+        $this->signIn([
+            'email' => config('houseify.roles.root')[0]
+        ]);
+        $business = $this->makeBusiness();
+
+        $response = $this->postJson(route($this->routePrefix . 'store'), $business);
+        $response->assertCreated();
+
+        $this->assertTrue(in_array(auth()->user()->email, config('houseify.roles.root')));
+        $newBusiness = Business::latest()->first();
+        Notification::assertSentTo(
+            auth()->user(),
+            function (NotifyNewBusiness $notification, $channels) use ($newBusiness) {
+                return $notification->business->id === $newBusiness->id;
+            }
+        );
     }
 }
