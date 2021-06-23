@@ -82,7 +82,6 @@ export default {
         this.onScroll()
     },
     components: {
-        JobProfileCard: () => import(/* webpackChunkName: "job-profile-card" */ '../../components/JobProfiles/JobProfileCard'),
     }
 }
 </script>

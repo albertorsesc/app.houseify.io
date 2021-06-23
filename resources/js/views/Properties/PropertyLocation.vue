@@ -79,7 +79,7 @@
                 </dl>
             </div>
 
-            <modal v-if="property.seller.id === auth"
+            <modal v-if="isAuthenticated && property.seller.id === auth"
                    modal-id="property-location"
                    max-width="sm:max-w-5xl">
                 <template #title>Ubicación de la Propiedad</template>
@@ -348,7 +348,9 @@ export default {
         })
     },
     created() {
-        this.$store.dispatch('general/fetchStates')
+        if (this.isAuthenticated) {
+            this.$store.dispatch('general/fetchStates')
+        }
     },
     components: {
         VueMultiselect,

@@ -100,7 +100,7 @@
                             </span>
                         </div>
                         <div class="-ml-px w-0 flex-1 flex">
-                            <a :href="jobProfile.meta.profile"
+                            <a :href="isAuthenticated ? jobProfile.meta.links.profile : jobProfile.meta.links.publicProfile"
                                class="lg:relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
                                 <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />

@@ -1,6 +1,6 @@
 <template>
     <div class="my-3 w-full sm:w-1/2 md:w-1/3 px-2 mt-8 md:mb-8 md:mt-4">
-        <a :href="business.meta.profile">
+        <a :href="isAuthenticated ? business.meta.links.profile : business.meta.links.publicProfile">
             <div class="card transition hover:transform max-w-sm rounded-lg border border-gray-200 bg-white shadow-lg px-2 py-4">
                 <div class="text-right align-middle items-end">
                     <div class="flex justify-end">
@@ -99,7 +99,8 @@ export default {
         }
     },
     components: {
-        InterestedBtn: () => import(/* webpackChunkName: "interested-btn" */ '../InterestedBtn')
+        Divider: () => import(/* webpackChunkName: "divider" */ '../Divider'),
+        InterestedBtn: () => import(/* webpackChunkName: "interested-btn" */ '../InterestedBtn'),
     }
 }
 </script>

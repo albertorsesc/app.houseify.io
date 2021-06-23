@@ -481,7 +481,6 @@ export default {
     },
     components: {
         Search: () => import(/* webpackChunkName: "search" */ '../../components/Search'),
-        PropertyCard: () => import(/* webpackChunkName: "property-card" */ '../../components/Properties/PropertyCard'),
     }
 }
 </script>

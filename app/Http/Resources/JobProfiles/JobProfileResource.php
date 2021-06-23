@@ -35,7 +35,10 @@ class JobProfileResource extends JsonResource
             'status' => $this->status,
             'photo' => $this->photo,
             'meta' => [
-                'profile' => $this->profile()
+                'links' => [
+                    'profile' => $this->profile(),
+                    'publicProfile' => $this->publicProfile(),
+                ]
             ]
         ];
     }

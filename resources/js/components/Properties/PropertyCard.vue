@@ -54,13 +54,13 @@
                                     endpoint="/properties"
                     ></interested-btn>
                     <a class="inline-block text-gray-700 hover:shadow-lg hover:text-indigo-500 tracking-wide text-sm font-bold mr-2 align-middle items-center"
-                       :href="`https://www.facebook.com/sharer.php?u=` + currentUrl"
+                       :href="`https://www.facebook.com/sharer.php?u=` + property.meta.links.publicProfile"
                        target="_blank"
                        title="Compartir">
                         <i class="fab fa-facebook text-blue-500 text-lg"></i>
                     </a>
                     <div class="mt-1 ml-2 right-0 items-center align-middle">
-                        <a :href="property.meta.links.profile"
+                        <a :href="isAuthenticated ? property.meta.links.profile : property.meta.links.publicProfile"
                            class="h-link flex no-underline text-sm font-medium text-gray-300 hover:text-emerald-400"
                            title="Ver Propiedad">
                             Ver

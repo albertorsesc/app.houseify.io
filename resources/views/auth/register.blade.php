@@ -43,7 +43,7 @@
                             <x-jet-checkbox name="terms" id="terms"/>
 
                             <div class="ml-2">
-                                {!! __('Al hacer clic en "Registrarte", aceptas nuestras Condiciones, la Política de datos y la Política de cookies :terms_of_service and :privacy_policy', [
+                                {!! __('Al hacer clic en "Registrarte", aceptas nuestras Condiciones, la Política de datos y la Política de cookies :terms_of_service y :privacy_policy', [
                                         'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Terminos de Servicio').'</a>',
                                         'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Politicas de Privacidad').'</a>',
                                 ]) !!}

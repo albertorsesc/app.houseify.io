@@ -9,6 +9,22 @@ use App\Http\Resources\Businesses\BusinessResource;
 
 class BusinessController extends Controller
 {
+    public function index()
+    {
+        return view('businesses.guests.index', [
+            'businesses' => BusinessResource::collection(
+                Business::query()
+                        ->isPublished()
+                        ->with([
+                            'interests',
+                            'location.state',
+                            'owner:id,first_name,last_name',
+                        ])
+                        ->latest()
+                        ->paginate(200)
+            )
+        ]);
+    }
     public function show (Business $business)
     {
         return view('businesses.show', [

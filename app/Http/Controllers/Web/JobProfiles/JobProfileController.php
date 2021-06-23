@@ -9,6 +9,23 @@ use App\Http\Resources\JobProfiles\JobProfileResource;
 
 class JobProfileController extends Controller
 {
+    public function index()
+    {
+        return view('job-profiles.guests.index', [
+            'jobProfiles' => JobProfileResource::collection(
+                JobProfile
+                    ::query()
+                    ->isPublished()
+                    ->with([
+                        'user:id,first_name,last_name',
+                        'location.state',
+                        'interests'
+                    ])
+                    ->orderBy('updated_at', 'desc')
+                    ->paginate(200)
+            )
+        ]);
+    }
     public function show(JobProfile $jobProfile)
     {
         return view('job-profiles.show', [

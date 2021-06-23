@@ -4,8 +4,8 @@ require('laravel-mix-bundle-analyzer');
 mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
-        // require('tailwindcss'),
-        require('@tailwindcss/jit'),
+        require('tailwindcss'),
+        // require('@tailwindcss/jit'),
         require('autoprefixer'),
     ]).vue();
 

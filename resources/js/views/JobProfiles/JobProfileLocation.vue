@@ -344,7 +344,9 @@ export default {
         })
     },
     created() {
-        this.$store.dispatch('general/fetchStates')
+        if (this.isAuthenticated) {
+            this.$store.dispatch('general/fetchStates')
+        }
     },
     components: {
         VueMultiselect,

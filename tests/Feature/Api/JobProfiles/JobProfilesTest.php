@@ -46,7 +46,10 @@ class JobProfilesTest extends TestCase
                     'site' => $jobProfile->site,
                     'bio' => $jobProfile->bio,
                     'meta' => [
-                        'profile' => $jobProfile->profile()
+                        'links' => [
+                            'profile' => $jobProfile->profile(),
+                            'publicProfile' => $jobProfile->publicProfile(),
+                        ]
                     ]
                 ]
             ]

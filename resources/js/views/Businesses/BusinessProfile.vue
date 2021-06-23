@@ -161,8 +161,11 @@ export default {
                 window.location.reload()
             }, 1300)
         })
-        this.$store.dispatch('general/fetchConstructionCategories')
-        this.$store.dispatch('general/fetchStates')
+
+        if (this.isAuthenticated) {
+            this.$store.dispatch('general/fetchConstructionCategories')
+            this.$store.dispatch('general/fetchStates')
+        }
     },
     components: {
         VueMultiselect,
