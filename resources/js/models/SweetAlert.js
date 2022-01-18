@@ -1,6 +1,6 @@
 // const Swal = require('sweetalert2')
 import Swal from 'sweetalert2'
-
+// SweetAlert.success('Haz registrado con exito')
 class SweetAlert {
 
     static success(title) {

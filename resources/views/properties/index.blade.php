@@ -89,7 +89,6 @@
 
             <main class="">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <!-- Replace with your content -->
                     <div class="px-4 py-6 sm:px-0">
                         <div v-show="activeTab === 'explore-properties'" class="text-3xl block">
                             <explore-properties></explore-properties>
@@ -105,7 +104,6 @@
                             <search-properties></search-properties>
                         </div>
                     </div>
-                    <!-- /End replace -->
                 </div>
             </main>
         </div>

@@ -55,7 +55,7 @@
                             <!--Name and Comments-->
                             <div class="w-2/3">
                                 <label class="block text-sm font-medium text-gray-700">
-                                    Busca por Nombre del Negocio o Informacion adicional
+                                    Busca por Nombre del Negocio o Información adicional
                                 </label>
                                 <div class="mt-1">
                                     <ais-search-box :placeholder="''"></ais-search-box>

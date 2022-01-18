@@ -142,7 +142,7 @@
                                                     </div>
                                                     <div class="sm:col-span-2">
                                                         <dt class="text-sm font-medium text-gray-500">
-                                                            Informacion Adicional
+                                                            Información Adicional
                                                         </dt>
                                                         <dd class="mt-1 text-sm text-gray-900" v-text="localBusiness.comments"></dd>
                                                     </div>
