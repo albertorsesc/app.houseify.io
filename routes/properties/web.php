@@ -6,4 +6,5 @@
         Route::get('propiedades/{property:slug}', [PropertyController::class, 'show'])->name('web.properties.show');
     });
 
-    Route::get('i/propiedades/{property:slug}', [PropertyController::class, 'display'])->name('web.public.properties.show');
+    Route::get('h/propiedades', [PropertyController::class, 'index'])->name('web.public.properties.index');
+    Route::get('h/propiedades/{property:slug}', [PropertyController::class, 'display'])->name('web.public.properties.show');

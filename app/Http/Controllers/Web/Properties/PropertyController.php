@@ -9,6 +9,26 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class PropertyController extends Controller
 {
+    public function index()
+    {
+        return view('properties.guests.index', [
+            'properties' => PropertyResource::collection(
+                Property::query()
+                        ->isPublished()
+                        ->with([
+                            'media',
+                            'interests',
+                            'seller:id',
+                            'location.state',
+                            'propertyFeature',
+                            'propertyCategory.propertyType',
+                        ])
+                        ->latest()
+                        ->paginate(200)
+            )
+        ]);
+    }
+
     public function show (Property $property)
     {
         /*abort_unless(

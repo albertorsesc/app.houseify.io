@@ -109,7 +109,7 @@
     function login () {
         window.axios.get('/sanctum/csrf-cookie').then(response => {
             window.axios.post('login').then(response => {
-                dd('bienvenido');
+                dd('Bienvenid@ a Houseify.io!');
             });
         });
     }

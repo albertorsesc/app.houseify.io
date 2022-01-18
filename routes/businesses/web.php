@@ -12,4 +12,5 @@
         Route::get('directorio-de-negocios/{business:slug}', [BusinessController::class, 'show'])->name('web.businesses.show');
     });
 
-    Route::get('i/directorio-de-negocios/{business:slug}', [BusinessController::class, 'display'])->name('web.public.businesses.show');
+    Route::get('h/directorio-de-negocios', [BusinessController::class, 'index'])->name('web.public.businesses.index');
+    Route::get('h/directorio-de-negocios/{business:slug}', [BusinessController::class, 'display'])->name('web.public.businesses.show');

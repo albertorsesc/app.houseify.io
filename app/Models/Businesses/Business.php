@@ -118,7 +118,10 @@ class Business extends Model
             'logo' => $this->logo,
             'interests' => $this->interests,
             'meta' => [
-                'profile' => $this->profile()
+                'links' => [
+                    'profile' => $this->profile(),
+                    'publicProfile' => $this->publicProfile(),
+                ]
             ]
         ];
     }

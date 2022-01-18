@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuggestionController;
-use App\Http\Controllers\Auth\GoogleLoginController;
-use App\Http\Controllers\Auth\FacebookLoginController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/', function () {
@@ -33,12 +31,6 @@ Route::middleware(['auth:sanctum', 'verified', 'prevent-back-history'])->group(f
 
     Route::view('novedades', 'updates.roadmap')->name('web.roadmap.index');
 });
-
-
-
-
-
-
 
 //    Route::get('resize', function () {
 //        \Intervention\Image\Facades\Image::make('img/forum.png')

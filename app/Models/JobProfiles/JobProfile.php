@@ -101,7 +101,10 @@ class JobProfile extends Model
             ] ,
             'interests' => $this->interests,
             'meta' => [
-                'profile' => $this->profile()
+                'links' => [
+                    'profile' => $this->profile(),
+                    'publicProfile' => $this->publicProfile(),
+                ]
             ]
         ];
     }

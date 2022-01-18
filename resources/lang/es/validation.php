@@ -153,7 +153,7 @@
             'name' => 'Nombre',
             'phone' => 'Teléfono',
             'body' => 'Cuerpo',
-            'excerpt' => 'Descripcion Corta',
+            'excerpt' => 'Descripción Corta',
             'category' => 'Categoría',
             'comments' => 'Comentarios',
             'business_type' => 'Tipo de Negocio',

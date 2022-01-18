@@ -183,7 +183,7 @@
 
             <div class="mt-4 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
                 <div class="space-y-6 lg:col-start-1"
-                     :class="[isAuthenticated && localBusiness.owner.id === auth ? 'lg:col-span-2' : 'lg:col-span-12']">
+                     :class="[(isAuthenticated && localBusiness.owner.id === auth) && ('{{ $likes['like_count'] || $interests['interest_count'] }}') ? 'lg:col-span-2' : 'lg:col-span-12']">
                     {{--Mobile--}}
                     <div v-if="isAuthenticated && localBusiness.owner.id === auth"
                          class="flex justify-end md:hidden mx-2 md:-mx-3 mt-1 mb-2" v-cloak>
@@ -381,9 +381,27 @@
                                                         </dt>
                                                         <dd class="mt-1 text-sm text-gray-900" v-text="localBusiness.meta.updatedAt"></dd>
                                                     </div>
+                                                    <div class="sm:col-span-1">
+                                                        <dt class="text-sm font-medium text-gray-500">
+                                                            Compartir
+                                                        </dt>
+                                                        <dd class="mt-1 text-sm text-gray-900">
+                                                            <div class="w-1/2">
+                                                                <a :href="`https://www.facebook.com/sharer.php?u=` + localBusiness.meta.links.publicProfile"
+                                                                   target="_blank"
+                                                                   title="Compartir"
+                                                                   class="w-full md:w-1/2 inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                                                    <span class="sr-only">Compartir en Facebook</span>
+                                                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                                                        <path fill-rule="evenodd" d="M20 10c0-5.523-4.477-10-10-10S0 4.477 0 10c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V10h2.54V7.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V10h2.773l-.443 2.89h-2.33v6.988C16.343 19.128 20 14.991 20 10z" clip-rule="evenodd" />
+                                                                    </svg>
+                                                                </a>
+                                                            </div>
+                                                        </dd>
+                                                    </div>
                                                     <div v-if="localBusiness.comments" class="sm:col-span-2">
                                                         <dt class="text-sm font-medium text-gray-500">
-                                                            Informacion Adicional
+                                                            Información Adicional
                                                         </dt>
                                                         <dd class="mt-1 text-sm text-gray-900" v-text="localBusiness.comments"></dd>
                                                     </div>
@@ -397,12 +415,10 @@
                                     <business-location v-cloak></business-location>
 
                                     @if ($business->location && ! is_null($business->location->coordinates))
-
                                         <google-map :location="{{ json_encode($business->location) }}"
                                                     :redirect-to="{{ json_encode($business->location->getGoogleMap()) }}"
                                                     :map-class="'rounded-lg border-gray-300 h-80 min-w-full relative'"
                                         ></google-map>
-
                                     @endif
 
                                     <modal v-if="localBusiness.owner.id === auth" modal-id="update-business" max-width="sm:max-w-5xl" v-cloak>
@@ -545,14 +561,13 @@
                                     </modal>
                                 </div>
                             </div>
-                            <!-- /End replace -->
                         </div>
-
                     </section>
                 </div>
 
                 <section v-if="isAuthenticated && localBusiness.owner.id === auth"
-                         aria-labelledby="timeline-title" class="lg:col-start-3 lg:col-span-1">
+                         aria-labelledby="timeline-title"
+                         class="lg:col-start-3 lg:col-span-1">
                     <div class="md:mt-6">
                         <div class="hidden lg:flex mb-2">
                             {{--Publish/UnPublish--}}
@@ -583,17 +598,18 @@
                         </div>
 
                         {{--Activity--}}
-                        <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
-                            <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Actividad</h2>
+                        @if($likes['like_count'] || $interests['interest_count'])
+                            <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
+                                <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Actividad</h2>
 
-                            <div class="mt-6 flow-root">
-                                <ul class="-mb-8 pb-12">
-                                    @if($likes['like_count'])
-                                    <li>
-                                        <div class="relative pb-16">
-                                            <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                                            <div class="relative flex space-x-3">
-                                                <div>
+                                <div class="mt-6 flow-root">
+                                    <ul class="-mb-8 pb-12">
+                                        @if($likes['like_count'])
+                                            <li>
+                                                <div class="relative pb-16">
+                                                    <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                                                    <div class="relative flex space-x-3">
+                                                        <div>
                                               <span class="h-8 w-8 rounded-full bg-white border border-emerald-300 flex items-center justify-center ring-8 ring-white">
                                                   <svg class="h-5 w-5 text-emerald-300"
                                                        fill="none"
@@ -603,26 +619,26 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                                                     </svg>
                                               </span>
-                                                </div>
+                                                        </div>
 
-                                                <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
-                                                    <div>
-                                                        <p class="text-sm text-gray-500">
-                                                            Tienes <span class="font-medium text-gray-900">1</span> nuevo Like.
-                                                        </p>
-                                                    </div>
-                                                    <div class="text-right text-sm whitespace-nowrap text-gray-500">
-                                                        <time datetime="{{ $likes['last_like_at'] }}">
-                                                            {{ $likes['last_like_at'] }}
-                                                        </time>
+                                                        <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                                            <div>
+                                                                <p class="text-sm text-gray-500">
+                                                                    Tienes <span class="font-medium text-gray-900">1</span> nuevo Like.
+                                                                </p>
+                                                            </div>
+                                                            <div class="text-right text-sm whitespace-nowrap text-gray-500">
+                                                                <time datetime="{{ $likes['last_like_at'] }}">
+                                                                    {{ $likes['last_like_at'] }}
+                                                                </time>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
-
-                                            </div>
-                                        </div>
-                                        <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                                    </li>
-                                    @endif
+                                                <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                                            </li>
+                                        @endif
 
                                     <!--                                    <li>
                                                                             <div class="relative pb-8">
@@ -648,54 +664,55 @@
                                                                             </div>
                                                                         </li>-->
 
-                                    @if($interests['interest_count'])
-                                    <li>
-                                        <div class="relative pb-8">
-                                            <div class="relative flex space-x-3">
-                                                <div>
+                                        @if($interests['interest_count'])
+                                            <li>
+                                                <div class="relative pb-8">
+                                                    <div class="relative flex space-x-3">
+                                                        <div>
                                           <span class="h-8 w-8 rounded-full bg-white border border-red-300 flex items-center justify-center ring-8 ring-white">
                                               <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                             </svg>
                                           </span>
-                                                </div>
-                                                <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
-                                                    <div>
-                                                        <p class="text-sm text-gray-500">
-                                                            Hay <span class="font-medium text-gray-900">1</span> nuevo interesado.
-                                                        </p>
+                                                        </div>
+                                                        <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                                            <div>
+                                                                <p class="text-sm text-gray-500">
+                                                                    Hay <span class="font-medium text-gray-900">1</span> nuevo interesado.
+                                                                </p>
+                                                            </div>
+                                                            <div class="text-right text-sm whitespace-nowrap text-gray-500">
+                                                                <time datetime="{{ $interests['last_interest_at'] }}">
+                                                                    {{ $interests['last_interest_at'] }}
+                                                                </time>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="text-right text-sm whitespace-nowrap text-gray-500">
-                                                        <time datetime="{{ $interests['last_interest_at'] }}">
-                                                            {{ $interests['last_interest_at'] }}
-                                                        </time>
-                                                    </div>
                                                 </div>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                </div>
+                                <div class="flex flex-col justify-stretch">
+                                    <div class="block bg-gray-50 px-4 py-4 hover:text-gray-700 sm:rounded-b-lg">
+                                        <div class="flex justify-evenly">
+                                            <!--                                        <div>
+                                                                                        <span class="text-xs font-medium text-gray-500 text-center">Visitas</span>
+                                                                                        <span class="text-blue-500 text-sm">23</span>
+                                                                                    </div>-->
+                                            <div class="mr-2">
+                                                <span class="text-xs font-medium text-gray-500 text-center">Likes</span>
+                                                <span class="text-blue-500 text-sm">{{ $likes['like_count'] }}</span>
                                             </div>
-                                        </div>
-                                    </li>
-                                    @endif
-                                </ul>
-                            </div>
-                            <div class="flex flex-col justify-stretch">
-                                <div class="block bg-gray-50 px-4 py-4 hover:text-gray-700 sm:rounded-b-lg">
-                                    <div class="flex justify-evenly">
-<!--                                        <div>
-                                            <span class="text-xs font-medium text-gray-500 text-center">Visitas</span>
-                                            <span class="text-blue-500 text-sm">23</span>
-                                        </div>-->
-                                        <div class="mr-2">
-                                            <span class="text-xs font-medium text-gray-500 text-center">Likes</span>
-                                            <span class="text-blue-500 text-sm">{{ $likes['like_count'] }}</span>
-                                        </div>
-                                        <div>
-                                            <span class="text-xs font-medium text-gray-500 text-center">Interesados</span>
-                                            <span class="text-blue-500 text-sm">{{ $interests['interest_count'] }}</span>
+                                            <div>
+                                                <span class="text-xs font-medium text-gray-500 text-center">Interesados</span>
+                                                <span class="text-blue-500 text-sm">{{ $interests['interest_count'] }}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </section>
             </div>

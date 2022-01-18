@@ -434,37 +434,19 @@
                                                         </div>
                                                     </div>
                                                 </li>
-                                                <li @click="copy"
-                                                    class="mt-3 cursor-pointer">
-                                                    <div class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
-                                                        <div class="px-4 pb-4 sm:px-6">
-                                                            <div class="flex items-center justify-center">
-                                                                <svg class="h-6 w-6 mr-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                                                                </svg>
-                                                                <div class="text-base leading-5 font-medium text-gray-600 truncate">
-                                                                    Copiar Enlace de la Propiedad
-                                                                </div>
-                                                                {{--<div class="ml-2 flex-shrink-0 flex w-1/2">
-                                                                    <a @click="copy"
-                                                                       role="button"
-                                                                       class="cursor-pointer text-xs">
-                                                                        {{ $property->publicProfile() }}
-                                                                        <action-message
-                                                                            :message="'Copiado!'"
-                                                                        ></action-message>
-                                                                    </a>
-                                                                </div>--}}
-                                                            </div>
-                                                        </div>
-
-                                                        <action-message
-                                                            :message="'Copiado!'"
-                                                        ></action-message>
-                                                    </div>
-                                                </li>
-
                                             </ul>
+                                            <divider title="Compartir en"></divider>
+                                            <div class="text-center mb-4 -mt-3">
+                                                <a :href="`https://www.facebook.com/sharer.php?u=` + localProperty.meta.links.publicProfile"
+                                                   target="_blank"
+                                                   title="Compartir"
+                                                   class="w-full md:w-1/2 inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                                    <span class="sr-only">Compartir en Facebook</span>
+                                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                                        <path fill-rule="evenodd" d="M20 10c0-5.523-4.477-10-10-10S0 4.477 0 10c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V10h2.54V7.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V10h2.773l-.443 2.89h-2.33v6.988C16.343 19.128 20 14.991 20 10z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

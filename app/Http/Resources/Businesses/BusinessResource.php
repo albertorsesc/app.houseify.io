@@ -35,7 +35,10 @@ class BusinessResource extends JsonResource
             'status' => $this->status,
             'logo' => $this->logo,
             'meta' => [
-                'profile' => $this->profile(),
+                'links' => [
+                    'profile' => $this->profile(),
+                    'publicProfile' => $this->publicProfile()
+                ],
                 'updatedAt' => $this->updated_at->diffForHumans()
             ]
         ];

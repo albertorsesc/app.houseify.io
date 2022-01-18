@@ -49,7 +49,10 @@ class BusinessesTest extends BusinessTestCase
                     'status' => $business->status,
                     'logo' => $business->logo,
                     'meta' => [
-                        'profile' => $business->profile(),
+                        'links' => [
+                            'profile' => $business->profile(),
+                            'publicProfile' => $business->publicProfile(),
+                        ],
                         'updatedAt' => $business->updated_at->diffForHumans()
                     ]
                 ]

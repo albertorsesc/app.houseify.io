@@ -2,6 +2,25 @@
 
 @section('title', e($jobProfile->title))
 
+@section('styles')
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+@endsection
+
+@section('scripts')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.gmaps_api') }}&libraries=&v=weekly"
+        async
+    ></script>
+@endsection
+
+@section('meta')
+    <meta property="og:url" content="{{ $jobProfile->publicProfile() }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ $jobProfile->title }}" />
+    <meta name="description" content="Profesional en {{ $jobProfile->location ? $jobProfile->location->city . ' - ' . $jobProfile->location->state->code : null }}" />
+    <meta property="og:image" content="{{ $jobProfile->photo ? str_replace('public', 'storage', $jobProfile->photo) : '' }}" />
+@endsection
+
 @section('content')
 
     <display-job-profile
@@ -130,6 +149,13 @@
                             <divider title="Dirección"></divider>
 
                             <job-profile-location></job-profile-location>
+
+                            @if ($jobProfile->location && ! is_null($jobProfile->location->coordinates))
+                                <google-map :location="{{ json_encode($jobProfile->location) }}"
+                                            :redirect-to="{{ json_encode($jobProfile->location->getGoogleMap()) }}"
+                                            :map-class="'rounded-lg border-gray-300 h-80 min-w-full relative'"
+                                ></google-map>
+                            @endif
                         </section>
                     </div>
                 </div>

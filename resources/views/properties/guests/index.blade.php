@@ -2,8 +2,12 @@
 
 @section('title', 'Propiedades')
 
-@section('styles')
-    <link rel="stylesheet" href="/css/vue-multiselect.min.css">
+@section('meta')
+    <meta property="og:url" content="{{ route('web.public.properties.index') }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Propiedades en venta, renta o traspaso en México." />
+    <meta property="og:description" content="Encuentra propiedades en venta, renta o traspaso en México." />
+    <meta property="og:image" content="/logos/houseify-13.png" />
 @endsection
 
 @section('content')
@@ -89,15 +93,38 @@
 
             <main class="">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <!-- Replace with your content -->
                     <div class="px-4 py-6 sm:px-0">
                         <div v-show="activeTab === 'explore-properties'" class="text-3xl block">
-                            <explore-properties></explore-properties>
+                            @foreach($properties as $property)
+                                <div class="flex-wrap md:flex sm:justify-center mt-3">
+                                    <property-card
+                                        :property="{{ json_encode($property) }}"
+                                    ></property-card>
+                                </div>
+                            @endforeach
                         </div>
+                        {{ $properties->links() }}
                         <div v-show="activeTab === 'my-properties'" class="text-3xl block">
-                            <my-properties></my-properties>
+                            <div class="text-center">
+                                <p class="px-10 py-6 text-lg text-center text-gray-500">
+                                    <a href="{{ route('login') }}"
+                                       class="h-link text-teal-500">
+                                        Inicia sesión
+                                    </a> y publica tus propiedades.
+                                </p>
+                            </div>
                         </div>
                         <div v-show="activeTab === 'interesting-properties'" class="text-3xl block">
-                            <interesting-properties></interesting-properties>
+                            <div class="text-center">
+                                <p class="px-10 py-6 text-lg text-center text-gray-500">
+                                    Debes
+                                    <a href="{{ route('login') }}"
+                                       class="h-link text-teal-500">
+                                        Iniciar sesión
+                                    </a> para guardar propiedades de interés.
+                                </p>
+                            </div>
                         </div>
                         <div v-show="activeTab === 'search-properties'"
                              class="text-3xl block">
@@ -109,3 +136,4 @@
         </div>
     </properties>
 @endsection
+

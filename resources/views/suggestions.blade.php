@@ -10,7 +10,7 @@
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 <div class="w-full md:flex md:justify-between items-center">
                     <h2 class="font-semibold text-2xl text-teal-400">
-                        Buzon de Sugerencias
+                        Buzón de Sugerencias
                     </h2>
                     <div class="hidden md:flex md:justify-between">
                     </div>

@@ -17,14 +17,17 @@ Vue.config.productionTip = false
 
 Vue.component('nav-bar', require('./components/NavBar').default);
 Vue.component('properties', require('./views/Properties/Properties').default);
+Vue.component('property-card', require('./components/Properties/PropertyCard').default);
 Vue.component('property-profile', require('./views/Properties/PropertyProfile').default);
 Vue.component('display-property', require('./views/Properties/Guests/DisplayProperty').default);
 
 Vue.component('businesses', require('./views/Businesses/Businesses').default);
+Vue.component('business-card', require('./components/Businesses/BusinessCard').default);
 Vue.component('business-profile', require('./views/Businesses/BusinessProfile').default);
 Vue.component('display-business', require('./views/Businesses/Guests/DisplayBusiness').default);
 
 Vue.component('job-profiles', require('./views/JobProfiles/JobProfiles').default);
+Vue.component('job-profile-card', require('./components/JobProfiles/JobProfileCard').default);
 Vue.component('job-profile', require('./views/JobProfiles/JobProfile').default);
 Vue.component('display-job-profile', require('./views/JobProfiles/Guests/DisplayJobProfile').default);
 

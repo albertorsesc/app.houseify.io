@@ -39,7 +39,29 @@
                         </div>
                         @endauth
                         @guest
-                        <div class="flex justify-end items-end space-x-6">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="{{ route('web.public.properties.index') }}"
+                               class="h-link border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl"
+                               :class="{{ request()->routeIs('web.properties.index') || request()->segment(1) === 'propiedades' ? '"border-white border-b-2"' : '' }}">
+                                Propiedades
+                            </a>
+                            <a href="{{ route('web.public.businesses.index') }}"
+                               class="h-link border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl"
+                               :class="{{ request()->routeIs('web.public.businesses.index') || request()->segment(2) === 'directorio-de-negocios' ? '"border-white border-b-2"' : '' }}">
+                                Negocios
+                            </a>
+                            <a href="{{ route('web.public.job-profiles.index') }}"
+                               class="h-link border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl"
+                               :class="{{ request()->routeIs('web.public.job-profiles.index') || request()->segment(2) === 'tecnicos-y-profesionales' ? '"border-white border-b-2"' : '' }}">
+                                Profesionales
+                            </a>
+                            <a href="{{ route('web.threads.index') }}"
+                               class="h-link border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl"
+                               :class="{{ request()->routeIs('web.threads.index') || request()->segment(1) === 'forum' ? '"border-white border-b-2"' : '' }}">
+                                Foro
+                            </a>
+                        </div>
+                        <div class="ml-10 flex justify-end items-end space-x-4">
                             <a href="{{ route('login') }}"
                                class="h-link border-transparent text-white font-semibold hover:border-white hover:text-gray-50 inline-flex items-center px-1 pt-1 border-b-2 text-xl"
                                :class="{{ request()->routeIs('login') ? '"border-white border-b-2"' : '' }}">
@@ -147,7 +169,7 @@
                     </div>
                 </div>
                 @endauth
-            <!-- Mobile menu button -->
+                <!-- Mobile menu button -->
                 <div class="-mr-2 flex md:hidden">
                     <button @click="isMobileOpen = ! isMobileOpen"
                             class="bg-white inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-emerald-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-emerald-600 focus:ring-white">
@@ -191,16 +213,36 @@
                     </a>
                 @endauth
                 @guest
-                        <a href="{{ route('login') }}"
-                           class="text-gray-500 hover:bg-gray-100 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                           :class="{{ request()->routeIs('login') ? '"bg-gray-100 border-white border-b-2"' : '' }}">
-                            Iniciar Sesión
-                        </a>
-                        <a href="{{ route('register') }}"
-                           class="text-gray-500 hover:bg-gray-100 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                           :class="{{ request()->routeIs('register') ? '"bg-gray-100 border-white border-b-2"' : '' }}">
-                            Registrarme
-                        </a>
+                    <a href="{{ route('web.public.properties.index') }}"
+                       class="text-gray-500 hover:bg-gray-100 hover:text-white block px-3 py-2 rounded-md text-sm font-medium"
+                       :class="{{ request()->routeIs('web.public.properties.index') ? '"bg-gray-100 border-white border-b-2"' : '' }}">
+                        Propiedades
+                    </a>
+                    <a href="{{ route('web.public.businesses.index') }}"
+                       class="text-gray-500 hover:bg-gray-100 hover:text-white block px-3 py-2 rounded-md text-sm font-medium"
+                       :class="{{ request()->routeIs('web.public.businesses.index') ? '"bg-gray-100 border-white border-b-2"' : '' }}">
+                        Negocios
+                    </a>
+                    <a href="{{ route('web.public.job-profiles.index') }}"
+                       class="text-gray-500 hover:bg-gray-100 hover:text-white block px-3 py-2 rounded-md text-sm font-medium"
+                       :class="{{ request()->routeIs('web.public.job-profiles.index') ? '"bg-gray-100 border-white border-b-2"' : '' }}">
+                        Profesionales
+                    </a>
+                    <a href="{{ route('web.threads.index') }}"
+                       class="text-gray-500 hover:bg-gray-100 hover:text-white block px-3 py-2 rounded-md text-sm font-medium"
+                       :class="{{ request()->routeIs('web.threads.index') ? '"bg-gray-100 border-white border-b-2"' : '' }}">
+                        Foro
+                    </a>
+                    <a href="{{ route('login') }}"
+                       class="text-gray-500 hover:bg-gray-100 hover:text-white block px-3 py-2 rounded-md text-sm font-medium"
+                       :class="{{ request()->routeIs('login') ? '"bg-gray-100 border-white border-b-2"' : '' }}">
+                        Iniciar Sesión
+                    </a>
+                    <a href="{{ route('register') }}"
+                       class="text-gray-500 hover:bg-gray-100 hover:text-white block px-3 py-2 rounded-md text-sm font-medium"
+                       :class="{{ request()->routeIs('register') ? '"bg-gray-100 border-white border-b-2"' : '' }}">
+                        Registrarme
+                    </a>
                 @endguest
             </div>
             @auth

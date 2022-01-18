@@ -72,7 +72,6 @@ export default {
     },
     components: {
         CreateBusiness: () => import(/* webpackChunkName: "create-business" */ './CreateBusiness'),
-        BusinessCard: () => import(/* webpackChunkName: "business-card" */ '../../components/Businesses/BusinessCard'),
     }
 }
 </script>

@@ -10,10 +10,10 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\{Builder,
-    Relations\BelongsTo,
     Relations\HasMany,
+    Relations\HasOne,
     Factories\HasFactory,
-    Relations\HasOne};
+};
 use Laravel\{Sanctum\HasApiTokens,
     Jetstream\HasProfilePhoto,
     Fortify\TwoFactorAuthenticatable,

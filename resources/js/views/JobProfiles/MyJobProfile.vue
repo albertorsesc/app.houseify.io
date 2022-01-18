@@ -78,7 +78,6 @@ export default {
     },
     components: {
         CreateJobProfile: () => import(/* webpackChunkName: "create-job-profile" */ './CreateJobProfile'),
-        JobProfileCard: () => import(/* webpackChunkName: "job-profile-card" */ '../../components/JobProfiles/JobProfileCard'),
     }
 }
 </script>

@@ -13,5 +13,6 @@
         Route::get('tecnicos-y-profesionales/{jobProfile:uuid}', [JobProfileController::class, 'show'])->name('web.job-profiles.show');
     });
 
-    Route::get('i/tecnicos-y-profesionales/{jobProfile:uuid}', [JobProfileController::class, 'display'])->name('web.public.job-profiles.show');
+    Route::get('h/tecnicos-y-profesionales', [JobProfileController::class, 'index'])->name('web.public.job-profiles.index');
+    Route::get('h/tecnicos-y-profesionales/{jobProfile:uuid}', [JobProfileController::class, 'display'])->name('web.public.job-profiles.show');
 
