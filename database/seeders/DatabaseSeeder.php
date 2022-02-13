@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         CountrySeeder::class,
         StateSeeder::class,
         ThreadChannelSeeder::class,
+        BusinessSeeder::class,
     ];
     /**
      * Seed the application's database.
