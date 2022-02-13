@@ -6,7 +6,7 @@ use Tests\BusinessTestCase;
 use Database\Seeders\StateSeeder;
 use Database\Seeders\CountrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\{Interest, Like, User, Location, Businesses\Business};
+use App\Models\{Businesses\Inventory\Product, Interest, Like, User, Location, Businesses\Business};
 
 class BusinessTest extends BusinessTestCase
 {
@@ -69,5 +69,19 @@ class BusinessTest extends BusinessTestCase
 
         $business->liked();
         $this->assertInstanceOf(Like::class, $business->fresh()->likes->first());
+    }
+
+    /**
+     *   @test
+     *   @throws \Throwable
+     */
+    public function business_has_many_products()
+    {
+        $this->signIn();
+
+        $business = $this->create(Business::class);
+        $this->create(Product::class, ['business_id' => $business->id]);
+
+        $this->assertInstanceOf(Product::class, $business->fresh()->products->first());
     }
 }
