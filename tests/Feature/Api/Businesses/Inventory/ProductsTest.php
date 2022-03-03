@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Api\Businesses\Inventory;
 
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 use App\Models\Businesses\Business;
 use App\Models\Businesses\Inventory\Product;
@@ -38,7 +39,9 @@ class ProductsTest extends TestCase
                     'id' => $product->id,
                     'business' => ['id' => $product->business->id],
                     'name' => $product->name,
+                    'description' => $product->description,
                     'inStock' => $product->in_stock,
+                    'storageUnit' => $product->storage_unit,
                     'unitPrice' => $product->unit_price,
                 ]
             ]
@@ -68,7 +71,10 @@ class ProductsTest extends TestCase
 
         $this->assertDatabaseHas(
             'inventory_products',
-            array_merge($newProduct->toArray(), ['business_id' => $business->id])
+            array_merge($newProduct->toArray(), [
+                'business_id' => $business->id,
+                'unit_price' => $newProduct->unit_price * 100
+            ])
         );
     }
 
@@ -86,7 +92,7 @@ class ProductsTest extends TestCase
             route($this->routePrefix . 'update', [$business, $product]),
             $newProduct->toArray()
         );
-        $response->assertCreated();
+        $response->assertOk();
         $response->assertJson([
             'data' => [
                 'business' => ['id' => $business->id],
@@ -96,7 +102,10 @@ class ProductsTest extends TestCase
 
         $this->assertDatabaseHas(
             'inventory_products',
-            array_merge($newProduct->toArray(), ['business_id' => $business->id])
+            array_merge($newProduct->toArray(), [
+                'business_id' => $business->id,
+                'unit_price' => $newProduct->unit_price * 100
+            ])
         );
     }
 
@@ -118,5 +127,24 @@ class ProductsTest extends TestCase
             'inventory_products',
             ['id' => $product->id]
         );
+    }
+
+    /* Unhappy path */
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function not_owner_of_business_cannot_store_an_inventory_product_for_a_non_owned_business()
+    {
+        Event::fake();
+        $business = $this->create(Business::class);
+        $newProduct = $this->make(Product::class);
+
+        $this->signIn();
+        $this->postJson(
+            route($this->routePrefix . 'store', $business),
+            $newProduct->toArray()
+        )->assertForbidden();
     }
 }

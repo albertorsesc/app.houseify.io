@@ -17,7 +17,9 @@ class ProductFactory extends Factory
         return [
             'business_id' => Business::factory(),
             'name' => $this->faker->word,
+            'description' => $this->faker->paragraph(),
             'in_stock' => $this->faker->randomNumber(rand(1, 2)),
+            'storage_unit' => $this->faker->randomElement(config('houseify.storage_units')),
             'unit_price' => $this->faker->randomNumber(rand(1, 2)),
         ];
     }

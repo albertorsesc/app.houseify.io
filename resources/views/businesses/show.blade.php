@@ -31,9 +31,29 @@
                         <h2 class="font-semibold text-2xl text-teal-400"
                             v-text="localBusiness.name"
                         ></h2>
+                        <div class="hidden md:flex md:justify-between">
+                            <a @click="businessTab = 'profile'"
+                               role="button"
+                               href="#"
+                               class="h-link mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5"
+                               :class="[businessTab === 'profile' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
+                                Perfil del Negocio
+                            </a>
+                            @if($business->products->count() > 0 || $business->owner->id === auth()->id())
+                            <a @click="businessTab = 'inventory'"
+                               role="button"
+                               href="#"
+                               class="h-link mx-2 text-base font-medium text-cyan-500 border-b-2 leading-5"
+                               :class="[businessTab === 'inventory' ? 'border-emerald-400 text-cyan-600' : 'hover:border-emerald-400 hover:text-cyan-600']">
+                                <template v-if="localBusiness.owner.id === auth">Mi Inventario</template>
+                                <template v-else>Inventario</template>
+                            </a>
+                            @endif
+                        </div>
                         @auth
                         {{--Desktop--}}
                         <div class="hidden md:flex md:justify-between">
+                            @if($business->owner->id !== auth()->id())
                             {{--Report--}}
                             <report :model-id="localBusiness.slug" model-name="businesses" inline-template>
                                 <div>
@@ -93,6 +113,7 @@
                                     </modal>
                                 </div>
                             </report>
+                            @endif
                             {{--Delete--}}
                             @if($business->owner->id === auth()->id())
                                 <button @click="onDelete"
@@ -106,6 +127,7 @@
                         {{--Mobile Header--}}
                         <div class="w-full flex justify-end md:hidden mt-2">
                             {{--Report--}}
+                            @if($business->owner->id !== auth()->id())
                             <report :model-id="localBusiness.slug"
                                     model-name="businesses"
                                     inline-template>
@@ -166,14 +188,15 @@
                                     </modal>
                                 </div>
                             </report>
+                            @endif
 
                             {{--Delete--}}
                             @if($business->owner->id === auth()->id())
-                                <button @click="onDelete"
-                                        class="h-link bg-white -mt-1 mr-1 shadow-sm hover:shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
-                                        title="Eliminar Negocio/Empresa">
-                                    <svg class="text-red-500 hover:text-red-600" width="25" height="25"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                                </button>
+                            <button @click="onDelete"
+                                    class="h-link bg-white -mt-1 mr-1 shadow-sm hover:shadow rounded-md py-2 px-2 float-left hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800"
+                                    title="Eliminar Negocio/Empresa">
+                                <svg class="text-red-500 hover:text-red-600" width="25" height="25"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
                             @endif
                         </div>
                         @endauth
@@ -181,9 +204,10 @@
                 </div>
             </header>
 
-            <div class="mt-4 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
+            <div v-if="businessTab === 'profile'"
+                 class="mt-4 mb-20 max-w-3xl mx-auto grid grid-cols-1 gap-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
                 <div class="space-y-6 lg:col-start-1"
-                     :class="[(isAuthenticated && localBusiness.owner.id === auth) && ('{{ $likes['like_count'] || $interests['interest_count'] }}') ? 'lg:col-span-2' : 'lg:col-span-12']">
+                     :class="[isAuthenticated && localBusiness.owner.id === auth ? 'lg:col-span-2' : 'lg:col-span-12']">
                     {{--Mobile--}}
                     <div v-if="isAuthenticated && localBusiness.owner.id === auth"
                          class="flex justify-end md:hidden mx-2 md:-mx-3 mt-1 mb-2" v-cloak>
@@ -230,7 +254,6 @@
 
                                     <div v-if="isAuthenticated && localBusiness.owner.id !== auth"
                                         class="w-1/2 w-4/5 mb-2 items-end align-middle flex justify-end">
-
                                         <div class="mr-4 lg:mr-0 w-1/12 w-4/5 flex justify-end">
                                             {{--Likes--}}
                                             <span class="mr-3">
@@ -425,7 +448,6 @@
                                         <template #title>Actualizar Datos de tu Negocio</template>
                                         <template #content>
                                             <form @submit.prevent>
-
                                                 <div class="w-full md:flex md:-mx-2 mt-4">
                                                     <div class="w-full md:mx-2">
                                                         <div class="w-full">
@@ -544,7 +566,6 @@
                                                         ></errors>
                                                     </div>
                                                 </div>
-
                                             </form>
                                         </template>
                                         <template #footer>
@@ -598,7 +619,7 @@
                         </div>
 
                         {{--Activity--}}
-                        @if($likes['like_count'] || $interests['interest_count'])
+{{--                        @if($likes['like_count'] || $interests['interest_count'])--}}
                             <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
                                 <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Actividad</h2>
 
@@ -712,9 +733,23 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+{{--                        @endif--}}
                     </div>
                 </section>
+            </div>
+
+            {{--Inventory--}}
+            <div v-if="businessTab === 'inventory'"
+                 class="mt-4 mb-20 max-w-3xl mx-auto grid grid-cols-1 gap-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
+                <div class="space-y-6 lg:col-start-1 lg:col-span-12">
+                    <section aria-labelledby="business-inventory">
+                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                            <div class="py-2 md:py-0 sm:px-0">
+                                <business-inventory :business="localBusiness"></business-inventory>
+                            </div>
+                        </div>
+                    </section>
+                </div>
             </div>
 
         </div>

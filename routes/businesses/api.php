@@ -26,6 +26,7 @@
 
     Route::apiResource('businesses', BusinessController::class);
 
+    /* Inventory */
     Route::get('businesses/{business}/products', [ProductController::class, 'index'])->name('businesses.products.index');
     Route::post('businesses/{business}/products', [ProductController::class, 'store'])->name('businesses.products.store');
     Route::put('businesses/{business}/products/{product}', [ProductController::class, 'update'])->name('businesses.products.update');

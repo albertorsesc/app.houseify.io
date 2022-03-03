@@ -15,13 +15,28 @@ class ProductController extends Controller
 {
     public function index(Business $business) : AnonymousResourceCollection
     {
+        $products = $business->products()->with('business');
+        if (request()->input('query')) {
+            $products->where(
+                'name',
+                'LIKE',
+                '%' . request()->input('query') . '%'
+            )->orWhere(
+                'description',
+                'LIKE',
+                '%' . request()->input('query') . '%'
+            );
+        }
+
         return ProductResource::collection(
-            $business->products()->with('business')->get()
+            $products->orderBy('name')->get()
         );
     }
 
     public function store(ProductRequest $request, Business $business) : JsonResponse
     {
+        $this->authorize('update', $business);
+
         $product = $business->products()->create($request->all());
         $product->load('business');
 
@@ -32,7 +47,9 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, Business $business, Product $product) : ProductResource
     {
-        $product = $business->products()->create($request->all());
+        $this->authorize('update', $business);
+
+        $product->update($request->all());
 
         return new ProductResource(
             $product->load('business')
@@ -41,6 +58,8 @@ class ProductController extends Controller
 
     public function destroy(Business $business, Product $product) : JsonResponse
     {
+        $this->authorize('update', $business);
+
         $product->delete();
 
         return response()->json([], 204);
