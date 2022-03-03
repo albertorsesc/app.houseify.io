@@ -14,7 +14,7 @@ export default {
     },
     provide() {
         return {
-            business: this.localBusiness
+            business: this.localBusiness,
         }
     },
     emits: [
@@ -35,6 +35,7 @@ export default {
                 site: '',
                 comments: '',
             },
+            businessTab: 'profile',
             logo: '',
 
             selectedConstructionCategories: [],
@@ -178,6 +179,7 @@ export default {
         GoogleMap: () => import(/* webpackChunkName: "google-map" */ '../../components/GoogleMap'),
         FormInput: () => import(/* webpackChunkName: "form-input" */ '../../components/FormInput'),
         BusinessLocation: () => import(/* webpackChunkName: "business-location" */ './BusinessLocation'),
+        BusinessInventory: () => import(/* webpackChunkName: "business-inventory" */ './BusinessInventory/BusinessInventory'),
         InterestedBtn: () => import(/* webpackChunkName: "interested-btn" */ '../../components/InterestedBtn'),
     }
 }

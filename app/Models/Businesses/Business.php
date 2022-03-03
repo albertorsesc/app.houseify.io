@@ -2,11 +2,16 @@
 
 namespace App\Models\Businesses;
 
-use App\Models\Location;
 use App\Models\User;
+use App\Models\Location;
 use Laravel\Scout\Searchable;
+use App\Models\Businesses\Inventory\Product;
+use Illuminate\Database\Eloquent\{Model,
+    Relations\BelongsTo,
+    Factories\HasFactory,
+    Relations\HasMany
+};
 use App\Models\Concerns\{CanBeReported, HasLocation, HasUuid, Interestable, Likeable, Publishable, SerializeTimestamps};
-use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo, Factories\HasFactory, Relations\MorphMany};
 
 /**
  * @property string status
@@ -55,6 +60,11 @@ class Business extends Model
     public function owner() : BelongsTo
     {
         return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function products() : HasMany
+    {
+        return $this->hasMany(Product::class);
     }
 
     /* Mutators */
