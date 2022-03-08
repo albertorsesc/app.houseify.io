@@ -20,7 +20,7 @@
                     <div class="py-1"><svg class="text-red-600 fill-current h-6 w-6 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
                     <div>
                         <p class="font-bold">
-                            Algo sucedio; {{ session('error') }}
+                            Algo sucedió; {{ session('error') }}
                         </p>
                     </div>
                 </div>
@@ -84,14 +84,14 @@
             </div>
 
             <div class="w-full mx-auto flex justify-center items-center align-middle mt-4">
-                <div class="w-auto items-center align-middle mr-4">
-                    <a href="{{ route('social-login.redirect', ['driver' => 'facebook']) }}"
+<!--                <div class="w-auto items-center align-middle mr-4">
+                    <a href="route('social-login.redirect', ['driver' => 'facebook'])"
                        class="flex align-middle items-center py-2 px-3 bg-blue-500 rounded-full shadow text-white text-sm"
                        title="Inicia Sesión con Facebook">
                         <i class="fab fa-facebook -mb-1 h-5 w-5 rounded-full"></i>
-                        {{ __('Facebook') }}
+                        Facebook
                     </a>
-                </div>
+                </div>-->
                 <div class="w-auto items-center">
                     <a href="{{ route('social-login.redirect', ['driver' => 'google']) }}"
                        class="flex align-middle items-center py-2 px-3 bg-white rounded-full shadow text-gray-700 text-sm"
