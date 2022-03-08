@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="items-center flex justify-center">
+        <div v-if="isOwnerOfBusiness" class="items-center flex justify-center">
             <svg v-show="inventoryTab === 'products'"
                  @click="toggle"
                  class="h-transform h-transition cursor-pointer h-8 w-8 text-emerald-300 hover:h-12 hover:w-12 hover:text-emerald-400 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -18,7 +18,8 @@
             <products></products>
         </div>
 
-        <div v-if="inventoryTab === 'create-product'" class="mt-8">
+        <div v-if="inventoryTab === 'create-product' && isOwnerOfBusiness"
+             class="mt-8">
             <create-product></create-product>
         </div>
 
@@ -32,7 +33,9 @@ export default {
     inject: ['business'],
     data() {
         return {
-            inventoryTab: 'products'
+            inventoryTab: 'products',
+            localBusiness: this.business,
+            isOwnerOfBusiness: false,
         }
     },
     methods: {
@@ -41,6 +44,7 @@ export default {
         }
     },
     mounted() {
+        this.isOwnerOfBusiness = this.localBusiness.owner.id === this.auth;
         window.Event.$on('businesses.products.product-created', (product) => {
             this.inventoryTab = 'products'
         })

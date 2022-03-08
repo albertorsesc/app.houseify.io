@@ -113,7 +113,7 @@ class ProductsTest extends TestCase
      * @test
      * @throws \Throwable
      */
-    public function business_owner_can_soft_delete_an_inventory_product_for_its_business()
+    public function business_owner_can_delete_an_inventory_product_for_its_business()
     {
         $business = $this->create(Business::class);
         $product = $this->create(Product::class, ['business_id' => $business->id]);
@@ -123,7 +123,7 @@ class ProductsTest extends TestCase
         );
         $response->assertStatus(204);
 
-        $this->assertSoftDeleted(
+        $this->assertDatabaseMissing(
             'inventory_products',
             ['id' => $product->id]
         );

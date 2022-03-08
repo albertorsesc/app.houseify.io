@@ -11,7 +11,14 @@ use Illuminate\Database\Eloquent\{Model,
     Factories\HasFactory,
     Relations\HasMany
 };
-use App\Models\Concerns\{CanBeReported, HasLocation, HasUuid, Interestable, Likeable, Publishable, SerializeTimestamps};
+use App\Models\Concerns\{CanBeReported,
+    DeletesRelations,
+    HasLocation,
+    HasUuid,
+    Interestable,
+    Likeable,
+    Publishable,
+    SerializeTimestamps};
 
 /**
  * @property string status
@@ -29,7 +36,7 @@ use App\Models\Concerns\{CanBeReported, HasLocation, HasUuid, Interestable, Like
  * @property string uuid
  * @property Location location
  */
-class Business extends Model
+class Business extends Model implements DeletesRelations
 {
     use HasUuid,
         Likeable,
@@ -97,6 +104,10 @@ class Business extends Model
     public function onDelete()
     {
         $this->location()->delete();
+        $this->likes()->each(fn ($like) => $like->delete());
+        $this->interests()->each(fn ($interest) => $interest->delete());
+        $this->products()->each(fn ($product) => $product->delete());
+        if ($this->logo) \Storage::delete($this->logo);
     }
 
     /**

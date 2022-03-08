@@ -12,10 +12,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $table = 'inventory_products';
-
     protected $fillable = ['name', 'description', 'in_stock', 'storage_unit', 'unit_price'];
 
     /* Relations */

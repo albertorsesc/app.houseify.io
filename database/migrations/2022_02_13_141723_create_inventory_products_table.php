@@ -15,14 +15,13 @@ class CreateInventoryProductsTable extends Migration
     {
         Schema::create('inventory_products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('business_id')->constrained();
+            $table->foreignId('business_id')->constrained()->onDelete('cascade');
             $table->string('name', 255);
             $table->unsignedInteger('unit_price')->nullable();
             $table->unsignedInteger('in_stock')->nullable()->default(0);
             $table->string('storage_unit', 10)->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
