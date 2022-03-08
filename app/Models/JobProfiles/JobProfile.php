@@ -53,7 +53,7 @@ class JobProfile extends Model implements DeletesRelations
     protected function skills(): Attribute
     {
         return new Attribute(
-            set: fn ($value) => json_encode($value),
+            set: fn ($value) => json_encode($value)
         );
     }
 
