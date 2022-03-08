@@ -39,7 +39,8 @@
                     <div class="w-full md:w-1/3 md:mr-4 mt-2">
                         <select name="channel"
                                 id="channel"
-                                class="h-select" onchange="window.location.href = `/forum/${event.target.value}`">
+                                class="h-select"
+                                onchange="window.location.href = `/forum/${event.target.value}`">
                             <option value="">Filtra por Categoria</option>
                             <option value="">Todo</option>
                             @foreach(\App\Models\Forum\Threads\ThreadChannel::orderBy('name')->get() as $channel)

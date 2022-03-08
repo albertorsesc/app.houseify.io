@@ -24,6 +24,16 @@ class UserSeeder extends Seeder
 //                'status' => true,
                 'created_at' => now()->toDateTimeString(),
             ],
+            [
+                'first_name' => 'Test',
+                'last_name' => 'User',
+                'email' => 'user@houseify.io',
+//                'phone' => '6862894998',
+                'password' => bcrypt('password'),
+                'email_verified_at' => now()->toDateTimeString(),
+//                'status' => true,
+                'created_at' => now()->toDateTimeString(),
+            ],
         ];
 
         \App\Models\User::insert($users);

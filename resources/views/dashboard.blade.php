@@ -2,10 +2,6 @@
 
 @section('title', 'Inicio')
 
-@section('meta')
-<meta name="description" content="Houseify es una plataforma especialmente dedicada al sector de Construcción. Publica, Ofrece y Encuentra Propiedades, Negocios o Empresas del área y más...">
-@endsection
-
 @section('content')
 
     <div>
@@ -78,7 +74,7 @@
                             </a>
                         </div>
 
-                        {{--Businesses--}}
+                        {{--Businesses --}}
                         <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/3 mt-4 xl:mt-6 px-3 md:py-0 lg:py-2 xl:py-1 items-center">
                             <a href="{{ route('web.businesses.index') }}">
                                 <div class="card h-transition hover:transform text-center items-center align-middle">
@@ -87,7 +83,7 @@
                                          alt="Negocios en el ramo constructor"
                                          loading="lazy">
                                     <img src="/img/business_location.svg"
-                                         class="hidden md:block lg:hidden sm:ml-16 md:px-2 md:py-0 md:h-48 md:ml-10 h-52 sm:object-contain"
+                                         class="hidden md:block lg:hidden sm:ml-16 md:px-2 md:py-0 md:h-60 md:ml-10 h-52 sm:object-contain"
                                          alt="Negocios en el ramo constructor"
                                          loading="lazy">
                                     <img src="/img/business_location.svg"
