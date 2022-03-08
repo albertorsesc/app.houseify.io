@@ -51,7 +51,6 @@ class JobProfileObserver
 
     public function deleting(JobProfile $jobProfile)
     {
-        $jobProfile->location()->delete();
     }
 
     /**

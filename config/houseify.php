@@ -63,6 +63,13 @@
             'other' => 'Otro'
         ],
 
+        /* Storage Units */
+        'storage_units' => [
+            'pz',
+            'mt',
+            'caja',
+        ],
+
         /* Modules */
         'modules' => [
             'properties' => 'Propiedades',

@@ -4,13 +4,19 @@ namespace App\Models\JobProfiles;
 
 use App\Models\User;
 use Laravel\Scout\Searchable;
-use App\Models\Concerns\{HasLocation, Interestable, Likeable, Publishable, CanBeReported, SerializeTimestamps};
-use Illuminate\Database\Eloquent\{Factories\HasFactory, Model, Relations\BelongsTo};
+use App\Models\Concerns\{DeletesRelations,
+    HasLocation,
+    Interestable,
+    Likeable,
+    Publishable,
+    CanBeReported,
+    SerializeTimestamps};
+use Illuminate\Database\Eloquent\{Casts\Attribute, Factories\HasFactory, Model, Relations\BelongsTo};
 
 /**
  * @property boolean status
  */
-class JobProfile extends Model
+class JobProfile extends Model implements DeletesRelations
 {
     use Likeable,
         HasFactory,
@@ -42,13 +48,24 @@ class JobProfile extends Model
         return $this->belongsTo(User::class);
     }
 
-    /* Mutators */
-    public function setSkillsAttribute($skills)
+    /* Accessors & Mutators */
+
+    protected function skills(): Attribute
     {
-        return $this->attributes['skills'] = json_encode($skills);
+        return new Attribute(
+            set: fn ($value) => json_encode($value),
+        );
     }
 
     /* Helpers */
+
+    public function onDelete ()
+    {
+        $this->location()->delete();
+        $this->likes()->each(fn ($like) => $like->delete());
+        $this->interests()->each(fn ($interest) => $interest->delete());
+        if ($this->photo) \Storage::delete($this->photo);
+    }
 
     public static function getSkills() : array
     {

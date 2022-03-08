@@ -2,11 +2,23 @@
 
 namespace App\Models\Businesses;
 
-use App\Models\Location;
 use App\Models\User;
+use App\Models\Location;
 use Laravel\Scout\Searchable;
-use App\Models\Concerns\{CanBeReported, HasLocation, HasUuid, Interestable, Likeable, Publishable, SerializeTimestamps};
-use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo, Factories\HasFactory, Relations\MorphMany};
+use App\Models\Businesses\Inventory\Product;
+use Illuminate\Database\Eloquent\{Model,
+    Relations\BelongsTo,
+    Factories\HasFactory,
+    Relations\HasMany
+};
+use App\Models\Concerns\{CanBeReported,
+    DeletesRelations,
+    HasLocation,
+    HasUuid,
+    Interestable,
+    Likeable,
+    Publishable,
+    SerializeTimestamps};
 
 /**
  * @property string status
@@ -24,7 +36,7 @@ use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo, Factories\HasFacto
  * @property string uuid
  * @property Location location
  */
-class Business extends Model
+class Business extends Model implements DeletesRelations
 {
     use HasUuid,
         Likeable,
@@ -57,6 +69,11 @@ class Business extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
+    public function products() : HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
+
     /* Mutators */
 
     public function setCategoriesAttribute($categories)
@@ -87,6 +104,10 @@ class Business extends Model
     public function onDelete()
     {
         $this->location()->delete();
+        $this->likes()->each(fn ($like) => $like->delete());
+        $this->interests()->each(fn ($interest) => $interest->delete());
+        $this->products()->each(fn ($product) => $product->delete());
+        if ($this->logo) \Storage::delete($this->logo);
     }
 
     /**
