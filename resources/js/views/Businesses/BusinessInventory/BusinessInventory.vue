@@ -45,7 +45,7 @@ export default {
     },
     mounted() {
         this.isOwnerOfBusiness = this.localBusiness.owner.id === this.auth;
-        window.Event.$on('businesses.products.product-created', (product) => {
+        window.Event.$on('businesses.products.product-created', () => {
             this.inventoryTab = 'products'
         })
     },
