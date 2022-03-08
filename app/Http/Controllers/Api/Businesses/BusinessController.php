@@ -16,6 +16,7 @@ class BusinessController extends Controller
             Business::query()
                     ->isPublished()
                     ->with([
+                        'products',
                         'interests',
                         'location.state',
                         'owner:id,first_name,last_name',

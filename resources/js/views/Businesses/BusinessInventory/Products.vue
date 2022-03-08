@@ -199,7 +199,7 @@ export default {
                 storage_unit: this.productForm.storageUnit,
                 description: this.productForm.description
             })
-                .then(response => {
+                .then(() => {
                     SweetAlert.toast('Producto actualizado!')
                     this.index()
                     this.closeModal()
