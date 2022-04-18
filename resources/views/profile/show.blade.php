@@ -63,6 +63,14 @@
                         <x-jet-section-border />
                     @endif
 
+                    @if (auth()->user()->socialAccounts->count() > 0)
+                        <div class="mt-10 sm:mt-0">
+                            @include('profile.delete-social-accounts-form')
+                        </div>
+
+                        <x-jet-section-border />
+                    @endif
+
                     @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
                         <div class="mt-10 sm:mt-0">
                             @livewire('profile.two-factor-authentication-form')

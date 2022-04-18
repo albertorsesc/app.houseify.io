@@ -6,10 +6,11 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/', function () {
     return redirect('/inicio');
-});
+})->name('home');
 
 Route::get('/auth/login/{driver}/redirect', [\App\Http\Controllers\Auth\SocialLoginController::class, 'redirectToProvider'])->name('social-login.redirect');
 Route::get('/auth/login/{driver}/callback', [\App\Http\Controllers\Auth\SocialLoginController::class, 'handleProviderCallback'])->name('social-login.callback');
+Route::get('/auth/logout/{driver}/delete', [\App\Http\Controllers\Auth\SocialLoginController::class, 'destroy'])->name('social-login.destroy');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();

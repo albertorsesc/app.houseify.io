@@ -53,6 +53,22 @@
             </div>
         </div>
 
+        @if (session('message'))
+            <div class="mt-4 top-0 inset-x-0">
+                <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+                    <div class="p-2 rounded-lg bg-white shadow-lg sm:p-3">
+                        <div class="flex items-center justify-between flex-wrap">
+                            <div class="w-0 flex-1 flex items-center">
+                                <p class="ml-3 font-medium text-emerald-400 truncate">
+                                    {{ session('message') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <main>
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="sm:px-4 sm:px-0">

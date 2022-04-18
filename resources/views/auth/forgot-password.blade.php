@@ -8,12 +8,6 @@
             {{ __('¿Olvidaste tu contraseña? No hay problema. Solamente introduzca su dirección de correo electrónico y le enviaremos un enlace para restablecer su contraseña.') }}
         </div>
 
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
-
         <x-jet-validation-errors class="mb-4" />
 
         <form method="POST" action="{{ route('password.email') }}">
