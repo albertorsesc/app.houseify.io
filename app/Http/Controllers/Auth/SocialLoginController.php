@@ -63,4 +63,23 @@ class SocialLoginController extends Controller
             return redirect('login')->with('error', 'Algo sucedió, también puedes registrarte para iniciar sesión.');
         }
     }
+
+    public function destroy($driver)
+    {
+        if (! $auth = auth()->user()) {
+            return redirect('login');
+        }
+
+        $auth->socialAccounts()->where('name', $driver)->delete();
+
+        if (! $auth->password) {
+            $redirectTo = 'forgot-password';
+            $message = 'Tu cuenta de ' . ucwords($driver) . ' ha sido desvinculada. Por favor, cree una contraseña para iniciar sesión.';
+        } else {
+            $redirectTo = 'inicio';
+            $message = 'Tu cuenta de ' . ucwords($driver) . ' ha sido desvinculada.';
+        }
+
+        return redirect($redirectTo)->with('message', $message);
+    }
 }

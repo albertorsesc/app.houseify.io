@@ -8,9 +8,9 @@
             {{ __('¿Olvidaste tu contraseña? No hay problema. Solamente introduzca su dirección de correo electrónico y le enviaremos un enlace para restablecer su contraseña.') }}
         </div>
 
-        @if (session('status'))
+        @if (session('message'))
             <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
+                {{ session('message') }}
             </div>
         @endif
 
