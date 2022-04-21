@@ -1,17 +1,6 @@
 <img width="500" alt="Houseify.io" src="https://i.postimg.cc/2jcqDgMd/houseify-13.png">
 
-## Aplicación Oficial de Houseify.io
-
-#### Sections
-* [x] Properties
-* [x] Businesses Directory
-* [x] Job Profiles
-* [] Forum
-* [] Ads
-* [] Job Posts
-* [] Quotes
-
-more...
+## Official Houseify.io app (ESP)
 
 ### Installation
 
